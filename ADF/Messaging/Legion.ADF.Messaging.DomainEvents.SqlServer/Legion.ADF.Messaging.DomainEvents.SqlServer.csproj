@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <Import Project="../../../SharedConfigurations.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Legion.Database.SqlServer\Legion.Database.SqlServer.csproj" />
+    <ProjectReference Include="..\..\..\src\Legion.EntityFrameworkCore.SqlServer\Legion.EntityFrameworkCore.SqlServer.csproj" />
+    <ProjectReference Include="..\Legion.ADF.Messaging.DomainEvents\Legion.ADF.Messaging.DomainEvents.csproj" />
+  </ItemGroup>
+
+</Project>

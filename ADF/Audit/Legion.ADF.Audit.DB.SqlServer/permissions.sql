@@ -1,0 +1,3 @@
+GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::aud To #TargetDbUsername#;
+GO
+

@@ -1,0 +1,94 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	QueryModelDescriptor entityDesc = GetParam<QueryModelDescriptor>("QueryModelDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+
+	StartNewFile(entityDesc.TargetFolder(modelName, contextName), entityDesc.FileName);
+	
+	string @sealed = entityDesc.Data.IsSealed ? " sealed" : "";
+	string customInterfaces = string.IsNullOrWhiteSpace(entityDesc.Data.CustomInterfaces) ? "" : ", " + entityDesc.Data.CustomInterfaces;
+
+	foreach (string import in entityDesc.Imports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < entityDesc.Imports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= entityDesc.Namespace(modelName, contextName) #>;
+
+public<#= @sealed #> partial class <#= entityDesc.Name #> : <#= entityDesc.GetBaseQueryEntityName(modelName, contextName) #>, Legion.Model.IQueryEntity<#= customInterfaces #>
+{
+<#
+	foreach (var property in entityDesc.Properties)
+	{
+		var isNullableString = property.ClrType == typeof(string) && property.Data.IsNullable;
+		var nullableString = isNullableString
+			? "?"
+			: "";
+
+		var isNullableByteArray = property.ClrType == typeof(byte[]) && property.Data.IsNullable;
+		var nullableByteArray = isNullableByteArray
+			? "?"
+			: "";
+
+		var isNullableList = property.IsCollection();
+		var nullableList = (isNullableList && !isNullableByteArray)
+			? "?"
+			: "";
+
+		var dbDataType = property.Data.GetDatabaseDataType(true);
+#>
+	/// <summary>
+	/// Database DataType: <#= dbDataType #>
+	/// </summary>
+	public <#= Helpers.TypeHelper.TypeToCSharpSourceCode(property.ClrType) #><#= nullableString #><#= nullableByteArray #><#= nullableList #> <#= property.Name #> { get; private set; }
+
+<#
+	}
+#>
+
+	private <#= entityDesc.Name #>()
+	{
+	}
+
+	public Dictionary<string, object?> ToDictionary()
+		=> new()
+		{
+<#
+	foreach (var property in entityDesc.Properties/*.Where(x => !x.Data.IsIgnored)*/)
+	{
+#>
+			{ nameof(<#= property.Name #>), <#= property.Name #> },
+<#
+	}
+#>
+		};
+
+	public override string? ToString()
+	{
+		return <#= entityDesc.PropertyToString(entityDesc.Data.MainColumn) #>;
+	}
+}
+<#
+	Process();
+#>

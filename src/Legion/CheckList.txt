@@ -1,0 +1,6 @@
+﻿
+
+Exceptions:
+Vzdy ked sa upravuje Legion/Exceptions/Throw musi sa upravit aj Legion/Extensions/IResultExtensions
+
+

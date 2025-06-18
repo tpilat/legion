@@ -1,0 +1,265 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	EntityModelDescriptor entityDesc = GetParam<EntityModelDescriptor>("EntityModelDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+
+	StartNewFile(entityDesc.EntityEqualityComparerTargetFolder, entityDesc.EntityEqualityComparerFileName);
+	
+	string @sealed = entityDesc.Data.IsSealed ? " sealed" : "";
+	string iAuditEntry = entityDesc.Data.IsAuditEntry ? ", Legion.Model.Audit.IAuditEntry" : "";
+	string iSelfAuditableEntity = entityDesc.Data.IsSelfAuditableEntity ? ", Legion.Model.Audit.ISelfAuditableEntity" : "";
+	string iAuditableEntity = entityDesc.Data.IsAuditableEntity ? ", Legion.Model.Audit.IAuditableEntity" : "";
+	string iSynchronizable = entityDesc.Data.IsSynchronizableEntity ? ", Legion.Model.Synchronyzation.ISynchronizable" : "";
+	string iCorrelable = entityDesc.Data.IsCorrelableEntity ? ", Legion.Model.Correlation.ICorrelable" : "";
+	string customInterfaces = string.IsNullOrWhiteSpace(entityDesc.Data.CustomInterfaces) ? "" : ", " + entityDesc.Data.CustomInterfaces;
+	
+	var concurrencyProps = entityDesc.Data.Properties.Where(x => x.IsConcurrencyToken).ToList();
+	var concurrencyProp = concurrencyProps.Count == 1 ? concurrencyProps.First() : null;
+	string iConcurrent = (concurrencyProp != null) ? ", Legion.Model.Concurrence.IConcurrent" : "";
+
+	foreach (string import in entityDesc.EntityEqualityComparerImports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < entityDesc.EntityEqualityComparerImports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= entityDesc.Namespace(modelName, contextName) #>;
+
+public<#= @sealed #> partial class <#= entityDesc.Name #> : <#= entityDesc.GetBaseEntityName(modelName, contextName) #><#= iAuditEntry #><#= iSelfAuditableEntity #><#= iSynchronizable #><#= iConcurrent #><#= iCorrelable #><#= customInterfaces #><#= iAuditableEntity #>, Legion.Model.IEntity
+{
+	public bool EqualsTo(
+		<#= entityDesc.BaseName(modelName, contextName) #>? obj,
+		ComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,
+		Action<ComparisonConditions<<#= entityDesc.BaseName(modelName, contextName) #>>>? conditions = null)
+		=> <#= entityDesc.ComparerName #>.EqualsTo(
+			this,
+			obj,
+			comparisonOptions,
+			conditions,
+			cache: null);
+
+	public<#= @sealed #> partial class <#= entityDesc.ComparerName #> : IEqualityComparer<<#= entityDesc.Name #>>
+	{
+		public static bool EqualsTo(
+			<#= entityDesc.BaseName(modelName, contextName) #>? obj1,
+			<#= entityDesc.BaseName(modelName, contextName) #>? obj2,
+			ComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,
+			Action<ComparisonConditions<<#= entityDesc.BaseName(modelName, contextName) #>>>? conditions = null,
+			Dictionary<object, HashSet<object>>? cache = null)
+		{
+			if (obj1 == null && obj2 == null)
+				return true;
+
+			if (obj1 == null || obj2 == null)
+				return false;
+
+			if (ReferenceEquals(obj1, obj2))
+				return true;
+
+			cache ??= [];
+
+			cache.TryGetValue(obj1, out HashSet<object>? cachedHashSet);
+			if (cachedHashSet?.Contains(obj2) == true)
+				return true;
+			
+			ComparisonConditions<<#= entityDesc.BaseName(modelName, contextName) #>>? conds = null;
+		
+			if ((ComparisonOptions.CompareProperties & comparisonOptions) == ComparisonOptions.CompareProperties)
+			{
+				if (conditions != null)
+				{
+					conds = new ComparisonConditions<<#= entityDesc.BaseName(modelName, contextName) #>>();
+					conditions.Invoke(conds);
+<#
+	if (entityDesc.Data.ConvertEntity != ConvertEntity.ToEnumerationClass
+		&& entityDesc.Data.ConvertEntity != ConvertEntity.ToEnumAndEnumerationClass)
+	{
+#>
+
+<#
+		foreach (var property in entityDesc.Properties)
+		{
+			var notEquals = property.ClrType == typeof(string)
+				? $"!string.Equals(obj1.{property.Name}, obj2.{property.Name})"
+				: $"obj1.{property.Name} != obj2.{property.Name}";
+
+			if (property.IsArray())
+				notEquals = $"(obj1.{property.Name} != null || obj2.{property.Name} != null) && (obj1.{property.Name} == null || obj2.{property.Name} == null || !obj1.{property.Name}.SequenceEqual(obj2.{property.Name}))";
+			else if (property.IsCollection())
+				notEquals = $"(obj1.{property.Name} != null || obj2.{property.Name} != null) && (obj1.{property.Name} == null || obj2.{property.Name} == null || !obj1.{property.Name}.SequenceEqual(obj2.{property.Name}))";
+#>
+					if (conds.CanCompare(obj1, nameof(obj1.<#= property.Name #>)) && <#= notEquals #>)
+						return false;
+<#
+		}
+#>
+				}
+				else
+				{
+<#
+		foreach (var property in entityDesc.Properties)
+		{
+			var notEquals = property.ClrType == typeof(string)
+				? $"!string.Equals(obj1.{property.Name}, obj2.{property.Name})"
+				: $"obj1.{property.Name} != obj2.{property.Name}";
+
+			if (property.IsArray())
+				notEquals = $"(obj1.{property.Name} != null || obj2.{property.Name} != null) && (obj1.{property.Name} == null || obj2.{property.Name} == null || !obj1.{property.Name}.SequenceEqual(obj2.{property.Name}))";
+			else if (property.IsCollection())
+				notEquals = $"(obj1.{property.Name} != null || obj2.{property.Name} != null) && (obj1.{property.Name} == null || obj2.{property.Name} == null || !obj1.{property.Name}.SequenceEqual(obj2.{property.Name}))";
+#>
+					if (<#= notEquals #>)
+						return false;
+<#
+		}
+	}
+#>
+				}
+			}
+
+			if (cachedHashSet == null)
+			{
+				cachedHashSet = [];
+				cache[obj1] = cachedHashSet;
+			}
+
+			cachedHashSet.Add(obj2);
+<#
+	var targetNavigationEntities = new List<EntityModelDescriptor>();
+	foreach (var navigation in entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+			targetNavigationEntities.Add(targetEntityDesc);
+	}
+
+	var targetBackNavigationEqualityComparers = new List<EntityModelDescriptor>();
+	foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+			targetBackNavigationEqualityComparers.Add(targetEntityDesc);
+	}
+
+	if (0 < targetNavigationEntities.Count || 0 < targetBackNavigationEqualityComparers.Count)
+	{
+#>
+
+			if ((ComparisonOptions.CompareReferences & comparisonOptions) == ComparisonOptions.CompareReferences)
+			{
+<#
+		foreach (var navigation in entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+		{
+			var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+			if (targetEntityDesc != null)
+			{
+#>
+				if (!<#= targetEntityDesc.Name #>.<#= targetEntityDesc.Name #>EqualityComparer.EqualsTo(obj1.<#= navigation.Name #>, obj2.<#= navigation.Name #>, comparisonOptions, conds?.GetConditions(x => x.<#= navigation.Name #>), cache))
+					return false;
+<#
+			}
+		}
+		
+		foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+		{
+			var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+			if (targetEntityDesc != null)
+			{
+				if (navigation.Data.IsCollection)
+				{
+#>
+				if (!ComparisonHelper.SequenceEqual(obj1.<#= navigation.Name #>, obj2.<#= navigation.Name #>, new <#= targetEntityDesc.Name #>.<#= targetEntityDesc.Name #>EqualityComparer(comparisonOptions, conds?.GetConditions(x => x.<#= navigation.Name #>), cache)))
+					return false;
+<#
+				}
+				else
+				{
+#>
+				if (!<#= targetEntityDesc.Name #>.<#= targetEntityDesc.Name #>EqualityComparer.EqualsTo(obj1.<#= navigation.Name #>, obj2.<#= navigation.Name #>, comparisonOptions, conds?.GetConditions(x => x.<#= navigation.Name #>), cache))
+					return false;
+<#
+				}
+			}
+		}
+#>
+		}
+<#
+	}
+#>
+
+			return true;
+		}
+
+		public static int GetHashCode(
+			<#= entityDesc.BaseName(modelName, contextName) #>? obj,
+			ComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,
+			Action<ComparisonConditions<<#= entityDesc.BaseName(modelName, contextName) #>>>? conditions = null,
+			HashSet<object>? cache = null)
+		{
+			if (obj == null)
+				return 0;
+
+			cache ??= [];
+
+			if (cache.Contains(obj))
+				return 0;
+
+				var hash = 1;
+			return hash;
+		}
+
+		public ComparisonOptions ComparisonOptions { get; }
+		public Action<ComparisonConditions<<#= entityDesc.BaseName(modelName, contextName) #>>>? Conditions { get; }
+		public Dictionary<object, HashSet<object>>? Cache { get; }
+	
+		public <#= entityDesc.ComparerName #>(
+			ComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,
+			Action<ComparisonConditions<<#= entityDesc.BaseName(modelName, contextName) #>>>? conditions = null,
+			Dictionary<object, HashSet<object>>? cache = null)
+		{
+			Cache = cache ?? [];
+			ComparisonOptions = comparisonOptions;
+			Conditions = conditions;
+		}
+	
+		public bool Equals(
+			<#= entityDesc.BaseName(modelName, contextName) #>? obj1,
+			<#= entityDesc.BaseName(modelName, contextName) #>? obj2)
+			=> EqualsTo(
+				obj1,
+				obj2,
+				ComparisonOptions,
+				Conditions,
+				Cache);
+	
+		public int GetHashCode([DisallowNull] <#= entityDesc.BaseName(modelName, contextName) #>? obj)
+			=> GetHashCode(
+				obj,
+				ComparisonOptions,
+				Conditions,
+				cache: null);
+	}
+}
+<#
+	Process();
+#>

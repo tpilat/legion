@@ -1,0 +1,94 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <Import Project="../../../SharedConfigurations.props" />
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="Moq" Version="4.20.72" />
+    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit.Analyzers" Version="3.9.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageReference Include="Testcontainers" Version="3.9.0" />
+    <PackageReference Include="Testcontainers.PostgreSql" Version="3.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Logs\Legion.ADF.Logs.PostgreSQL\Legion.ADF.Logs.PostgreSQL.csproj" />
+    <ProjectReference Include="..\Legion.ADF.Messaging.MessageBox.PostgreSQL\Legion.ADF.Messaging.MessageBox.PostgreSQL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="NUnit.Framework" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DB\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Legion.ADF.Messaging.DB.PostgreSQL\configuredb.sql" Link="DB\configuredb.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Legion.ADF.Messaging.DB.PostgreSQL\data_initial.sql" Link="DB\data_initial.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Legion.ADF.Messaging.DB.PostgreSQL\permissions.sql" Link="DB\permissions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Legion.ADF.Messaging.DB.PostgreSQL\schemas.sql" Link="DB\schemas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Legion.ADF.Messaging.DB.PostgreSQL\tables.sql" Link="DB\tables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Legion.ADF.Messaging.DB.PostgreSQL\truncate_all.sql" Link="DB\truncate_all.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Legion.ADF.Messaging.DB.PostgreSQL\views.sql" Link="DB\views.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\Legion.ADF.Messaging.DB.PostgreSQL\DBPatch\*.sql" Link="DB\DBPatch\%(Filename)%(Extension)">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Logs\Legion.ADF.Logs.DB.PostgreSQL\permissions.sql" Link="DB\Logs\permissions.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Logs\Legion.ADF.Logs.DB.PostgreSQL\schemas.sql" Link="DB\Logs\schemas.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Logs\Legion.ADF.Logs.DB.PostgreSQL\tables.sql" Link="DB\Logs\tables.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Logs\Legion.ADF.Logs.DB.PostgreSQL\truncate_all.sql" Link="DB\Logs\truncate_all.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Logs\Legion.ADF.Logs.DB.PostgreSQL\views.sql" Link="DB\Logs\views.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Logs\Legion.ADF.Logs.DB.PostgreSQL\DBPatch\*.sql" Link="DB\Logs\DBPatch\%(Filename)%(Extension)">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\Logs\Legion.ADF.Logs.DB.PostgreSQL\data_initial.sql" Link="DB\Logs\data_initial.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+		"Homestyle.Generator": {
+			"commandName": "Project",
+			"commandLineArgs": "c:\\Code\\legion\\ADF\\Audit"
+		}
+  }
+}

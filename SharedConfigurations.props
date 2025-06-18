@@ -1,0 +1,18 @@
+<Project>
+  <!-- Define the available configurations -->
+  <PropertyGroup>
+    <Configurations>Debug;Release;TrackObjects</Configurations>
+  </PropertyGroup>
+
+  <!-- Define properties for TrackObjects configuration - "inherits" from Debug -->
+  <PropertyGroup Condition="'$(Configuration)' == 'TrackObjects'">
+    <DefineConstants>TRACE;DEBUG;TRACK_OBJECTS</DefineConstants>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\TrackObjects\</OutputPath>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Config\Legion.ADF.Config.PostgreSQL\Legion.ADF.Config.PostgreSQL.csproj" />
+    <ProjectReference Include="..\Legion.ADF.ESB.Components.PostgreSQL\Legion.ADF.ESB.Components.PostgreSQL.csproj" />
+    <ProjectReference Include="..\Legion.ADF.ESB.MBox.PostgreSQL\Legion.ADF.ESB.MBox.PostgreSQL.csproj" />
+    <ProjectReference Include="..\Legion.ADF.ESB.Orchestrations.PostgreSQL\Legion.ADF.ESB.Orchestrations.PostgreSQL.csproj" />
+    <ProjectReference Include="..\Legion.ADF.ESB.ServiceBus\Legion.ADF.ESB.ServiceBus.csproj" />
+  </ItemGroup>
+
+</Project>

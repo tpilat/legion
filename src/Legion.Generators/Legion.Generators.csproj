@@ -1,0 +1,271 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<IncludeReferencedProjects>true</IncludeReferencedProjects>
+		<NeutralLanguage>en</NeutralLanguage>
+		<Description>Legion.Generators</Description>
+		<PackageTags></PackageTags>
+		<PackageReleaseNotes></PackageReleaseNotes>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<!--<PackageProjectUrl>https://github.com/legion/legion</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/legion/legion</RepositoryUrl>
+		<PackageIcon>legion_icon.png</PackageIcon>-->
+		<Copyright>Copyright Legion</Copyright>
+		<Authors>Tomas Pilat</Authors>
+		<!--<SignAssembly>true</SignAssembly>-->
+	</PropertyGroup>
+
+	<Import Project="../../SharedConfigurations.props" />
+
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.9.2" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+		<PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.10.48">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="System.CodeDom" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Legion\Legion.csproj" />
+		<ProjectReference Include="..\Legion.Database.PostgreSQL\Legion.Database.PostgreSQL.csproj" />
+		<ProjectReference Include="..\Legion.Database.SqlServer\Legion.Database.SqlServer.csproj" />
+		<ProjectReference Include="..\Legion.EntityFrameworkCore\Legion.EntityFrameworkCore.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="..\\Legion\\bin\\Release\\net8.0\\Legion.dll">
+			<Pack>true</Pack>
+			<PackagePath>lib/net8.0/</PackagePath>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="..\\Legion.Database.PostgreSQL\\bin\\Release\\net8.0\\Legion.Database.PostgreSQL.dll">
+			<Pack>true</Pack>
+			<PackagePath>lib/net8.0/</PackagePath>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="..\\Legion.Database.SqlServer\\bin\\Release\\net8.0\\Legion.Database.SqlServer.dll">
+			<Pack>true</Pack>
+			<PackagePath>lib/net8.0/</PackagePath>
+		</Content>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="..\\Legion.EntityFrameworkCore\\bin\\Release\\net8.0\\Legion.EntityFrameworkCore.dll">
+			<Pack>true</Pack>
+			<PackagePath>lib/net8.0/</PackagePath>
+		</Content>
+	</ItemGroup>
+	<PropertyGroup>
+		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+	</PropertyGroup>
+
+	<!--<ItemGroup>
+		<Content Include="$(OutputPath)**\*.dll">
+			<Pack>true</Pack>
+			<PackagePath>lib\net8.0</PackagePath>
+		</Content>
+	</ItemGroup>-->
+
+	<ItemGroup>
+		<None Update="AppGen\AppGenGenerators\Model\BaseEntityGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>BaseEntityGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>BaseQueryEntityGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\EntityContextGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>EntityContextGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\EntityContextModelBuilderGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>EntityContextModelBuilderGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>EntityEqualityComparerGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\EntityMapperGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>EntityMapperGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\EntityModelEnumerationGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>EntityModelEnumerationGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>EntityModelEnumerationObjectGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\EntityModelGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>EntityModelGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\QueryContextGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>QueryContextGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>QueryContextModelBuilderGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\QueryModelGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>QueryModelGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\QueryTableInfoGenerator.tt">
+			<LastGenOutput>QueryTableInfoGenerator.cs</LastGenOutput>
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>QueryRepositoryGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\TableInfoGenerator.tt">
+			<LastGenOutput>TableInfoGenerator.cs</LastGenOutput>
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Model\RepositoryGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>RepositoryGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Shared\EnumGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>EnumGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="AppGen\AppGenGenerators\Shared\ResxGenerator.tt">
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+			<LastGenOutput>ResxGenerator.cs</LastGenOutput>
+		</None>
+		<None Update="EqualityComparers\EqualityComparerGenerator.tt">
+			<LastGenOutput>EqualityComparerGenerator.cs</LastGenOutput>
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+		</None>
+		<None Update="Mappers\TypeMapperGenerator.tt">
+			<LastGenOutput>TypeMapperGenerator.cs</LastGenOutput>
+			<Generator>TextTemplatingFilePreprocessor</Generator>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="AppGen\AppGenGenerators\Model\BaseEntityGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>BaseEntityGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>BaseQueryEntityGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\EntityContextGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>EntityContextGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\EntityContextModelBuilderGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>EntityContextModelBuilderGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>EntityEqualityComparerGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\EntityMapperGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>EntityMapperGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\EntityModelEnumerationGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>EntityModelEnumerationGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>EntityModelEnumerationObjectGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\EntityModelGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>EntityModelGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\QueryContextGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>QueryContextGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>QueryContextModelBuilderGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\QueryModelGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>QueryModelGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\QueryTableInfoGenerator.cs">
+			<DependentUpon>QueryTableInfoGenerator.tt</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>QueryRepositoryGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\TableInfoGenerator.cs">
+			<DependentUpon>TableInfoGenerator.tt</DependentUpon>
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Model\RepositoryGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>RepositoryGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Shared\EnumGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>EnumGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="AppGen\AppGenGenerators\Shared\ResxGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>ResxGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="EqualityComparers\EqualityComparerGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>EqualityComparerGenerator.tt</DependentUpon>
+		</Compile>
+		<Compile Update="Mappers\TypeMapperGenerator.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>TypeMapperGenerator.tt</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+</Project>

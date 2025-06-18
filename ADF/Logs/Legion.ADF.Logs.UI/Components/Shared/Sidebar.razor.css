@@ -1,0 +1,24 @@
+.sidebar {
+  background-color: #007bff;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1rem;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.sidebar-item {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+.sidebar-item:hover {
+  background-color: #007bff;
+}

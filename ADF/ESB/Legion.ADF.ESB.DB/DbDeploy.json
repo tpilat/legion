@@ -1,0 +1,30 @@
+{
+	"WaitingForKeyPress": false,
+	"BaseDatabaseName": "postgres",
+	"DatabaseName": "legion_adf_esb",
+	"AdminUserName": "postgres",
+	"AdminUserPassword": "postgres",
+	"TimeoutInSeconds": 60,
+	"DropCreateDbUser": true,
+	"DbUser": "legion_adf_esb_usr",
+	"DbUserPassword": "legion_adf_esb_pwd",
+	"ApplySampleData": true,
+	"ApplyFinalize": true,
+	"BeforeDBCreateScripts": null,
+	"AfterDBCreateScripts": null,
+	"AfterTablesViewsScripts": null,
+	"BeforePatchScripts": null,
+	"DBPatch": {
+		"Enabled": false,
+		"DBServer": "localhost",
+		"Port": 5432,
+		"SchemaName": "db",
+		"TableName": "DBPatch_ADFESB",
+		"PreviousVersion": null,
+		"FromDateTime": null,
+		"Archive": false,
+		"AllowedConditions": [
+			"LEGION.ADF.ESB"
+		]
+	}
+}

@@ -1,0 +1,130 @@
+﻿na zaciatku kazdej metody urob
+scopeContext = scopeContext.CreateNew();
+
+Do kazdej metody Throw.* dopln scopeContext!!!!!!!
+
+
+pri logovani oddelit user "error" od systemoveho "erroru"
+	- user "error" = validacna chyba (reakcia na vstup od usera) - otazka je, ci to vobec treba logovat?
+	- systemovy "error" = skutocny error, ktory sa moze zalogovat aj do Event logu vo windowse
+
+
+Do Kazdej exceptiony pridaj ScopeContext
+
+
+
+MessageBus - vsetkyu metody napis tak, aby nikdy nethrowli exception!! - vzdy zapis do resultu
+
+
+- Logovanie - pri logovani (do DB) zohladnit parameter TargetStoreId, ktory bol pridany na LogMessage resp. ak je null tak v ScopeContext.TargetStoreId, ktory identifikuje cielovu databazu / tabulku kam sa bude logovat.
+	- ak TargetStoreId == null, tak sa loguje do primarneho storu logov
+
+
+- vyhladaj vsetky #if NETSTANDARD2_0 || NETSTANDARD2_1 ... ci este maju zmysel ak ide o Newtonsoft
+- premenuj vsetky NET6_0_OR_GREATER na NET8_0_OR_GREATER
+
+
+skontroloj kazty throw a prepis na Throw.*
+
+vyhladaj vsetky vyskyty JsonPolymorphicConverter a dopln ho o prislusny atribut pre Newtonsoft
+
+
+
+pre kazdy await pouzi ConfigureAwait(false) - ALE OKREM PRIPADOV, KED NA VSTUPE METODY JE DELEGAT, ktory sa predava z vonku zo zdrojovej APP ... kedze ten delegat sa musi vratit naspat na spravny SynchronizationContext,
+	t.j. vtedy sa nepouziva ConfigureAwait(false) !!!!
+	- ConfigureAwait(false) je mozne pouzit aj pri using ~~ IAsuncDispose, aj pri IAsyncEnumerable
+
+
+pre Database.Internal a pre Database.Metamodel nastav typy tried, do ktorych sa maju jednotile interfaces deserializovat - JSON
+
+
+- dokoncit EF Core Erros
+
+
+
+Commandy budu public sealed record s implicitnym constructorom
+https://youtu.be/tLk4pZZtiDY?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=338
+
+rovnako to plati aj pre Queries
+public sealed record s implicitnym constructorom
+https://youtu.be/tLk4pZZtiDY?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=366
+
+
+AOP
+- validacia  https://youtu.be/tLk4pZZtiDY?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=423
+
+
+API DLL s Controllermi
+https://youtu.be/tLk4pZZtiDY?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=676
+
+
+Anemic domain model -> to Rich domain model
+- dedi od abstract Entity<TIdentity> --> Entity, IEntity, IEquatable<Entity>   https://youtu.be/00tCda35Bvk?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=199
+- kazda Entity bude sealed partial class
+- private set; properties
+- List -> IReadOnlyList
+	- private readonly List<{NavigationEntity}> _{navigationEntity} = new();
+	- IReadOnlyList<{NavigationEntity}> {NavigationEntities} => _{navigationEntity};
+- private constructor(s)
+- public/internal static Create factory method(s)  https://youtu.be/1Lcr2c3MVF4?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=319
+	- internal (co je default - tak to budem generovat???) - na public sa to prepise, ak z vznikne situacia, ze danu entitu nevytvara (len) ina entita, ale je to option aj z vonku z commandHandlera / zo service
+	- na vstupe je IScopeContext
+	- returns IResult<{Entity}>
+- dalsie public/internal static Use-Case methods (napr. Approve, Expire, Accept - t.j. StateChange metody)
+	- na vstupe je IScopeContext
+	- returns IResult    https://youtu.be/KgfzM0QWHrQ?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=586
+
+- AggregateRoot<TIdentity> : Entity<TIdentity>
+	- entity kolekcie (IReadonlyList-y), ktore patria pod aggregate root nemozu byt separatne nacitavane z DB, vzdy len ako include/join cez AggregateRoot
+		https://youtu.be/0D3EB2jvQ44?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=287
+	- RaiseDomainEvent https://youtu.be/BimfDeDV4yU?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=206
+	- GetDomainEvents, ClearDomainEvents    https://youtu.be/XALvnX7MPeo?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=316
+	
+
+- ValueObject : IEquatable<ValueObject>    https://youtu.be/P5CRea21R2E?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=312
+	- priklad FirstName s IResult factory metodou a validaciou https://youtu.be/P5CRea21R2E?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=561
+
+
+- DomainEvent   https://youtu.be/BimfDeDV4yU?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=333
+	- DB OutboxMessage https://youtu.be/XALvnX7MPeo?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=143
+	
+	
+xUnit for CommandHandlers   https://youtu.be/a6Qab5l-VLo?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=391
+	https://youtu.be/a6Qab5l-VLo?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=526
+	
+	
+Stronly typed enum    https://youtu.be/v6cYTcEfZ8A?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=1014
+
+
+Static code analyzers - to all csproj   https://youtu.be/0nVT1gM4vPg?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=505
+.editorconfig  - analyzers severity settings  https://youtu.be/0nVT1gM4vPg?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=368
+
+
+IServiceInstaller interface   https://youtu.be/tKEF6xaeoig?list=PLYpjLpq5ZDGstQ5afRz-34o_0dexr1RGa&t=595
+
+
+idempotency command - command, ktory je identifikovany unikatnym Guidom identifikatorom (spravidla z requestu - napr. unique correlationId kazdeho requestu)
+	- dany command sa da zavolat len raz s konkretnym idempotency tokenom (guidom)
+	
+EF:
+	- ked sa nepouziva LINQ, je mozne pouzit aj custom JOIN (nie len na zaklade ForeignKey, ako pri LINQu)
+	- ked sa pouziva LINQ, je mozne obmedzit Include(x => x.EnumerationProperty.Where(w => obmedzenie))	
+	
+
+FeatureManagement:
+	- https://youtu.be/QVEUgIC7Wpo?t=186
+
+
+Testovanie
+	 - Docker Postgresql  https://youtu.be/tj5ZCtvgXKY?t=81
+	 
+
+OptimisticConcurrency - https://youtu.be/lLDBVMj5He8?t=145
+
+
+CompiledQuery - https://youtu.be/gg-kGOZqUrw?t=532
+
+
+IResultBuilder.HasTransactionRollbackError() ->>> nie kazdy error je dovodom na rollback transakcie ... co ak HasError vrati aj SOFT errory, ktore dovoluju commit transakcie NOT(ErrorMessage.DisableTransactionRollback)
+
+

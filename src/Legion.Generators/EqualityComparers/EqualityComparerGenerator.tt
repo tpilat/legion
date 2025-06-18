@@ -1,0 +1,603 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	EqualityComparerDescriptor equalityComparerDesc = GetParam<EqualityComparerDescriptor>("EqualityComparerDescriptor");
+
+	StartNewFile(equalityComparerDesc.ComparerTargetFolder, equalityComparerDesc.ComparerFileName);
+#>
+<#
+	if (equalityComparerDesc.IsLegionFramework)
+	{
+#>
+using Legion;
+<#
+	}
+#>
+using <#= equalityComparerDesc.ComparerBaseClassesNamespace #>;
+using System.Diagnostics.CodeAnalysis;
+
+<#
+	if (equalityComparerDesc.EmbedToTargetType)
+	{
+#>
+namespace <#= equalityComparerDesc.TargetTypeNamespace #>;
+
+<#
+	}
+	else
+	{
+#>
+namespace <#= equalityComparerDesc.ComparerNamespace #>;
+
+<#
+	}
+
+	if (equalityComparerDesc.EmbedToTargetType)
+	{
+		var classOrRecord = equalityComparerDesc.TargetType.IsRecord() ? "record" : "class";
+#>
+public partial <#= classOrRecord #> <#= equalityComparerDesc.TargetTypeSimpleName #>
+{
+<#
+		PushIndent("	");
+	}
+#>
+public partial class <#= equalityComparerDesc.ComparerName #> : IEqualityComparer<<#= equalityComparerDesc.TargetTypeName #>>
+{
+	public static bool EqualsTo(
+		<#= equalityComparerDesc.TargetTypeName #>? obj1,
+		<#= equalityComparerDesc.TargetTypeName #>? obj2,
+		ComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,
+		Action<ComparisonConditions<<#= equalityComparerDesc.TargetTypeName #>>>? conditions = null,
+		Dictionary<object, HashSet<object>>? cache = null)
+	{
+		if (obj1 == null && obj2 == null)
+			return true;
+
+		if (obj1 == null || obj2 == null)
+			return false;
+
+		if (ReferenceEquals(obj1, obj2))
+			return true;
+
+<#
+	if (equalityComparerDesc.LessThanCSharp12)
+	{
+#>
+		cache ??= new();
+<#
+	}
+	else
+	{
+#>
+		cache ??= [];
+<#
+	}
+#>
+
+		cache.TryGetValue(obj1, out HashSet<object>? cachedHashSet);
+		if (cachedHashSet?.Contains(obj2) == true)
+			return true;
+			
+		ComparisonConditions<<#= equalityComparerDesc.TargetTypeName #>>? conds = null;
+		
+		if ((ComparisonOptions.CompareProperties & comparisonOptions) == ComparisonOptions.CompareProperties)
+		{
+			if (conditions != null)
+			{
+				conds = new ComparisonConditions<<#= equalityComparerDesc.TargetTypeName #>>();
+				conditions.Invoke(conds);
+
+<#
+		List<string> notSuppoertedProperties = [];
+		foreach (var property in equalityComparerDesc.ValueTypeProperties)
+		{
+			var notEquals = property.PropertyType == typeof(string)
+				? $"!string.Equals(obj1.{property.Name}, obj2.{property.Name})"
+				: $"obj1.{property.Name} != obj2.{property.Name}";
+
+			var notSupported = string.Empty;
+			if (property.IsArray())
+			{
+				notEquals = $"(obj1.{property.Name} != null || obj2.{property.Name} != null) && (obj1.{property.Name} == null || obj2.{property.Name} == null || !obj1.{property.Name}.SequenceEqual(obj2.{property.Name}))";
+			}
+			else if (property.IsDictionary())
+			{
+				notSupported = "//TODO: Comparer: Not supported property type >>> ";
+			}
+			else if (property.IsEnumerable())
+			{
+				notEquals = $"(obj1.{property.Name} != null || obj2.{property.Name} != null) && (obj1.{property.Name} == null || obj2.{property.Name} == null || !obj1.{property.Name}.SequenceEqual(obj2.{property.Name}))";
+			}
+
+			if (string.IsNullOrWhiteSpace(notSupported) && !property.CanRead)
+				notSupported = "//TODO: Comparer: Cannot read property >>> ";
+
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				notSuppoertedProperties.Add($"				{notSupported}if (conds.CanCompare(obj1, nameof(obj1.{property.Name})) && {notEquals}){Environment.NewLine}				{notSupported}	obj2.{property.Name} = obj1.{property.Name}");
+			}
+			else
+			{
+#>
+				if (conds.CanCompare(obj1, nameof(obj1.<#= property.Name #>)) && <#= notEquals #>)
+					return false;
+<#
+			}
+		}
+		
+		foreach (var notSupported in notSuppoertedProperties)
+		{
+#>
+
+<#= notSupported #>
+<#
+		}
+#>
+			}
+			else
+			{
+<#
+		notSuppoertedProperties = [];
+		foreach (var property in equalityComparerDesc.ValueTypeProperties)
+		{
+			var notEquals = property.PropertyType == typeof(string)
+				? $"!string.Equals(obj1.{property.Name}, obj2.{property.Name})"
+				: $"obj1.{property.Name} != obj2.{property.Name}";
+
+			var notSupported = string.Empty;
+			if (property.IsArray())
+			{
+				notEquals = $"(obj1.{property.Name} != null || obj2.{property.Name} != null) && (obj1.{property.Name} == null || obj2.{property.Name} == null || !obj1.{property.Name}.SequenceEqual(obj2.{property.Name}))";
+			}
+			else if (property.IsDictionary())
+			{
+				notSupported = "//TODO: Comparer: Not supported property type >>> ";
+			}
+			else if (property.IsEnumerable())
+			{
+				notEquals = $"(obj1.{property.Name} != null || obj2.{property.Name} != null) && (obj1.{property.Name} == null || obj2.{property.Name} == null || !obj1.{property.Name}.SequenceEqual(obj2.{property.Name}))";
+			}
+			
+			if (string.IsNullOrWhiteSpace(notSupported) && !property.CanRead)
+				notSupported = "//TODO: Comparer: Cannot read property >>> ";
+
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				notSuppoertedProperties.Add($"				{notSupported}if ({notEquals}) return false;");
+			}
+			else
+			{
+#>
+				if (<#= notEquals #>)
+					return false;
+<#
+			}
+		}
+		
+		foreach (var notSupported in notSuppoertedProperties)
+		{
+#>
+
+<#= notSupported #>
+<#
+		}
+#>
+			}
+		}
+<#
+		if (0 < equalityComparerDesc.ValueTypeFields.Count)
+		{
+#>
+
+		if ((ComparisonOptions.CompareFields & comparisonOptions) == ComparisonOptions.CompareFields)
+		{
+			if (conditions != null)
+			{
+				conds = new ComparisonConditions<<#= equalityComparerDesc.TargetTypeName #>>();
+				conditions.Invoke(conds);
+
+<#
+		List<string> notSuppoertedFields = [];
+		foreach (var field in equalityComparerDesc.ValueTypeFields)
+		{
+			var notEquals = field.FieldType == typeof(string)
+				? $"!string.Equals(obj1.{field.Name}, obj2.{field.Name})"
+				: $"obj1.{field.Name} != obj2.{field.Name}";
+
+			var notSupported = string.Empty;
+			if (field.IsArray())
+			{
+				notEquals = $"(obj1.{field.Name} != null || obj2.{field.Name} != null) && (obj1.{field.Name} == null || obj2.{field.Name} == null || !obj1.{field.Name}.SequenceEqual(obj2.{field.Name}))";
+			}
+			else if (field.IsDictionary())
+			{
+				notSupported = "//TODO: Comparer: Not supported field type >>> ";
+			}
+			else if (field.IsEnumerable())
+			{
+				notEquals = $"(obj1.{field.Name} != null || obj2.{field.Name} != null) && (obj1.{field.Name} == null || obj2.{field.Name} == null || !obj1.{field.Name}.SequenceEqual(obj2.{field.Name}))";
+			}
+
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				notSuppoertedFields.Add($"				{notSupported}if (conds.CanCompare(obj1, nameof(obj1.{field.Name})) && {notEquals}){Environment.NewLine}				{notSupported}	obj2.{field.Name} = obj1.{field.Name}");
+			}
+			else
+			{
+#>
+				if (conds.CanCompare(obj1, nameof(obj1.<#= field.Name #>)) && <#= notEquals #>)
+					return false;
+<#
+			}
+		}
+		
+		foreach (var notSupported in notSuppoertedFields)
+		{
+#>
+
+<#= notSupported #>
+<#
+		}
+#>
+			}
+			else
+			{
+<#
+		notSuppoertedFields = [];
+		foreach (var field in equalityComparerDesc.ValueTypeFields)
+		{
+			var notEquals = field.FieldType == typeof(string)
+				? $"!string.Equals(obj1.{field.Name}, obj2.{field.Name})"
+				: $"obj1.{field.Name} != obj2.{field.Name}";
+
+			var notSupported = string.Empty;
+			if (field.IsArray())
+			{
+				notEquals = $"(obj1.{field.Name} != null || obj2.{field.Name} != null) && (obj1.{field.Name} == null || obj2.{field.Name} == null || !obj1.{field.Name}.SequenceEqual(obj2.{field.Name}))";
+			}
+			else if (field.IsDictionary())
+			{
+				notSupported = "//TODO: Comparer: Not supported field type >>> ";
+			}
+			else if (field.IsEnumerable())
+			{
+				notEquals = $"(obj1.{field.Name} != null || obj2.{field.Name} != null) && (obj1.{field.Name} == null || obj2.{field.Name} == null || !obj1.{field.Name}.SequenceEqual(obj2.{field.Name}))";
+			}
+
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				notSuppoertedFields.Add($"				{notSupported}if ({notEquals}) return false;");
+			}
+			else
+			{
+#>
+				if (<#= notEquals #>)
+					return false;
+<#
+			}
+		}
+		
+		foreach (var notSupported in notSuppoertedFields)
+		{
+#>
+
+<#= notSupported #>
+<#
+		}
+#>
+			}
+		}
+<#
+		}
+#>
+
+		if (cachedHashSet == null)
+		{
+			cachedHashSet = [];
+			cache[obj1] = cachedHashSet;
+		}
+
+		cachedHashSet.Add(obj2);
+<#
+	if (0 < equalityComparerDesc.ReferenceTypeProperties.Count || 0 < equalityComparerDesc.CollectionOfReferenceTypeProperties.Count)
+	{
+#>
+
+		if ((ComparisonOptions.CompareReferences & comparisonOptions) == ComparisonOptions.CompareReferences)
+		{
+<#
+		notSuppoertedProperties = [];
+		foreach (var navigation in equalityComparerDesc.ReferenceTypeProperties)
+		{
+			var notSupported = string.Empty;
+
+			if (string.IsNullOrWhiteSpace(notSupported) && !navigation.Key.CanRead)
+				notSupported = "//TODO: Comparer: Cannot read property >>> ";
+
+			var embededNamespace = equalityComparerDesc.EmbedToTargetType
+				? $"{navigation.Value.TargetTypeName}."
+				: "";
+
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				if (equalityComparerDesc.IsComapredByReference(navigation.Key.PropertyType) == true)
+				{
+					notSuppoertedProperties.Add($"			{notSupported}if (!ReferenceEquals(obj2.{navigation.Key.Name}, obj1.{navigation.Key.Name})) return false;");
+				}
+				else
+				{
+					notSuppoertedProperties.Add($"			{notSupported}if (!{embededNamespace}{navigation.Value.ComparerName}.EqualsTo(obj1.{navigation.Key.Name}, obj2.{navigation.Key.Name}, comparisonOptions, conds?.GetConditions(x => x.{navigation.Key.Name}), cache)) return false;");
+				}
+			}
+			else
+			{
+				if (equalityComparerDesc.IsComapredByReference(navigation.Key.PropertyType) == true)
+				{
+#>
+			if (!ReferenceEquals(obj2.<#= navigation.Key.Name #>, obj1.<#= navigation.Key.Name #>))
+				return false;
+<#
+				}
+				else
+				{
+#>
+			if (!<#= embededNamespace #><#= navigation.Value.ComparerName #>.EqualsTo(obj1.<#= navigation.Key.Name #>, obj2.<#= navigation.Key.Name #>, comparisonOptions, conds?.GetConditions(x => x.<#= navigation.Key.Name #>), cache))
+				return false;
+<#
+				}
+			}
+		}
+		
+		foreach (var navigation in equalityComparerDesc.CollectionOfReferenceTypeProperties)
+		{
+			var notSupported = string.Empty;
+
+			if (string.IsNullOrWhiteSpace(notSupported) && !navigation.Key.CanRead)
+				notSupported = "//TODO: Comparer: Cannot read property >>> ";
+
+			var embededNamespace = equalityComparerDesc.EmbedToTargetType
+				? $"{navigation.Value.TargetTypeName}."
+				: "";
+				
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				if (equalityComparerDesc.IsComapredByReference(navigation.Key.PropertyType) == true)
+				{
+					notSuppoertedProperties.Add($"			{notSupported}if (!ReferenceEquals(obj2.{navigation.Key.Name}, obj1.{navigation.Key.Name}) return false;");
+				}
+				else if (equalityComparerDesc.IsComapredByReference(navigation.Key.PropertyType.GetEnumerableElementType()) == true)
+				{
+					notSuppoertedProperties.Add($"			{notSupported}if ((obj1.{navigation.Key.Name} != null || obj2.{navigation.Key.Name} != null) && (obj1.{navigation.Key.Name} == null || obj2.{navigation.Key.Name} == null || !obj1.{navigation.Key.Name}.SequenceEqual(obj2.{navigation.Key.Name}))) return false;");
+				}
+				else
+				{
+					notSuppoertedProperties.Add($"			{notSupported}if (!ComparisonHelper.SequenceEqual(obj1.{navigation.Key.Name}, obj2.{navigation.Key.Name}, new {embededNamespace}{navigation.Value.ComparerName}(comparisonOptions, conds?.GetConditions(x => x.{navigation.Key.Name}), cache))) return false;");
+				}
+			}
+			else
+			{
+				if (equalityComparerDesc.IsComapredByReference(navigation.Key.PropertyType) == true)
+				{
+#>
+			if (!ReferenceEquals(obj2.<#= navigation.Key.Name #>, obj1.<#= navigation.Key.Name #>)
+				return false;
+<#
+				}
+				else if (equalityComparerDesc.IsComapredByReference(navigation.Key.PropertyType.GetEnumerableElementType()) == true)
+				{
+#>
+			if ((obj1.<#= navigation.Key.Name #> != null || obj2.<#= navigation.Key.Name #> != null) && (obj1.<#= navigation.Key.Name #> == null || obj2.<#= navigation.Key.Name #> == null || !obj1.<#= navigation.Key.Name #>.SequenceEqual(obj2.<#= navigation.Key.Name #>)))
+				return false;
+<#
+				}
+				else
+				{
+#>
+			if (!ComparisonHelper.SequenceEqual(obj1.<#= navigation.Key.Name #>, obj2.<#= navigation.Key.Name #>, new <#= embededNamespace#><#= navigation.Value.ComparerName #>(comparisonOptions, conds?.GetConditions(x => x.<#= navigation.Key.Name #>), cache)))
+				return false;
+<#
+				}
+			}
+		}
+		
+		foreach (var notSupported in notSuppoertedProperties)
+		{
+#>
+
+<#= notSupported #>
+<#
+		}
+#>
+		}
+<#
+	}
+#>
+
+		return true;
+	}
+
+	public static int GetHashCode(
+		<#= equalityComparerDesc.TargetTypeName #>? obj,
+		ComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,
+		Action<ComparisonConditions<<#= equalityComparerDesc.TargetTypeName #>>>? conditions = null,
+		HashSet<object>? cache = null)
+	{
+		if (obj == null)
+			return 0;
+
+<#
+	if (equalityComparerDesc.LessThanCSharp12)
+	{
+#>
+		cache ??= new();
+<#
+	}
+	else
+	{
+#>
+		cache ??= [];
+<#
+	}
+#>
+
+		if (cache.Contains(obj))
+			return 0;
+
+<#
+		List<System.Reflection.MemberInfo> propsAndFields = equalityComparerDesc.ValueTypeProperties.Select(x => (System.Reflection.MemberInfo)x.PropertyInfo).ToList();
+		propsAndFields.AddRange(equalityComparerDesc.ReferenceTypeProperties.Select(x => (System.Reflection.MemberInfo)x.Key.PropertyInfo));
+		propsAndFields.AddRange(equalityComparerDesc.CollectionOfReferenceTypeProperties.Select(x => (System.Reflection.MemberInfo)x.Key.PropertyInfo));
+		propsAndFields.AddRange(equalityComparerDesc.ValueTypeFields.Select(x => (System.Reflection.MemberInfo)x.FieldInfo));
+		propsAndFields.AddRange(equalityComparerDesc.ReferenceTypeFields.Select(x => (System.Reflection.MemberInfo)x.Key.FieldInfo));
+		propsAndFields.AddRange(equalityComparerDesc.CollectionOfReferenceTypeFields.Select(x => (System.Reflection.MemberInfo)x.Key.FieldInfo));
+
+		var sb = new StringBuilder();
+		var hash = ComputeHash(equalityComparerDesc, propsAndFields.ToArray());
+		sb.AppendLine(hash);
+		hash = sb.ToString();
+#>
+		<#= hash #>
+
+		return hash;
+	}
+
+	public ComparisonOptions ComparisonOptions { get; }
+	public Action<ComparisonConditions<<#= equalityComparerDesc.TargetTypeName #>>>? Conditions { get; }
+	public Dictionary<object, HashSet<object>>? Cache { get; }
+	
+	public <#= equalityComparerDesc.ComparerName #>(
+		ComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,
+		Action<ComparisonConditions<<#= equalityComparerDesc.TargetTypeName #>>>? conditions = null,
+		Dictionary<object, HashSet<object>>? cache = null)
+	{
+<#
+	if (equalityComparerDesc.LessThanCSharp12)
+	{
+#>
+		Cache = cache ?? new();
+<#
+	}
+	else
+	{
+#>
+		Cache = cache ?? [];
+<#
+	}
+#>
+		ComparisonOptions = comparisonOptions;
+		Conditions = conditions;
+	}
+	
+	public bool Equals(
+		<#= equalityComparerDesc.TargetTypeName #>? obj1,
+		<#= equalityComparerDesc.TargetTypeName #>? obj2)
+		=> EqualsTo(
+			obj1,
+			obj2,
+			ComparisonOptions,
+			Conditions,
+			Cache);
+	
+	public int GetHashCode([DisallowNull] <#= equalityComparerDesc.TargetTypeName #>? obj)
+		=> GetHashCode(
+			obj,
+			ComparisonOptions,
+			Conditions,
+			cache: null);
+}
+<#
+
+	if (equalityComparerDesc.EmbedToTargetType)
+	{
+		PopIndent();
+#>
+}
+<#
+	}
+
+	Process();
+#>
+<#+
+string? ComputeHash(
+	EqualityComparerDescriptor equalityComparerDesc,
+	params System.Reflection.MemberInfo[] parameters)
+{
+	if (parameters == null || parameters.Length == 0)
+		return "";
+
+	var fieldsProps = new List<string>();
+
+	for (int i = 0; i < parameters.Length; i++)
+	{
+		var parameter = parameters[i];
+		var type = parameter.GetFieldOrPropertyType();
+
+		if (type.IsDictionary())
+			continue;
+
+		if (type.IsSimpleType())
+		{
+			fieldsProps.Add($"obj.{parameter.Name}");
+		}
+		else if (type.IsEnumerableSimpleType())
+		{
+			Type itemType = type.GetEnumerableElementType();
+
+			fieldsProps.Add($"ComparisonHelper.SequenceHashCode(obj.{parameter.Name}, System.Collections.Generic.EqualityComparer<{itemType.ToFriendlyName()}>.Default)");
+		}
+		else if (type.IsEnumerableType())
+		{
+			fieldsProps.Add($"ComparisonHelper.SequenceHashCode(obj.{parameter.Name}, System.Collections.Generic.EqualityComparer<{type.GetEnumerableElementType().FullName}>.Default)");
+		}
+		else //is reference type
+		{
+			if (equalityComparerDesc.IsComapredByReference(type))
+			{
+				fieldsProps.Add($"obj.{parameter.Name}?.GetHashCode()");
+			}
+			else
+			{
+				fieldsProps.Add(equalityComparerDesc.EmbedToTargetType
+					? $"{type.FullName}.{type.Name}EqualityComparer.GetHashCode(obj.{parameter.Name}, comparisonOptions, /*conditions*/null, cache)"
+					: $"{equalityComparerDesc.ComparerNamespace ?? type.Namespace!}.{type.Name}EqualityComparer.GetHashCode(obj.{parameter.Name}, comparisonOptions, /*conditions*/null, cache)");
+			}
+		}
+	}
+
+	var sb = new StringBuilder();
+	var batch = fieldsProps.Take(8).ToList();
+	fieldsProps = fieldsProps.Skip(8).ToList();
+	var isFirst = true;
+	while (batch.Any())
+	{
+		if (isFirst)
+		{
+			sb.AppendLine(batch.Count == 1
+				? $"int hash = {batch[0]}?.GetHashCode() ?? 0;"
+				: $"int hash = HashCode.Combine({string.Join($",{Environment.NewLine}			", batch)});");
+		}
+		else
+		{
+			sb.AppendLine($"		hash = HashCode.Combine(hash, {string.Join($",{Environment.NewLine}			", batch)});");
+		}
+
+		batch = fieldsProps.Take(7).ToList();
+		fieldsProps = fieldsProps.Skip(7).ToList();
+		isFirst = false;
+	}
+
+	return sb.ToString();
+}
+#>

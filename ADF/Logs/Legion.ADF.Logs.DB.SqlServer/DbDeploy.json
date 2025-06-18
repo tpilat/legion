@@ -1,0 +1,37 @@
+{
+		"DbDeploy": {
+				"ConncetionString": "Server=127.0.0.1;Database=legion_adf_logs;User Id=sa;Password=Password1.;TrustServerCertificate=True;MultipleActiveResultSets=true",
+				"TargetDbUsername": "logsusr",
+				"TargetDbPassword": "logs_Pwd1.",
+				"UseGlobalTransaction": false,
+				"SqlFiles": [
+						{
+								"FilePath": "dropCreate.sql",
+								"Transaction": null,
+								"CurrentDatabase": "master",
+								"FilledScriptPostfix": "_filled"
+						},
+						{
+								"FilePath": "schemas.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "tables.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "views.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "permissions.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "data_initial.sql",
+								"Transaction": "Local"
+						}
+				],
+				"DbPatch": null
+		}
+}

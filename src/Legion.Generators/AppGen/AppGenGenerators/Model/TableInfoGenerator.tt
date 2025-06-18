@@ -1,0 +1,118 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	TableInfoDescriptor tabInfoDesc = GetParam<TableInfoDescriptor>("TableInfoDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+	
+	StartNewFile(tabInfoDesc.InterfaceTargetFolder, tabInfoDesc.InterfaceFileName);
+	
+	foreach (string import in tabInfoDesc.InterfaceImports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < tabInfoDesc.InterfaceImports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= tabInfoDesc.InterfaceNamespace #>;
+
+public interface <#= tabInfoDesc.InterfaceName #> : Legion.Database.ITableInfoProvider
+{
+}
+<#
+	StartNewFile(tabInfoDesc.TableInfoTargetFolder, tabInfoDesc.FileName);
+
+	var dbConnection = AppGen.Model.Config.CodeGeneratorConfig.Instance.SelectedDatabaseConnection.Provider == Database.Metamodel.DatabaseProviderType.PostgreSQL ? "NpgsqlConnection" : "SqlConnection";
+
+	foreach (string import in tabInfoDesc.Imports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < tabInfoDesc.Imports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= tabInfoDesc.TableInfoNamespace #>;
+
+public class <#= tabInfoDesc.Name #> : <#= tabInfoDesc.InterfaceNamespace #>.<#= tabInfoDesc.InterfaceName #>
+{
+<#
+	foreach (var entity in tabInfoDesc.Model.Entities)
+	{
+		var entityDesc = tabInfoDesc.Context.GetEntityModelDescriptor(entity, true, modelName, contextName);
+		if (entityDesc == null) continue;
+#>
+	private readonly static Lazy<Legion.Database.Metamodel.Info.TableInfo> _<#= entity.Name #>TableInfo = new(() =>
+		new Legion.Database.Metamodel.Info.TableInfo(
+				"<#= entity.Schema #>", "<#= AppGen.Model.Config.CodeGeneratorConfig.Instance.SelectedDatabaseConnection.Provider == Database.Metamodel.DatabaseProviderType.PostgreSQL ? $"\\\"{entity.TableName}\\\"" : $"[{entity.TableName}]" #>",
+				[
+<#
+		foreach (var property in entity.Properties.Where(x => !x.IsIgnored))
+		{
+#>
+					new(nameof(<#= entityDesc.FullName(modelName, contextName) #>.<#= property.Name #>), typeof(<#= Helpers.TypeHelper.TypeToCSharpSourceCode(property.ClrType) #>), "<#= AppGen.Model.Config.CodeGeneratorConfig.Instance.SelectedDatabaseConnection.Provider == Database.Metamodel.DatabaseProviderType.PostgreSQL ? $"\\\"{property.ColumnName}\\\"" : $"[{property.ColumnName}]" #>", "<#= property.GetDatabaseDataType(false) #>", <#= property.IsNullable.ToString().ToLower() #>),
+<#
+		}
+#>
+				]));
+
+	public static Legion.Database.Metamodel.Info.TableInfo Get<#= entity.Name #>TableInfo()
+		=> _<#= entity.Name #>TableInfo.Value;
+
+<#
+	}
+#>
+	private readonly static Lazy<Dictionary<Type, Legion.Database.Metamodel.Info.TableInfo>> _tableInfoDictionary =
+		new(() => new Dictionary<Type, Legion.Database.Metamodel.Info.TableInfo>
+		{
+<#
+	foreach (var entity in tabInfoDesc.Model.Entities)
+	{
+		var entityDesc = tabInfoDesc.Context.GetEntityModelDescriptor(entity, true, modelName, contextName);
+		if (entityDesc == null) continue;
+#>
+			{ typeof(<#= entityDesc.Namespace(modelName, contextName) #>.<#= entity.Name #>), Get<#= entity.Name #>TableInfo() },
+<#
+	}
+#>
+		});
+
+	public IReadOnlyDictionary<Type, Legion.Database.Metamodel.Info.TableInfo> TableInfoDictionary => _tableInfoDictionary.Value;
+
+	public Legion.Database.Metamodel.Info.TableInfo GetTableInfo<T>()
+		=> GetTableInfo(typeof(T));
+
+	public Legion.Database.Metamodel.Info.TableInfo GetTableInfo(Type type)
+	{
+		if (TableInfoDictionary.TryGetValue(type, out var tableInfo))
+			return tableInfo;
+
+		Legion.Throw.InvalidOperationException($"Invalid entity type = {type.ToFriendlyFullName()}");
+		return null;
+	}
+}
+<#
+	Process();
+#>

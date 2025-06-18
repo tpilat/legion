@@ -1,0 +1,180 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	EntityContextDescriptor dbContextDesc = GetParam<EntityContextDescriptor>("EntityContextDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+	var isPostgreSql = AppGen.Model.Config.CodeGeneratorConfig.Instance.SelectedDatabaseConnection.Provider == Database.Metamodel.DatabaseProviderType.PostgreSQL;
+
+	StartNewFile(dbContextDesc.TargetFolder(modelName, contextName), dbContextDesc.FileName);
+
+	foreach (string import in dbContextDesc.Imports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < dbContextDesc.Imports.Count)
+	{
+#>
+
+<#
+	}
+#>
+#nullable disable
+
+namespace <#= dbContextDesc.Namespace(modelName, contextName) #>;
+
+public partial class <#= dbContextDesc.Name #> : Legion.EntityFrameworkCore.Audit.AuditableDbContext, <#= dbContextDesc.AbstractionBaseNamespace #>.<#= dbContextDesc.AbstractionName #>
+{
+	public static readonly System.Collections.Generic.IReadOnlyDictionary<string, string> PrimaryKeyFormatters;
+
+	static <#= dbContextDesc.Name #>()
+	{
+		PrimaryKeyFormatters = new System.Collections.Generic.Dictionary<string, string>
+		{
+<#
+	foreach (var entity in dbContextDesc.Data.Entities.OrderBy(x => x.Name))
+	{
+		var entityDesc = dbContextDesc.Context.GetEntityModelDescriptor(entity, true, modelName, contextName);
+		if (entityDesc == null || !entity.GenerateModel) continue;
+#>
+			{ nameof(<#= entityDesc.FullName(modelName, contextName) #>), <#= entityDesc.EntityContextModelBuilderBaseName #>.PrimaryKeyFormatter },
+<#
+	}
+#>
+		};
+	}
+
+<#
+	foreach (var entity in dbContextDesc.Data.Entities.OrderBy(x => x.Name))
+	{
+		var entityDesc = dbContextDesc.Context.GetEntityModelDescriptor(entity, true, modelName, contextName);
+		if (entityDesc == null || !entity.GenerateModel) continue;
+		//if (entity.IsAuditEntry) continue;
+#>
+	public virtual <#= entityDesc.Data.DbContextType.ToString() #><<#= entityDesc.FullName(modelName, contextName) #>> <#= entity.DbSetName #> { get; set; }
+<#
+	}
+#>
+
+	public <#= dbContextDesc.Name #>(DbContextOptions<<#= dbContextDesc.Name #>> options, Microsoft.Extensions.Logging.ILogger<<#= dbContextDesc.Name #>> logger)
+		: base(options, logger)
+	{
+	}
+
+	public <#= dbContextDesc.Name #>(Microsoft.Extensions.Logging.ILogger<<#= dbContextDesc.Name #>> logger)
+		: base(logger)
+	{
+	}
+
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
+		if (!optionsBuilder.IsConfigured)
+		{
+			if (ConnectionProvider == null)
+				Legion.Throw.InitializationException(ConnectionProvider);
+
+			ConnectionProvider.OnConfiguring(optionsBuilder);
+		}
+		else
+		{
+			SetIsDbContextOptionsBuilderPreconfigured();
+		}
+
+		if (DbContextSettintgs.AllowLocking == true)
+			optionsBuilder.AddInterceptors(new Legion.EntityFrameworkCore.Interceptors.RowLockInterceptor_<#= isPostgreSql ? "PostgreSql" : "SqlServer" #>());
+	}
+
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		RegisterUnaccentFunction(modelBuilder);
+
+<#
+	foreach (var entity in dbContextDesc.Data.Entities.OrderBy(x => x.Name))
+	{
+		if (!entity.GenerateModel)
+			continue;
+
+		//TODO urob ine mapovanie ak entityDesc.DbContextType == DbQuery !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+		var entityDesc = dbContextDesc.Context.GetEntityModelDescriptor(entity, true, modelName, contextName);
+		if (entityDesc == null) continue;
+#>
+		<#= entityDesc.EntityContextModelBuilderBaseName #>.Build(modelBuilder);
+<#
+	}
+#>
+	}
+}
+<#
+	StartNewFile(dbContextDesc.AbstractionTargetFolder, dbContextDesc.AbstractionFileName);
+
+	foreach (string import in dbContextDesc.AbstractionImports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < dbContextDesc.AbstractionImports.Count)
+	{
+#>
+
+<#
+	}
+#>
+#nullable disable
+
+namespace <#= dbContextDesc.AbstractionNamespace #>;
+
+public interface <#= dbContextDesc.AbstractionName #> : Legion.EntityFrameworkCore.Audit.IAuditableDbContext, Legion.EntityFrameworkCore.IDbContext, IDisposable, IAsyncDisposable
+{
+<#
+	foreach (var entity in dbContextDesc.Data.Entities.OrderBy(x => x.Name))
+	{
+		var entityDesc = dbContextDesc.Context.GetEntityModelDescriptor(entity, true, modelName, contextName);
+		if (entityDesc == null || !entity.GenerateModel) continue;
+		//if (entity.IsAuditEntry) continue;
+#>
+	<#= entityDesc.Data.DbContextType.ToString() #><<#= entityDesc.FullName(modelName, contextName) #>> <#= entity.DbSetName #> { get; }
+<#
+	}
+#>
+}
+<#
+	Process();
+#>
+<#+
+string MultiLineFluentApi(params string[] lines)
+{
+	StringBuilder sb = new StringBuilder();
+	if (lines != null && 0 < lines.Length)
+	{
+		if (lines.Length == 1)
+		{
+			sb.Append(lines[0].Trim());
+		}
+		else
+		{
+			foreach (var line in lines)
+			{
+				sb.AppendLine();
+				sb.Append(line);
+			}     
+		}
+	}
+	sb.Append(";");
+	return sb.ToString();
+}
+#>

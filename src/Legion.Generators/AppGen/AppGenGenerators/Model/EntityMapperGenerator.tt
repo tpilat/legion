@@ -1,0 +1,244 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	EntityModelDescriptor entityDesc = GetParam<EntityModelDescriptor>("EntityModelDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+
+	StartNewFile(entityDesc.EntityMapperTargetFolder, entityDesc.EntityMapperFileName);
+	
+	string @sealed = entityDesc.Data.IsSealed ? " sealed" : "";
+	string iAuditEntry = entityDesc.Data.IsAuditEntry ? ", Legion.Model.Audit.IAuditEntry" : "";
+	string iSelfAuditableEntity = entityDesc.Data.IsSelfAuditableEntity ? ", Legion.Model.Audit.ISelfAuditableEntity" : "";
+	string iAuditableEntity = entityDesc.Data.IsAuditableEntity ? ", Legion.Model.Audit.IAuditableEntity" : "";
+	string iSynchronizable = entityDesc.Data.IsSynchronizableEntity ? ", Legion.Model.Synchronyzation.ISynchronizable" : "";
+	string iCorrelable = entityDesc.Data.IsCorrelableEntity ? ", Legion.Model.Correlation.ICorrelable" : "";
+	string customInterfaces = string.IsNullOrWhiteSpace(entityDesc.Data.CustomInterfaces) ? "" : ", " + entityDesc.Data.CustomInterfaces;
+	
+	var concurrencyProps = entityDesc.Data.Properties.Where(x => x.IsConcurrencyToken).ToList();
+	var concurrencyProp = concurrencyProps.Count == 1 ? concurrencyProps.First() : null;
+	string iConcurrent = (concurrencyProp != null) ? ", Legion.Model.Concurrence.IConcurrent" : "";
+
+	foreach (string import in entityDesc.EntityMapperImports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < entityDesc.EntityMapperImports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= entityDesc.Namespace(modelName, contextName) #>;
+
+public<#= @sealed #> partial class <#= entityDesc.Name #> : <#= entityDesc.GetBaseEntityName(modelName, contextName) #><#= iAuditEntry #><#= iSelfAuditableEntity #><#= iSynchronizable #><#= iConcurrent #><#= iCorrelable #><#= customInterfaces #><#= iAuditableEntity #>, Legion.Model.IEntity
+{
+	public static <#= entityDesc.BaseName(modelName, contextName) #>? Map(
+		<#= entityDesc.BaseName(modelName, contextName) #> source,
+		<#= entityDesc.BaseName(modelName, contextName) #>? target,
+		ReferenceModifier referenceModifier = ReferenceModifier.SkipAllReferences,
+		Action<MappingConditions<<#= entityDesc.BaseName(modelName, contextName) #>>>? conditions = null,
+		Legion.Reflection.InstanceFactory? instanceFactory = null,
+		Dictionary<object, object>? cache = null)
+	{
+		Throw.IfArgumentNull(source);
+
+		return source.MapTo(target, referenceModifier, conditions, instanceFactory, cache);
+	}
+
+	public <#= entityDesc.BaseName(modelName, contextName) #>? Clone(
+		ReferenceModifier referenceModifier = ReferenceModifier.SkipAllReferences,
+		Action<MappingConditions<<#= entityDesc.BaseName(modelName, contextName) #>>>? conditions = null,
+		Legion.Reflection.InstanceFactory? instanceFactory = null,
+		Dictionary<object, object>? cache = null)
+		=> MapTo(target: null, referenceModifier, conditions, instanceFactory, cache);
+
+	public <#= entityDesc.BaseName(modelName, contextName) #>? MapTo(
+		<#= entityDesc.BaseName(modelName, contextName) #>? target,
+		ReferenceModifier referenceModifier = ReferenceModifier.SkipAllReferences,
+		Action<MappingConditions<<#= entityDesc.BaseName(modelName, contextName) #>>>? conditions = null,
+		Legion.Reflection.InstanceFactory? instanceFactory = null,
+		Dictionary<object, object>? cache = null)
+	{
+		cache ??= [];
+<#
+	if (entityDesc.Data.ConvertEntity == ConvertEntity.ToEnumerationClass
+		|| entityDesc.Data.ConvertEntity == ConvertEntity.ToEnumAndEnumerationClass)
+	{
+#>
+		target ??= <#= entityDesc.FullName(modelName, contextName) #>.DictionaryMap.Value[<#= entityDesc.Data.FirstPrimaryKey.Name #>];
+<#
+	}
+	else
+	{
+#>
+		target ??= instanceFactory?.CreateInstance<<#= entityDesc.FullName(modelName, contextName) #>>(
+				useActivatorIfNoFactoryFound: false,
+				throwIfFactoryReturnsNull: true)
+			?? new <#= entityDesc.FullName(modelName, contextName) #>();
+<#
+	}
+#>
+
+		if (cache.TryGetValue(this, out var cached))
+			return (<#= entityDesc.BaseName(modelName, contextName) #>)cached;
+			
+		MappingConditions<<#= entityDesc.BaseName(modelName, contextName) #>>? conds = null;
+		if (conditions != null)
+		{
+			conds = new MappingConditions<<#= entityDesc.BaseName(modelName, contextName) #>>();
+			conditions.Invoke(conds);
+<#
+	if (entityDesc.Data.ConvertEntity != ConvertEntity.ToEnumerationClass
+		&& entityDesc.Data.ConvertEntity != ConvertEntity.ToEnumAndEnumerationClass)
+	{
+#>
+
+<#
+		foreach (var property in entityDesc.Properties)
+		{
+			var isArray = property.IsArray();
+			var isCollection = property.IsCollection();
+			var collectionCopy = isCollection && !isArray
+				? "?.ToList()"
+				: (isArray ? "?.ToArray()" : "");
+#>
+			if (conds.CanMap(this, nameof(<#= property.Name #>)))
+				target.<#= property.Name #> = <#= property.Name #><#= collectionCopy #>;
+<#
+		}
+#>
+		}
+		else
+		{
+<#
+		foreach (var property in entityDesc.Properties)
+		{
+			var isArray = property.IsArray();
+			var isCollection = property.IsCollection();
+			var collectionCopy = isCollection && !isArray
+				? "?.ToList()"
+				: (isArray ? "?.ToArray()" : "");
+#>
+			target.<#= property.Name #> = <#= property.Name #><#= collectionCopy #>;
+<#
+		}
+	}
+#>
+		}
+
+		cache.Add(this, target);
+<#
+	var targetNavigationEntities = new List<EntityModelDescriptor>();
+	foreach (var navigation in entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+			targetNavigationEntities.Add(targetEntityDesc);
+	}
+
+	var targetBackNavigationMappers = new List<EntityModelDescriptor>();
+	foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+			targetBackNavigationMappers.Add(targetEntityDesc);
+	}
+
+	if (0 < targetNavigationEntities.Count || 0 < targetBackNavigationMappers.Count)
+	{
+#>
+
+		if (referenceModifier == ReferenceModifier.MapAllReferences)
+		{
+<#
+		foreach (var navigation in entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+		{
+			var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+			if (targetEntityDesc != null)
+			{
+#>
+			target.<#= navigation.Name #> = <#= navigation.Name #>?.MapTo(target.<#= navigation.Name #>, referenceModifier, conds?.GetConditions(x => x.<#= navigation.Name #>), instanceFactory, cache)!;
+<#
+			}
+		}
+		
+		foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+		{
+			var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+			if (targetEntityDesc != null)
+			{
+				if (navigation.Data.IsCollection)
+				{
+#>
+			target._<#= navigation.AsFieldName #> = MapperHelper.MapToList(<#= navigation.Name #>, target._<#= navigation.AsFieldName #>, <#= targetEntityDesc.FullName(modelName, contextName) #>.Map, referenceModifier, conds?.GetConditions(x => x.<#= navigation.Name #>), instanceFactory, cache)!;
+<#
+				}
+				else
+				{
+#>
+			target.<#= navigation.Name #> = <#= navigation.Name #>?.MapTo(target.<#= targetEntityDesc.FullName(modelName, contextName) #>, referenceModifier, conds?.GetConditions(x => x.<#= navigation.Name #>), instanceFactory, cache)!;
+<#
+				}
+			}
+		}
+#>
+		}
+		else if (referenceModifier == ReferenceModifier.SetNull)
+		{
+<#
+		foreach (var navigation in entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+		{
+			var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+			if (targetEntityDesc != null)
+			{
+#>
+			target.<#= navigation.Name #> = null!;
+<#
+			}
+		}
+		foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+		{
+			var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+			if (targetEntityDesc != null)
+			{
+				if (navigation.Data.IsCollection)
+				{
+#>
+			target._<#= navigation.AsFieldName #> = [];
+<#
+				}
+				else
+				{
+#>
+			target.<#= navigation.Name #> = null!;
+<#
+				}
+			}
+		}
+#>
+		}
+<#
+	}
+#>
+
+		return target;
+	}
+}
+<#
+	Process();
+#>

@@ -1,0 +1,150 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	EntityModelEnumerationDescriptor entityDesc = GetParam<EntityModelEnumerationDescriptor>("EntityModelEnumerationDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+
+	StartNewFile(entityDesc.TargetFolder(modelName, contextName), entityDesc.FileName);
+	
+	foreach (string import in entityDesc.Imports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < entityDesc.Imports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= entityDesc.Namespace(modelName, contextName) #>;
+
+public partial class <#= entityDesc.Name #> : <#= entityDesc.GetBaseEntityName(modelName, contextName) #>, Legion.Model.IEntity
+{
+<#
+		if (entityDesc.Data.MainColumn.ClrType != typeof(string))
+		{
+#>
+#pragma warning disable IDE1006 // Naming Styles
+<#
+		}
+
+		int idx = 0;
+		foreach (var enumRow in entityDesc.EnumData)
+		{
+			idx++;
+			if (1 < idx)
+			{
+#>
+
+<#
+			}
+#>
+	/// <summary>
+	/// <#= enumRow.Values[0].Replace("new Guid(\"", "").Replace("\")", "") #>
+	/// </summary>
+	public static <#= entityDesc.Data.FirstPrimaryKey.CSharpType #> <#= enumRow.BasePropertyCSharpName #> { get; }
+<#
+		}
+
+		if (entityDesc.Data.MainColumn.ClrType != typeof(string))
+		{
+#>
+#pragma warning restore IDE1006 // Naming Styles
+<#
+		}
+#>
+
+	static <#= entityDesc.Name #>()
+	{
+<#
+	foreach (var enumRow in entityDesc.EnumData)
+	{
+#>
+		<#= enumRow.BasePropertyCSharpName #> = <#= enumRow.Values[0] #>;
+<#
+	}
+#>
+
+		DefaultDBValidator = SetDBValidatorRules(new Legion.Validation.ValidatorBuilder<<#= entityDesc.Name #>>()).Build();
+	}
+
+	public static IEnumerable<<#= entityDesc.Data.FirstPrimaryKey.CSharpType #>> AsEnumerable()
+	{
+<#
+		if (entityDesc.EnumData.Count == 0)
+		{
+#>
+		yield return null;
+<#
+		}
+		else
+		{
+			foreach (var enumRow in entityDesc.EnumData)
+			{
+#>
+		yield return <#= enumRow.BasePropertyCSharpName #>;
+<#
+			}
+		}
+#>
+	}
+<#
+	if (entityDesc.ConvertEntity == ConvertEntity.ToEnumAndEnumerationClass)
+	{
+#>
+
+	public <#= entityDesc.EnumName #> ToEnum()
+	{
+<#
+	foreach (var enumRow in entityDesc.EnumData)
+	{
+#>
+		if (<#= entityDesc.Data.FirstPrimaryKey #> == <#= enumRow.BasePropertyCSharpName #>)
+			return <#= entityDesc.EnumName #>.<#= enumRow.BasePropertyCSharpName #>;
+
+<#
+	}
+#>
+		Legion.Throw.NotSupportedException($"Invalid {nameof(<#= entityDesc.Data.FirstPrimaryKey #>)} value {<#= entityDesc.Data.FirstPrimaryKey #>}");
+
+		return 0;
+	}
+
+	public static implicit operator <#= entityDesc.EnumName #>(<#= entityDesc.Name #> status)
+		=> status?.ToEnum() ?? 0;
+
+	public static implicit operator <#= entityDesc.Name #>(<#= entityDesc.EnumName #> @enum)
+		=> @enum switch
+		{
+<#
+	foreach (var enumRow in entityDesc.EnumData)
+	{
+#>
+			<#= entityDesc.EnumName #>.<#= enumRow.BasePropertyCSharpName #> => <#= enumRow.BasePropertyCSharpName_NewObject #>,
+<#
+	}
+#>
+			_ => throw new NotSupportedException($"Invalid {nameof(<#= entityDesc.EnumName #>)} value {@enum}"),
+		};
+<#
+	}
+#>
+}
+<#
+	Process();
+#>

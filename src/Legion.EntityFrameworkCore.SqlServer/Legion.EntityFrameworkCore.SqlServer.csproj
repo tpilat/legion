@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <Import Project="../../SharedConfigurations.props" />
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Legion.EntityFrameworkCore\Legion.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="..\\Legion\\bin\\Release\\net8.0\\Legion.dll">
+			<Pack>true</Pack>
+			<PackagePath>lib/net8.0/</PackagePath>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="..\\Legion.EntityFrameworkCore\\bin\\Release\\net8.0\\Legion.EntityFrameworkCore.dll">
+			<Pack>true</Pack>
+			<PackagePath>lib/net8.0/</PackagePath>
+		</Content>
+	</ItemGroup>
+	<PropertyGroup>
+		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+	</PropertyGroup>
+
+</Project>

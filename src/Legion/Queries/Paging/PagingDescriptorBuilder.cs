@@ -1,0 +1,78 @@
+namespace Legion.Queries.Paging;
+
+public class PagingDescriptorBuilder<T> : IPagingDescriptorBuilder<T>, IQueryModifier<T>
+{
+	private int _pageIndex;
+	private int _pageSize;
+
+	public PagingDescriptorBuilder<T> Page(int pageIndex, int pageSize)
+	{
+		_pageIndex = pageIndex;
+		_pageSize = pageSize;
+
+		return this;
+	}
+
+	IEnumerable<T> IQueryModifier<T>.ApplySort(IEnumerable<T> enumerable)
+		=> enumerable;
+
+	IQueryable<T> IQueryModifier<T>.ApplySort(IQueryable<T> queryable)
+		=> queryable;
+
+	IEnumerable<T> IQueryModifier<T>.ApplyPaging(IEnumerable<T> enumerable)
+	{
+		Throw.IfArgumentNull(enumerable);
+
+		if (0 < _pageIndex && 0 < _pageSize)
+			enumerable = enumerable
+				.Skip((_pageIndex - 1) * _pageSize)
+				.Take(_pageSize);
+
+		return enumerable;
+	}
+
+	IQueryable<T> IQueryModifier<T>.ApplyPaging(IQueryable<T> queryable)
+	{
+		Throw.IfArgumentNull(queryable);
+
+		if (0 < _pageIndex && 0 < _pageSize)
+			queryable = queryable
+				.Skip((_pageIndex - 1) * _pageSize)
+				.Take(_pageSize);
+
+		return queryable;
+	}
+
+	IEnumerable<T> IQueryModifier<T>.ApplyIncludes(IEnumerable<T> enumerable)
+		=> enumerable;
+
+	IQueryable<T> IQueryModifier<T>.ApplyIncludes(IQueryable<T> queryable)
+		=> queryable;
+
+	IEnumerable<T> IQueryModifier<T>.Apply(IEnumerable<T> enumerable)
+	{
+		Throw.IfArgumentNull(enumerable);
+
+		if (0 < _pageIndex && 0 < _pageSize)
+			enumerable = enumerable
+				.Skip((_pageIndex - 1) * _pageSize)
+				.Take(_pageSize);
+
+		return enumerable;
+	}
+
+	IQueryable<T> IQueryModifier<T>.Apply(IQueryable<T> queryable)
+	{
+		Throw.IfArgumentNull(queryable);
+
+		if (0 < _pageIndex && 0 < _pageSize)
+			queryable = queryable
+				.Skip((_pageIndex - 1) * _pageSize)
+				.Take(_pageSize);
+
+		return queryable;
+	}
+
+	IPagingDescriptorBuilder<T> IPagingDescriptorBuilder<T>.Page(int pageIndex, int pageSize)
+		=> Page(pageIndex, pageSize);
+}

@@ -1,0 +1,14 @@
+﻿ARCHITEKTURA:
+	- kazdy jeden modul musi byt uplne sebestacny, oddeleny od ostatnych modulov, tak aby bol totalne jednoducho odobratelny
+	a integrovatelny do ineho projektu, bez vnutornej smeny samotneho modulu
+	- ostatne moduly budu komunikovat s danym modulom jedine prostrednictvom jeho verjneho API (a to jednoducho switchovateleho systemu PUBLIC_FACADE vs. HttpClient)
+	- https://www.milanjovanovic.tech/blog/monolith-to-microservices-how-a-modular-monolith-helps?utm_source=Twitter&utm_campaign=25.12.2023
+
+
+
+
+
+ScopeContext
+- vzdy ked pride na vstupe metody - vzdy treba zavolat staticku metodu ScopeContext.Create(scopeContext).SetProperties(...)
+- pri kazdom predani do dalsej metody treba volat CreateNew() .... FooMethod(scopeContext.CreateNew())
+

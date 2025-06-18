@@ -1,0 +1,40 @@
+﻿namespace Legion.Database.SqlServer;
+
+public enum SqlServerDataTypes
+{
+	_bigint,
+	_binary,
+	_bit,
+	_char,
+	_date,
+	_datetime,
+	_datetime2,
+	_datetimeoffset,
+	_decimal,
+	_float,
+	_image,
+	_int,
+	_money,
+	_nchar,
+	_ntext,
+	_numeric,
+	_nvarchar,
+	_real,
+	_smalldatetime,
+	_smallint,
+	_smallmoney,
+	_text,
+	_time,
+	_timestamp,
+	_tinyint,
+	_uniqueidentifier,
+	_varbinary,
+	_varchar,
+	_xml,
+
+	_geography,
+	_geometry,
+	_hierarchyid,
+	_sql_variant,
+	_sysname
+}

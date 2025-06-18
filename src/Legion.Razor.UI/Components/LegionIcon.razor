@@ -1,0 +1,7 @@
+﻿@namespace Legion.Razor.UI
+@inherits LegionComponentBase
+
+@if (Visible)
+{
+	<i @ref="@Element" style="@getStyle()" @attributes="Attributes" class="@GetCssClass()" id="@GetId()">@((MarkupString)Icon)</i>
+}

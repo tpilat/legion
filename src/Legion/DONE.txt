@@ -1,0 +1,33 @@
+﻿
+- vsetky typy custom exceptionov a ich "Throw.If*" metody preklop aj pre ""IResult.FailIf*""
+
+skontroluj vsetky result.With* metody ci su pouzite spravne
+pre create ErrorMessage - pre client / internal message by sa nemalo robit zo stringu, ale rovnako ako Exceptiony - cez ErrorCode
+
+
+
+zreviduj ValidationBuilder - pouziva sa napr v Legion.Database - Validate metoda
+skontroluj kazdu " Validate*" meotdu, aby mala vzdy rovnake vstupy a vystup - result ... lebo su metody, ktore throw-uju exceptiony, resp. vracaju void ... vsetky by mali vratit IReuslt - s chybami / warningami
+
+
+
+- Pri generovani cez AppGenV5 updavit generovanie BaseEntity a AuditEntry
+
+do ScopeContextu nastavit:
+- LegionPrincipal
+- Culture - konkretny jazyk, v kontexte, ktoreho sa bude dat vytiahnut resx
+- Logger
+- CancellationToken
+
+AOP metoda:
+musi bezat ako izolovany scoped-sandbox, s moznostou nastavit
+- transakciu:
+	- bez transakcie (default)
+	- nastavit existujucu,
+	- vytvorit novu
+- meranie kolko casu trva execute - na vstupe je OPTIONS v ktorom sa to da zapnut - default je to vypnute ... ak je zapnute, na konci metody sa to log-ne, resp. ulozi sa udaj v [ms] do samotneho Resultu
+- try-catch
+- return IResult
+
+
+premenuj TraceFrameXXX na TraceFrame - ked uz bude preklopeny cely Legion kod

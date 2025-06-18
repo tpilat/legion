@@ -1,0 +1,8 @@
+{
+  "profiles": {
+		"Legion.ADF.ESB.Generator": {
+			"commandName": "Project",
+			"commandLineArgs": "c:\\Code\\legion\\ADF\\ESB"
+		}
+  }
+}

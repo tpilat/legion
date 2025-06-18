@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!--<AddRazorSupportForMvc>true</AddRazorSupportForMvc>-->
+  </PropertyGroup>
+
+  <Import Project="../../SharedConfigurations.props" />
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.4.9" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Legion\Legion.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="..\\Legion\\bin\\Release\\net8.0\\Legion.dll">
+			<Pack>true</Pack>
+			<PackagePath>lib/net8.0/</PackagePath>
+		</Content>
+	</ItemGroup>
+	<PropertyGroup>
+		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+	</PropertyGroup>
+
+  <!--<ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>-->
+
+</Project>

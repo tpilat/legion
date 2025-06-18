@@ -1,0 +1,6 @@
+GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::jobs To #TargetDbUsername#;
+GO
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::orch To #TargetDbUsername#;
+GO
+

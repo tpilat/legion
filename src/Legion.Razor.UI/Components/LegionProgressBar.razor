@@ -1,0 +1,27 @@
+﻿@namespace Legion.Razor.UI
+@using System.Globalization
+@inherits LegionComponentBase
+
+@if (Visible)
+{
+	<div @ref="@Element" style="@($"--lui-progressbar-value: {(NormalizedValue * 100).ToString(CultureInfo.InvariantCulture)}%;{Style}")" aria-valuemax="@Max" aria-valuemin="@Min" role="progressbar" @attributes="Attributes" class="@GetCssClass()"
+		 aria-valuenow="@Value" id="@GetId()">
+		<div class="lui-progressbar-value"></div>
+		@if (ShowValue)
+		{
+			<div class="lui-progressbar-label">
+				@if (Template != null)
+				{
+					@Template
+				}
+				else
+				{
+					@Value
+
+					@Unit
+					<span aria-hidden="true" class="lui-progressbar-label-value">@Value@Unit</span>
+				}
+			</div>
+		}
+	</div>
+}

@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+  <!-- Root element: Orchestration starts with a Sequential block -->
+  <xs:element name="Sequential" type="SequentialType">
+    <xs:annotation>
+      <xs:documentation>
+        Root orchestration block. Contains a sequence of flow elements to execute one after another.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
+  <!-- Sequential Node: List of child steps or structures to execute in order -->
+  <xs:complexType name="SequentialType">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="CallFlow" type="CallFlowType"/>
+        <xs:element name="Step" type="StepType"/>
+        <xs:element name="Parallel" type="ParallelType"/>
+        <xs:element name="If" type="IfType"/>
+        <xs:element name="Switch" type="SwitchType"/>
+        <xs:element name="WaitForEvent" type="WaitForEventType"/>
+        <xs:element name="While" type="WhileType"/>
+        <xs:element name="Foreach" type="ForeachType"/>
+        <xs:element name="TryCatch" type="TryCatchType"/>
+        <xs:element name="GoTo" type="GoToType"/>
+        <xs:element name="Compensate" type="CompensateType"/>
+        <xs:element name="Retry" type="RetryType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Step Node: Represents a single named operation or unit of work -->
+  <xs:complexType name="StepType">
+    <xs:annotation>
+      <xs:documentation>Represents a single executable step with optional retry and timeout policies.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="stepName" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Name of the step to execute.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="id" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Optional unique identifier for this node (used for GoTo).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+      
+    
+  </xs:complexType>
+
+  <!-- Parallel Node: Executes all child steps in parallel -->
+  <xs:complexType name="ParallelType">
+    <xs:sequence>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="Step" type="StepType"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="waitAll" type="xs:boolean" default="true">
+      <xs:annotation>
+        <xs:documentation>If true, waits for all branches to complete. Otherwise, continues when any one completes.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- If Node: Conditional execution of Then or Else block -->
+  <xs:complexType name="IfType">
+    <xs:sequence>
+      <xs:element name="Then" type="SingleNodeContainerType"/>
+      <xs:element name="Else" type="SingleNodeContainerType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="condition" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Expression to evaluate to determine which branch to take.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Switch Node: Chooses one case based on expression value -->
+  <xs:complexType name="SwitchType">
+    <xs:sequence>
+      <xs:element name="Case" type="SwitchCaseType" maxOccurs="unbounded"/>
+      <xs:element name="Default" type="SingleNodeContainerType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="expression" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Expression whose result determines the case to execute.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Switch Case Node -->
+  <xs:complexType name="SwitchCaseType">
+    <xs:sequence>
+      <xs:element name="Step" type="StepType"/>
+    </xs:sequence>
+    <xs:attribute name="equals" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Value to compare against the switch expression result.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- WaitForEvent Node: Pauses execution until an event is received -->
+  <xs:complexType name="WaitForEventType">
+  <xs:attribute name="eventName" type="xs:string" use="required">
+    <xs:annotation>
+      <xs:documentation>Name of the external event to wait for.</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="timeout" type="xs:duration" use="optional">
+    <xs:annotation>
+      <xs:documentation>Optional timeout after which the wait expires.</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="correlationProperty" type="xs:string" use="optional">
+    <xs:annotation>
+      <xs:documentation>
+        Name of the property in the event payload to correlate with the orchestration instance.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="correlationValue" type="xs:string" use="optional">
+    <xs:annotation>
+      <xs:documentation>
+        Value to match against the correlationProperty. Can be omitted if derived from orchestration state.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
+
+  <!-- While Node: Repeats body while condition is true -->
+  <xs:complexType name="WhileType">
+    <xs:sequence>
+      <xs:element name="Body" type="SingleNodeContainerType"/>
+    </xs:sequence>
+    <xs:attribute name="condition" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Boolean expression to evaluate before each iteration.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Foreach Node: Iterates over a collection of items -->
+  <xs:complexType name="ForeachType">
+    <xs:sequence>
+      <xs:element name="Body" type="SingleNodeContainerType"/>
+    </xs:sequence>
+    <xs:attribute name="collection" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Name of the collection in state.Data to iterate over.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="itemVar" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Variable name to assign each item in the loop (default: "item").</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- TryCatch Node: Handles errors in Try block with optional Compensate logic -->
+  <xs:complexType name="TryCatchType">
+    <xs:sequence>
+      <xs:element name="Try" type="SingleNodeContainerType"/>
+      <xs:element name="Catch" type="SingleNodeContainerType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Compensate Node: Defines a rollback strategy via named steps -->
+  <xs:complexType name="CompensateType">
+    <xs:sequence>
+      <xs:element name="StepRef" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="stepName" type="xs:string" use="required">
+            <xs:annotation>
+              <xs:documentation>Name of the step to compensate (in reverse order).</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- GoTo Node: Jumps to another step or node by ID -->
+  <xs:complexType name="GoToType">
+    <xs:attribute name="targetNodeId" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>ID of the node to jump to.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Generic container for one sub-node (Then, Else, Body, etc.) -->
+  <xs:complexType name="SingleNodeContainerType">
+    <xs:choice>
+      <xs:element name="CallFlow" type="CallFlowType"/>
+      <xs:element name="Step" type="StepType"/>
+      <xs:element name="Parallel" type="ParallelType"/>
+      <xs:element name="If" type="IfType"/>
+      <xs:element name="Switch" type="SwitchType"/>
+      <xs:element name="WaitForEvent" type="WaitForEventType"/>
+      <xs:element name="While" type="WhileType"/>
+      <xs:element name="Foreach" type="ForeachType"/>
+      <xs:element name="TryCatch" type="TryCatchType"/>
+      <xs:element name="GoTo" type="GoToType"/>
+      <xs:element name="Compensate" type="CompensateType"/>
+      <xs:element name="Retry" type="RetryType"/>
+    </xs:choice>
+  </xs:complexType>
+
+  <!-- Retry Node: Repeats the inner step node with retry policy -->
+  <xs:complexType name="RetryType">
+    <xs:sequence>
+      <xs:element name="Body" type="SingleNodeContainerType"/>
+    </xs:sequence>
+    <xs:attribute name="retryCount" type="xs:int" use="required">
+      <xs:annotation>
+        <xs:documentation>How many times to retry the inner node before failing.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="delay" type="xs:duration" use="optional">
+      <xs:annotation>
+        <xs:documentation>Delay between retries (e.g. PT1S for 1 second).</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="timeout" type="xs:duration" use="optional">
+      <xs:annotation>
+        <xs:documentation>Timeout applied to each attempt of the inner node.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Extended WaitForEvent Node: supports optional timeout -->
+  <xs:complexType name="WaitForEventType">
+    <xs:attribute name="eventName" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Name of the external event to wait for.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="timeout" type="xs:duration" use="optional">
+      <xs:annotation>
+        <xs:documentation>Optional timeout after which the wait expires.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- CallFlow Node: Executes a referenced subflow by name -->
+  <xs:complexType name="CallFlowType">
+    <xs:attribute name="flowName" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation>Name of the reusable subflow to invoke.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="id" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Optional identifier for this invocation node.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+</xs:schema>

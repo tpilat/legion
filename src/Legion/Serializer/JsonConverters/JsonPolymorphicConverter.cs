@@ -1,0 +1,54 @@
+﻿#if NET8_0_OR_GREATER
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace Legion.Serializer;
+
+public class JsonPolymorphicConverter<TInterface> : JsonConverter<TInterface>
+{
+	public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		=> throw new NotSupportedException($"Legion.Serializer.{nameof(JsonPolymorphicConverter<TInterface>)}");
+
+	public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options)
+	{
+		if (value == null)
+			throw new ArgumentNullException(nameof(value));
+
+		System.Text.Json.JsonSerializer.Serialize(writer, value, value.GetType(), options);
+	}
+}
+
+public class JsonPolymorphicConverter<TInterface, TReturnType> : JsonConverter<TInterface>
+{
+	private readonly Type _returnType = typeof(TReturnType);
+
+	public override TInterface Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		=> (TInterface)System.Text.Json.JsonSerializer.Deserialize(ref reader, _returnType, options)!;
+
+	public override void Write(Utf8JsonWriter writer, TInterface value, JsonSerializerOptions options)
+	{
+		if (value == null)
+			throw new ArgumentNullException(nameof(value));
+
+		System.Text.Json.JsonSerializer.Serialize(writer, value, value.GetType(), options);
+	}
+}
+
+public class JsonPolymorphicConverter : JsonConverter<object>
+{
+	public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		=> throw new NotSupportedException($"Legion.Serializer.{nameof(JsonPolymorphicConverter)}");
+
+	public override bool CanConvert(Type typeToConvert)
+	{
+		return true;
+	}
+
+	public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+	{
+		Throw.IfArgumentNull(value);
+		
+		System.Text.Json.JsonSerializer.Serialize(writer, value, value.GetType(), options);
+	}
+}
+#endif

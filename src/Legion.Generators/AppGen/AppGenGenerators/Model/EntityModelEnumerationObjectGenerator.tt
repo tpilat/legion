@@ -1,0 +1,198 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	EntityModelEnumerationDescriptor entityDesc = GetParam<EntityModelEnumerationDescriptor>("EntityModelEnumerationDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+
+	StartNewFile(entityDesc.TargetFolder(modelName, contextName), entityDesc.EnumerationFileName);
+
+	foreach (string import in entityDesc.Imports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < entityDesc.Imports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= entityDesc.Namespace(modelName, contextName) #>;
+
+public partial class <#= entityDesc.Name #> : <#= entityDesc.GetBaseEntityName(modelName, contextName) #>, Legion.Model.IEntity, IComparable
+{
+<#
+		if (entityDesc.Data.MainColumn.ClrType != typeof(string))
+		{
+#>
+#pragma warning disable IDE1006 // Naming Styles
+<#
+		}
+		
+		int commentIdx = 0;
+		foreach (var enumRow in entityDesc.EnumData)
+		{
+			commentIdx++;
+			if (1 < commentIdx)
+			{
+#>
+
+<#
+			}
+#>
+	/// <summary>
+	/// <#= enumRow.Values[0].Replace("new Guid(\"", "").Replace("\")", "") #>
+	/// </summary>
+	public static <#= entityDesc.Name #> <#= enumRow.BasePropertyCSharpName_NewObject #> => new(<#= string.Join(", ", enumRow.Values) #>);
+<#
+		}
+
+		if (entityDesc.Data.MainColumn.ClrType != typeof(string))
+		{
+#>
+#pragma warning restore IDE1006 // Naming Styles
+<#
+		}
+#>
+
+	private <#= entityDesc.Name #>(<#= entityDesc.GetPropertiesAsMethodParameters() #>)
+		: this()
+	{
+<#
+	foreach (var property in entityDesc.Properties)
+	{
+#>
+		<#= property.Name #> = <#= property.AsFieldName #>;
+<#
+	}
+#>
+	}
+<#
+	if (entityDesc.Data.MainColumn.ClrType == typeof(string))
+	{
+#>
+
+	public override bool Equals(object? obj)
+	{
+		if (obj is not <#= entityDesc.Name #> otherValue)
+			return false;
+
+		var typeMatches = GetType().Equals(obj.GetType());
+		var valueMatches = <#= entityDesc.Data.MainColumn.Name #>?.Equals(otherValue.<#= entityDesc.Data.MainColumn.Name #>) ?? (otherValue.<#= entityDesc.Data.MainColumn.Name #> == null);
+
+		return typeMatches && valueMatches;
+	}
+
+	public override int GetHashCode()
+	{
+		return <#= entityDesc.Data.MainColumn.Name #>?.GetHashCode() ?? 0;
+	}
+
+	public int CompareTo(object? other)
+	{
+		var otherEnumeration = other as <#= entityDesc.Name #>;
+		return <#= entityDesc.Data.MainColumn.Name #>?.CompareTo(otherEnumeration?.<#= entityDesc.Data.MainColumn.Name #>) ?? 1;
+	}
+
+	public static <#= entityDesc.Name #>? FromId(<#= entityDesc.GetKeyPropertiesAsMethodParameters(entityDesc.Data.PrimaryKey) #>)
+	{
+		return AsEnumerable_NewObjects().FirstOrDefault(x => <#= entityDesc.GetKeyPropertiesAsWhereCondition(entityDesc.Data.PrimaryKey, "x") #>);
+	}
+
+	public static <#= entityDesc.Name #>? From<#= entityDesc.Data.MainColumn.Name #>(string <#= GeneratorHelper.AsFieldName(entityDesc.Data.MainColumn.Name) #>)
+	{
+		return AsEnumerable_NewObjects().FirstOrDefault(v => v.<#= entityDesc.Data.MainColumn.Name #>?.Equals(<#= GeneratorHelper.AsFieldName(entityDesc.Data.MainColumn.Name) #>, StringComparison.Ordinal) ?? false);
+	}
+<#
+	}
+	else //NOT STRING
+	{
+#>
+
+	public override bool Equals(object? obj)
+	{
+		if ((obj is not <#= entityDesc.Name #> otherValue))
+			return false;
+
+		var typeMatches = GetType().Equals(obj.GetType());
+		var valueMatches = <#= entityDesc.Data.MainColumn.Name #>.Equals(otherValue.<#= entityDesc.Data.MainColumn.Name #>);
+
+		return typeMatches && valueMatches;
+	}
+
+	public override int GetHashCode()
+	{
+		return <#= entityDesc.Data.MainColumn.Name #>.GetHashCode();
+	}
+
+	public int CompareTo(object? other)
+	{
+		var otherEnumeration = other as <#= entityDesc.Name #>;
+		return <#= entityDesc.Data.MainColumn.Name #>.CompareTo(otherEnumeration?.<#= entityDesc.Data.MainColumn.Name #>);
+	}
+
+	public static <#= entityDesc.Name #>? FromId(<#= entityDesc.GetKeyPropertiesAsMethodParameters(entityDesc.Data.PrimaryKey) #>)
+	{
+		return AsEnumerable_NewObjects().FirstOrDefault(x => <#= entityDesc.GetKeyPropertiesAsWhereCondition(entityDesc.Data.PrimaryKey, "x") #>);
+	}
+
+	public static <#= entityDesc.Name #>? From<#= entityDesc.Data.MainColumn.Name #>(string <#= GeneratorHelper.AsFieldName(entityDesc.Data.MainColumn.Name) #>)
+	{
+		return AsEnumerable_NewObjects().FirstOrDefault(v => v.<#= entityDesc.Data.MainColumn.Name #>.Equals(<#= GeneratorHelper.AsFieldName(entityDesc.Data.MainColumn.Name) #>));
+	}
+<#
+	}
+#>
+
+	public static readonly Lazy<IReadOnlyDictionary<<#= entityDesc.Data.FirstPrimaryKey.CSharpType #>, <#= entityDesc.Name #>>> DictionaryMap = new(() => new Dictionary<<#= entityDesc.Data.FirstPrimaryKey.CSharpType #>, <#= entityDesc.Name #>>
+	{
+<#
+		var idx = 0;
+		foreach (var enumRow in entityDesc.EnumData)
+		{
+			idx++;
+#>
+			{ <#= enumRow.Values[0] #>, <#= enumRow.BasePropertyCSharpName_NewObject #> }<#= idx == entityDesc.EnumData.Count ? "" : "," #>
+<#
+		}
+#>
+	});
+
+	public static IEnumerable<<#= entityDesc.Name #>> AsEnumerable_NewObjects()
+	{
+<#
+		if (entityDesc.EnumData.Count == 0)
+		{
+#>
+		yield return null;
+<#
+		}
+		else
+		{
+			foreach (var enumRow in entityDesc.EnumData)
+			{
+#>
+		yield return <#= enumRow.BasePropertyCSharpName_NewObject #>;
+<#
+			}
+		}
+#>
+	}
+}
+<#
+	Process();
+#>

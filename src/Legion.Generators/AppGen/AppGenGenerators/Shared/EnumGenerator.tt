@@ -1,0 +1,63 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	EnumDescriptor enumDesc = GetParam<EnumDescriptor>("EnumDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+
+	StartNewFile(enumDesc.TargetFolder(modelName, contextName), enumDesc.FileName);
+#>
+namespace <#= enumDesc.Namespace(modelName, contextName) #>
+{
+	public enum <#= enumDesc.Name #>
+	{
+<#
+	var values = enumDesc.GetAllValues();
+	int index = 0;
+	foreach (var kvp in values)
+	{
+		index++;
+#>
+		<#= kvp.Value #> = <#= kvp.Key #><#= index == values.Count ? "" : "," #>
+<#
+	}
+#>
+	}
+<#
+	if (enumDesc.ConvertEntity == ConvertEntity.ToEnumAndEnumerationClass)
+	{
+#>
+
+	public static class Extensions<#= enumDesc.Name #>
+	{
+		public static Guid ToGuid(this <#= enumDesc.Name #> @enum)
+			=> @enum switch
+			{
+<#
+	foreach (var kvp in values)
+	{
+#>
+				<#= enumDesc.Name #>.<#= kvp.Value #> => <#= enumDesc.BaseEntityname #>.<#= kvp.Value #>,
+<#
+	}
+#>
+				_ => throw new NotSupportedException($"Invalid {nameof(<#= enumDesc.Name #>)} value {@enum}"),
+			};
+	}
+<#
+	}
+#>
+}
+<#
+	Process();
+#>

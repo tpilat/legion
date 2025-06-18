@@ -1,0 +1,37 @@
+﻿using Legion.Expressions;
+using System.ComponentModel;
+using System.Linq.Expressions;
+
+namespace Legion.Queries.Sorting;
+
+public class SortDescriptor<T>
+{
+	private Expression<Func<T, object>>? _memberSelector;
+	public Expression<Func<T, object>> MemberSelector
+	{
+		get => _memberSelector!;
+		set
+		{
+			_memberSelector = value;
+			_memberDelegate = null;
+		}
+	}
+
+	public ListSortDirection SortDirection { get; set; }
+
+	private Func<T, object>? _memberDelegate;
+	public Func<T, object> MemberDelegate =>
+		_memberDelegate ??= MemberSelector == null
+			? throw new InvalidOperationException($"{nameof(MemberSelector)} == null")
+			: ExpressionCacheHelper.CompileExpression(MemberSelector);
+
+	public string Serialize()
+	{
+		return "";
+	}
+
+	public static SortDescriptor<T> Deserialize(string json)
+	{
+		return new SortDescriptor<T>();
+	}
+}

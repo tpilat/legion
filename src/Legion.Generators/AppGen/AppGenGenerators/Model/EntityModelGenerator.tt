@@ -1,0 +1,802 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	EntityModelDescriptor entityDesc = GetParam<EntityModelDescriptor>("EntityModelDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+
+	StartNewFile(entityDesc.TargetFolder(modelName, contextName), entityDesc.FileName);
+	
+	string @sealed = entityDesc.Data.IsSealed ? " sealed" : "";
+	string iAuditEntry = entityDesc.Data.IsAuditEntry ? ", Legion.Model.Audit.IAuditEntry" : "";
+	string iSelfAuditableEntity = entityDesc.Data.IsSelfAuditableEntity ? ", Legion.Model.Audit.ISelfAuditableEntity" : "";
+	string iAuditableEntity = entityDesc.Data.IsAuditableEntity ? ", Legion.Model.Audit.IAuditableEntity" : "";
+	string iSynchronizable = entityDesc.Data.IsSynchronizableEntity ? ", Legion.Model.Synchronyzation.ISynchronizable" : "";
+	string iCorrelable = entityDesc.Data.IsCorrelableEntity ? ", Legion.Model.Correlation.ICorrelable" : "";
+	string customInterfaces = string.IsNullOrWhiteSpace(entityDesc.Data.CustomInterfaces) ? "" : ", " + entityDesc.Data.CustomInterfaces;
+	bool enableFixupReferences = false;
+
+	var concurrencyProps = entityDesc.Data.Properties.Where(x => x.IsConcurrencyToken).ToList();
+	var concurrencyProp = concurrencyProps.Count == 1 ? concurrencyProps.First() : null;
+	string iConcurrent = (concurrencyProp != null) ? ", Legion.Model.Concurrence.IConcurrent" : "";
+
+	foreach (string import in entityDesc.Imports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < entityDesc.Imports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= entityDesc.Namespace(modelName, contextName) #>;
+
+public<#= @sealed #> partial class <#= entityDesc.Name #> : <#= entityDesc.GetBaseEntityName(modelName, contextName) #><#= iAuditEntry #><#= iSelfAuditableEntity #><#= iSynchronizable #><#= iConcurrent #><#= iCorrelable #><#= customInterfaces #><#= iAuditableEntity #>, Legion.Model.IEntity
+{
+<#
+	var wasSet = false;
+	foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+		{
+			if (navigation.Data.IsCollection)
+			{
+				wasSet = true;
+#>
+	private List<<#= targetEntityDesc.BaseName(modelName, contextName) #>> _<#= navigation.AsFieldName #>;
+<#
+			}
+		}
+	}
+
+	if (wasSet)
+	{
+#>
+
+<#
+	}
+#>
+	public static IValidator<<#= entityDesc.Name #>> DefaultDBValidator { get; }
+<#
+
+	foreach (var property in entityDesc.Properties.Where(x => !x.Data.IsIgnored))
+	{
+		var isNullableString = property.ClrType == typeof(string) && property.Data.IsNullable;
+		var nullableString = isNullableString
+			? "?"
+			: "";
+
+		var isNullableByteArray = property.ClrType == typeof(byte[]) && property.Data.IsNullable;
+		var nullableByteArray = isNullableByteArray
+			? "?"
+			: "";
+
+		var isNullableList = property.IsCollection();
+		var nullableList = (isNullableList && !isNullableByteArray)
+			? "?"
+			: "";
+
+		var dbDataType = property.Data.GetDatabaseDataType(true);
+
+		if (property.Data.ForeignKey != null)
+		{
+			var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(property.Data.ForeignKey.DependentToPrincipal.TargetType, true, modelName, contextName);
+			if (targetEntityDesc == null)
+			{
+#>
+
+	/// <summary>
+	/// Database DataType: <#= dbDataType #> | --NO TARGET-- | <#= property.Data.ForeignKey.Name #>
+	/// </summary>
+<#
+			}
+			else
+			{
+#>
+
+	/// <summary>
+	/// Database DataType: <#= dbDataType #> | <#= targetEntityDesc?.BaseName(modelName, contextName) #>.<#= property.Data.ForeignKey.DependentToPrincipal.Name #> | <#= property.Data.ForeignKey.Name #>
+	/// </summary>
+<#
+			}
+		}
+		else
+		{
+#>
+
+	/// <summary>
+	/// Database DataType: <#= dbDataType #>
+	/// </summary>
+<#
+		}
+
+		if (!property.Data.IsIgnored)
+		{
+#>
+	public <#= Helpers.TypeHelper.TypeToCSharpSourceCode(property.ClrType) #><#= nullableString #><#= nullableByteArray #><#= nullableList #> <#= property.Name #> { get; <#= (property.Data.IsConcurrencyToken ? "" : "private ") #>set; }
+<#
+		}
+	}
+
+	if (0 < entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)).Count())
+	{
+#>
+
+<#	 
+	}
+
+	foreach (var navigation in entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+		{
+#>
+
+<#
+	if (navigation.Data.ForeignKey.PrincipalToDependent.IsCollection)
+	{
+#>
+	/// <summary>
+	/// _1:N <#= Helpers.TypeHelper.TypeToCSharpSourceCode(navigation.Data.ForeignKey.Properties[0].ClrType) #> <#= navigation.Data.ForeignKey.Properties[0].Name #> | <#= navigation.Data.ForeignKey.Name #>
+	/// </summary>
+<#
+	}
+	else
+	{
+#>
+	/// <summary>
+<#
+		foreach (var idx in navigation.Data.ForeignKey.Properties.SelectMany(fkp => fkp.Indexes).Where(ix => ix.IsUnique))
+		{
+#>
+	/// UNIQUE INDEX: <#= idx.Name #>
+<#
+		}
+#>
+	/// _1:1 <#= Helpers.TypeHelper.TypeToCSharpSourceCode(navigation.Data.ForeignKey.Properties[0].ClrType) #> <#= navigation.Data.ForeignKey.Properties[0].Name #> | <#= navigation.Data.ForeignKey.Name #>
+	/// </summary>
+<#
+	}
+#>
+	public <#= targetEntityDesc.BaseName(modelName, contextName) #> <#= navigation.Name #> { get; private set; }
+<#
+		}
+	}
+
+	if (0 < entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)).Count())
+	{
+#>
+
+<#	
+	}
+
+	foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+		{
+			if (navigation.Data.IsCollection)
+			{
+#>
+
+	/// <summary>
+	/// N:_1 <#= targetEntityDesc.BaseName(modelName, contextName) #>.<#= navigation.Data.ForeignKey.Properties[0].Name #> | <#= navigation.Data.ForeignKey.Name #>
+	/// </summary>
+	public IReadOnlyList<<#= targetEntityDesc.BaseName(modelName, contextName) #>> <#= navigation.Name #> => _<#= navigation.AsFieldName #>;
+<#
+			}
+			else
+			{
+#>
+
+	/// <summary>
+	/// 1:_1 <#= navigation.Data.ForeignKey.PrincipalToDependent.Name #>.<#= navigation.Data.ForeignKey.Properties[0].Name #> | <#= navigation.Data.ForeignKey.Name #>
+	/// </summary>
+	public <#= targetEntityDesc.BaseName(modelName, contextName) #> <#= navigation.Name #> { get; private set; }
+<#
+			}
+		}
+	}
+	
+	var constructorModifier = true || //!entityDesc.Data.IsActivityEntity &&
+								(entityDesc.Data.ConvertEntity == ConvertEntity.ToEnumerationClass 
+								|| entityDesc.Data.ConvertEntity == ConvertEntity.ToEnumAndEnumerationClass)
+								? "private"
+								: "public";
+#>
+
+	<#= constructorModifier #> <#= entityDesc.Name #>()
+	{
+<#
+	foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName) && bn.Data.IsCollection))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+		{
+#>
+		_<#= navigation.AsFieldName #> = [];
+<#
+		}
+	}
+
+	bool hasAnyNavigationsOrBackNavigations = 0 < entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)).Count() || 0 < entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)).Count();
+
+#>
+	}
+<#
+if (enableFixupReferences)
+{
+	if (hasAnyNavigationsOrBackNavigations)
+	{
+#>
+
+	private Guid _fixToken;
+<#
+	}
+#>
+
+	public void FixupReferences(Guid fixToken)
+	{
+<# 
+	if (hasAnyNavigationsOrBackNavigations)
+	{
+#>
+		if (_fixToken == fixToken)
+			return;
+
+		_fixToken = fixToken;
+<#
+	}
+	if (0 < entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)).Count()
+		|| 0 < entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)).Count())
+	{
+#>
+
+<#	 
+	}
+
+	foreach (var navigation in entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+		{
+			var compare = targetEntityDesc.Data.FirstPrimaryKey.ClrType.GetUnderlyingNullableType() == typeof(Guid)
+				? "Guid.Empty =="
+				: "0 <";
+#>
+		if (<#= navigation.Name #> != null)
+		{
+			if (<#= compare #> <#= navigation.Name #>.<#= targetEntityDesc.Data.FirstPrimaryKey #>)
+				<#= navigation.Data.ForeignKey.Properties[0].Name #> = <#= navigation.Name #>.<#= targetEntityDesc.Data.FirstPrimaryKey #>;
+<#
+			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
+			{
+#>
+			else
+				<#= navigation.Data.ForeignKey.Properties[0].Name #> = null;
+<#
+			}
+#>
+
+<#
+			if (!navigation.Data.BackNavigation.Ignore && navigation.Data.BackNavigation.TargetType.ModelContextNames.ContainsKey(modelName))
+			{
+				if (navigation.Data.BackNavigation.IsCollection)
+				{
+#>
+			if (<#= navigation.Name #>.<#= navigation.Data.BackNavigation.Name #> == null)
+				<#= navigation.Name #>.<#= navigation.Data.BackNavigation.Name #> = new List<<#= entityDesc.Name #>>();
+
+			if (!<#= navigation.Name #>.<#= navigation.Data.BackNavigation.Name #>.Any(x => ReferenceEquals(x, this)))
+				<#= navigation.Name #>.<#= navigation.Data.BackNavigation.Name #>.Add(this);
+
+<#
+				}
+				else
+				{
+#>
+			<#= navigation.Name #>.<#= navigation.Data.BackNavigation.Name #> = this;
+<#
+				}
+			}
+#>
+			<#= navigation.Name #>.FixupReferences(_fixToken);
+		}
+
+<#
+		}
+	}
+
+	foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+		{
+			var compare = entityDesc.Data.FirstPrimaryKey.ClrType.GetUnderlyingNullableType() == typeof(Guid)
+				? "Guid.Empty =="
+				: "0 <";
+
+			if (navigation.Data.IsCollection)
+			{
+#>
+		if (<#= navigation.Name #> != null)
+		{
+			foreach (var item in <#= navigation.Name #>)
+			{
+				if (<#= compare #> this.<#= entityDesc.Data.FirstPrimaryKey #>)
+					item.<#= navigation.Data.ForeignKey.Properties[0].Name #> = this.<#= entityDesc.Data.FirstPrimaryKey #>;
+<#
+				if (navigation.Data.ForeignKey.Properties[0].IsNullable)
+				{
+#>
+				else
+					item.<#= navigation.Data.ForeignKey.Properties[0].Name #> = null;
+<#
+				}
+#>
+
+				item.<#= navigation.Data.Navigation.Name #> = this;
+				item.FixupReferences(_fixToken);
+			}
+		}
+
+<#
+			}
+			else
+			{
+#>
+		if (<#= navigation.Name #> != null)
+		{
+			if (<#= compare #> this.<#= entityDesc.Data.FirstPrimaryKey #>)
+				<#= navigation.Name #>.<#= navigation.Data.ForeignKey.Properties[0].Name #> = this.<#= entityDesc.Data.FirstPrimaryKey #>;
+<#
+				if (navigation.Data.ForeignKey.Properties[0].IsNullable)
+				{
+#>
+			else
+				<#= navigation.Name #>.<#= navigation.Data.ForeignKey.Properties[0].Name #> = null;
+<#
+				}
+#>
+
+			<#= navigation.Name #>.<#= navigation.Data.Navigation.Name #> = this;
+			<#= navigation.Name #>.FixupReferences(_fixToken);
+		}
+
+<#
+			}
+		}
+	}
+#>
+	}
+<#
+	foreach (var navigation in entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+		{
+#>
+
+	public <#= entityDesc.Name #> Set<#= navigation.Name #>(<#= targetEntityDesc.BaseName(modelName, contextName) #> <#= targetEntityDesc.AsFieldName #>)
+	{
+<#
+			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
+			{
+#>
+		if (<#= targetEntityDesc.AsFieldName #> == null)
+		{
+			Unset<#= navigation.Name #>();
+			return this;
+		}
+<#
+			}
+			else //not nullable
+			{
+#>
+		if (<#= targetEntityDesc.AsFieldName #> == null)
+			throw new ArgumentNullException(nameof(<#= targetEntityDesc.AsFieldName #>));
+<#
+			}
+#>
+
+		<#= navigation.Data.ForeignKey.Properties[0].Name #> = <#= targetEntityDesc.AsFieldName #>.<#= targetEntityDesc.Data.FirstPrimaryKey #>;
+<#
+			if (!navigation.Data.BackNavigation.Ignore && navigation.Data.BackNavigation.TargetType.ModelContextNames.ContainsKey(modelName))
+			{
+				if (navigation.Data.BackNavigation.IsCollection)
+				{
+#>
+
+		if (<#= navigation.Name #>.<#= navigation.Data.BackNavigation.Name #> != null)
+			<#= navigation.Name #>.<#= navigation.Data.BackNavigation.Name #>.Remove(this);
+
+		if (<#= targetEntityDesc.AsFieldName #>.<#= navigation.Data.BackNavigation.Name #> == null)
+			<#= targetEntityDesc.AsFieldName #>.<#= navigation.Data.BackNavigation.Name #> = new List<<#= entityDesc.Name #>>();
+
+		if (!<#= targetEntityDesc.AsFieldName #>.<#= navigation.Data.BackNavigation.Name #>.Any(x => ReferenceEquals(x, this)))
+			<#= targetEntityDesc.AsFieldName #>.<#= navigation.Data.BackNavigation.Name #>.Add(this);
+<#
+				}
+				else
+				{
+#>
+
+		<#= navigation.Name #>.<#= navigation.Data.BackNavigation.Name #> = null;
+		<#= targetEntityDesc.AsFieldName #>.<#= navigation.Data.BackNavigation.Name #> = this;
+<#
+				}
+#>
+<#
+			}
+#>
+
+		<#= navigation.Name #> = <#= targetEntityDesc.AsFieldName #>;
+		return this;
+	}
+<#
+			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
+			{
+#>
+
+	public <#= entityDesc.Name #> Unset<#= navigation.Name #>()
+	{
+		<#= navigation.Data.ForeignKey.Properties[0].Name #> = null;
+<#
+			if (!navigation.Data.BackNavigation.Ignore && navigation.Data.BackNavigation.TargetType.ModelContextNames.ContainsKey(modelName))
+			{
+				if (navigation.Data.BackNavigation.IsCollection)
+				{
+#>
+
+		if (<#= navigation.Name #> != null && <#= navigation.Name #>.<#= navigation.Data.BackNavigation.Name #> != null)
+			<#= navigation.Name #>.<#= navigation.Data.BackNavigation.Name #>.Remove(this);
+<#
+				}
+				else
+				{
+#>
+
+		<#= navigation.Name #>.<#= navigation.Data.BackNavigation.Name #> = null;
+<#
+				}
+#>
+<#
+			}
+#>
+
+		<#= navigation.Name #> = null;
+		return this;
+	}
+<#
+			}
+		}
+	}
+
+	foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName) && !bn.Data.IsCollection))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+		{
+#>
+
+	public <#= entityDesc.Name #> Set<#= navigation.Name #>(<#= targetEntityDesc.BaseName(modelName, contextName) #> <#= targetEntityDesc.AsFieldName #>)
+	{
+<#
+			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
+			{
+#>
+		if (<#= targetEntityDesc.AsFieldName #> == null)
+		{
+			Unset<#= navigation.Name #>();
+			return this;
+		}
+<#
+			}
+			else //not nullable
+			{
+#>
+		if (<#= targetEntityDesc.AsFieldName #> == null)
+			throw new ArgumentNullException(nameof(<#= targetEntityDesc.AsFieldName #>));
+<#
+			}
+			if (!navigation.Data.Navigation.Ignore && navigation.Data.Navigation.TargetType.ModelContextNames.ContainsKey(modelName))
+			{
+				if (navigation.Data.IsCollection)
+				{
+#>
+
+		<#= navigation.Data.ForeignKey.Properties[0].Name #> = <#= targetEntityDesc.AsFieldName #>.<#= targetEntityDesc.Data.FirstPrimaryKey #>;
+
+		if (<#= navigation.Name #>.<#= navigation.Data.Navigation.Name #> != null)
+			<#= navigation.Name #>.<#= navigation.Data.Navigation.Name #>.Remove(this);
+
+		if (<#= targetEntityDesc.AsFieldName #>.<#= navigation.Data.Navigation.Name #> == null)
+			<#= targetEntityDesc.AsFieldName #>.<#= navigation.Data.Navigation.Name #> = new List<<#= entityDesc.Name #>>();
+
+		if (!<#= targetEntityDesc.AsFieldName #>.<#= navigation.Data.Navigation.Name #>.Any(x => ReferenceEquals(x, this)))
+			<#= targetEntityDesc.AsFieldName #>.<#= navigation.Data.Navigation.Name #>.Add(this);
+<#
+				}
+				else
+				{
+#>
+
+		<#= navigation.Name #>.<#= navigation.Data.Navigation.Name #> = null;
+		<#= targetEntityDesc.AsFieldName #>.<#= navigation.Data.Navigation.Name #> = this;
+<#
+				}
+			}
+#>
+
+		<#= navigation.Name #> = <#= targetEntityDesc.AsFieldName #>;
+		return this;
+	}
+<#
+			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
+			{
+#>
+
+	public <#= entityDesc.Name #> Unset<#= navigation.Name #>()
+	{
+<#
+			if (!navigation.Data.Navigation.Ignore && navigation.Data.Navigation.TargetType.ModelContextNames.ContainsKey(modelName))
+			{
+				if (navigation.Data.IsCollection)
+				{
+#>
+		<#= navigation.Data.ForeignKey.Properties[0].Name #> = null;
+
+		if (<#= navigation.Name #> != null && <#= navigation.Name #>.<#= navigation.Data.Navigation.Name #> != null)
+			<#= navigation.Name #>.<#= navigation.Data.Navigation.Name #>.Remove(this);
+<#
+				}
+				else
+				{
+#>
+		<#= navigation.Name #>.<#= navigation.Data.Navigation.Name #> = null;
+<#
+				}
+			}
+#>
+
+		<#= navigation.Name #> = null;
+		return this;
+	}
+<#
+			}
+		}
+	}
+
+	foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName) && bn.Data.IsCollection))
+	{
+		var targetEntityDesc = entityDesc.Context.GetEntityModelDescriptor(navigation.Data.TargetType, true, modelName, contextName);
+		if (targetEntityDesc != null)
+		{
+#>
+
+	public <#= entityDesc.Name #> Clear<#= navigation.Name #>()
+	{
+		if (<#= navigation.Name #> != null)
+		{
+<#
+			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
+			{
+#>
+			foreach (var item in <#= navigation.Name #>)
+			{
+				item.<#= navigation.Data.ForeignKey.Properties[0].Name #> = null;
+<#
+			if (!navigation.Data.ForeignKey.DependentToPrincipal.Ignore && navigation.Data.ForeignKey.DependentToPrincipal.TargetType.ModelContextNames.ContainsKey(modelName))
+			{
+#>
+				item.<#= navigation.Data.ForeignKey.DependentToPrincipal.Name #> = null;
+<#
+			}
+#>
+			}
+
+<#
+			}
+#>
+			<#= navigation.Name #>.Clear();
+		}
+
+		return this;
+	}
+<#
+		}
+	}
+} //enableFixupReferences
+
+	if (entityDesc.Data.IsSelfAuditableEntity)
+	{
+#>
+
+	void Legion.Model.Audit.ISelfAuditableEntity.SetAuditCreated(DateTime auditCreatedUtc, Guid? idAuditCreatedBy)
+	{
+		AuditCreatedUtc = auditCreatedUtc;
+		IdAuditCreatedBy = idAuditCreatedBy;
+	}
+
+	void Legion.Model.Audit.ISelfAuditableEntity.SetAuditModified(DateTime auditModifiedUtc, Guid? idAuditModifiedBy)
+	{
+		AuditModifiedUtc = auditModifiedUtc;
+		IdAuditModifiedBy = idAuditModifiedBy;
+	}
+<#
+	}
+
+	if (concurrencyProp != null)
+	{
+#>
+
+	[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+	string Legion.Model.Concurrence.IConcurrent.ConcurrencyTokenPropertyName => nameof(<#= concurrencyProp.Name #>);
+
+	public void SetNewConcurrencyToken()
+	{
+<#
+	if (Helpers.TypeHelper.TypeToCSharpSourceCode(concurrencyProp.ClrType) == "Guid")
+	{
+#>
+		<#= concurrencyProp.Name #> = Guid.NewGuid();
+<#
+	}
+	else
+	{
+#>
+		BUG!!! expected GUID
+		throw new NotImplementedException();
+<#
+	}
+#>
+	}
+<#
+	}
+
+	if (entityDesc.Data.ConvertEntity != ConvertEntity.ToEnumerationClass 
+		&& entityDesc.Data.ConvertEntity != ConvertEntity.ToEnumAndEnumerationClass)
+	{
+#>
+
+	static <#= entityDesc.Name #>()
+	{
+		DefaultDBValidator = SetDBValidatorRules(new ValidatorBuilder<<#= entityDesc.Name #>>()).Build();
+	}
+<#
+	}
+#>
+
+	public Dictionary<string, object?> ToDictionary()
+		=> new()
+		{
+<#
+	foreach (var property in entityDesc.Properties.Where(x => !x.Data.IsIgnored))
+	{
+#>
+			{ nameof(<#= property.Name #>), <#= property.Name #> },
+<#
+	}
+#>
+		};
+
+	public void TrimStringValuesToFitDatabaseMaxLengths(string? postfix = null)
+	{
+<#
+	foreach (var property in entityDesc.Properties.Where(x => !x.Data.IsIgnored))
+	{
+		if (0 < property.Data.MaxLength
+			&& (property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._character, StringComparison.InvariantCultureIgnoreCase)
+			|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._character_varying, StringComparison.InvariantCultureIgnoreCase)
+			|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._char, StringComparison.InvariantCultureIgnoreCase)
+			|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._nchar, StringComparison.InvariantCultureIgnoreCase)
+			|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._ntext, StringComparison.InvariantCultureIgnoreCase)
+			|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._nvarchar, StringComparison.InvariantCultureIgnoreCase)
+			|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._text, StringComparison.InvariantCultureIgnoreCase)
+			|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._varchar, StringComparison.InvariantCultureIgnoreCase)))
+			{
+#>
+		<#= property.Name #> = Legion.Text.StringHelper.TrimToFitMaxLength(<#= property.Name #>, <#= property.Data.MaxLength #>, postfix);
+<#
+			}
+	}
+#>
+	}
+
+	public override string? GetPrimaryKeyValue()
+	{
+		return <#= entityDesc.PropertyToString(entityDesc.Data.FirstPrimaryKey) #>;
+	}
+
+	public override string? ToString()
+	{
+		return <#= entityDesc.PropertyToString(entityDesc.Data.MainColumn) #>;
+	}
+
+	public static ValidatorBuilder<<#= entityDesc.Name #>> SetDBValidatorRules(ValidatorBuilder<<#= entityDesc.Name #>> builder)
+		=> builder
+<#
+	foreach (var property in entityDesc.Properties.Where(x => !x.Data.IsIgnored))
+	{
+		if (property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._boolean, StringComparison.InvariantCultureIgnoreCase)
+			|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._bit, StringComparison.InvariantCultureIgnoreCase))
+			continue;
+
+		var skipValidator = "";
+
+		//ak ide o ForeignKey tak validujeme na NotDefaultOrEmpty
+		if (!property.Data.IsPrimaryKey
+			&& property.Data.ForeignKey == null
+			&& (property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._bigint, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._double_precision, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._float, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._real, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._real, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._integer, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._int, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._numeric, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._numeric, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._decimal, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._money, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._smallmoney, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._timestamp_without_time_zone, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._timestamp_with_time_zone, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._date, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._datetime, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._datetime2, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._smalldatetime, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._uuid, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._uniqueidentifier, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._smallint, StringComparison.InvariantCultureIgnoreCase)
+				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._smallint, StringComparison.InvariantCultureIgnoreCase)))
+			skipValidator = "//";
+
+		var validator = "";
+		
+		if (!property.Data.IsNullable)
+		{
+			validator = ".NotDefaultOrEmpty()";
+		}
+		
+		if (property.ClrType == typeof(string)
+			&& 0 < property.Data.MaxLength
+			&& !property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._jsonb, StringComparison.InvariantCultureIgnoreCase)
+			&& !property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._tsvector, StringComparison.InvariantCultureIgnoreCase)
+			&& !property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._sysname, StringComparison.InvariantCultureIgnoreCase))
+		{
+			validator = $"{validator}.MaxLength({property.Data.MaxLength})";
+		}
+
+		if (!string.IsNullOrWhiteSpace(validator))
+		{
+			var fkValidator =
+				property.Data.ForeignKey != null
+					? $", (x, parent) => x.{property.Data.ForeignKey.DependentToPrincipal.Name} == null"
+					: "";
+#>
+			<#= skipValidator #>.ForProperty(x => x.<#= property.Name #>, v => v<#= validator #><#= fkValidator #>)
+<#
+		}
+	}
+#>
+		;
+}
+<#
+	Process();
+#>

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<Import Project="../../../SharedConfigurations.props" />
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="call $(ProjectDir)run.bat $(ProjectDir) $(SolutionDir)" />
+	</Target>
+
+	<ItemGroup>
+		<None Update="DbDeploy.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="DBPatch\" />
+	</ItemGroup>
+
+</Project>

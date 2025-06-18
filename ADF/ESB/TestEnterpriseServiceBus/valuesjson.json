@@ -1,0 +1,496 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "UPDATED_Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "TesProp": {
+    "TestInnerProp": 18
+  },
+  "Vals": [
+    "_",
+    "x",
+    "a"
+  ],
+  "MultiArray": [
+    "##IGNORE##",
+    [
+      "##IGNORE##",
+      {
+        "PropA": "##IGNORE##",
+        "PropB": "UPDATED_1_1b"
+      }
+    ]
+  ],
+  "App": {
+    "IdCompany": 888,
+    "DbContextSettings": {
+      "Intranet": {
+        "ConnectionString": "Host=UPDATED"
+      }
+    },
+    "ServiceSettings": {
+      "AllowedSignInAsPersonalAccount": true,
+      "AllowedVisualSignatureModes": [
+        "##IGNORE##",
+        "UPDATED_2",
+        "##REMOVE##"
+      ],
+    },
+    "AppLogger": {
+      "ArchiveAboveSizeInBytes": 66
+    },
+    "Authentication": {
+      "NEW_VALUE": 123456789,
+      "NEW_VALUE2": "123456789"
+    },
+    "ESBSettings": {
+      "LogRetentionSettings": {
+        "DBLogConnectionStrings": [
+          "##REMOVE##"
+        ],
+      }
+    },
+    "UI": {
+      "Themes": [
+        "##REMOVE##"
+      ]
+    },
+    "LdapSettings": {
+      "Server": "DC1.int.disig.sk",
+      "Port": 389,
+      "AuthType": 9,
+      "SecureSocketLayer": false,
+      "Search": [
+        "##IGNORE##",
+        {
+          "SearchIdentifier": "ADSync",
+          "DistinguishedName": "OU=UER,OU=Disig_Users,DC=int,DC=disig,DC=sk",
+          "SearchScope": 2,
+          "MaxResultsToRequest": 500,
+          "LdapFilter": "(objectClass=user)",
+          "ReadAttributes": [
+            "sAMAccountName",
+            "distinguishedName",
+            "company",
+            "givenName",
+            "sn",
+            "mail",
+            "title",
+            "telephoneNumber",
+            "lockoutTime",
+            "memberOf"
+          ]
+        }
+      ],
+      "LdapSyncRoleMatrix": [
+        {
+          "MemberOf": "CN=registračná autorita Košice,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                2
+              ]
+            },
+            {
+              "DocumentType": null,
+              "Permissions": [
+                100000
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                4,
+                5,
+                8
+              ]
+            },
+            {
+              "DocumentType": null,
+              "Permissions": [
+                3,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=Support_Eurovia,CN=Users,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=Podpora TATRABANKA,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                1,
+                18
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=registračná autorita Košice,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                1,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk}",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                9
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                9
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                9
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC92",
+              "Permissions": [
+                9
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC93",
+              "Permissions": [
+                9
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                14
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                14
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                14
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC92",
+              "Permissions": [
+                14
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC93",
+              "Permissions": [
+                14
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=registračná autorita Košice,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                10
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                10
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                10
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC92",
+              "Permissions": [
+                10
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC93",
+              "Permissions": [
+                10
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=Support_Eurovia,CN=Users,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                15
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                15
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                15
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC92",
+              "Permissions": [
+                15
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC93",
+              "Permissions": [
+                15
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": null,
+              "Permissions": [
+                3,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=Podpora TATRABANKA,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": null,
+              "Permissions": [
+                11
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": null,
+              "Permissions": [
+                12
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": null,
+              "Permissions": [
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=registračná autorita Košice,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": null,
+              "Permissions": [
+                13
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=registračná autorita Košice,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC92",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC93",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=Support_Eurovia,CN=Users,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                1,
+                8,
+                18,
+                19
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                1,
+                8,
+                18,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=ALL",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "00000000-0000-0000-0000-000000000000",
+              "Permissions": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                100000
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "MaxRequestBodySizeInMegaBytes": 100
+  }
+}

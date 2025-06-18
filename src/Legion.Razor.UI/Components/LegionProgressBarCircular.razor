@@ -1,0 +1,29 @@
+﻿@namespace Legion.Razor.UI
+@using System.Globalization
+@inherits LegionProgressBar
+
+@if (Visible)
+{
+	<div @ref="@Element" style="@Style" aria-valuemax="@Max" aria-valuemin="@Min" role="progressbar" @attributes="Attributes" class="@GetCssClass()"
+		 aria-valuenow="@Value" id="@GetId()">
+		<svg class="lui-progressbar-circular-viewbox" viewBox="-19 -19 38 38">
+			<circle class="lui-progressbar-circular-background" r="15.91549" fill="none" />
+			<circle class="lui-progressbar-circular-value" r="15.91549" fill="none" stroke-dashoffset="@(((1 - NormalizedValue) * 100).ToString(CultureInfo.InvariantCulture))" />
+		</svg>
+		@if (ShowValue)
+		{
+			<div class="lui-progressbar-circular-label">
+				@if (Template != null)
+				{
+					@Template
+				}
+				else
+				{
+					@Value
+
+					@Unit
+				}
+			</div>
+		}
+	</div>
+}

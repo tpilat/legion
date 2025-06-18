@@ -1,0 +1,89 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	RepositoryDescriptor repoDesc = GetParam<RepositoryDescriptor>("RepositoryDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+	
+	StartNewFile(repoDesc.InterfaceTargetFolder, repoDesc.InterfaceFileName);
+	
+	foreach (string import in repoDesc.InterfaceImports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < repoDesc.InterfaceImports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= repoDesc.InterfaceNamespace #>;
+
+public partial interface <#= repoDesc.InterfaceName #> : Legion.Model.Repositories.IEntityRepositoryBase
+{
+}
+
+public interface <#= repoDesc.InterfaceName #><T> : Legion.Model.Repositories.IEntityRepositoryBase<T>, <#= repoDesc.InterfaceName #>, Legion.Model.Repositories.IEntityRepositoryBase
+{
+}
+<#
+	StartNewFile(repoDesc.BaseRepoTargetFolder, repoDesc.BaseRepoFileName);
+
+	var dbConnection = AppGen.Model.Config.CodeGeneratorConfig.Instance.SelectedDatabaseConnection.Provider == Database.Metamodel.DatabaseProviderType.PostgreSQL ? "NpgsqlConnection" : "SqlConnection";
+
+	foreach (string import in repoDesc.BaseRepoImports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < repoDesc.BaseRepoImports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= repoDesc.BaseRepoNamespace #>;
+
+public abstract partial class <#= repoDesc.BaseRepoName #> : <#= repoDesc.InterfaceNamespace #>.<#= repoDesc.InterfaceName #>, Legion.Model.Repositories.IEntityRepositoryBase
+{
+	public IEFConnectionProvider ConnectionProvider { get; }
+
+	public <#= repoDesc.BaseRepoName #>(
+		IEFConnectionProvider connectionProvider)
+	{
+		Throw.IfArgumentNull(connectionProvider);
+
+		ConnectionProvider = connectionProvider;
+	}
+
+	protected <#= repoDesc.DbContextFullName #> GetContext(IScopeContext scopeContext)
+		=> ConnectionProvider.GetOrCreateDbContext<<#= repoDesc.DbContextFullName #>>(scopeContext);
+
+	protected <#= dbConnection #> GetDbConnection()
+		=> (<#= dbConnection #>)ConnectionProvider.GetDbConnection()!;
+
+	protected <#= dbConnection #> GetOrCreateNewDbConnection(out bool isNewConnection)
+		=> (<#= dbConnection #>)ConnectionProvider.GetOrCreateNewDbConnection(out isNewConnection)!;
+
+	protected <#= dbConnection #> CreateNewDbConnection()
+		=> (<#= dbConnection #>)ConnectionProvider.CreateNewDbConnection()!;
+}
+<#
+	Process();
+#>

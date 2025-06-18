@@ -1,0 +1,41 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	BaseQueryEntityDescriptor entityBaseDesc = GetParam<BaseQueryEntityDescriptor>("BaseQueryEntityDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+
+	StartNewFile(entityBaseDesc.TargetFolder(modelName, contextName), entityBaseDesc.FileName);
+	
+	foreach (string import in entityBaseDesc.Imports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < entityBaseDesc.Imports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= entityBaseDesc.Namespace(modelName, contextName) #>;
+
+public abstract class <#= entityBaseDesc.Name #> : Legion.Model.IQueryEntity
+{
+}
+<#
+	Process();
+#>

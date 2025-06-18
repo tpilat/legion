@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+  </PropertyGroup>
+
+  <Import Project="../../../SharedConfigurations.props" />
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Legion.Razor.UI\Legion.Razor.UI.csproj" />
+  </ItemGroup>
+
+  <Target Name="CompileSass" BeforeTargets="Build">
+    <Exec Command="sass wwwroot/scss:wwwroot/css" />
+  </Target>
+
+  <Target Name="CompileComponentSass" BeforeTargets="Build">
+    <ItemGroup>
+      <ScssFiles Include="**/*.razor.scss" />
+    </ItemGroup>
+
+    <Exec Command="for %%F in (%(ScssFiles.FullPath)) do sass %%F:%%~dpnF.css --no-source-map" />
+  </Target>
+
+</Project>

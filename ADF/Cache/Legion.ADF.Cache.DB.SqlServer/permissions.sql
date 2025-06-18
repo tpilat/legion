@@ -1,0 +1,3 @@
+GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::cache To #TargetDbUsername#;
+GO
+

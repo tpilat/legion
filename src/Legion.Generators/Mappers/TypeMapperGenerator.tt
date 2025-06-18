@@ -1,0 +1,375 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	TypeMapperDescriptor typeMapperDesc = GetParam<TypeMapperDescriptor>("TypeMapperDescriptor");
+
+	StartNewFile(typeMapperDesc.MapperTargetFolder, typeMapperDesc.MapperFileName);
+#>
+<#
+	if (typeMapperDesc.IsLegionFramework)
+	{
+#>
+using Legion;
+<#
+	}
+#>
+using <#= typeMapperDesc.MapperBaseClassesNamespace #>;
+
+namespace <#= typeMapperDesc.MapperNamespace #>;
+
+public static partial class <#= typeMapperDesc.MapperName #>
+{
+	public static <#= typeMapperDesc.TargetTypeName #>? Map(
+		<#= typeMapperDesc.SourceTypeName #> source,
+		<#= typeMapperDesc.TargetTypeName #> target,
+		ReferenceModifier referenceModifier = ReferenceModifier.MapAllReferences,
+		Action<MappingConditions<<#= typeMapperDesc.SourceTypeName #>>>? conditions = null,
+		Legion.Reflection.InstanceFactory? instanceFactory = null,
+		Dictionary<object, object>? cache = null)
+	{
+		if (source == null)
+			return target;
+
+<#
+	if (typeMapperDesc.LessThanCSharp12)
+	{
+#>
+		cache ??= new();
+<#
+	}
+	else
+	{
+#>
+		cache ??= [];
+<#
+	}
+#>
+
+		if (cache.TryGetValue(source, out object? cached))
+			return (<#= typeMapperDesc.TargetTypeName #>)cached;
+<#
+	if (typeMapperDesc.TypesGeneratedByFactory?.Contains(typeMapperDesc.TargetType) == true)
+	{
+#>
+
+		target ??= instanceFactory?.CreateInstance<<#= typeMapperDesc.TargetTypeName #>>(
+				useActivatorIfNoFactoryFound: false,
+				throwIfFactoryReturnsNull: true)!;
+<#
+	}
+	else
+	{
+#>
+
+		target ??= instanceFactory?.CreateInstance<<#= typeMapperDesc.TargetTypeName #>>(
+				useActivatorIfNoFactoryFound: false,
+				throwIfFactoryReturnsNull: true)
+			?? new <#= typeMapperDesc.TargetTypeName #>();
+<#
+	}
+#>
+
+		MappingConditions<<#= typeMapperDesc.SourceTypeName #>>? conds = null;
+
+		if (conditions != null)
+		{
+			conds = new MappingConditions<<#= typeMapperDesc.SourceTypeName #>>();
+			conditions.Invoke(conds);
+
+<#
+		List<string> notSuppoertedProperties = [];
+		foreach (var property in typeMapperDesc.ValueTypeProperties)
+		{
+			var existsInSource = typeMapperDesc.ExistsInSource(property);
+			var notSupported = existsInSource ? string.Empty : "//TODO: Mapper: Source property does not exists >>> ";
+			var collectionCopy = string.Empty;
+			if (property.IsArray())
+			{
+				collectionCopy = "?.ToArray()";
+			}
+			else if (property.IsDictionary())
+			{
+				notSupported = "//TODO: Mapper: Not supported target property >>> ";
+				collectionCopy = "?.ToDictionary()";
+			}
+			else if (property.IsEnumerable())
+			{
+				collectionCopy = "?.ToList()";
+			}
+
+			if (string.IsNullOrWhiteSpace(notSupported) && !property.CanWrite)
+				notSupported = "//TODO: Mapper: Target property is readonly >>> ";
+
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				notSuppoertedProperties.Add($"			{notSupported}if (conds.CanMap(source, nameof(source.{property.Name}))){Environment.NewLine}			{notSupported}	target.{property.Name} = source.{property.Name}{collectionCopy}");
+			}
+			else
+			{
+#>
+			if (conds.CanMap(source, nameof(source.<#= property.Name #>)))
+				target.<#= property.Name #> = source.<#= property.Name #><#= collectionCopy #>;
+<#
+			}
+		}
+		
+		foreach (var notSupported in notSuppoertedProperties)
+		{
+#>
+
+<#= notSupported #>
+<#
+		}
+#>
+		}
+		else
+		{
+<#
+		notSuppoertedProperties = [];
+		foreach (var property in typeMapperDesc.ValueTypeProperties)
+		{
+			var existsInSource = typeMapperDesc.ExistsInSource(property);
+			var notSupported = existsInSource ? string.Empty : "//TODO: Mapper: Source property does not exists >>> ";
+			var collectionCopy = string.Empty;
+			if (property.IsArray())
+			{
+				collectionCopy = "?.ToArray()";
+			}
+			else if (property.IsDictionary())
+			{
+				notSupported = "//TODO: Mapper: Not supported property type >>> ";
+				collectionCopy = "?.ToDictionary()";
+			}
+			else if (property.IsEnumerable())
+			{
+				collectionCopy = "?.ToList()";
+			}
+
+			if (string.IsNullOrWhiteSpace(notSupported) && !property.CanWrite)
+				notSupported = "//TODO: Mapper: Target property is readonly >>> ";
+
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				notSuppoertedProperties.Add($"			{notSupported}target.{property.Name} = source.{property.Name}{collectionCopy};");
+			}
+			else
+			{
+#>
+			target.<#= property.Name #> = source.<#= property.Name #><#= collectionCopy #>;
+<#
+			}
+		}
+		
+		foreach (var notSupported in notSuppoertedProperties)
+		{
+#>
+
+<#= notSupported #>
+<#
+		}
+#>
+		}
+
+		cache.Add(source, target);
+<#
+	if (0 < typeMapperDesc.ReferenceTypeProperties.Count || 0 < typeMapperDesc.CollectionOfReferenceTypeProperties.Count)
+	{
+#>
+
+		if (referenceModifier == ReferenceModifier.MapAllReferences)
+		{
+<#
+		notSuppoertedProperties = [];
+		foreach (var navigation in typeMapperDesc.ReferenceTypeProperties)
+		{
+			var existsInSource = typeMapperDesc.ExistsInSource(navigation.Key);
+			var notSupported = existsInSource ? string.Empty : "//TODO: Mapper: Source property does not exists >>> ";
+
+			if (string.IsNullOrWhiteSpace(notSupported) && !navigation.Key.CanWrite)
+				notSupported = "//TODO: Mapper: Target property is readonly >>> ";
+
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				if (typeMapperDesc.IsComapredByReference(navigation.Key.PropertyType) == true)
+				{
+					notSuppoertedProperties.Add($"			{notSupported}target.{navigation.Key.Name} = source.{navigation.Key.Name};");
+				}
+				else
+				{
+					notSuppoertedProperties.Add($"			{notSupported}target.{navigation.Key.Name} = {navigation.Value.MapperName}.Map(source.{navigation.Key.Name}, target.{navigation.Key.Name}, referenceModifier, conds?.GetConditions(x => x.{navigation.Key.Name}), instanceFactory, cache)!;");
+				}
+			}
+			else
+			{
+				if (typeMapperDesc.IsComapredByReference(navigation.Key.PropertyType) == true)
+				{
+#>
+			target.<#= navigation.Key.Name #> = source.<#= navigation.Key.Name #>;
+<#
+				}
+				else
+				{
+#>
+			target.<#= navigation.Key.Name #> = <#= navigation.Value.MapperName #>.Map(source.<#= navigation.Key.Name #>, target.<#= navigation.Key.Name #>, referenceModifier, conds?.GetConditions(x => x.<#= navigation.Key.Name #>), instanceFactory, cache)!;
+<#
+				}
+			}
+		}
+		
+		foreach (var navigation in typeMapperDesc.CollectionOfReferenceTypeProperties)
+		{
+			var existsInSource = typeMapperDesc.ExistsInSource(navigation.Key);
+			var notSupported = existsInSource ? string.Empty : "//TODO: Mapper: Source property does not exists >>> ";
+
+			if (string.IsNullOrWhiteSpace(notSupported) && !navigation.Key.CanWrite)
+				notSupported = "//TODO: Mapper: Target property is readonly >>> ";
+				
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				if (typeMapperDesc.IsComapredByReference(navigation.Key.PropertyType) == true)
+				{
+					notSuppoertedProperties.Add($"			{notSupported}target.{navigation.Key.Name} = source.{navigation.Key.Name};");
+				}
+				else if (typeMapperDesc.IsComapredByReference(navigation.Key.PropertyType.GetEnumerableElementType()) == true)
+				{
+					if (navigation.Key.PropertyType.IsArray)
+					{
+						notSuppoertedProperties.Add($"			{notSupported}target.{navigation.Key.Name} = source.{navigation.Key.Name}.ToArray();");
+					}
+					else
+					{
+						notSuppoertedProperties.Add($"			{notSupported}target.{navigation.Key.Name} = source.{navigation.Key.Name}.ToList();");
+					}
+				}
+				else
+				{
+					notSuppoertedProperties.Add($"			{notSupported}target.{navigation.Key.Name} = MapperHelper.MapToList(source.{navigation.Key.Name}, target.{navigation.Key.Name}, {navigation.Value.MapperName}.Map, referenceModifier, conds?.GetConditions(x => x.{navigation.Key.Name}), instanceFactory, cache)!;");
+				}
+			}
+			else
+			{
+				if (typeMapperDesc.IsComapredByReference(navigation.Key.PropertyType) == true)
+				{
+#>
+			target.<#= navigation.Key.Name #> = source.<#= navigation.Key.Name #>;
+<#
+				}
+				else if (typeMapperDesc.IsComapredByReference(navigation.Key.PropertyType.GetEnumerableElementType()) == true)
+				{
+					if (navigation.Key.PropertyType.IsArray)
+					{
+#>
+			target.<#= navigation.Key.Name #> = source.<#= navigation.Key.Name #>.ToArray();
+<#
+					}
+					else
+					{
+#>
+			target.<#= navigation.Key.Name #> = source.<#= navigation.Key.Name #>.ToList();
+<#
+					}
+				}
+				else
+				{
+#>
+			target.<#= navigation.Key.Name #> = MapperHelper.MapToList(source.<#= navigation.Key.Name #>, target.<#= navigation.Key.Name #>, <#= navigation.Value.MapperName #>.Map, referenceModifier, conds?.GetConditions(x => x.<#= navigation.Key.Name #>), instanceFactory, cache)!;
+<#
+				}
+			}
+		}
+		
+		foreach (var notSupported in notSuppoertedProperties)
+		{
+#>
+
+<#= notSupported #>
+<#
+		}
+#>
+		}
+		else if (referenceModifier == ReferenceModifier.SetNull)
+		{
+<#
+		notSuppoertedProperties = [];
+		foreach (var navigation in typeMapperDesc.ReferenceTypeProperties)
+		{
+			var notSupported = navigation.Key.CanWrite
+				? string.Empty
+				: "//TODO: Mapper: Target property is readonly >>> ";
+
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				notSuppoertedProperties.Add($"			{notSupported}target.{navigation.Key.Name} = null!;");
+			}
+			else
+			{
+#>
+			target.<#= navigation.Key.Name #> = null!;
+<#
+			}
+		}
+
+		foreach (var navigation in typeMapperDesc.CollectionOfReferenceTypeProperties)
+		{
+			var notSupported = navigation.Key.CanWrite
+				? string.Empty
+				: "//TODO: Mapper: Target property is readonly >>> ";
+
+			if (!string.IsNullOrWhiteSpace(notSupported))
+			{
+				if (typeMapperDesc.LessThanCSharp12)
+				{
+					notSuppoertedProperties.Add($"			{notSupported}target.{navigation.Key.Name} = new();");
+				}
+				else
+				{
+					notSuppoertedProperties.Add($"			{notSupported}target.{navigation.Key.Name} = [];");
+				}
+			}
+			else
+			{
+				if (typeMapperDesc.LessThanCSharp12)
+				{
+#>
+			target.<#= navigation.Key.Name #> = new();
+<#
+				}
+				else
+				{
+#>
+			target.<#= navigation.Key.Name #> = [];
+<#
+				}
+			}
+		}
+		
+		foreach (var notSupported in notSuppoertedProperties)
+		{
+#>
+
+<#= notSupported #>
+<#
+		}
+#>
+		}
+<#
+	}
+#>
+
+		return target;
+	}
+}
+<#
+	Process();
+#>

@@ -1,0 +1,7 @@
+﻿@namespace Legion.Razor.UI
+@inherits LegionComponentWithChildren
+
+@if (Visible)
+{
+	<div @ref="@Element" style="@Style" Container="@Container" @attributes="Attributes" class="@GetCssClass()" id="@GetId()">@ChildContent</div>
+}

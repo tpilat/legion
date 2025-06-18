@@ -1,0 +1,57 @@
+{
+		"DbDeploy": {
+				"ConncetionString": "Server=127.0.0.1;Database=legion_adf_servicebus;User Id=sa;Password=Password1.;TrustServerCertificate=True;MultipleActiveResultSets=true",
+				"TargetDbUsername": "servicebususr",
+				"TargetDbPassword": "servicebus_Pwd1.",
+				"UseGlobalTransaction": false,
+				"SqlFiles": [
+						{
+								"FilePath": "dropCreate.sql",
+								"Transaction": null,
+								"CurrentDatabase": "master",
+								"FilledScriptPostfix": "_filled"
+						},
+						{
+								"FilePath": "schemas.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "tables.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "views.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "permissions.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "data_initial.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.SqlServer\\schemas.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.SqlServer\\tables.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.SqlServer\\views.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.SqlServer\\data_initial.sql",
+								"Transaction": "Local"
+						},
+						{
+								"FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.SqlServer\\permissions.sql",
+								"Transaction": "Local"
+						}
+				],
+				"DbPatch": null
+		}
+}

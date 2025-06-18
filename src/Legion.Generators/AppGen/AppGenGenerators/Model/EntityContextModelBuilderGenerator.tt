@@ -1,0 +1,311 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	EntityContextDescriptor dbContextDesc = GetParam<EntityContextDescriptor>("EntityContextDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+
+	foreach (var entity in dbContextDesc.Data.Entities.OrderBy(x => x.Name))
+	{
+		if (!entity.GenerateModel)
+			continue;
+
+		var entityDesc = dbContextDesc.Context.GetEntityModelDescriptor(entity, true, modelName, contextName);
+		if (entityDesc == null) continue;
+
+		StartNewFile(entityDesc.EntityContextModelBuilderTargetFolder, entityDesc.EntityContextModelBuilderFileName);
+
+		foreach (string import in entityDesc.EntityContextModelBuilderImports)
+		{
+#>
+using <#= import #>;
+<#
+		}
+
+		if (0 < entityDesc.EntityContextModelBuilderImports.Count)
+		{
+#>
+
+<#
+		}
+#>
+namespace <#= entityDesc.EntityContextModelBuilderNamespace #>;
+
+public class <#= entityDesc.EntityContextModelBuilderName #> : IEntityTypeConfiguration<<#= entityDesc.BaseName(modelName, contextName) #>>
+{
+	public const string PrimaryKeyFormatter = "<#= entityDesc.GetKeyPropertiesAsJsonFormatter(entity.PrimaryKey) #>";
+
+	public void Configure(EntityTypeBuilder<<#= entityDesc.BaseName(modelName, contextName) #>> entityBuilder)
+		=> ConfigureEntity(entityBuilder);
+
+	public static void ConfigureEntity(EntityTypeBuilder<<#= entityDesc.BaseName(modelName, contextName) #>> entityBuilder)
+	{
+<#
+		//PRIMARY KEY
+#>
+		entityBuilder.HasKey(e => <#= entityDesc.GetKeyPropertiesAsLambda(entity.PrimaryKey, "e") #>);
+<#
+		//TABLE
+#>
+
+		entityBuilder.ToTable(<#= Text.StringHelper.DelimitString(entity.TableName) #><#= entity.IsExplicitSchemaName ? (", " + Text.StringHelper.DelimitString(entity.Schema)) : "" #>);
+<#
+		//INDEX
+		foreach (var index in entity.Indexes)
+		{
+			string lineDelimiter = (index.IsUnique || !string.IsNullOrWhiteSpace(index.Filter)) ? "" : ";";
+#>
+
+		entityBuilder.HasIndex(e => <#= entityDesc.GetIndexPropertiesAsLambda(index, "e") #>, <#= Text.StringHelper.DelimitString(index.Name) #>)<#= lineDelimiter #>
+<#
+			if (index.IsUnique)
+			{
+				lineDelimiter = !string.IsNullOrWhiteSpace(index.Filter) ? "" : ";";
+#>
+				.IsUnique()<#= lineDelimiter #>
+<#
+			}
+			if (!string.IsNullOrWhiteSpace(index.Filter))
+			{
+#>
+				.HasFilter(<#= Text.StringHelper.DelimitString(index.Filter) #>);
+<#
+			}
+		}
+
+		//Properties
+		foreach (var property in entity.Properties.Where(x => !x.IsIgnored))
+		{
+			List<string> lines = new List<string>();
+			if (property.IsRequiredEfMapping)
+			{
+				lines.Add("			.IsRequired()");
+			}
+			if (property.IsExplicitName)
+			{
+				lines.Add("			.HasColumnName(" + Text.StringHelper.DelimitString(property.ColumnName) + ")");
+			}
+			if (property.HasJsonConversion)
+			{
+				lines.Add("			.HasConversion(");
+				lines.Add("				v => Legion.Serializer.JsonSerializerHelper.Serialize(v, true),");
+				lines.Add($"				v => Legion.Serializer.JsonSerializerHelper.Deserialize<{property.CSharpType}>(v, true),");
+				lines.Add($"				new Microsoft.EntityFrameworkCore.ChangeTracking.ValueComparer<{property.CSharpType}>(");
+				lines.Add($"					(c1, c2) => (c1 == null && c2 == null) || (c1 != null && c2 != null && c1.SequenceEqual(c2)),");
+				lines.Add($"					c => c == null ? 0 : c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),");
+				lines.Add($"					c => c == null ? null! : c.ToList())");
+				lines.Add("			)");
+			}
+			if (!string.IsNullOrWhiteSpace(property.ConfiguredColumnType))
+			{
+				lines.Add("			.HasColumnType(" + Text.StringHelper.DelimitString(property.ConfiguredColumnType) + ")");
+			}
+			if (property.ClrType == typeof(string) && property.MaxLength.HasValue)
+			{
+				lines.Add("			.HasMaxLength(" + Text.StringHelper.GenerateLiteral(property.MaxLength.Value) + ")");
+			}
+			if (false /*TODO*/ && property.Precision.HasValue)
+			{
+				lines.Add("			.HasMaxLength(" + Text.StringHelper.GenerateLiteral(property.Precision.Value) + ")");
+			}
+			if (property.IsUnicode.HasValue)
+			{
+				lines.Add("			.IsUnicode(" + (property.IsUnicode == false ? Text.StringHelper.GenerateLiteral(false) : "") + ")");
+			}
+			if (property.DefaultValue != null)
+			{
+				lines.Add("			.HasDefaultValue(" + Text.StringHelper.GenerateLiteral((dynamic)property.DefaultValue) + ")");
+			}
+			if (!string.IsNullOrWhiteSpace(property.DefaultValueSql))
+			{
+				lines.Add("		.HasDefaultValueSql(" + Text.StringHelper.DelimitString(property.DefaultValueSql) + ")");
+			}
+			if (!string.IsNullOrWhiteSpace(property.ComputedColumnSql))
+			{
+				lines.Add("				.HasComputedColumnSql(" + Text.StringHelper.DelimitString(property.ComputedColumnSql) + ")");
+			}
+			if (!string.IsNullOrWhiteSpace(property.ValueGeneratedMetohdName))
+			{
+				lines.Add("		." + property.ValueGeneratedMetohdName + "()");
+			}
+			if (property.IsConcurrencyToken)
+			{
+				lines.Add("				.IsConcurrencyToken()");
+			}
+
+			string propertyFluent = MultiLineFluentApi(lines.ToArray());
+			if (propertyFluent != ";")
+			{
+#>
+
+		entityBuilder.Property(e => e.<#= property.Name #>)<#= propertyFluent #>
+<#
+			}
+		}
+
+		//Relationship
+		foreach (var foreignKey in entity.ForeignKeys)
+		{
+			if (foreignKey.DependentToPrincipal.Ignore
+				|| !foreignKey.DependentToPrincipal.TargetType.ModelContextNames.ContainsKey(modelName))
+				continue;
+
+			bool isOneToOne = !foreignKey.DependentToPrincipal.BackNavigation.IsCollection;
+			string relation = isOneToOne ? "WithOne" : "WithMany";
+			if (!foreignKey.PrincipalEntity.GenerateModel)
+				continue;
+
+			var navigationExpression = foreignKey.PrincipalToDependent.Ignore || !foreignKey.PrincipalToDependent.TargetType.ModelContextNames.ContainsKey(modelName)
+				? ""
+				: "p => p." + foreignKey.PrincipalToDependent.Name;
+#>
+
+		entityBuilder.HasOne(d => d.<#= foreignKey.DependentToPrincipal.Name #>)
+			.<#= relation #>(<#= navigationExpression #>)
+<#
+			if (!foreignKey.PrincipalKeyIsPrimaryKey)
+			{
+#>
+			.HasPrincipalKey<#= foreignKey.IsUnique ? ("<" + entityDesc.Context.GetEntityModelDescriptor(foreignKey.PrincipalEntity, false, modelName, contextName).BaseName(modelName, contextName) + ">") : "" #>(p => <#= entityDesc.GetForeignKeyPropertiesAsLambda(foreignKey, "p") #>)
+<#
+			}
+#>
+			.HasForeignKey<#= isOneToOne ? ("<" + entityDesc.Context.GetEntityModelDescriptor(foreignKey.DeclaringEntity, false, modelName, contextName).BaseName(modelName, contextName) + ">") : "" #>(d => <#= entityDesc.GetForeignKeyPrincipalKeyPropertiesAsLambda(foreignKey, "d") #>)
+<#
+			if (foreignKey.DeleteBehavior != foreignKey.DefaultDeleteBehavior)
+			{
+#>
+			.OnDelete(<#= Text.StringHelper.GenerateLiteral(foreignKey.DeleteBehavior) #>)
+<#
+			}
+#>
+			.HasConstraintName(<#= Text.StringHelper.DelimitString(foreignKey.Name) #>);
+<#
+		}
+
+		var ignoredDependentToPrincipalForeignKeys =
+			entity.BackNavigations
+				.SelectMany(x => x.TargetType.ForeignKeys)
+				.Where(fk => fk.DependentToPrincipal.Ignore || !fk.DependentToPrincipal.TargetType.ModelContextNames.ContainsKey(modelName))
+				.ToList();
+
+		//ignoredDependentToPrincipal Relationships
+		foreach (var foreignKey in ignoredDependentToPrincipalForeignKeys)
+		{
+			bool isOneToOne = !foreignKey.PrincipalToDependent.IsCollection;
+			if (!foreignKey.PrincipalEntity.GenerateModel)
+				continue;
+
+			if ((foreignKey.DependentToPrincipal.Ignore
+					|| !foreignKey.DependentToPrincipal.TargetType.ModelContextNames.ContainsKey(modelName))
+				&& (foreignKey.PrincipalToDependent.Ignore
+					|| !foreignKey.PrincipalToDependent.TargetType.ModelContextNames.ContainsKey(modelName)))
+				continue;
+			
+				string relation = isOneToOne ? "HasOne" : "HasMany";
+#>
+
+		entityBuilder.<#= relation #>(d => d.<#= foreignKey.PrincipalToDependent.Name #>)
+			.WithOne()
+<#
+			if (!foreignKey.PrincipalKeyIsPrimaryKey)
+			{
+#>
+			.HasPrincipalKey<#= foreignKey.IsUnique ? ("<" + entityDesc.Context.GetEntityModelDescriptor(foreignKey.PrincipalEntity, false, modelName, contextName).BaseName(modelName, contextName) + ">") : "" #>(p => <#= entityDesc.GetForeignKeyPropertiesAsLambda(foreignKey, "p") #>)
+<#
+			}
+#>
+			.HasForeignKey<#= isOneToOne ? ("<" + entityDesc.Context.GetEntityModelDescriptor(foreignKey.DeclaringEntity, false, modelName, contextName).BaseName(modelName, contextName) + ">") : "" #>(d => <#= entityDesc.GetForeignKeyPrincipalKeyPropertiesAsLambda(foreignKey, "d") #>)
+<#
+			if (foreignKey.DeleteBehavior != foreignKey.DefaultDeleteBehavior)
+			{
+#>
+			.OnDelete(<#= Text.StringHelper.GenerateLiteral(foreignKey.DeleteBehavior) #>)
+<#
+			}
+#>
+			.HasConstraintName(<#= Text.StringHelper.DelimitString(foreignKey.Name) #>);
+<#
+		}
+#>
+	}
+
+	public static ModelBuilder Build(ModelBuilder modelBuilder)
+	{
+		modelBuilder.Entity<<#= entityDesc.BaseName(modelName, contextName) #>>(ConfigureEntity);
+<#
+	//Sequences
+	//TODO:
+	dbContextDesc.Data.Sequences = new List<SequenceBase>();
+
+	foreach (var sequence in dbContextDesc.Data.Sequences)
+	{
+		List<string> lines = new List<string>();
+		if (sequence.StartValue != sequence.StartValue)
+		{
+				lines.Add("		.StartsAt(" + sequence.StartValue + ")");
+		}
+		if (sequence.IncrementBy != sequence.IncrementBy)
+		{
+				lines.Add("		.IncrementsBy(" + sequence.IncrementBy + ")");
+		}
+		if (sequence.MinValue != sequence.MinValue)
+		{
+				lines.Add("		.HasMin(" + sequence.MinValue + ")");
+		}
+		if (sequence.MaxValue != sequence.MaxValue)
+		{
+				lines.Add("		.HasMax(" + sequence.MaxValue + ")");
+		}
+		if (sequence.IsCyclic != sequence.IsCyclic)
+		{
+				lines.Add("		.IsCyclic()");
+		}
+#>
+
+		modelBuilder.HasSequence<#= sequence.ClrType != sequence.ClrType ? ("<" + Helpers.TypeHelper.TypeToCSharpSourceCode(sequence.ClrType) + ">") : "" #>(<#= Text.StringHelper.DelimitString(sequence.Name) #><#= sequence.IsExplicitSchema ? (", " + Text.StringHelper.DelimitString(sequence.Schema)) : "" #>)<#= MultiLineFluentApi(lines.ToArray()) #>
+<#
+	}
+#>
+
+		return modelBuilder;
+	}
+}
+<#
+	}
+	Process();
+#>
+<#+
+string MultiLineFluentApi(params string[] lines)
+{
+	StringBuilder sb = new StringBuilder();
+	if (lines != null && 0 < lines.Length)
+	{
+		if (lines.Length == 1)
+		{
+			sb.Append(lines[0].Trim());
+		}
+		else
+		{
+			foreach (var line in lines)
+			{
+				sb.AppendLine();
+				sb.Append(line);
+			}
+		}
+	}
+	sb.Append(";");
+	return sb.ToString();
+}
+#>

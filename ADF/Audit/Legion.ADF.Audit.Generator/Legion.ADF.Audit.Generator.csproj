@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<LangVersion>12.0</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<NeutralLanguage>en</NeutralLanguage>
+	</PropertyGroup>
+
+	<Import Project="../../../SharedConfigurations.props" />
+
+	<PropertyGroup>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.9.2" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+		<PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.10.48">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\src\Legion.Generators\Legion.Generators.csproj" />
+	  <ProjectReference Include="..\Legion.ADF.Audit.PostgreSQL\Legion.ADF.Audit.PostgreSQL.csproj" />
+	  <ProjectReference Include="..\Legion.ADF.Audit.SqlServer\Legion.ADF.Audit.SqlServer.csproj" />
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="call $(ProjectDir)\bin\$(ConfigurationName)\net8.0\Legion.ADF.Audit.Generator.exe $(SolutionDir)\ADF\Audit" />
+	</Target>
+
+</Project>

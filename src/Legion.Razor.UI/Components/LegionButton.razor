@@ -1,0 +1,43 @@
+﻿@namespace Legion.Razor.UI
+@inherits LegionComponentBase
+
+@if (Visible)
+{
+    <button @ref="@Element" style="@Style" disabled="@IsDisabled" tabindex="@(Disabled ? -1 : TabIndex)"
+            type="@ButtonType.ToString().ToLower()"
+            @attributes="Attributes" class="@GetCssClass()" id="@GetId()"
+            @onclick="@OnClick">
+        <span class="lui-button-box">
+            @if (ChildContent != null)
+            {
+                @ChildContent
+            }
+            else
+            {
+                @if (IsBusy)
+                {
+                    <LegionIcon Icon="refresh" Style="animation: rotation 700ms linear infinite" />
+                    @if (!string.IsNullOrEmpty(BusyText))
+                    {
+                        <span class="lui-button-text">@BusyText</span>
+                    }
+                }
+                else
+                {
+                    @if (!string.IsNullOrEmpty(@Icon))
+                    {
+                        <i class="notranslate lui-button-icon-left luii" style="@(!string.IsNullOrEmpty(IconColor) ? $"color:{IconColor}" : null)">@((MarkupString)Icon)</i>
+                    }
+                    @if (!string.IsNullOrEmpty(Image))
+                    {
+                        <img class="notranslate lui-button-icon-left luii" src="@Image" alt="@ImageAlternateText" />
+                    }
+                    @if (!string.IsNullOrEmpty(Text))
+                    {
+                        <span class="lui-button-text">@Text</span>
+                    }
+                }
+            }
+        </span>
+    </button>
+}

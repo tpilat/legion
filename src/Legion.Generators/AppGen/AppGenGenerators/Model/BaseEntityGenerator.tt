@@ -1,0 +1,68 @@
+﻿<#@ template language="C#" inherits="Generator.GeneratorBase" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="Legion.Extensions" #>
+<#@ import namespace="Legion.Generators.AppGen.Model" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors" #>
+<#@ import namespace="Legion.Generators.AppGen.Descriptors.MetaDescriptors" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+<#
+	SetGenerationEnvironment(this.GenerationEnvironment);
+	
+	BaseEntityDescriptor entityBaseDesc = GetParam<BaseEntityDescriptor>("BaseEntityDescriptor");
+	string modelName = GetParam<string>("modelName");
+	string contextName = GetParam<string>("contextName");
+
+	StartNewFile(entityBaseDesc.TargetFolder(modelName, contextName), entityBaseDesc.FileName);
+	
+	foreach (string import in entityBaseDesc.Imports)
+	{
+#>
+using <#= import #>;
+<#
+	}
+	if (0 < entityBaseDesc.Imports.Count)
+	{
+#>
+
+<#
+	}
+#>
+namespace <#= entityBaseDesc.Namespace(modelName, contextName) #>;
+
+public abstract class <#= entityBaseDesc.Name #> : Legion.Model.IEntity
+{
+	[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+	public bool __IsNewObject {get; set; }
+
+	[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+	private readonly List<Legion.Model.IDomainEvent> _domainEvents = [];
+
+	public virtual IReadOnlyDictionary<string, string>? GetIgnoredAuditPropertiesWithDefaultValue()
+		=> null;
+
+	public abstract string? GetPrimaryKeyValue();
+
+	public virtual List<string>? GetIgnoredSynchronizationProperties()
+		=> null;
+
+	public IReadOnlyList<Legion.Model.IDomainEvent> GetDomainEvents()
+		=> _domainEvents.Where(de => !de.Saved).ToList();
+
+	public void ClearDomainEvents()
+	{
+		foreach (var domainEvent in _domainEvents)
+			domainEvent.SetSaved();
+
+		_domainEvents.Clear();
+	}
+
+	protected void RaiseDomainEventOnCommit(Legion.Model.IDomainEvent domainEvent) =>
+		_domainEvents.Add(domainEvent);
+}
+<#
+	Process();
+#>

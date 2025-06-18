@@ -1,0 +1,8 @@
+{
+  "profiles": {
+		"Legion.ADF.Cache.Generator": {
+			"commandName": "Project",
+			"commandLineArgs": "c:\\Code\\legion\\ADF\\Cache"
+		}
+  }
+}

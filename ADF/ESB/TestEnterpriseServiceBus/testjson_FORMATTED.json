@@ -1,0 +1,883 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "TesProp": {
+    "TestInnerProp": 18
+  },
+  "IgnoredValues": [
+    "_",
+    "x",
+    "a"
+  ],
+  "MultiArray": [
+    [
+      {
+        "PropA": "0_0a",
+        "PropB": "0_0b"
+      },
+      {
+        "PropA": "0_1a",
+        "PropB": "0_1b"
+      }
+    ],
+    [
+      {
+        "PropA": "1_0a",
+        "PropB": "1_0b"
+      },
+      {
+        "PropA": "1_1a",
+        "PropB": "1_1b"
+      }
+    ]
+  ],
+  "App": {
+    "System": 1,
+    "CompanyName": "Slovenská sporiteľňa, a. s.",
+    "IdCompany": 5000,
+    "DefaultCultureName": "sk-SK",
+    "DefaultCulture": "sk",
+    "BaseUrl": "http://localhost:56155",
+    "DbContextSettings": {
+      "EntityContext": {
+        "ConnectionString": "Host=localhost;Database=esignerint;Username=signerintusr;Password=signerintpwd;Timeout=120;CommandTimeout=120;MaxPoolSize=80;ApplicationName=ES_ESB_main"
+      },
+      "Extranet": {
+        "ConnectionString": "Host=localhost;Database=esignerext;Username=signerextusr;Password=signerextpwd;Timeout=120;CommandTimeout=120;MaxPoolSize=80;ApplicationName=ES_ESB_main"
+      },
+      "Intranet": {
+        "ConnectionString": "Host=localhost;Database=esignerint;Username=signerintusr;Password=signerintpwd;Timeout=120;CommandTimeout=120;MaxPoolSize=80;ApplicationName=ES_ESB_main"
+      }
+    },
+    "HostSettings": {
+      "MaxRequestBodySizeInBytes": 29360128
+    },
+    "ForwardedHeadersSettings": {
+      "ForwardHeaders": false,
+      "KnownProxies": [
+        "12.34.56.78"
+      ],
+      "ForwardLimit": 6
+    },
+    "RequestCorrelation": {
+      "IncludeInResponse": true,
+      "UseCorrelationIdFromClient": false
+    },
+    "HostNormalizerSettings": {
+      "AllowHostNormalizer": false,
+      "Protocol": "https"
+    },
+    "ServiceSettings": {
+      "LogCommandQueryEntries": false,
+      "SerializeCommandQuery": false,
+      "LockSigningTaskRequestTimeoutInMilliseconds": 10000,
+      "SigningTaskLockedToInSeconds": 600,
+      "AllowedSignInAsPersonalAccount": false,
+      "NotificationSettings": {
+        "ExtranetBaseUrl": "http://localhost:4976",
+        "IntranetBaseUrl": "http://localhost:56155",
+        "ExtranetMobileBaseUrl": "disigenterprisesigner://EnterpriseSignerApp?mode=1",
+        "IntranetMobileBaseUrl": "disigenterprisesigner://EnterpriseSignerApp?mode=1",
+        "UIHiddenNotificationTypes": [
+          4
+        ]
+      },
+      "AllowedSigningTaskForwarding": false,
+      "AllowedTemplates": true,
+      "RequiredRejectNote": true,
+      "VisibleAttachmentsOnlyForInternalUsersDefaultValue": true,
+      "InternalUsersOrderedFirstDefaultValue": false,
+      "AllowedSigningTaskGiveUp": false,
+      "SignSigningTaskByOwnerDefaultValue": false,
+      "SignSigningTaskAttachmentDefaultValue": true,
+      "PlaceVisualSignaturePlaceholdersByOwner": true,
+      "AllowedVisualSignatureModes": [
+        1,
+        2,
+        3
+      ],
+      "VisualSignatureModeDefaultValue": 3,
+      "RequiredVisualSignaturePlaceholders": true,
+      "AllowedPrivateAddressBook": false,
+      "AllowedAuditLog": true,
+      "HideRejectNoteInExtranet": true,
+      "HideCancelNoteInExtranet": false,
+      "VisualSignatureMetadataTemplate": "{SignerName}|{SigningTime}",
+      "MaxSigningTaskDueDateInDays": null,
+      "PreferredSigningTaskDueDateInDaysDefaultValue": 5,
+      "MaxDownloadableSigningTaskAttachmentsInDays": null,
+      "DownloadableSigningTaskAttachmentsInDaysDefaultValue": 5,
+      "RpoSettings": {
+        "BaseAddress": "https://api.statistics.sk/rpo/v1/",
+        "TimeoutInSeconds": 60
+      },
+      "NotifyClientSettings": {
+        "Allowed": false,
+        "BaseAddress": "https://localhost"
+      },
+      "HideUndownloadableDocuments": true,
+      "AllowCreateSigningTasksFromTemplate": true,
+      "AllowBatchCreateSigningTasksFromTemplate": true,
+      "AllowPreviewSigningTaskBeforeSend": true,
+      "SigningTasksTargetAbsoluteDirectoryPath": "c:\\Logs\\NaPodpis\\SAP-DEMO",
+      "SigningTasksTargetAbsoluteTempDirectoryPath": "c:\\Logs\\NaPodpis\\SAP-DEMO_TEMP",
+      "SigningTaskNameFromBatchFormatter": "{TemplateName} {LastRecipientFullName} {LastRecipientLogin}",
+      "TargetSigningTaskFileNameFormatter": "{PostedDate:yyyy-MM-dd_HH_mm_ss}_{LastRecipientLogin}_{DocumentTypeCode}",
+      "TargetSigningTaskFileNameWhitespaceReplaceWith": "_",
+      "AllowCreateExternalSubjects": false,
+      "AllowApproveForContactRecipients": true,
+      "AllowApproveForSubjectRecipients": true,
+      "AllowNotificationHiding": true,
+      "MoveManuallySigningTasksToOutdatedList": false,
+      "AllowMovingSigningTasksToOutdatedList": true,
+      "AllowMovingContactSigningTasksToOutdatedList": true,
+      "AllowDeleteSigningTasks": true,
+      "AllowCreateSigningTasksForHierarchicalMultiTenants": false,
+      "AllowedTags": false,
+      "AllowNotifyOnlyForContactRecipients": true,
+      "AllowNotifyOnlyForSubjectRecipients": true,
+      "AllowedManualFileExtensions": [
+        ".pdf",
+        ".docx"
+      ],
+      "AllowedContactAttachmentExtensions": [
+        ".pdf",
+        ".docx"
+      ],
+      "AllowSignSigningTaskDropzone": true,
+      "AllowSignatoryQes": true,
+      "AllowSignatoryQesSeal": true,
+      "AllowQesTimestamper": true,
+      "AllowQesValidator": true,
+      "AllowSignatoryQesPadesWithVisualAppeareance": true,
+      "AllowSignatoryQesSealPadesWithVisualAppeareance": true,
+      "AllowedMultiSignQesSignatureTypes": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "HideEmptyDashboardTile": false,
+      "HideDashboardLists": true,
+      "AllowedQesSignTypes": [],
+      "AllowMobileSigning": false,
+      "AllowedProtocolActivities": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        16,
+        21,
+        22,
+        23,
+        24
+      ],
+      "AllowProtocolDeletedRecipeints": false,
+      "AllowNotifyTheEndOfIntProcess": false,
+      "AllowProtocolActivityNotes": true,
+      "JobImportAddressBook_XlsxFilePath": null,
+      "JobImportAddressBook_LogFilePath": null,
+      "AllowPostProcessUpdateByOwner": false,
+      "AllowExportSignigTasksToXlsx": true,
+      "ExportSigningTasksResultPageSize": 500,
+      "ExportSigningTaskResultPageSize": 500,
+      "ExportContactSigningTasksQuerySize": 100,
+      "ExportContactSigningTasksResultPageSize": 500,
+      "ExportSigningTaskProtocolsQuerySize": 100,
+      "ExportSigningTaskProtocolsResultPageSize": 500,
+      "ExportTaskAttachmentsQuerySize": 100,
+      "ExportTaskAttachmentsResultPageSize": 500,
+      "ExportSignaturesQuerySize": 100,
+      "ExportSignaturesResultPageSize": 500,
+      "PhoneNumberFormatRegex": "^\\+(?:[0-9] ?){6,14}[0-9]$",
+      "HideExactSignatureLevel": false,
+      "AllowedProtocolLanguages": [
+        "sk",
+        "en"
+      ],
+      "MergeAllProtocolLanguagesToOneFile": true,
+      "MergeAllProtocolLanguagesToSigningTask": true,
+      "SystemSealSigningCertificateName": "QESSignerCert",
+      "AllowSendNotifyOnlySigningTasks": true
+    },
+    "StaticFileExtensionsToContentTypes": [
+      {
+        "FileExtension": ".properties",
+        "ContentType": "text/plain"
+      }
+    ],
+    "AppLogger": {
+      "DBConnectionString": "Host=localhost;Database=esignerint;Username=signerintusr;Password=signerintpwd;Timeout=120;CommandTimeout=120;MaxPoolSize=80;ApplicationName=ES_ESB_log",
+      "LogFilePath": "c:\\Logs\\NaPodpis\\DMS-ESB\\log.txt",
+      "MinLogLevel": 3,
+      "ArchiveAboveSizeInBytes": 1048576,
+      "AutoEnableMetrics": false
+    },
+    "Authentication": {
+      "LogRequestAuthentication": true,
+      "LogRoles": true,
+      "LogPermissions": true,
+      "UseWindowsIntegratedAuthentication": true,
+      "LegalSubjectCookieName": "DES.PO",
+      "RoleSettings": {
+        "IsAdminRoleReadOnly": true,
+        "IsSignatoryWithCertPermissionReadOnly": true,
+        "IsSignatoryWithoutCertPermissionReadOnly": true,
+        "IsApprovalPermissionReadOnly": true,
+        "IsNotifyOnlyPermissionReadOnly": true,
+        "IsSignatoryQesPermissionReadOnly": true,
+        "IsSignatoryQesSealPermissionReadOnly": true,
+        "IsQesValidatorPermissionReadOnly": true,
+        "IsCreateSigningTasksPermissionReadOnly": true,
+        "IsUpdateCompanyStructurePermissionReadOnly": true,
+        "IsUpdateCompanyAddressBookPermissionReadOnly": true,
+        "IsUpdateCompanyDocumentTemplatesPermissionReadOnly": true,
+        "IsShowAllSigningTasksPermissionReadOnly": true,
+        "IsMetadataEditorPermissionReadOnly": true,
+        "IsUpdateCompanyAddressBookPhysicalPersonsPermissionReadOnly": true,
+        "IsUpdateSigningTasksPermissionReadOnly": true,
+        "IsPostProcessSigningTasksPermissionReadOnly": true,
+        "IsQesTimestamperPermissionReadOnly": true,
+        "CreateSigningTasksFromTemplateReadOnly": true,
+        "BatchCreateSigningTasksFromTemplateReadOnly": true
+      },
+      "CookieAuthenticationSettings": {
+        "Allowed": false,
+        "CookieName": "DES.AUTH",
+        "MaxFailedAttemptCount": 3,
+        "LockoutInSeconds": 300,
+        "AuthenticationCookieSessionExpirationInMinutes": 15,
+        "PasswordVerificationMode": 2,
+        "ShowLoginExpiresInSeconds": 120
+      },
+      "SMSAuthenticationSettings": {
+        "Allowed": false,
+        "BaseAddress": "https://www.google.com",
+        "BasicAuthEncoding": "UTF-8",
+        "BasicAuthUserName": "BasicAuthUserName",
+        "BasicAuthPassword": "BasicAuthPassword",
+        "SendTestEmail": true,
+        "AuthCodeLength": 4,
+        "AuthCodeChars": [
+          "a",
+          "b",
+          "c",
+          "d",
+          "e",
+          "f",
+          "g",
+          "h",
+          "j",
+          "k",
+          "m",
+          "n",
+          "p",
+          "q",
+          "r",
+          "s",
+          "t",
+          "u",
+          "v",
+          "w",
+          "x",
+          "y",
+          "z",
+          "A",
+          "B",
+          "C",
+          "D",
+          "E",
+          "F",
+          "G",
+          "H",
+          "J",
+          "K",
+          "L",
+          "M",
+          "N",
+          "P",
+          "Q",
+          "R",
+          "S",
+          "T",
+          "U",
+          "V",
+          "W",
+          "X",
+          "Y",
+          "Z",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        "AuthCodeValidityInMinutes": 15,
+        "ResetAttemptsAfterMinutes": 5,
+        "MaxIncorrectEntryAttempts": 3,
+        "MaxRenewCountInOneHour": 3,
+        "NOTC_Source_Type": "SMS AUTH",
+        "NOTC_Source_System": "ENTSIGNER",
+        "NOTC_Notification_Priority": 10
+      },
+      "DataProtectionKeyStoreDirectory": "c:\\Logs\\NaPodpis\\ESB\\KeyStore",
+      "DataProtectionKeyLifetimeInDays": 90
+    },
+    "QesSettings": {
+      "AllowQesSigner": true,
+      "QesPortalApiUrl": "https://uerqes.int.disig.sk/QesPortal3.3.0API",
+      "QesPortalApiKey": "TestApiKey",
+      "QesSignerDefaulSigningCertificateName": "QESSignerCert",
+      "AllowedQualifiedElectronicSignature": true,
+      "AllowedQualifiedElectronicSignatureWithVisualSignature": true,
+      "AllowedAdvancedElectronicSignature": true,
+      "AllowedAdvancedElectronicSignatureWithVisualSignature": true,
+      "AllowedElectronicSealWithTimeStamp": true,
+      "OrdinaryElectronicSignature": true,
+      "ArchiveTimestamping": 0,
+      "//EArchiveEndpoint": "https://uerqes.int.disig.sk/eArchive/NotificationService/NotificationService.svc/soap",
+      "ArchiveRetentionInYearsDefaultValue": 5,
+      "IdPreferredSignatureLevel": 1,
+      "CreateNewSessionForDocumentValidation": true,
+      "ValidationProtocolHashType": 0
+    },
+    "ApiSettings": {
+      "OwnerLogin": "dusan.pidanic",
+      "IdDisigEnterpriseSigner": "00000001-0000-0000-0000-000000000000",
+      "AllowOpenApiSpecification": true,
+      "ReturnFullErrorMessages": true
+    },
+    "EmailSettings": {
+      "PickupDirectoryLocation": "c:\\Logs\\NaPodpis\\DMS-ESB\\PickupDirectoryLocation",
+      "SplitPickupDirectoryByEmail": true,
+      "SmtpHost": "test.fke3x",
+      "SmtpPort": 25,
+      "EnableSsl": false,
+      "UserName": "test@test.test",
+      "Password": "heslo",
+      "SenderEmailAddress": "test.email@testovanie.test"
+    },
+    "ESBSettings": {
+      "Mode": 3,
+      "AllowADSync": true,
+      "AllowADSyncToUpdateSubjectMetadata": true,
+      "ADSyncCheckIntervalInSeconds": 10,
+      "ADSyncHour": 8,
+      "ADSyncMinute": 0,
+      "LogRetentionSettings": {
+        "Enabled": true,
+        "CheckIntervalInSeconds": 10,
+        "AtHour": 23,
+        "AtMinute": 0,
+        "DBLogConnectionStrings": [
+          "Host=localhost;Database=esignerint;Username=signerintusr;Password=signerintpwd;Timeout=120;CommandTimeout=120;MaxPoolSize=80;ApplicationName=ES_ESB_ret",
+          "Host=localhost;Database=esignerext;Username=signerextusr;Password=signerextpwd;Timeout=120;CommandTimeout=120;MaxPoolSize=80;ApplicationName=ES_ESB_ret"
+        ],
+        "DeleteLogsBeforeInDays": 14
+      }
+    },
+    "UI": {
+      "NotificationReloadIntervalInSeconds": 60,
+      "VisualSignaturePage": 1,
+      "DefaultTheme": 9,
+      "Themes": [
+        9
+      ],
+      "ResetNotificationBatchOnOpen": true,
+      "PageSize": 50
+    },
+    "Support": {
+      "Phone": null,
+      "Email": null
+    },
+    "DMSSettings": {
+      "FileSystemType": 3,
+      "FileSystemSettings": {
+        "IntranetFileAttachmentsRootDirectory": "C:\\Logs\\NaPodpis\\DMS-INT",
+        "ExtranetFileAttachmentsRootDirectory": "C:\\Logs\\NaPodpis\\DMS-EXT"
+      },
+      "FtpSettings": {
+        "IntranetFtpConfig": {
+          "HostName": "ftp://localhost",
+          "Port": "9520",
+          "EnableSsl": false,
+          "UserName": null,
+          "Password": null
+        },
+        "ExtranetFtpConfig": {
+          "HostName": "ftp://localhost",
+          "Port": "9521",
+          "EnableSsl": false,
+          "UserName": null,
+          "Password": null
+        }
+      },
+      "DBStreamSettings": {
+        "IntranetConnectionString": "Host=localhost;Database=esignerint;Username=signerintusr;Password=signerintpwd;Timeout=120;CommandTimeout=120;MaxPoolSize=80;ApplicationName=ES_ESB_fsdb",
+        "ExtranetConnectionString": "Host=localhost;Database=esignerext;Username=signerextusr;Password=signerextpwd;Timeout=120;CommandTimeout=120;MaxPoolSize=80;ApplicationName=ES_ESB_fsdb"
+      }
+    },
+    "LdapSettings": {
+      "Server": "DC1.int.disig.sk",
+      "Port": 389,
+      "AuthType": 9,
+      "SecureSocketLayer": false,
+      "Search": [
+        {
+          "SearchIdentifier": "ADSearch",
+          "DistinguishedName": "OU=UER,OU=Disig_Users,DC=int,DC=disig,DC=sk",
+          "SearchScope": 2,
+          "MaxResultsToRequest": 500,
+          "LdapFilter": "(sAMAccountName={0})",
+          "ReadAttributes": [
+            "sAMAccountName",
+            "distinguishedName",
+            "company",
+            "givenName",
+            "sn",
+            "mail",
+            "telephoneNumber",
+            "lockoutTime"
+          ]
+        },
+        {
+          "SearchIdentifier": "ADSync",
+          "DistinguishedName": "OU=UER,OU=Disig_Users,DC=int,DC=disig,DC=sk",
+          "SearchScope": 2,
+          "MaxResultsToRequest": 500,
+          "LdapFilter": "(objectClass=user)",
+          "ReadAttributes": [
+            "sAMAccountName",
+            "distinguishedName",
+            "company",
+            "givenName",
+            "sn",
+            "mail",
+            "title",
+            "telephoneNumber",
+            "lockoutTime",
+            "memberOf"
+          ]
+        }
+      ],
+      "LdapSyncRoleMatrix": [
+        {
+          "MemberOf": "CN=registračná autorita Košice,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                2
+              ]
+            },
+            {
+              "DocumentType": null,
+              "Permissions": [
+                100000
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                4,
+                5,
+                8
+              ]
+            },
+            {
+              "DocumentType": null,
+              "Permissions": [
+                3,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=Support_Eurovia,CN=Users,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=Podpora TATRABANKA,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                1,
+                18
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=registračná autorita Košice,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                1,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk}",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                9
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                9
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                9
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC92",
+              "Permissions": [
+                9
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC93",
+              "Permissions": [
+                9
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                14
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                14
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                14
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC92",
+              "Permissions": [
+                14
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC93",
+              "Permissions": [
+                14
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=registračná autorita Košice,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                10
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                10
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                10
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC92",
+              "Permissions": [
+                10
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC93",
+              "Permissions": [
+                10
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=Support_Eurovia,CN=Users,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                15
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                15
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                15
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC92",
+              "Permissions": [
+                15
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC93",
+              "Permissions": [
+                15
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": null,
+              "Permissions": [
+                3,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=Podpora TATRABANKA,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": null,
+              "Permissions": [
+                11
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": null,
+              "Permissions": [
+                12
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": null,
+              "Permissions": [
+                17
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=registračná autorita Košice,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": null,
+              "Permissions": [
+                13
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=registračná autorita Košice,OU=DG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC92",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC93",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=Support_Eurovia,CN=Users,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                1,
+                4,
+                8,
+                18,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC90",
+              "Permissions": [
+                1,
+                8,
+                18,
+                19
+              ]
+            },
+            {
+              "DocumentType": "D13D1EC4-0B29-41CF-8C54-CAA187E3EC91",
+              "Permissions": [
+                1,
+                8,
+                18,
+                19
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=UER,OU=SG,OU=Disig_Groups,DC=int,DC=disig,DC=sk",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "0057a47e-0000-0000-0000-2e3c2d4fbe2e",
+              "Permissions": [
+                5
+              ]
+            }
+          ]
+        },
+        {
+          "MemberOf": "CN=ALL",
+          "DocumentPermissions": [
+            {
+              "DocumentType": "00000000-0000-0000-0000-000000000000",
+              "Permissions": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                100000
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "MaxRequestBodySizeInMegaBytes": 100
+  }
+}

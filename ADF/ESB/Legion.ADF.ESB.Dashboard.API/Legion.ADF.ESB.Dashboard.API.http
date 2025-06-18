@@ -1,0 +1,6 @@
+@Legion.ADF.ESB.Dashboard.API_HostAddress = http://localhost:5214
+
+GET {{Legion.ADF.ESB.Dashboard.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

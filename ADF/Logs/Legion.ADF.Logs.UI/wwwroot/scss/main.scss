@@ -1,0 +1,28 @@
+﻿
+@use "./variables";
+@use "./mixins";
+
+body {
+	font-family: variables.$font-stack;
+	color: variables.$primary-color;
+	background-color: variables.$secondary-color;
+}
+
+.container {
+	padding: 1rem;
+	border-radius: variables.$border-radius;
+	@include mixins.flex-center;
+}
+
+button {
+	background-color: variables.$primary-color;
+	color: #fff;
+	border: none;
+	padding: 0.5rem 1rem;
+	border-radius: variables.$border-radius;
+	cursor: pointer;
+
+	&:hover {
+		background-color: variables.$primary-color;
+	}
+}

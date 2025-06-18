@@ -1,0 +1,60 @@
+﻿using Microsoft.Extensions.Logging;
+
+namespace Legion.Logging;
+
+public interface IErrorMessageBuilder<TBuilder, TObject> : ILogMessageBuilder<TBuilder, TObject>
+	where TBuilder : IErrorMessageBuilder<TBuilder, TObject>
+	where TObject : IErrorMessage
+{
+}
+
+public abstract class ErrorMessageBuilderBase<TBuilder, TObject> : LogMessageBuilderBase<TBuilder, TObject>, IErrorMessageBuilder<TBuilder, TObject>
+	where TBuilder : ErrorMessageBuilderBase<TBuilder, TObject>
+	where TObject : IErrorMessage
+{
+	protected ErrorMessageBuilderBase(TObject errorMessage)
+		:base(errorMessage)
+	{
+	}
+
+	public override TBuilder LogLevel(LogLevel logLevel, bool force = false)
+	{
+		if (logLevel != Microsoft.Extensions.Logging.LogLevel.Error
+			&& logLevel != Microsoft.Extensions.Logging.LogLevel.Critical)
+			throw new InvalidOperationException($"Invalid {nameof(logLevel)} = {logLevel}");
+
+		if (force || _logMessage.LogLevel == default)
+			_logMessage.LogLevel = logLevel;
+
+		return _builder;
+	}
+}
+
+public class ErrorMessageBuilder : ErrorMessageBuilderBase<ErrorMessageBuilder, IErrorMessage>
+{
+	public ErrorMessageBuilder(IScopeContext scopeContext, IErrorCode errorCode)
+		: this(new ErrorMessage(scopeContext, errorCode ?? Throw.IfArgumentNull(errorCode)))
+	{
+	}
+
+	public ErrorMessageBuilder(IErrorMessage errorMessage)
+		: base(errorMessage)
+	{
+	}
+
+	public static implicit operator ErrorMessage?(ErrorMessageBuilder builder)
+	{
+		if (builder == null)
+			return null;
+
+		return builder._logMessage as ErrorMessage;
+	}
+
+	public static implicit operator ErrorMessageBuilder?(ErrorMessage errorMessage)
+	{
+		if (errorMessage == null)
+			return null;
+
+		return new ErrorMessageBuilder(errorMessage);
+	}
+}

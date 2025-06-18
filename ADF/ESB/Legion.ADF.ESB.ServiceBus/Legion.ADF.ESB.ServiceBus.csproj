@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Legion.ADF.ESB.Components\Legion.ADF.ESB.Components.csproj" />
+    <ProjectReference Include="..\Legion.ADF.ESB.MBox\Legion.ADF.ESB.MBox.csproj" />
+    <ProjectReference Include="..\Legion.ADF.ESB.Orchestrations\Legion.ADF.ESB.Orchestrations.csproj" />
+  </ItemGroup>
+
+</Project>
