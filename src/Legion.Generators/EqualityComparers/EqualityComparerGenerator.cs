@@ -23,7 +23,7 @@ namespace Legion.Generators.EqualityComparers
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+    #line 1 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class EqualityComparerGenerator : Generator.GeneratorBase
     {
@@ -35,7 +35,7 @@ namespace Legion.Generators.EqualityComparers
         {
             this.Write("\r\n");
             
-            #line 12 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 12 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	SetGenerationEnvironment(this.GenerationEnvironment);
 	
@@ -47,7 +47,7 @@ namespace Legion.Generators.EqualityComparers
             #line default
             #line hidden
             
-            #line 19 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 19 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	if (equalityComparerDesc.IsLegionFramework)
 	{
@@ -57,7 +57,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("using Legion;\r\n");
             
-            #line 24 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 24 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	}
 
@@ -66,14 +66,14 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("using ");
             
-            #line 27 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 27 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.ComparerBaseClassesNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\nusing System.Diagnostics.CodeAnalysis;\r\n\r\n");
             
-            #line 30 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 30 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	if (equalityComparerDesc.EmbedToTargetType)
 	{
@@ -83,14 +83,14 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("namespace ");
             
-            #line 34 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 34 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n");
             
-            #line 36 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 36 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	}
 	else
@@ -101,14 +101,14 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("namespace ");
             
-            #line 41 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 41 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.ComparerNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n");
             
-            #line 43 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 43 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	}
 
@@ -121,21 +121,21 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("public partial ");
             
-            #line 50 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 50 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(classOrRecord));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 50 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 50 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeSimpleName));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n");
             
-            #line 52 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 52 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		PushIndent("	");
 	}
@@ -145,28 +145,28 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("public partial class ");
             
-            #line 56 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 56 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.ComparerName));
             
             #line default
             #line hidden
             this.Write(" : IEqualityComparer<");
             
-            #line 56 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 56 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
             #line hidden
             this.Write(">\r\n{\r\n\tpublic static bool EqualsTo(\r\n\t\t");
             
-            #line 59 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 59 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
             #line hidden
             this.Write("? obj1,\r\n\t\t");
             
-            #line 60 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 60 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
@@ -174,7 +174,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write("? obj2,\r\n\t\tComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,\r\n\t" +
                     "\tAction<ComparisonConditions<");
             
-            #line 62 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 62 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
@@ -184,7 +184,7 @@ namespace Legion.Generators.EqualityComparers
                     "bj2 == null)\r\n\t\t\treturn false;\r\n\r\n\t\tif (ReferenceEquals(obj1, obj2))\r\n\t\t\treturn " +
                     "true;\r\n\r\n");
             
-            #line 74 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 74 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	if (equalityComparerDesc.LessThanCSharp12)
 	{
@@ -194,7 +194,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\tcache ??= new();\r\n");
             
-            #line 79 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 79 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	}
 	else
@@ -205,7 +205,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\tcache ??= [];\r\n");
             
-            #line 85 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 85 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	}
 
@@ -215,7 +215,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write("\r\n\t\tcache.TryGetValue(obj1, out HashSet<object>? cachedHashSet);\r\n\t\tif (cachedHas" +
                     "hSet?.Contains(obj2) == true)\r\n\t\t\treturn true;\r\n\t\t\t\r\n\t\tComparisonConditions<");
             
-            #line 93 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 93 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
@@ -224,14 +224,14 @@ namespace Legion.Generators.EqualityComparers
                     "ons) == ComparisonOptions.CompareProperties)\r\n\t\t{\r\n\t\t\tif (conditions != null)\r\n\t" +
                     "\t\t{\r\n\t\t\t\tconds = new ComparisonConditions<");
             
-            #line 99 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 99 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
             #line hidden
             this.Write(">();\r\n\t\t\t\tconditions.Invoke(conds);\r\n\r\n");
             
-            #line 102 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 102 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		List<string> notSuppoertedProperties = [];
 		foreach (var property in equalityComparerDesc.ValueTypeProperties)
@@ -269,21 +269,21 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\t\tif (conds.CanCompare(obj1, nameof(obj1.");
             
-            #line 134 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 134 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(")) && ");
             
-            #line 134 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 134 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notEquals));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\t\treturn false;\r\n");
             
-            #line 136 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 136 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 			}
 		}
@@ -296,14 +296,14 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\r\n");
             
-            #line 144 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 144 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notSupported));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 145 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 145 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		}
 
@@ -312,7 +312,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\t}\r\n\t\t\telse\r\n\t\t\t{\r\n");
             
-            #line 151 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 151 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		notSuppoertedProperties = [];
 		foreach (var property in equalityComparerDesc.ValueTypeProperties)
@@ -350,14 +350,14 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\t\tif (");
             
-            #line 183 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 183 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notEquals));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\t\treturn false;\r\n");
             
-            #line 185 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 185 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 			}
 		}
@@ -370,14 +370,14 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\r\n");
             
-            #line 193 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 193 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notSupported));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 194 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 194 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		}
 
@@ -386,7 +386,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\t}\r\n\t\t}\r\n");
             
-            #line 199 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 199 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		if (0 < equalityComparerDesc.ValueTypeFields.Count)
 		{
@@ -398,14 +398,14 @@ namespace Legion.Generators.EqualityComparers
                     "s.CompareFields)\r\n\t\t{\r\n\t\t\tif (conditions != null)\r\n\t\t\t{\r\n\t\t\t\tconds = new Compari" +
                     "sonConditions<");
             
-            #line 208 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 208 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
             #line hidden
             this.Write(">();\r\n\t\t\t\tconditions.Invoke(conds);\r\n\r\n");
             
-            #line 211 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 211 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		List<string> notSuppoertedFields = [];
 		foreach (var field in equalityComparerDesc.ValueTypeFields)
@@ -440,21 +440,21 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\t\tif (conds.CanCompare(obj1, nameof(obj1.");
             
-            #line 240 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 240 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write(")) && ");
             
-            #line 240 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 240 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notEquals));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\t\treturn false;\r\n");
             
-            #line 242 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 242 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 			}
 		}
@@ -467,14 +467,14 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\r\n");
             
-            #line 250 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 250 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notSupported));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 251 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 251 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		}
 
@@ -483,7 +483,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\t}\r\n\t\t\telse\r\n\t\t\t{\r\n");
             
-            #line 257 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 257 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		notSuppoertedFields = [];
 		foreach (var field in equalityComparerDesc.ValueTypeFields)
@@ -518,14 +518,14 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\t\tif (");
             
-            #line 286 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 286 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notEquals));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\t\treturn false;\r\n");
             
-            #line 288 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 288 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 			}
 		}
@@ -538,14 +538,14 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\r\n");
             
-            #line 296 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 296 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notSupported));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 297 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 297 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		}
 
@@ -554,7 +554,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\t}\r\n\t\t}\r\n");
             
-            #line 302 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 302 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		}
 
@@ -564,7 +564,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write("\r\n\t\tif (cachedHashSet == null)\r\n\t\t{\r\n\t\t\tcachedHashSet = [];\r\n\t\t\tcache[obj1] = cac" +
                     "hedHashSet;\r\n\t\t}\r\n\r\n\t\tcachedHashSet.Add(obj2);\r\n");
             
-            #line 313 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 313 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	if (0 < equalityComparerDesc.ReferenceTypeProperties.Count || 0 < equalityComparerDesc.CollectionOfReferenceTypeProperties.Count)
 	{
@@ -575,7 +575,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write("\r\n\t\tif ((ComparisonOptions.CompareReferences & comparisonOptions) == ComparisonOp" +
                     "tions.CompareReferences)\r\n\t\t{\r\n");
             
-            #line 320 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 320 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		notSuppoertedProperties = [];
 		foreach (var navigation in equalityComparerDesc.ReferenceTypeProperties)
@@ -610,21 +610,21 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\tif (!ReferenceEquals(obj2.");
             
-            #line 349 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 349 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(", obj1.");
             
-            #line 349 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 349 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write("))\r\n\t\t\t\treturn false;\r\n");
             
-            #line 351 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 351 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 				}
 				else
@@ -635,41 +635,41 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\tif (!");
             
-            #line 356 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 356 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(embededNamespace));
             
             #line default
             #line hidden
             
-            #line 356 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 356 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Value.ComparerName));
             
             #line default
             #line hidden
             this.Write(".EqualsTo(obj1.");
             
-            #line 356 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 356 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(", obj2.");
             
-            #line 356 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 356 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(", comparisonOptions, conds?.GetConditions(x => x.");
             
-            #line 356 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 356 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write("), cache))\r\n\t\t\t\treturn false;\r\n");
             
-            #line 358 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 358 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 				}
 			}
@@ -711,21 +711,21 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\tif (!ReferenceEquals(obj2.");
             
-            #line 394 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 394 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(", obj1.");
             
-            #line 394 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 394 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\treturn false;\r\n");
             
-            #line 396 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 396 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 				}
 				else if (equalityComparerDesc.IsComapredByReference(navigation.Key.PropertyType.GetEnumerableElementType()) == true)
@@ -736,49 +736,49 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\tif ((obj1.");
             
-            #line 401 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 401 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" != null || obj2.");
             
-            #line 401 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 401 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" != null) && (obj1.");
             
-            #line 401 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 401 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" == null || obj2.");
             
-            #line 401 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 401 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" == null || !obj1.");
             
-            #line 401 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 401 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(".SequenceEqual(obj2.");
             
-            #line 401 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 401 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(")))\r\n\t\t\t\treturn false;\r\n");
             
-            #line 403 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 403 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 				}
 				else
@@ -789,41 +789,41 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t\tif (!ComparisonHelper.SequenceEqual(obj1.");
             
-            #line 408 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 408 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(", obj2.");
             
-            #line 408 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 408 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(", new ");
             
-            #line 408 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 408 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(embededNamespace));
             
             #line default
             #line hidden
             
-            #line 408 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 408 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Value.ComparerName));
             
             #line default
             #line hidden
             this.Write("(comparisonOptions, conds?.GetConditions(x => x.");
             
-            #line 408 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 408 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write("), cache)))\r\n\t\t\t\treturn false;\r\n");
             
-            #line 410 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 410 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 				}
 			}
@@ -837,14 +837,14 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\r\n");
             
-            #line 419 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 419 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notSupported));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 420 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 420 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		}
 
@@ -853,7 +853,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t}\r\n");
             
-            #line 424 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 424 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	}
 
@@ -862,7 +862,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\r\n\t\treturn true;\r\n\t}\r\n\r\n\tpublic static int GetHashCode(\r\n\t\t");
             
-            #line 432 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 432 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
@@ -870,7 +870,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write("? obj,\r\n\t\tComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,\r\n\t\t" +
                     "Action<ComparisonConditions<");
             
-            #line 434 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 434 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
@@ -878,7 +878,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write(">>? conditions = null,\r\n\t\tHashSet<object>? cache = null)\r\n\t{\r\n\t\tif (obj == null)\r" +
                     "\n\t\t\treturn 0;\r\n\r\n");
             
-            #line 440 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 440 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	if (equalityComparerDesc.LessThanCSharp12)
 	{
@@ -888,7 +888,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\tcache ??= new();\r\n");
             
-            #line 445 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 445 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	}
 	else
@@ -899,7 +899,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\tcache ??= [];\r\n");
             
-            #line 451 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 451 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	}
 
@@ -908,7 +908,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\r\n\t\tif (cache.Contains(obj))\r\n\t\t\treturn 0;\r\n\r\n");
             
-            #line 458 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 458 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 		List<System.Reflection.MemberInfo> propsAndFields = equalityComparerDesc.ValueTypeProperties.Select(x => (System.Reflection.MemberInfo)x.PropertyInfo).ToList();
 		propsAndFields.AddRange(equalityComparerDesc.ReferenceTypeProperties.Select(x => (System.Reflection.MemberInfo)x.Key.PropertyInfo));
@@ -927,7 +927,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\t");
             
-            #line 471 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 471 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(hash));
             
             #line default
@@ -935,7 +935,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write("\r\n\r\n\t\treturn hash;\r\n\t}\r\n\r\n\tpublic ComparisonOptions ComparisonOptions { get; }\r\n\t" +
                     "public Action<ComparisonConditions<");
             
-            #line 477 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 477 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
@@ -943,7 +943,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write(">>? Conditions { get; }\r\n\tpublic Dictionary<object, HashSet<object>>? Cache { get" +
                     "; }\r\n\t\r\n\tpublic ");
             
-            #line 480 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 480 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.ComparerName));
             
             #line default
@@ -951,7 +951,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write("(\r\n\t\tComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,\r\n\t\tActio" +
                     "n<ComparisonConditions<");
             
-            #line 482 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 482 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
@@ -959,7 +959,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write(">>? conditions = null,\r\n\t\tDictionary<object, HashSet<object>>? cache = null)\r\n\t{\r" +
                     "\n");
             
-            #line 485 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 485 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	if (equalityComparerDesc.LessThanCSharp12)
 	{
@@ -969,7 +969,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\tCache = cache ?? new();\r\n");
             
-            #line 490 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 490 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	}
 	else
@@ -980,7 +980,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("\t\tCache = cache ?? [];\r\n");
             
-            #line 496 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 496 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	}
 
@@ -990,14 +990,14 @@ namespace Legion.Generators.EqualityComparers
             this.Write("\t\tComparisonOptions = comparisonOptions;\r\n\t\tConditions = conditions;\r\n\t}\r\n\t\r\n\tpub" +
                     "lic bool Equals(\r\n\t\t");
             
-            #line 504 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 504 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
             #line hidden
             this.Write("? obj1,\r\n\t\t");
             
-            #line 505 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 505 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
@@ -1005,7 +1005,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write("? obj2)\r\n\t\t=> EqualsTo(\r\n\t\t\tobj1,\r\n\t\t\tobj2,\r\n\t\t\tComparisonOptions,\r\n\t\t\tConditions" +
                     ",\r\n\t\t\tCache);\r\n\t\r\n\tpublic int GetHashCode([DisallowNull] ");
             
-            #line 513 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 513 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(equalityComparerDesc.TargetTypeName));
             
             #line default
@@ -1013,7 +1013,7 @@ namespace Legion.Generators.EqualityComparers
             this.Write("? obj)\r\n\t\t=> GetHashCode(\r\n\t\t\tobj,\r\n\t\t\tComparisonOptions,\r\n\t\t\tConditions,\r\n\t\t\tcac" +
                     "he: null);\r\n}\r\n");
             
-            #line 520 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 520 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 
 	if (equalityComparerDesc.EmbedToTargetType)
@@ -1025,7 +1025,7 @@ namespace Legion.Generators.EqualityComparers
             #line hidden
             this.Write("}\r\n");
             
-            #line 527 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+            #line 527 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 	}
 
@@ -1037,7 +1037,7 @@ namespace Legion.Generators.EqualityComparers
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 532 "C:\code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
+        #line 532 "C:\Code\legion\src\Legion.Generators\EqualityComparers\EqualityComparerGenerator.tt"
 
 string? ComputeHash(
 	EqualityComparerDescriptor equalityComparerDesc,

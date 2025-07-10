@@ -158,6 +158,9 @@ public partial class Result : IResult
 		data = default;
 		return false;
 	}
+
+	public virtual Results.ResultDto ToDto()
+		=> new(this);
 }
 
 public class Result<TData> : Result, IResult<TData>, IResult
@@ -211,4 +214,7 @@ public class Result<TData> : Result, IResult<TData>, IResult
 		data = default!;
 		return false;
 	}
+
+	public new Results.ResultDto<TData> ToDto()
+		=> new(this);
 }

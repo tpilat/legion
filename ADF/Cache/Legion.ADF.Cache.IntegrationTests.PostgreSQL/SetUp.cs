@@ -43,7 +43,7 @@ public class SetUp
 						ConncetionString
 					},
 					{
-						"ADFLogs:DBSettings:DbConnectionSettings:ADF_AUDIT:ConnectionString",
+						"ADFLogs:DBSettings:DbConnectionSettings:ADF_Logs:ConnectionString",
 						ConncetionString
 					},
 					{

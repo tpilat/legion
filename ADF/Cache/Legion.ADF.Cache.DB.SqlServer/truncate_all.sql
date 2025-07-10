@@ -36,6 +36,12 @@ EXEC sp_executesql @sql;
 GO
 
 -- Step 3: Truncate all tables in the database
+TRUNCATE TABLE cache.[CacheData];
+GO
+
+TRUNCATE TABLE cache.[DistributedLock];
+GO
+
 TRUNCATE TABLE cache.[ReloadableCacheKey];
 GO
 

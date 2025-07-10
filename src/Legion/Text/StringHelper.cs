@@ -563,26 +563,6 @@ public static class StringHelper
 		}
 	}
 
-	public static string Combine(string text1, string text2, string? joiner = null)
-	{
-		if (text1 == null)
-			return text2;
-
-		if (string.IsNullOrEmpty(text1))
-		{
-			return text2 ?? text1;
-		}
-
-		if (string.IsNullOrEmpty(text2))
-		{
-			return text1;
-		}
-
-		return joiner == null
-			? $"{text1}{text2}"
-			: $"{text1}{joiner}{text2}";
-	}
-
 	[return: NotNullIfNotNull(nameof(text))]
 	public static string? TrimPrefix(string text, string prefix, bool ignoreCase = false)
 	{
@@ -946,6 +926,26 @@ public static class StringHelper
 		}
 
 		return newString.ToString();
+	}
+
+	public static string Combine(string text1, string text2, string? joiner = null)
+	{
+		if (text1 == null)
+			return text2;
+
+		if (string.IsNullOrEmpty(text1))
+		{
+			return text2 ?? text1;
+		}
+
+		if (string.IsNullOrEmpty(text2))
+		{
+			return text1;
+		}
+
+		return joiner == null
+			? $"{text1}{text2}"
+			: $"{text1}{joiner}{text2}";
 	}
 
 	[return: NotNullIfNotNull(nameof(source))]

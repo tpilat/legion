@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Legion.ADF.ServiceBus": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

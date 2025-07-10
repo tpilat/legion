@@ -23,7 +23,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+    #line 1 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class TableInfoGenerator : Generator.GeneratorBase
     {
@@ -35,7 +35,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
         {
             this.Write("\r\n");
             
-            #line 12 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 12 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 	SetGenerationEnvironment(this.GenerationEnvironment);
 	
@@ -53,14 +53,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("using ");
             
-            #line 24 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 24 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(import));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 25 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 25 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 	}
 	if (0 < tabInfoDesc.InterfaceImports.Count)
@@ -71,7 +71,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 31 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 31 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 	}
 
@@ -80,21 +80,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("namespace ");
             
-            #line 34 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 34 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tabInfoDesc.InterfaceNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\npublic interface ");
             
-            #line 36 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 36 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tabInfoDesc.InterfaceName));
             
             #line default
             #line hidden
             this.Write(" : Legion.Database.ITableInfoProvider\r\n{\r\n}\r\n");
             
-            #line 39 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 39 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 	StartNewFile(tabInfoDesc.TableInfoTargetFolder, tabInfoDesc.FileName);
 
@@ -108,14 +108,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("using ");
             
-            #line 47 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 47 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(import));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 48 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 48 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 	}
 	if (0 < tabInfoDesc.Imports.Count)
@@ -126,7 +126,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 54 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 54 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 	}
 
@@ -135,35 +135,35 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("namespace ");
             
-            #line 57 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 57 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tabInfoDesc.TableInfoNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\npublic class ");
             
-            #line 59 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 59 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tabInfoDesc.Name));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 59 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 59 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tabInfoDesc.InterfaceNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 59 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 59 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(tabInfoDesc.InterfaceName));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n");
             
-            #line 61 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 61 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 	foreach (var entity in tabInfoDesc.Model.Entities)
 	{
@@ -175,28 +175,28 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\tprivate readonly static Lazy<Legion.Database.Metamodel.Info.TableInfo> _");
             
-            #line 67 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 67 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entity.Name));
             
             #line default
             #line hidden
             this.Write("TableInfo = new(() =>\r\n\t\tnew Legion.Database.Metamodel.Info.TableInfo(\r\n\t\t\t\t\"");
             
-            #line 69 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 69 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entity.Schema));
             
             #line default
             #line hidden
             this.Write("\", \"");
             
-            #line 69 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 69 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AppGen.Model.Config.CodeGeneratorConfig.Instance.SelectedDatabaseConnection.Provider == Database.Metamodel.DatabaseProviderType.PostgreSQL ? $"\\\"{entity.TableName}\\\"" : $"[{entity.TableName}]"));
             
             #line default
             #line hidden
             this.Write("\",\r\n\t\t\t\t[\r\n");
             
-            #line 71 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 71 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 		foreach (var property in entity.Properties.Where(x => !x.IsIgnored))
 		{
@@ -206,49 +206,49 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t\t\t\tnew(nameof(");
             
-            #line 75 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 75 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.FullName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 75 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 75 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("), typeof(");
             
-            #line 75 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 75 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Helpers.TypeHelper.TypeToCSharpSourceCode(property.ClrType)));
             
             #line default
             #line hidden
             this.Write("), \"");
             
-            #line 75 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 75 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AppGen.Model.Config.CodeGeneratorConfig.Instance.SelectedDatabaseConnection.Provider == Database.Metamodel.DatabaseProviderType.PostgreSQL ? $"\\\"{property.ColumnName}\\\"" : $"[{property.ColumnName}]"));
             
             #line default
             #line hidden
             this.Write("\", \"");
             
-            #line 75 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 75 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.GetDatabaseDataType(false)));
             
             #line default
             #line hidden
             this.Write("\", ");
             
-            #line 75 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 75 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.IsNullable.ToString().ToLower()));
             
             #line default
             #line hidden
             this.Write("),\r\n");
             
-            #line 76 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 76 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 		}
 
@@ -257,21 +257,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t\t\t]));\r\n\r\n\tpublic static Legion.Database.Metamodel.Info.TableInfo Get");
             
-            #line 81 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 81 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entity.Name));
             
             #line default
             #line hidden
             this.Write("TableInfo()\r\n\t\t=> _");
             
-            #line 82 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 82 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entity.Name));
             
             #line default
             #line hidden
             this.Write("TableInfo.Value;\r\n\r\n");
             
-            #line 84 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 84 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 	}
 
@@ -282,7 +282,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
                     "leInfo>> _tableInfoDictionary =\r\n\t\tnew(() => new Dictionary<Type, Legion.Databas" +
                     "e.Metamodel.Info.TableInfo>\r\n\t\t{\r\n");
             
-            #line 90 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 90 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 	foreach (var entity in tabInfoDesc.Model.Entities)
 	{
@@ -294,28 +294,28 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t\t{ typeof(");
             
-            #line 96 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 96 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Namespace(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 96 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 96 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entity.Name));
             
             #line default
             #line hidden
             this.Write("), Get");
             
-            #line 96 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 96 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entity.Name));
             
             #line default
             #line hidden
             this.Write("TableInfo() },\r\n");
             
-            #line 97 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 97 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 	}
 
@@ -340,7 +340,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
 }
 ");
             
-            #line 116 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
+            #line 116 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\TableInfoGenerator.tt"
 
 	Process();
 

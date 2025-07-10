@@ -69,8 +69,16 @@ public sealed partial class Job : Jobs.JobsBaseEntity, Legion.Model.IEntity
 				target.CronExpression = CronExpression;
 			if (conds.CanMap(this, nameof(CronExpressionIncludeSeconds)))
 				target.CronExpressionIncludeSeconds = CronExpressionIncludeSeconds;
+			if (conds.CanMap(this, nameof(IdDefaultHost)))
+				target.IdDefaultHost = IdDefaultHost;
+			if (conds.CanMap(this, nameof(IdCurrentHost)))
+				target.IdCurrentHost = IdCurrentHost;
+			if (conds.CanMap(this, nameof(AttachedToCurrentHostUtc)))
+				target.AttachedToCurrentHostUtc = AttachedToCurrentHostUtc;
 			if (conds.CanMap(this, nameof(LastProcessingUtc)))
 				target.LastProcessingUtc = LastProcessingUtc;
+			if (conds.CanMap(this, nameof(LastProcessingFinishedUtc)))
+				target.LastProcessingFinishedUtc = LastProcessingFinishedUtc;
 			if (conds.CanMap(this, nameof(NextProcessinUtc)))
 				target.NextProcessinUtc = NextProcessinUtc;
 			if (conds.CanMap(this, nameof(TimeoutForProcessingInSeconds)))
@@ -91,7 +99,11 @@ public sealed partial class Job : Jobs.JobsBaseEntity, Legion.Model.IEntity
 			target.IdleTimeoutInSeconds = IdleTimeoutInSeconds;
 			target.CronExpression = CronExpression;
 			target.CronExpressionIncludeSeconds = CronExpressionIncludeSeconds;
+			target.IdDefaultHost = IdDefaultHost;
+			target.IdCurrentHost = IdCurrentHost;
+			target.AttachedToCurrentHostUtc = AttachedToCurrentHostUtc;
 			target.LastProcessingUtc = LastProcessingUtc;
+			target.LastProcessingFinishedUtc = LastProcessingFinishedUtc;
 			target.NextProcessinUtc = NextProcessinUtc;
 			target.TimeoutForProcessingInSeconds = TimeoutForProcessingInSeconds;
 			target.MaxProcessingRetryCount = MaxProcessingRetryCount;

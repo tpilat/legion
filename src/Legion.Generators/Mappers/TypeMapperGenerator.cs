@@ -23,7 +23,7 @@ namespace Legion.Generators.Mappers
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+    #line 1 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class TypeMapperGenerator : Generator.GeneratorBase
     {
@@ -35,7 +35,7 @@ namespace Legion.Generators.Mappers
         {
             this.Write("\r\n");
             
-            #line 12 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 12 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	SetGenerationEnvironment(this.GenerationEnvironment);
 	
@@ -47,7 +47,7 @@ namespace Legion.Generators.Mappers
             #line default
             #line hidden
             
-            #line 19 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 19 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	if (typeMapperDesc.IsLegionFramework)
 	{
@@ -57,7 +57,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("using Legion;\r\n");
             
-            #line 24 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 24 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	}
 
@@ -66,42 +66,42 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("using ");
             
-            #line 27 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 27 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.MapperBaseClassesNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\nnamespace ");
             
-            #line 29 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 29 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.MapperNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\npublic static partial class ");
             
-            #line 31 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 31 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.MapperName));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic static ");
             
-            #line 33 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 33 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.TargetTypeName));
             
             #line default
             #line hidden
             this.Write("? Map(\r\n\t\t");
             
-            #line 34 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 34 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.SourceTypeName));
             
             #line default
             #line hidden
             this.Write(" source,\r\n\t\t");
             
-            #line 35 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 35 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.TargetTypeName));
             
             #line default
@@ -109,7 +109,7 @@ namespace Legion.Generators.Mappers
             this.Write(" target,\r\n\t\tReferenceModifier referenceModifier = ReferenceModifier.MapAllReferen" +
                     "ces,\r\n\t\tAction<MappingConditions<");
             
-            #line 37 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 37 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.SourceTypeName));
             
             #line default
@@ -118,7 +118,7 @@ namespace Legion.Generators.Mappers
                     "ll,\r\n\t\tDictionary<object, object>? cache = null)\r\n\t{\r\n\t\tif (source == null)\r\n\t\t\t" +
                     "return target;\r\n\r\n");
             
-            #line 44 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 44 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	if (typeMapperDesc.LessThanCSharp12)
 	{
@@ -128,7 +128,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\tcache ??= new();\r\n");
             
-            #line 49 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	}
 	else
@@ -139,7 +139,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\tcache ??= [];\r\n");
             
-            #line 55 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 55 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	}
 
@@ -148,14 +148,14 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\r\n\t\tif (cache.TryGetValue(source, out object? cached))\r\n\t\t\treturn (");
             
-            #line 60 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 60 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.TargetTypeName));
             
             #line default
             #line hidden
             this.Write(")cached;\r\n");
             
-            #line 61 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 61 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	if (typeMapperDesc.TypesGeneratedByFactory?.Contains(typeMapperDesc.TargetType) == true)
 	{
@@ -165,7 +165,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\r\n\t\ttarget ??= instanceFactory?.CreateInstance<");
             
-            #line 66 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 66 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.TargetTypeName));
             
             #line default
@@ -173,7 +173,7 @@ namespace Legion.Generators.Mappers
             this.Write(">(\r\n\t\t\t\tuseActivatorIfNoFactoryFound: false,\r\n\t\t\t\tthrowIfFactoryReturnsNull: true" +
                     ")!;\r\n");
             
-            #line 69 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 69 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	}
 	else
@@ -184,7 +184,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\r\n\t\ttarget ??= instanceFactory?.CreateInstance<");
             
-            #line 75 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 75 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.TargetTypeName));
             
             #line default
@@ -192,14 +192,14 @@ namespace Legion.Generators.Mappers
             this.Write(">(\r\n\t\t\t\tuseActivatorIfNoFactoryFound: false,\r\n\t\t\t\tthrowIfFactoryReturnsNull: true" +
                     ")\r\n\t\t\t?? new ");
             
-            #line 78 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 78 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.TargetTypeName));
             
             #line default
             #line hidden
             this.Write("();\r\n");
             
-            #line 79 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 79 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	}
 
@@ -208,7 +208,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\r\n\t\tMappingConditions<");
             
-            #line 83 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 83 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.SourceTypeName));
             
             #line default
@@ -216,14 +216,14 @@ namespace Legion.Generators.Mappers
             this.Write(">? conds = null;\r\n\r\n\t\tif (conditions != null)\r\n\t\t{\r\n\t\t\tconds = new MappingConditi" +
                     "ons<");
             
-            #line 87 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 87 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeMapperDesc.SourceTypeName));
             
             #line default
             #line hidden
             this.Write(">();\r\n\t\t\tconditions.Invoke(conds);\r\n\r\n");
             
-            #line 90 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 90 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 		List<string> notSuppoertedProperties = [];
 		foreach (var property in typeMapperDesc.ValueTypeProperties)
@@ -260,34 +260,34 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t\tif (conds.CanMap(source, nameof(source.");
             
-            #line 121 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 121 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(")))\r\n\t\t\t\ttarget.");
             
-            #line 122 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 122 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" = source.");
             
-            #line 122 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 122 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             
-            #line 122 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 122 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(collectionCopy));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 123 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 123 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 			}
 		}
@@ -300,14 +300,14 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\r\n");
             
-            #line 131 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 131 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notSupported));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 132 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 132 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 		}
 
@@ -316,7 +316,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t}\r\n\t\telse\r\n\t\t{\r\n");
             
-            #line 138 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 138 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 		notSuppoertedProperties = [];
 		foreach (var property in typeMapperDesc.ValueTypeProperties)
@@ -353,27 +353,27 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t\ttarget.");
             
-            #line 169 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 169 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" = source.");
             
-            #line 169 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 169 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             
-            #line 169 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 169 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(collectionCopy));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 170 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 170 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 			}
 		}
@@ -386,14 +386,14 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\r\n");
             
-            #line 178 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 178 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notSupported));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 179 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 179 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 		}
 
@@ -402,7 +402,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t}\r\n\r\n\t\tcache.Add(source, target);\r\n");
             
-            #line 185 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 185 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	if (0 < typeMapperDesc.ReferenceTypeProperties.Count || 0 < typeMapperDesc.CollectionOfReferenceTypeProperties.Count)
 	{
@@ -412,7 +412,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\r\n\t\tif (referenceModifier == ReferenceModifier.MapAllReferences)\r\n\t\t{\r\n");
             
-            #line 192 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 192 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 		notSuppoertedProperties = [];
 		foreach (var navigation in typeMapperDesc.ReferenceTypeProperties)
@@ -444,21 +444,21 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t\ttarget.");
             
-            #line 218 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 218 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" = source.");
             
-            #line 218 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 218 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 219 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 219 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 				}
 				else
@@ -469,42 +469,42 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t\ttarget.");
             
-            #line 224 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 224 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 224 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 224 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Value.MapperName));
             
             #line default
             #line hidden
             this.Write(".Map(source.");
             
-            #line 224 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 224 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(", target.");
             
-            #line 224 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 224 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(", referenceModifier, conds?.GetConditions(x => x.");
             
-            #line 224 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 224 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write("), instanceFactory, cache)!;\r\n");
             
-            #line 225 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 225 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 				}
 			}
@@ -550,21 +550,21 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t\ttarget.");
             
-            #line 265 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 265 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" = source.");
             
-            #line 265 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 265 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 266 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 266 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 				}
 				else if (typeMapperDesc.IsComapredByReference(navigation.Key.PropertyType.GetEnumerableElementType()) == true)
@@ -577,21 +577,21 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t\ttarget.");
             
-            #line 273 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 273 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" = source.");
             
-            #line 273 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 273 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(".ToArray();\r\n");
             
-            #line 274 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 274 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 					}
 					else
@@ -602,21 +602,21 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t\ttarget.");
             
-            #line 279 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 279 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" = source.");
             
-            #line 279 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 279 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(".ToList();\r\n");
             
-            #line 280 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 280 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 					}
 				}
@@ -628,42 +628,42 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t\ttarget.");
             
-            #line 286 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 286 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" = MapperHelper.MapToList(source.");
             
-            #line 286 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 286 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(", target.");
             
-            #line 286 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 286 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 286 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 286 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Value.MapperName));
             
             #line default
             #line hidden
             this.Write(".Map, referenceModifier, conds?.GetConditions(x => x.");
             
-            #line 286 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 286 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write("), instanceFactory, cache)!;\r\n");
             
-            #line 287 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 287 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 				}
 			}
@@ -677,14 +677,14 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\r\n");
             
-            #line 296 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 296 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notSupported));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 297 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 297 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 		}
 
@@ -693,7 +693,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t}\r\n\t\telse if (referenceModifier == ReferenceModifier.SetNull)\r\n\t\t{\r\n");
             
-            #line 303 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 303 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 		notSuppoertedProperties = [];
 		foreach (var navigation in typeMapperDesc.ReferenceTypeProperties)
@@ -714,14 +714,14 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t\ttarget.");
             
-            #line 318 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 318 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" = null!;\r\n");
             
-            #line 319 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 319 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 			}
 		}
@@ -753,14 +753,14 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t\ttarget.");
             
-            #line 345 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 345 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" = new();\r\n");
             
-            #line 346 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 346 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 				}
 				else
@@ -771,14 +771,14 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t\ttarget.");
             
-            #line 351 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 351 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Key.Name));
             
             #line default
             #line hidden
             this.Write(" = [];\r\n");
             
-            #line 352 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 352 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 				}
 			}
@@ -792,14 +792,14 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\r\n");
             
-            #line 361 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 361 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notSupported));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 362 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 362 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 		}
 
@@ -808,7 +808,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\t\t}\r\n");
             
-            #line 366 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 366 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	}
 
@@ -817,7 +817,7 @@ namespace Legion.Generators.Mappers
             #line hidden
             this.Write("\r\n\t\treturn target;\r\n\t}\r\n}\r\n");
             
-            #line 373 "C:\code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
+            #line 373 "C:\Code\legion\src\Legion.Generators\Mappers\TypeMapperGenerator.tt"
 
 	Process();
 

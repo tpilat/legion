@@ -96,4 +96,6 @@ public interface ILogMessage : Serializer.IDictionaryObject
 	LogMessageDto ToClientDto();
 
 	void Log(ILogger logger);
+
+	string? ToMessageText(bool includeStackTrace = true);
 }

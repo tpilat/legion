@@ -1,3 +1,30 @@
+CREATE TABLE hosts."Host"
+(
+	"IdHost" uuid NOT NULL,
+	"Name" varchar(255) NOT NULL,
+	"Description" varchar(511) NOT NULL,
+	"CreatedUtc" timestamp with time zone NOT NULL,
+	"IsEnabled" boolean NOT NULL,
+	"StartedUtc" timestamp with time zone NULL,
+	"LastActivityUtc" timestamp with time zone NOT NULL,
+	"StoppedUtc" timestamp with time zone NULL,
+	"Configuration" jsonb NOT NULL,
+	"IsDistributedManagerAvailable" boolean NOT NULL
+);
+
+CREATE TABLE hosts."HostLog"
+(
+	"IdHostLog" uuid NOT NULL,
+	"IdHost" uuid NOT NULL,
+	"IdLogLevel" integer NOT NULL,
+	"CreatedUtc" timestamp with time zone NOT NULL,
+	"IsRunning" boolean NOT NULL,
+	"TraceCorrelationId" uuid NOT NULL,
+	"IdLogMessage" uuid NULL,
+	"Code" varchar(127) NOT NULL,
+	"Detail" text NULL
+);
+
 CREATE TABLE jobs."Job"
 (
 	"IdJob" uuid NOT NULL,
@@ -11,7 +38,11 @@ CREATE TABLE jobs."Job"
 	"IdleTimeoutInSeconds" integer NULL,
 	"CronExpression" varchar(63) NULL,
 	"CronExpressionIncludeSeconds" boolean NOT NULL,
+	"IdDefaultHost" uuid NOT NULL,
+	"IdCurrentHost" uuid NOT NULL,
+	"AttachedToCurrentHostUtc" timestamp with time zone NOT NULL,
 	"LastProcessingUtc" timestamp with time zone NULL,
+	"LastProcessingFinishedUtc" timestamp with time zone NULL,
 	"NextProcessinUtc" timestamp with time zone NOT NULL,
 	"TimeoutForProcessingInSeconds" integer NOT NULL,
 	"MaxProcessingRetryCount" integer NOT NULL
@@ -200,6 +231,17 @@ CREATE TABLE orch."OrchestrationStepProcessingStatus"
 	"Name" varchar(127) NOT NULL
 );
 
+ALTER TABLE hosts."Host" ADD CONSTRAINT "PK_Host"
+	PRIMARY KEY ("IdHost");
+
+ALTER TABLE hosts."Host" 
+  ADD CONSTRAINT "UQ_Host_Name" UNIQUE ("Name");
+
+ALTER TABLE hosts."HostLog" ADD CONSTRAINT "PK_HostLog"
+	PRIMARY KEY ("IdHostLog");
+
+CREATE INDEX "IXFK_HostLog_Host" ON hosts."HostLog" ("IdHost" ASC);
+
 ALTER TABLE jobs."Job" ADD CONSTRAINT "PK_Job"
 	PRIMARY KEY ("IdJob");
 
@@ -300,6 +342,9 @@ ALTER TABLE orch."OrchestrationStepProcessingMessageType" ADD CONSTRAINT "PK_Orc
 
 ALTER TABLE orch."OrchestrationStepProcessingStatus" ADD CONSTRAINT "PK_OrchestrationStepProcessingStatus"
 	PRIMARY KEY ("IdOrchestrationStepProcessingStatus");
+
+ALTER TABLE hosts."HostLog" ADD CONSTRAINT "FK_HostLog_IdHost"
+	FOREIGN KEY ("IdHost") REFERENCES hosts."Host" ("IdHost") ON DELETE No Action ON UPDATE No Action;
 
 ALTER TABLE jobs."Job" ADD CONSTRAINT "FK_Job_IdJobRunType"
 	FOREIGN KEY ("IdJobRunType") REFERENCES jobs."JobRunType" ("IdJobRunType") ON DELETE No Action ON UPDATE No Action;

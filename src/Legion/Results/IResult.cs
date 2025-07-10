@@ -79,6 +79,8 @@ public interface IResult
 	T? GetData<T>();
 
 	bool TryGetData<T>([MaybeNullWhen(false)] out T data);
+
+	Results.ResultDto ToDto();
 }
 
 #if NET6_0_OR_GREATER
@@ -89,4 +91,6 @@ public interface IResult<TData> : IResult
 	TData? Data { get; set; }
 
 	void ClearData();
+
+	new Results.ResultDto<TData> ToDto();
 }

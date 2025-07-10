@@ -1,0 +1,43 @@
+using Legion;
+using Legion.EntityFrameworkCore;
+using Legion.EntityFrameworkCore.Queries;
+using Legion.Exceptions;
+using Legion.Transactions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace Legion.ADF.ServiceBus.SqlServer.Model.Repositories;
+
+public partial class VwHostRepository : Legion.ADF.ServiceBus.SqlServer.ServiceBusQueryRepositoryBase, Legion.ADF.ServiceBus.IServiceBusQueryRepository<Legion.ADF.ServiceBus.Model.VwHost>, Legion.ADF.ServiceBus.Model.Repositories.IVwHostRepository
+{
+	private readonly Lazy<Legion.ACL.IAccessControlManager<Legion.ADF.ServiceBus.Model.VwHost>?> _accessControlManager;
+
+	private Legion.ADF.ServiceBus.SqlServer.IServiceBusQueryDbContext? _context;
+
+	public Legion.ACL.IAccessControlManager<Legion.ADF.ServiceBus.Model.VwHost>? AccessControlManager => _accessControlManager.Value;
+
+	public VwHostRepository(IEFConnectionProvider connectionProvider)
+		: base(connectionProvider)
+	{
+		_accessControlManager = new(() => connectionProvider.ServiceProvider.GetService<Legion.ACL.IAccessControlManager<Legion.ADF.ServiceBus.Model.VwHost>>());
+	}
+
+	public IQueryable<Legion.ADF.ServiceBus.Model.VwHost> AsQueryable(IScopeContext scopeContext)
+		=> AsQueryable(scopeContext, false);
+
+	public IQueryable<Legion.ADF.ServiceBus.Model.VwHost> AsQueryable(IScopeContext scopeContext, bool checkReadPermissions)
+	{
+		var queryable = (_context ??= ConnectionProvider.GetOrCreateDbContext<Legion.ADF.ServiceBus.SqlServer.IServiceBusQueryDbContext>(scopeContext)).VwHost;
+
+		if (checkReadPermissions)
+			AccessControlManager?.SetAuthorizationQuery(scopeContext, queryable);
+
+		return queryable;
+	}
+
+	public IQueryable<Legion.ADF.ServiceBus.Model.VwHost> AsReadOnlyQueryable(IScopeContext scopeContext)
+		=> AsQueryable(scopeContext).AsNoTracking();
+
+	public IQueryable<Legion.ADF.ServiceBus.Model.VwHost> AsReadOnlyQueryable(IScopeContext scopeContext, bool checkReadPermissions)
+		=> AsQueryable(scopeContext, checkReadPermissions).AsNoTracking();
+	}

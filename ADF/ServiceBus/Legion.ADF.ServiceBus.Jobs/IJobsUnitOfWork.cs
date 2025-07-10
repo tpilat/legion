@@ -10,6 +10,8 @@ public partial interface IJobsUnitOfWork : Legion.Model.Repositories.IUnitOfWork
 
 	Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobDataRepository JobDataRepository { get; }
 
+	Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobExecutionRepository JobExecutionRepository { get; }
+
 	Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobLogRepository JobLogRepository { get; }
 
 	Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobMessageRepository JobMessageRepository { get; }
@@ -17,6 +19,8 @@ public partial interface IJobsUnitOfWork : Legion.Model.Repositories.IUnitOfWork
 	Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobMessageTypeRepository JobMessageTypeRepository { get; }
 
 	Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobRunTypeRepository JobRunTypeRepository { get; }
+
+	Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobStatisticsRepository JobStatisticsRepository { get; }
 
 	Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobStatusRepository JobStatusRepository { get; }
 }

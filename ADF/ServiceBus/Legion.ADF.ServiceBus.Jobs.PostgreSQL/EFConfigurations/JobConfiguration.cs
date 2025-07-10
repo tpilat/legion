@@ -48,7 +48,15 @@ public class JobConfiguration : IEntityTypeConfiguration<Jobs.Model.Job>
 			.HasColumnType("varchar(63)")
 			.HasMaxLength(63);
 
+		entityBuilder.Property(e => e.IdDefaultHost).HasColumnType("uuid");
+
+		entityBuilder.Property(e => e.IdCurrentHost).HasColumnType("uuid");
+
+		entityBuilder.Property(e => e.AttachedToCurrentHostUtc).HasColumnType("timestamptz");
+
 		entityBuilder.Property(e => e.LastProcessingUtc).HasColumnType("timestamptz");
+
+		entityBuilder.Property(e => e.LastProcessingFinishedUtc).HasColumnType("timestamptz");
 
 		entityBuilder.Property(e => e.NextProcessinUtc).HasColumnType("timestamptz");
 

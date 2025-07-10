@@ -10,7 +10,7 @@ public class JobSummaryDto
 
 	public Guid IdJobRunType { get; private set; }
 
-	public string JobRunType { get; private set; }
+	public JobRunTypeEnum JobRunType { get; private set; }
 
 	public Guid IdJobStatus { get; private set; }
 
@@ -21,4 +21,21 @@ public class JobSummaryDto
 	public DateTime NextProcessinUtc { get; private set; }
 
 	public int TimeoutForProcessingInSeconds { get; private set; }
+
+	public HostInfoDto DefaultHost { get; private set; }
+
+	public HostInfoDto CurrentHost { get; private set; }
+
+	public List<JobExecutionTypeEnum> JobExecutionTypes { get; set; }
+}
+
+public class HostInfoDto
+{
+	public string Name { get; private set; }
+
+	public string Description { get; private set; }
+
+	public bool IsEnabled { get; private set; }
+
+	public DateTime LastActivityUtc { get; private set; }
 }

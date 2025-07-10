@@ -1,0 +1,13 @@
+﻿using Legion.MessageBus.Messages;
+
+namespace Legion.ADF.ServiceBus.Hosts.Queries.Host;
+
+public record GetHostByNameQuery(
+	string Name,
+	bool GetDisabledHost,
+	bool CheckReadPermissions,
+	bool AsNoTracking = false,
+	bool DisableCahce = true,
+	Action<Legion.Queries.IQueryableBuilder<Model.Host>>? QueryableBuilder = null)
+	: Legion.Queries.BaseQuery<Model.Host>(AsNoTracking, DisableCahce, QueryableBuilder),
+		IQueryRequest<Model.Host, Model.Host?>;

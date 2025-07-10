@@ -25,6 +25,7 @@ public class QueryTableInfoProvider : Legion.ADF.ServiceBus.Jobs.IQueryTableInfo
 					new(nameof(Legion.ADF.ServiceBus.Jobs.Model.VwJob.NextProcessinUtc), typeof(DateTime), "[NextProcessinUtc]", "datetime2", false),
 					new(nameof(Legion.ADF.ServiceBus.Jobs.Model.VwJob.TimeoutForProcessingInSeconds), typeof(int), "[TimeoutForProcessingInSeconds]", "int", false),
 					new(nameof(Legion.ADF.ServiceBus.Jobs.Model.VwJob.MaxProcessingRetryCount), typeof(int), "[MaxProcessingRetryCount]", "int", false),
+					new(nameof(Legion.ADF.ServiceBus.Jobs.Model.VwJob.IdDefaultHost), typeof(Guid), "[IdDefaultHost]", "uniqueidentifier", false),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetVwJobTableInfo()

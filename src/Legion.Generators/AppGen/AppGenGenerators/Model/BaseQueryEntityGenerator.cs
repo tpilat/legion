@@ -23,7 +23,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
+    #line 1 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class BaseQueryEntityGenerator : Generator.GeneratorBase
     {
@@ -35,7 +35,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
         {
             this.Write("\r\n");
             
-            #line 12 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
+            #line 12 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
 
 	SetGenerationEnvironment(this.GenerationEnvironment);
 	
@@ -53,14 +53,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("using ");
             
-            #line 24 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
+            #line 24 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(import));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 25 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
+            #line 25 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
 
 	}
 	if (0 < entityBaseDesc.Imports.Count)
@@ -71,7 +71,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 31 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
+            #line 31 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
 
 	}
 
@@ -80,21 +80,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("namespace ");
             
-            #line 34 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
+            #line 34 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityBaseDesc.Namespace(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\npublic abstract class ");
             
-            #line 36 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
+            #line 36 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityBaseDesc.Name));
             
             #line default
             #line hidden
             this.Write(" : Legion.Model.IQueryEntity\r\n{\r\n}\r\n");
             
-            #line 39 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
+            #line 39 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\BaseQueryEntityGenerator.tt"
 
 	Process();
 

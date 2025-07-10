@@ -23,7 +23,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+    #line 1 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class EntityModelEnumerationObjectGenerator : Generator.GeneratorBase
     {
@@ -35,7 +35,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
         {
             this.Write("\r\n");
             
-            #line 12 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 12 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 	SetGenerationEnvironment(this.GenerationEnvironment);
 	
@@ -53,14 +53,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("using ");
             
-            #line 24 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 24 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(import));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 25 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 25 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 	}
 	if (0 < entityDesc.Imports.Count)
@@ -71,7 +71,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 31 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 31 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 	}
 
@@ -80,28 +80,28 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("namespace ");
             
-            #line 34 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 34 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Namespace(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\npublic partial class ");
             
-            #line 36 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 36 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 36 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 36 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.GetBaseEntityName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(", Legion.Model.IEntity, IComparable\r\n{\r\n");
             
-            #line 38 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 38 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 		if (entityDesc.Data.MainColumn.ClrType != typeof(string))
 		{
@@ -111,7 +111,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("#pragma warning disable IDE1006 // Naming Styles\r\n");
             
-            #line 43 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 43 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 		}
 		
@@ -127,7 +127,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 54 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 54 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 			}
 
@@ -136,35 +136,35 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t/// <summary>\r\n\t/// ");
             
-            #line 58 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 58 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumRow.Values[0].Replace("new Guid(\"", "").Replace("\")", "")));
             
             #line default
             #line hidden
             this.Write("\r\n\t/// </summary>\r\n\tpublic static ");
             
-            #line 60 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 60 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 60 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 60 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumRow.BasePropertyCSharpName_NewObject));
             
             #line default
             #line hidden
             this.Write(" => new(");
             
-            #line 60 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 60 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(", ", enumRow.Values)));
             
             #line default
             #line hidden
             this.Write(");\r\n");
             
-            #line 61 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 61 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 		}
 
@@ -176,7 +176,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("#pragma warning restore IDE1006 // Naming Styles\r\n");
             
-            #line 68 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 68 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 		}
 
@@ -185,21 +185,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\tprivate ");
             
-            #line 72 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 72 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 72 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 72 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.GetPropertiesAsMethodParameters()));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t: this()\r\n\t{\r\n");
             
-            #line 75 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 75 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 	foreach (var property in entityDesc.Properties)
 	{
@@ -209,21 +209,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t");
             
-            #line 79 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 79 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 79 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 79 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.AsFieldName));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 80 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 80 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 	}
 
@@ -232,7 +232,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t}\r\n");
             
-            #line 84 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 84 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 	if (entityDesc.Data.MainColumn.ClrType == typeof(string))
 	{
@@ -242,7 +242,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\tpublic override bool Equals(object? obj)\r\n\t{\r\n\t\tif (obj is not ");
             
-            #line 91 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 91 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
@@ -250,21 +250,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write(" otherValue)\r\n\t\t\treturn false;\r\n\r\n\t\tvar typeMatches = GetType().Equals(obj.GetTyp" +
                     "e());\r\n\t\tvar valueMatches = ");
             
-            #line 95 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 95 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
             #line hidden
             this.Write("?.Equals(otherValue.");
             
-            #line 95 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 95 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
             #line hidden
             this.Write(") ?? (otherValue.");
             
-            #line 95 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 95 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
@@ -272,7 +272,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write(" == null);\r\n\r\n\t\treturn typeMatches && valueMatches;\r\n\t}\r\n\r\n\tpublic override int G" +
                     "etHashCode()\r\n\t{\r\n\t\treturn ");
             
-            #line 102 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 102 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
@@ -280,84 +280,84 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("?.GetHashCode() ?? 0;\r\n\t}\r\n\r\n\tpublic int CompareTo(object? other)\r\n\t{\r\n\t\tvar othe" +
                     "rEnumeration = other as ");
             
-            #line 107 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 107 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\treturn ");
             
-            #line 108 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 108 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
             #line hidden
             this.Write("?.CompareTo(otherEnumeration?.");
             
-            #line 108 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 108 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
             #line hidden
             this.Write(") ?? 1;\r\n\t}\r\n\r\n\tpublic static ");
             
-            #line 111 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 111 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write("? FromId(");
             
-            #line 111 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 111 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.GetKeyPropertiesAsMethodParameters(entityDesc.Data.PrimaryKey)));
             
             #line default
             #line hidden
             this.Write(")\r\n\t{\r\n\t\treturn AsEnumerable_NewObjects().FirstOrDefault(x => ");
             
-            #line 113 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 113 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.GetKeyPropertiesAsWhereCondition(entityDesc.Data.PrimaryKey, "x")));
             
             #line default
             #line hidden
             this.Write(");\r\n\t}\r\n\r\n\tpublic static ");
             
-            #line 116 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 116 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write("? From");
             
-            #line 116 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 116 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
             #line hidden
             this.Write("(string ");
             
-            #line 116 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 116 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.AsFieldName(entityDesc.Data.MainColumn.Name)));
             
             #line default
             #line hidden
             this.Write(")\r\n\t{\r\n\t\treturn AsEnumerable_NewObjects().FirstOrDefault(v => v.");
             
-            #line 118 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 118 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
             #line hidden
             this.Write("?.Equals(");
             
-            #line 118 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 118 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.AsFieldName(entityDesc.Data.MainColumn.Name)));
             
             #line default
             #line hidden
             this.Write(", StringComparison.Ordinal) ?? false);\r\n\t}\r\n");
             
-            #line 120 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 120 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 	}
 	else //NOT STRING
@@ -368,7 +368,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\tpublic override bool Equals(object? obj)\r\n\t{\r\n\t\tif ((obj is not ");
             
-            #line 128 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 128 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
@@ -376,14 +376,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write(" otherValue))\r\n\t\t\treturn false;\r\n\r\n\t\tvar typeMatches = GetType().Equals(obj.GetTy" +
                     "pe());\r\n\t\tvar valueMatches = ");
             
-            #line 132 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 132 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
             #line hidden
             this.Write(".Equals(otherValue.");
             
-            #line 132 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 132 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
@@ -391,7 +391,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write(");\r\n\r\n\t\treturn typeMatches && valueMatches;\r\n\t}\r\n\r\n\tpublic override int GetHashCo" +
                     "de()\r\n\t{\r\n\t\treturn ");
             
-            #line 139 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 139 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
@@ -399,84 +399,84 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write(".GetHashCode();\r\n\t}\r\n\r\n\tpublic int CompareTo(object? other)\r\n\t{\r\n\t\tvar otherEnume" +
                     "ration = other as ");
             
-            #line 144 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 144 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\treturn ");
             
-            #line 145 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 145 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
             #line hidden
             this.Write(".CompareTo(otherEnumeration?.");
             
-            #line 145 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 145 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
             #line hidden
             this.Write(");\r\n\t}\r\n\r\n\tpublic static ");
             
-            #line 148 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 148 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write("? FromId(");
             
-            #line 148 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 148 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.GetKeyPropertiesAsMethodParameters(entityDesc.Data.PrimaryKey)));
             
             #line default
             #line hidden
             this.Write(")\r\n\t{\r\n\t\treturn AsEnumerable_NewObjects().FirstOrDefault(x => ");
             
-            #line 150 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 150 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.GetKeyPropertiesAsWhereCondition(entityDesc.Data.PrimaryKey, "x")));
             
             #line default
             #line hidden
             this.Write(");\r\n\t}\r\n\r\n\tpublic static ");
             
-            #line 153 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 153 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write("? From");
             
-            #line 153 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 153 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
             #line hidden
             this.Write("(string ");
             
-            #line 153 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 153 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.AsFieldName(entityDesc.Data.MainColumn.Name)));
             
             #line default
             #line hidden
             this.Write(")\r\n\t{\r\n\t\treturn AsEnumerable_NewObjects().FirstOrDefault(v => v.");
             
-            #line 155 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 155 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.MainColumn.Name));
             
             #line default
             #line hidden
             this.Write(".Equals(");
             
-            #line 155 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 155 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(GeneratorHelper.AsFieldName(entityDesc.Data.MainColumn.Name)));
             
             #line default
             #line hidden
             this.Write("));\r\n\t}\r\n");
             
-            #line 157 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 157 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 	}
 
@@ -485,35 +485,35 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\tpublic static readonly Lazy<IReadOnlyDictionary<");
             
-            #line 161 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 161 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.FirstPrimaryKey.CSharpType));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 161 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 161 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(">> DictionaryMap = new(() => new Dictionary<");
             
-            #line 161 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 161 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.FirstPrimaryKey.CSharpType));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 161 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 161 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(">\r\n\t{\r\n");
             
-            #line 163 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 163 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 		var idx = 0;
 		foreach (var enumRow in entityDesc.EnumData)
@@ -525,28 +525,28 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t\t{ ");
             
-            #line 169 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 169 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumRow.Values[0]));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 169 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 169 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumRow.BasePropertyCSharpName_NewObject));
             
             #line default
             #line hidden
             this.Write(" }");
             
-            #line 169 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 169 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(idx == entityDesc.EnumData.Count ? "" : ","));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 170 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 170 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 		}
 
@@ -555,14 +555,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t});\r\n\r\n\tpublic static IEnumerable<");
             
-            #line 175 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 175 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write("> AsEnumerable_NewObjects()\r\n\t{\r\n");
             
-            #line 177 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 177 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 		if (entityDesc.EnumData.Count == 0)
 		{
@@ -572,7 +572,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\tyield return null;\r\n");
             
-            #line 182 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 182 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 		}
 		else
@@ -585,14 +585,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\tyield return ");
             
-            #line 189 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 189 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumRow.BasePropertyCSharpName_NewObject));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 190 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 190 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 			}
 		}
@@ -602,7 +602,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t}\r\n}\r\n");
             
-            #line 196 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
+            #line 196 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelEnumerationObjectGenerator.tt"
 
 	Process();
 

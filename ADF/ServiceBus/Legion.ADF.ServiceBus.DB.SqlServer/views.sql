@@ -1,3 +1,9 @@
+CREATE VIEW [hosts].[VwHost] AS 
+SELECT *
+FROM hosts.[Host]
+GO
+
+
 CREATE VIEW [jobs].[VwJob] AS 
 SELECT
 	j.[IdJob],
@@ -16,7 +22,8 @@ SELECT
 	j.[LastProcessingUtc],
 	j.[NextProcessinUtc],
 	j.[TimeoutForProcessingInSeconds],
-	j.[MaxProcessingRetryCount]
+	j.[MaxProcessingRetryCount],
+	j.[IdDefaultHost]
 FROM [jobs].[Job] as j
 JOIN [jobs].[JobStatus] js ON j.[IdJobStatus] = js.[IdJobStatus]
 JOIN [jobs].[JobRunType] jrt ON j.[IdJobRunType] = [jrt].[IdJobRunType]

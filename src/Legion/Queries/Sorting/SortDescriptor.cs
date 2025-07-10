@@ -24,14 +24,4 @@ public class SortDescriptor<T>
 		_memberDelegate ??= MemberSelector == null
 			? throw new InvalidOperationException($"{nameof(MemberSelector)} == null")
 			: ExpressionCacheHelper.CompileExpression(MemberSelector);
-
-	public string Serialize()
-	{
-		return "";
-	}
-
-	public static SortDescriptor<T> Deserialize(string json)
-	{
-		return new SortDescriptor<T>();
-	}
 }

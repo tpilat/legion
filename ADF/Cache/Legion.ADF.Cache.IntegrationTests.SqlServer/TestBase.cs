@@ -1,5 +1,8 @@
-﻿using Legion.Database.SqlServer;
+﻿using Legion.Caching;
+using Legion.Database.SqlServer;
+using Legion.Locks;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 
 namespace Legion.ADF.Cache.IntegrationTests;
@@ -32,6 +35,12 @@ public abstract class TestBase
 
 		SetupTestInternal();
 	}
+
+	public ISimplePersistentCache GetSimplePersistentCache(IServiceProvider sp)
+		=> sp.GetRequiredService<ISimplePersistentCache>();
+
+	public IDistributedLockProvider GetDistributedLockProvider(IServiceProvider sp)
+		=> sp.GetRequiredService<IDistributedLockProvider>();
 
 	[TearDown]
 	public async Task TearDownTest()

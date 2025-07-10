@@ -5410,7 +5410,7 @@ public static class IResultExtensions
 				.ValidationFailure(failure, true)
 				.ClientMessage(clientMessageWithPropertyName ? failure.MessageWithPropertyName : failure.ErrorCode.Message, true)
 				.Detail(failure.DetailInfo)
-				.PropertyName(string.IsNullOrWhiteSpace(failure.ObjectPath.PropertyName) ? null : failure.ObjectPath.ToString()?.TrimPrefix("_."), !string.IsNullOrWhiteSpace(failure.ObjectPath.PropertyName));
+				.PropertyName(failure.GetPropertyName(), !string.IsNullOrWhiteSpace(failure.ObjectPath.PropertyName));
 
 		return errorMessageBuilder.Build();
 	}
@@ -5429,7 +5429,7 @@ public static class IResultExtensions
 				.ValidationFailure(failure, true)
 				.ClientMessage(clientMessageWithPropertyName ? failure.MessageWithPropertyName : failure.ErrorCode.Message, true)
 				.Detail(failure.DetailInfo)
-				.PropertyName(string.IsNullOrWhiteSpace(failure.ObjectPath.PropertyName) ? null : failure.ObjectPath.ToString()?.TrimPrefix("_."), !string.IsNullOrWhiteSpace(failure.ObjectPath.PropertyName));
+				.PropertyName(failure.GetPropertyName(), !string.IsNullOrWhiteSpace(failure.ObjectPath.PropertyName));
 
 		return logMessageBuilder.Build();
 	}

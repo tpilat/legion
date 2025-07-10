@@ -583,6 +583,16 @@ internal partial class CacheUnitOfWork : Legion.ADF.Cache.ICacheUnitOfWork, Legi
 		[CallerLineNumber] int sourceLineNumber = 0)
 		=> await ConnectionProvider.RollbackAllAsync(scopeContext.CreateNew(true, memberName, sourceFilePath, sourceLineNumber), exception, TransactionsControllerStatus.CommitInProgress, cancellationToken);
 
+	private Legion.ADF.Cache.Model.Repositories.ICacheDataRepository? cacheData;
+	public Legion.ADF.Cache.Model.Repositories.ICacheDataRepository CacheDataRepository
+		=> cacheData ??= new Legion.ADF.Cache.SqlServer.Model.Repositories.CacheDataRepository(ConnectionProvider);
+
+
+	private Legion.ADF.Cache.Model.Repositories.IDistributedLockRepository? distributedLock;
+	public Legion.ADF.Cache.Model.Repositories.IDistributedLockRepository DistributedLockRepository
+		=> distributedLock ??= new Legion.ADF.Cache.SqlServer.Model.Repositories.DistributedLockRepository(ConnectionProvider);
+
+
 	private Legion.ADF.Cache.Model.Repositories.IReloadableCacheKeyRepository? reloadableCacheKey;
 	public Legion.ADF.Cache.Model.Repositories.IReloadableCacheKeyRepository ReloadableCacheKeyRepository
 		=> reloadableCacheKey ??= new Legion.ADF.Cache.SqlServer.Model.Repositories.ReloadableCacheKeyRepository(ConnectionProvider);

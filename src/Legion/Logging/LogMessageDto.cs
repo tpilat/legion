@@ -1,5 +1,6 @@
 ﻿using Legion.Exceptions;
 using Legion.Serializer;
+using Legion.Text;
 using Microsoft.Extensions.Logging;
 using System.Text;
 
@@ -542,4 +543,14 @@ public class LogMessageDto : ILogMessage
 
 	public void Log(ILogger logger)
 		=> ToLogMessage().Log(logger);
+
+	public string? ToMessageText(bool includeStackTrace = true)
+		=> includeStackTrace
+			? InternalMessage
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, ClientMessage)
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, Detail)
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, StackTrace)
+			: InternalMessage
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, ClientMessage)
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, Detail);
 }

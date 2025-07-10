@@ -267,12 +267,32 @@ public static class IEnumerableExtensions
 		Throw.IfArgumentNull(source);
 
 		var checkBuffer = new HashSet<T>();
-		foreach (var t in source)
+		foreach (var item in source)
 		{
-			if (checkBuffer.Add(t))
+			if (checkBuffer.Add(item))
 				continue;
 
 			return true;
+		}
+
+		return false;
+	}
+
+	public static bool HasDuplicates<T, TKey>(this IEnumerable<T> source, Func<T?, TKey?> keySelector)
+	{
+		if (keySelector == null)
+			return HasDuplicates(source);
+
+		Throw.IfArgumentNull(source);
+
+		var result = new List<T>();
+		var checkBuffer = new HashSet<TKey?>();
+		foreach (var item in source)
+		{
+			if (!checkBuffer.Add(keySelector(item)))
+				return true;
+
+			result.Add(item);
 		}
 
 		return false;
@@ -283,12 +303,12 @@ public static class IEnumerableExtensions
 		Throw.IfArgumentNull(source);
 
 		var checkBuffer = new HashSet<T>();
-		foreach (var t in source)
+		foreach (var item in source)
 		{
-			if (checkBuffer.Add(t))
+			if (checkBuffer.Add(item))
 				continue;
 
-			firstDuplicate = t;
+			firstDuplicate = item;
 			return true;
 		}
 
@@ -302,32 +322,32 @@ public static class IEnumerableExtensions
 
 		var result = new List<T>();
 		var checkBuffer = new HashSet<T>();
-		foreach (var t in source)
+		foreach (var item in source)
 		{
-			if (checkBuffer.Add(t))
+			if (checkBuffer.Add(item))
 				continue;
 
-			result.Add(t);
+			result.Add(item);
 		}
 
 		return result;
 	}
 
-	public static List<T> GetDuplicates<T, TCompare>(this IEnumerable<T> source, Func<T?, TCompare?> equalityTransformation)
+	public static List<T> GetDuplicates<T, TKey>(this IEnumerable<T> source, Func<T?, TKey?> keySelector)
 	{
-		if (equalityTransformation == null)
+		if (keySelector == null)
 			return GetDuplicates(source);
 
 		Throw.IfArgumentNull(source);
 
 		var result = new List<T>();
-		var checkBuffer = new HashSet<TCompare?>();
-		foreach (var t in source)
+		var checkBuffer = new HashSet<TKey?>();
+		foreach (var item in source)
 		{
-			if (checkBuffer.Add(equalityTransformation(t)))
+			if (checkBuffer.Add(keySelector(item)))
 				continue;
 
-			result.Add(t);
+			result.Add(item);
 		}
 
 		return result;

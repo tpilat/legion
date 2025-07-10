@@ -3,6 +3,7 @@ using Legion.ADF.Cache.Services.Internal;
 using Legion.ADF.Cache.Settings;
 using Legion.Caching;
 using Legion.Extensions;
+using Legion.Locks;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -53,9 +54,13 @@ public static class ServiceCollectionExtensions
 
 		services.TryAddSingleton<IReloadableCacheKeyStoreFactory, ReloadableCacheKeyStoreFactory>();
 		services.TryAddSingleton<IADFCache, ADFCache>();
+		services.TryAddSingleton<IPersistentCache, PersistentCache>();
+		services.TryAddSingleton<ISimplePersistentCache, PersistentCache>();
 		services.TryAddTransient<ReloadableCacheKeyStore>();
 		services.TryAddTransient<IReloadableCacheKeyStore, ReloadableCacheKeyStore>();
+		services.TryAddSingleton<IDistributedLockProvider, DistributedLockProvider>();
 
+		services.AddHostedService<CacheDataRemoveService>();
 		services.AddHostedService<CacheKeyRemoveService>();
 
 		return new ADFCacheBuilder(services, configuration);

@@ -1,3 +1,9 @@
+DROP Schema If Exists hosts;
+GO
+
+CREATE Schema hosts;
+GO
+
 DROP Schema If Exists jobs;
 GO
 

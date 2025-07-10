@@ -2,23 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <LangVersion>12.0</LangVersion>
+    <LangVersion>Latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <RootNamespace>Legion.Hosting</RootNamespace>
     <PackageId>Legion.Hosting</PackageId>
     <Description>Legion.Hosting</Description>
     <PackageTags></PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/legion-dotnet/legion-hosting</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/legion-dotnet/legion-hosting</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/legion-dotnet/legion</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/legion-dotnet/legion</RepositoryUrl>
     <PackageIcon>legion.png</PackageIcon>
     <NeutralLanguage>en</NeutralLanguage>
     <Copyright>Copyright LEGION</Copyright>
     <Authors>Tomas Pilat</Authors>
-    <Version>1.0.0</Version>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 
   <Import Project="../../SharedConfigurations.props" />
@@ -39,19 +41,19 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Legion\Legion.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Legion\Legion.csproj" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Content Include="..\\Legion\\bin\\Release\\net8.0\\Legion.dll">
-			<Pack>true</Pack>
-			<PackagePath>lib/net8.0/</PackagePath>
-		</Content>
-	</ItemGroup>
-	<PropertyGroup>
-		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
-	</PropertyGroup>
+  <ItemGroup>
+    <Content Include="..\\Legion\\bin\\Release\\net8.0\\Legion.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib/net8.0/</PackagePath>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
 
 
 </Project>

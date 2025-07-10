@@ -68,9 +68,29 @@ public sealed partial class Job : Jobs.JobsBaseEntity, Legion.Model.IEntity
 	public bool CronExpressionIncludeSeconds { get; private set; }
 
 	/// <summary>
+	/// Database DataType: uuid NOT NULL
+	/// </summary>
+	public Guid IdDefaultHost { get; private set; }
+
+	/// <summary>
+	/// Database DataType: uuid NOT NULL
+	/// </summary>
+	public Guid IdCurrentHost { get; private set; }
+
+	/// <summary>
+	/// Database DataType: timestamp with time zone NOT NULL
+	/// </summary>
+	public DateTime AttachedToCurrentHostUtc { get; private set; }
+
+	/// <summary>
 	/// Database DataType: timestamp with time zone NULL
 	/// </summary>
 	public DateTime? LastProcessingUtc { get; private set; }
+
+	/// <summary>
+	/// Database DataType: timestamp with time zone NULL
+	/// </summary>
+	public DateTime? LastProcessingFinishedUtc { get; private set; }
 
 	/// <summary>
 	/// Database DataType: timestamp with time zone NOT NULL
@@ -152,7 +172,11 @@ public sealed partial class Job : Jobs.JobsBaseEntity, Legion.Model.IEntity
 			{ nameof(IdleTimeoutInSeconds), IdleTimeoutInSeconds },
 			{ nameof(CronExpression), CronExpression },
 			{ nameof(CronExpressionIncludeSeconds), CronExpressionIncludeSeconds },
+			{ nameof(IdDefaultHost), IdDefaultHost },
+			{ nameof(IdCurrentHost), IdCurrentHost },
+			{ nameof(AttachedToCurrentHostUtc), AttachedToCurrentHostUtc },
 			{ nameof(LastProcessingUtc), LastProcessingUtc },
+			{ nameof(LastProcessingFinishedUtc), LastProcessingFinishedUtc },
 			{ nameof(NextProcessinUtc), NextProcessinUtc },
 			{ nameof(TimeoutForProcessingInSeconds), TimeoutForProcessingInSeconds },
 			{ nameof(MaxProcessingRetryCount), MaxProcessingRetryCount },
@@ -185,6 +209,9 @@ public sealed partial class Job : Jobs.JobsBaseEntity, Legion.Model.IEntity
 			.ForProperty(x => x.IdJobStatus, v => v.NotDefaultOrEmpty(), (x, parent) => x.JobStatus == null)
 			.ForProperty(x => x.Namespace, v => v.NotDefaultOrEmpty().MaxLength(1023))
 			.ForProperty(x => x.CronExpression, v => v.MaxLength(63))
+			//.ForProperty(x => x.IdDefaultHost, v => v.NotDefaultOrEmpty())
+			//.ForProperty(x => x.IdCurrentHost, v => v.NotDefaultOrEmpty())
+			//.ForProperty(x => x.AttachedToCurrentHostUtc, v => v.NotDefaultOrEmpty())
 			//.ForProperty(x => x.NextProcessinUtc, v => v.NotDefaultOrEmpty())
 			//.ForProperty(x => x.TimeoutForProcessingInSeconds, v => v.NotDefaultOrEmpty())
 			//.ForProperty(x => x.MaxProcessingRetryCount, v => v.NotDefaultOrEmpty())

@@ -19,4 +19,8 @@ public interface IValidationFailure
 	string MessageWithPropertyName { get; }
 
 	string ToFullPathString(string basePath);
+
+	string? GetPropertyName();
+
+	string ToString(bool withDetail, bool withSeverity);
 }

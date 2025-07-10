@@ -44,6 +44,8 @@ public class VwJobConfiguration : IEntityTypeConfiguration<Jobs.Model.VwJob>
 		entityBuilder.Property(e => e.LastProcessingUtc).HasColumnType("timestamptz");
 
 		entityBuilder.Property(e => e.NextProcessinUtc).HasColumnType("timestamptz");
+
+		entityBuilder.Property(e => e.IdDefaultHost).HasColumnType("uuid");
 	}
 
 	public static ModelBuilder Build(ModelBuilder modelBuilder)

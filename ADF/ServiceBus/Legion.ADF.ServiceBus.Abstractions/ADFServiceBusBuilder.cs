@@ -5,6 +5,8 @@ namespace Legion.ADF.ServiceBus;
 
 public class ADFServiceBusBuilder
 {
+	public ADFServiceBusBuilderContext ADFServiceBusBuilderContext { get; }
+
 	public IConfiguration? Configuration { get; }
 	public IServiceCollection Services { get; }
 
@@ -14,5 +16,6 @@ public class ADFServiceBusBuilder
 
 		Services = services;
 		Configuration = configuration;
+		ADFServiceBusBuilderContext = new ADFServiceBusBuilderContext();
 	}
 }

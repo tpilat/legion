@@ -23,7 +23,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+    #line 1 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class EntityEqualityComparerGenerator : Generator.GeneratorBase
     {
@@ -35,7 +35,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
         {
             this.Write("\r\n");
             
-            #line 12 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 12 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 	SetGenerationEnvironment(this.GenerationEnvironment);
 	
@@ -65,14 +65,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("using ");
             
-            #line 36 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 36 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(import));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 37 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 37 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 	}
 	if (0 < entityDesc.EntityEqualityComparerImports.Count)
@@ -83,7 +83,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 43 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 43 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 	}
 
@@ -92,77 +92,77 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("namespace ");
             
-            #line 46 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 46 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Namespace(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\npublic");
             
-            #line 48 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 48 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@sealed));
             
             #line default
             #line hidden
             this.Write(" partial class ");
             
-            #line 48 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 48 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 48 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 48 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.GetBaseEntityName(modelName, contextName)));
             
             #line default
             #line hidden
             
-            #line 48 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 48 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iAuditEntry));
             
             #line default
             #line hidden
             
-            #line 48 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 48 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iSelfAuditableEntity));
             
             #line default
             #line hidden
             
-            #line 48 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 48 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iSynchronizable));
             
             #line default
             #line hidden
             
-            #line 48 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 48 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iConcurrent));
             
             #line default
             #line hidden
             
-            #line 48 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 48 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iCorrelable));
             
             #line default
             #line hidden
             
-            #line 48 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 48 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(customInterfaces));
             
             #line default
             #line hidden
             
-            #line 48 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 48 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iAuditableEntity));
             
             #line default
             #line hidden
             this.Write(", Legion.Model.IEntity\r\n{\r\n\tpublic bool EqualsTo(\r\n\t\t");
             
-            #line 51 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 51 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
@@ -170,14 +170,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("? obj,\r\n\t\tComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,\r\n\t\t" +
                     "Action<ComparisonConditions<");
             
-            #line 53 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 53 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(">>? conditions = null)\r\n\t\t=> ");
             
-            #line 54 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 54 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.ComparerName));
             
             #line default
@@ -185,35 +185,35 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write(".EqualsTo(\r\n\t\t\tthis,\r\n\t\t\tobj,\r\n\t\t\tcomparisonOptions,\r\n\t\t\tconditions,\r\n\t\t\tcache: n" +
                     "ull);\r\n\r\n\tpublic");
             
-            #line 61 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 61 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@sealed));
             
             #line default
             #line hidden
             this.Write(" partial class ");
             
-            #line 61 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 61 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.ComparerName));
             
             #line default
             #line hidden
             this.Write(" : IEqualityComparer<");
             
-            #line 61 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 61 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(">\r\n\t{\r\n\t\tpublic static bool EqualsTo(\r\n\t\t\t");
             
-            #line 64 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 64 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write("? obj1,\r\n\t\t\t");
             
-            #line 65 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 65 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
@@ -221,7 +221,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("? obj2,\r\n\t\t\tComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,\r\n" +
                     "\t\t\tAction<ComparisonConditions<");
             
-            #line 67 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 67 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
@@ -246,7 +246,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
 			
 			ComparisonConditions<");
             
-            #line 85 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 85 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
@@ -255,14 +255,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
                     "ions) == ComparisonOptions.CompareProperties)\r\n\t\t\t{\r\n\t\t\t\tif (conditions != null)" +
                     "\r\n\t\t\t\t{\r\n\t\t\t\t\tconds = new ComparisonConditions<");
             
-            #line 91 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 91 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(">();\r\n\t\t\t\t\tconditions.Invoke(conds);\r\n");
             
-            #line 93 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 93 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 	if (entityDesc.Data.ConvertEntity != ConvertEntity.ToEnumerationClass
 		&& entityDesc.Data.ConvertEntity != ConvertEntity.ToEnumAndEnumerationClass)
@@ -273,7 +273,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 99 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 99 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 		foreach (var property in entityDesc.Properties)
 		{
@@ -291,21 +291,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t\t\t\tif (conds.CanCompare(obj1, nameof(obj1.");
             
-            #line 111 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 111 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(")) && ");
             
-            #line 111 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 111 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notEquals));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\t\t\treturn false;\r\n");
             
-            #line 113 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 113 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 		}
 
@@ -314,7 +314,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t\t\t}\r\n\t\t\t\telse\r\n\t\t\t\t{\r\n");
             
-            #line 119 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 119 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 		foreach (var property in entityDesc.Properties)
 		{
@@ -332,14 +332,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t\t\t\tif (");
             
-            #line 131 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 131 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(notEquals));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\t\t\treturn false;\r\n");
             
-            #line 133 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 133 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 		}
 	}
@@ -350,7 +350,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("\t\t\t\t}\r\n\t\t\t}\r\n\r\n\t\t\tif (cachedHashSet == null)\r\n\t\t\t{\r\n\t\t\t\tcachedHashSet = [];\r\n\t\t\t\t" +
                     "cache[obj1] = cachedHashSet;\r\n\t\t\t}\r\n\r\n\t\t\tcachedHashSet.Add(obj2);\r\n");
             
-            #line 147 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 147 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 	var targetNavigationEntities = new List<EntityModelDescriptor>();
 	foreach (var navigation in entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
@@ -377,7 +377,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("\r\n\t\t\tif ((ComparisonOptions.CompareReferences & comparisonOptions) == ComparisonO" +
                     "ptions.CompareReferences)\r\n\t\t\t{\r\n");
             
-            #line 170 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 170 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 		foreach (var navigation in entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
 		{
@@ -390,42 +390,42 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t\t\tif (!");
             
-            #line 177 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 177 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 177 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 177 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.Name));
             
             #line default
             #line hidden
             this.Write("EqualityComparer.EqualsTo(obj1.");
             
-            #line 177 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 177 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(", obj2.");
             
-            #line 177 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 177 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(", comparisonOptions, conds?.GetConditions(x => x.");
             
-            #line 177 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 177 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write("), cache))\r\n\t\t\t\t\treturn false;\r\n");
             
-            #line 179 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 179 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 			}
 		}
@@ -443,42 +443,42 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t\t\tif (!ComparisonHelper.SequenceEqual(obj1.");
             
-            #line 191 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 191 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(", obj2.");
             
-            #line 191 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 191 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(", new ");
             
-            #line 191 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 191 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 191 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 191 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.Name));
             
             #line default
             #line hidden
             this.Write("EqualityComparer(comparisonOptions, conds?.GetConditions(x => x.");
             
-            #line 191 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 191 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write("), cache)))\r\n\t\t\t\t\treturn false;\r\n");
             
-            #line 193 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 193 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 				}
 				else
@@ -489,42 +489,42 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t\t\tif (!");
             
-            #line 198 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 198 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 198 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 198 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.Name));
             
             #line default
             #line hidden
             this.Write("EqualityComparer.EqualsTo(obj1.");
             
-            #line 198 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 198 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(", obj2.");
             
-            #line 198 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 198 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(", comparisonOptions, conds?.GetConditions(x => x.");
             
-            #line 198 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 198 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write("), cache))\r\n\t\t\t\t\treturn false;\r\n");
             
-            #line 200 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 200 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 				}
 			}
@@ -535,7 +535,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t}\r\n");
             
-            #line 206 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 206 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 	}
 
@@ -544,7 +544,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\t\t\treturn true;\r\n\t\t}\r\n\r\n\t\tpublic static int GetHashCode(\r\n\t\t\t");
             
-            #line 214 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 214 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
@@ -552,7 +552,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("? obj,\r\n\t\t\tComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,\r\n\t" +
                     "\t\tAction<ComparisonConditions<");
             
-            #line 216 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 216 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
@@ -575,7 +575,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
 		public ComparisonOptions ComparisonOptions { get; }
 		public Action<ComparisonConditions<");
             
-            #line 232 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 232 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
@@ -583,7 +583,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write(">>? Conditions { get; }\r\n\t\tpublic Dictionary<object, HashSet<object>>? Cache { ge" +
                     "t; }\r\n\t\r\n\t\tpublic ");
             
-            #line 235 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 235 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.ComparerName));
             
             #line default
@@ -591,7 +591,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("(\r\n\t\t\tComparisonOptions comparisonOptions = ComparisonOptions.CompareAll,\r\n\t\t\tAct" +
                     "ion<ComparisonConditions<");
             
-            #line 237 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 237 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
@@ -600,14 +600,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
                     "{\r\n\t\t\tCache = cache ?? [];\r\n\t\t\tComparisonOptions = comparisonOptions;\r\n\t\t\tCondit" +
                     "ions = conditions;\r\n\t\t}\r\n\t\r\n\t\tpublic bool Equals(\r\n\t\t\t");
             
-            #line 246 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 246 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write("? obj1,\r\n\t\t\t");
             
-            #line 247 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 247 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
@@ -615,7 +615,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("? obj2)\r\n\t\t\t=> EqualsTo(\r\n\t\t\t\tobj1,\r\n\t\t\t\tobj2,\r\n\t\t\t\tComparisonOptions,\r\n\t\t\t\tCondi" +
                     "tions,\r\n\t\t\t\tCache);\r\n\t\r\n\t\tpublic int GetHashCode([DisallowNull] ");
             
-            #line 255 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 255 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.BaseName(modelName, contextName)));
             
             #line default
@@ -623,7 +623,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("? obj)\r\n\t\t\t=> GetHashCode(\r\n\t\t\t\tobj,\r\n\t\t\t\tComparisonOptions,\r\n\t\t\t\tConditions,\r\n\t\t" +
                     "\t\tcache: null);\r\n\t}\r\n}\r\n");
             
-            #line 263 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
+            #line 263 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityEqualityComparerGenerator.tt"
 
 	Process();
 

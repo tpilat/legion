@@ -46,6 +46,8 @@ public class VwJobConfiguration : IEntityTypeConfiguration<Jobs.Model.VwJob>
 		entityBuilder.Property(e => e.LastProcessingUtc).HasColumnType("datetime2(7)");
 
 		entityBuilder.Property(e => e.NextProcessinUtc).HasColumnType("datetime2(7)");
+
+		entityBuilder.Property(e => e.IdDefaultHost).HasColumnType("uniqueidentifier");
 	}
 
 	public static ModelBuilder Build(ModelBuilder modelBuilder)

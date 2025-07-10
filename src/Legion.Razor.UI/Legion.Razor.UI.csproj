@@ -2,8 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <LangVersion>Latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <RootNamespace>Legion.Razor.UI</RootNamespace>
+    <PackageId>Legion.Razor.UI</PackageId>
+    <Description>Legion.Razor.UI</Description>
+    <PackageTags></PackageTags>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/legion-dotnet/legion</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/legion-dotnet/legion</RepositoryUrl>
+    <PackageIcon>legion.png</PackageIcon>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Copyright>Copyright LEGION</Copyright>
+    <Authors>Tomas Pilat</Authors>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
     <!--<AddRazorSupportForMvc>true</AddRazorSupportForMvc>-->
   </PropertyGroup>
 
@@ -18,19 +35,19 @@
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.4.9" />
   </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Legion\Legion.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Legion\Legion.csproj" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Content Include="..\\Legion\\bin\\Release\\net8.0\\Legion.dll">
-			<Pack>true</Pack>
-			<PackagePath>lib/net8.0/</PackagePath>
-		</Content>
-	</ItemGroup>
-	<PropertyGroup>
-		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
-	</PropertyGroup>
+  <ItemGroup>
+    <Content Include="..\\Legion\\bin\\Release\\net8.0\\Legion.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib/net8.0/</PackagePath>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
 
   <!--<ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />

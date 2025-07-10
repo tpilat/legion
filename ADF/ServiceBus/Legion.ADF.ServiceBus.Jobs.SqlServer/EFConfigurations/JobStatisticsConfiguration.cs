@@ -24,7 +24,7 @@ public class JobStatisticsConfiguration : IEntityTypeConfiguration<Jobs.Model.Jo
 
 		entityBuilder.Property(e => e.IdJob).HasColumnType("uniqueidentifier");
 
-		entityBuilder.Property(e => e.StartHoutUtc).HasColumnType("datetime2(7)");
+		entityBuilder.Property(e => e.StartHourUtc).HasColumnType("datetime2(7)");
 
 		entityBuilder.Property(e => e.AverageDuration).HasColumnType("decimal(18, 0)");
 

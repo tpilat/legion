@@ -1,5 +1,4 @@
-﻿using Legion;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Legion.ADF.Messaging;
 

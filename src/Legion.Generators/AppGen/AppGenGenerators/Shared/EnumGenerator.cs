@@ -22,7 +22,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+    #line 1 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class EnumGenerator : Generator.GeneratorBase
     {
@@ -34,7 +34,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
         {
             this.Write("\r\n");
             
-            #line 11 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 11 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
 
 	SetGenerationEnvironment(this.GenerationEnvironment);
 	
@@ -49,21 +49,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
             #line hidden
             this.Write("namespace ");
             
-            #line 20 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 20 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumDesc.Namespace(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n\tpublic enum ");
             
-            #line 22 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 22 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumDesc.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n");
             
-            #line 24 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 24 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
 
 	var values = enumDesc.GetAllValues();
 	int index = 0;
@@ -76,27 +76,27 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
             #line hidden
             this.Write("\t\t");
             
-            #line 31 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 31 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(kvp.Value));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 31 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 31 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(kvp.Key));
             
             #line default
             #line hidden
             
-            #line 31 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 31 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(index == values.Count ? "" : ","));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 32 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 32 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
 
 	}
 
@@ -105,7 +105,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
             #line hidden
             this.Write("\t}\r\n");
             
-            #line 36 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 36 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
 
 	if (enumDesc.ConvertEntity == ConvertEntity.ToEnumAndEnumerationClass)
 	{
@@ -115,21 +115,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
             #line hidden
             this.Write("\r\n\tpublic static class Extensions");
             
-            #line 41 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 41 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumDesc.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n\t\tpublic static Guid ToGuid(this ");
             
-            #line 43 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 43 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumDesc.Name));
             
             #line default
             #line hidden
             this.Write(" @enum)\r\n\t\t\t=> @enum switch\r\n\t\t\t{\r\n");
             
-            #line 46 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 46 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
 
 	foreach (var kvp in values)
 	{
@@ -139,35 +139,35 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
             #line hidden
             this.Write("\t\t\t\t");
             
-            #line 50 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 50 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumDesc.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 50 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 50 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(kvp.Value));
             
             #line default
             #line hidden
             this.Write(" => ");
             
-            #line 50 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 50 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumDesc.BaseEntityname));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 50 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 50 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(kvp.Value));
             
             #line default
             #line hidden
             this.Write(",\r\n");
             
-            #line 51 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 51 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
 
 	}
 
@@ -176,14 +176,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
             #line hidden
             this.Write("\t\t\t\t_ => throw new NotSupportedException($\"Invalid {nameof(");
             
-            #line 54 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 54 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(enumDesc.Name));
             
             #line default
             #line hidden
             this.Write(")} value {@enum}\"),\r\n\t\t\t};\r\n\t}\r\n");
             
-            #line 57 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 57 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
 
 	}
 
@@ -192,7 +192,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
             #line hidden
             this.Write("}\r\n");
             
-            #line 61 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
+            #line 61 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\EnumGenerator.tt"
 
 	Process();
 

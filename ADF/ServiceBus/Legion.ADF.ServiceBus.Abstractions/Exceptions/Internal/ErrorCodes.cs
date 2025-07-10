@@ -20,4 +20,26 @@ public static partial class ErrorCodes
 				"L_ESB_UoW_0001",
 				$"Cannot create UnitOfWork"));
 	}
+
+	public static partial class ServiceBusHostException
+	{
+		public static IErrorCode UnhandledError(string hostName, Guid? idHost)
+			=> new ErrorCode(
+				"L_ESB_Host_0000",
+				$"Unhandled error in host with name \"{hostName}\" with id {idHost}");
+
+		public static IErrorCode NoHostFound(string hostName)
+			=> new ErrorCode(
+				"L_ESB_Host_0001",
+				$"No host found with name \"{hostName}\"");
+	}
+
+	public static partial class HostConfigurationException
+	{
+		public static IErrorCode DuplicatedRetryCount => _duplicatedRetryCount.Value;
+		private static readonly Lazy<IErrorCode> _duplicatedRetryCount = new(() =>
+			new ErrorCode(
+				"L_ESB_Conf_0001",
+				$"Duplicated retry count"));
+	}
 }

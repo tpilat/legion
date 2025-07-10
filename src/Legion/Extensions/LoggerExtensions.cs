@@ -386,7 +386,12 @@ public static partial class LoggerExtensions
 		message.IsLogged = true;
 	}
 
-	public static IErrorMessage? PrepareErrorMessage(this ILogger logger, IScopeContext scopeContext, IErrorCode errorCode, Action<ErrorMessageBuilder> messageBuilder, bool onlyIfEnabled = false)
+	public static IErrorMessage? PrepareErrorMessage(
+		this ILogger logger,
+		IScopeContext scopeContext,
+		IErrorCode errorCode,
+		Action<ErrorMessageBuilder>? messageBuilder,
+		bool onlyIfEnabled = false)
 	{
 		Throw.IfArgumentNull(logger);
 
@@ -399,7 +404,17 @@ public static partial class LoggerExtensions
 		var builder = new ErrorMessageBuilder(scopeContext, errorCode)
 			.LogLevel(LogLevel.Error);
 
-		messageBuilder?.Invoke(builder);
+		if (messageBuilder == null)
+		{
+			builder
+				.InternalMessage(errorCode.Message)
+				.Detail(errorCode.Description);
+		}
+		else
+		{
+			messageBuilder?.Invoke(builder);
+		}
+
 		var message = builder.Build();
 
 		return message;
@@ -409,7 +424,7 @@ public static partial class LoggerExtensions
 		this ILogger logger,
 		IServiceProvider serviceProvider,
 		IErrorCode errorCode,
-		Action<ErrorMessageBuilder> messageBuilder,
+		Action<ErrorMessageBuilder>? messageBuilder = null,
 		bool skipIfAlreadyLogged = true,
 		[CallerMemberName] string memberName = "",
 		[CallerFilePath] string sourceFilePath = "",
@@ -425,7 +440,7 @@ public static partial class LoggerExtensions
 		this ILogger logger,
 		string sourceSystemName,
 		IErrorCode errorCode,
-		Action<ErrorMessageBuilder> messageBuilder,
+		Action<ErrorMessageBuilder>? messageBuilder = null,
 		bool skipIfAlreadyLogged = true,
 		[CallerMemberName] string memberName = "",
 		[CallerFilePath] string sourceFilePath = "",
@@ -437,12 +452,16 @@ public static partial class LoggerExtensions
 			messageBuilder,
 			skipIfAlreadyLogged);
 
-	public static IErrorMessage LogErrorMessage(this ILogger logger, IScopeContext scopeContext, IErrorCode errorCode, Action<ErrorMessageBuilder> messageBuilder, bool skipIfAlreadyLogged = true)
+	public static IErrorMessage LogErrorMessage(
+		this ILogger logger,
+		IScopeContext scopeContext,
+		IErrorCode errorCode,
+		Action<ErrorMessageBuilder>? messageBuilder = null,
+		bool skipIfAlreadyLogged = true)
 	{
 		Throw.IfArgumentNull(logger);
 		Throw.IfArgumentNull(scopeContext);
 		Throw.IfArgumentNull(errorCode);
-		Throw.IfArgumentNull(messageBuilder);
 
 		var message = PrepareErrorMessage(logger, scopeContext, errorCode, messageBuilder, false);
 		LogErrorMessage(logger, message!, skipIfAlreadyLogged);

@@ -1,3 +1,32 @@
+CREATE TABLE [hosts].[Host]
+(
+	[IdHost] uniqueidentifier NOT NULL,
+	[Name] varchar(255) NOT NULL,
+	[Description] varchar(511) NOT NULL,
+	[CreatedUtc] datetime2(7) NOT NULL,
+	[IsEnabled] bit NOT NULL,
+	[StartedUtc] datetime2(7) NULL,
+	[LastActivityUtc] datetime2(7) NOT NULL,
+	[StoppedUtc] datetime2(7) NULL,
+	[Configuration] nvarchar(max) NOT NULL,
+	[IsDistributedManagerAvailable] bit NOT NULL
+)
+GO
+
+CREATE TABLE [hosts].[HostLog]
+(
+	[IdHostLog] uniqueidentifier NOT NULL,
+	[IdHost] uniqueidentifier NOT NULL,
+	[IdLogLevel] int NOT NULL,
+	[CreatedUtc] datetime2(7) NOT NULL,
+	[IsRunning] bit NOT NULL,
+	[TraceCorrelationId] uniqueidentifier NOT NULL,
+	[IdLogMessage] uniqueidentifier NULL,
+	[Code] nvarchar(127) NOT NULL,
+	[Detail] nvarchar(max) NULL
+)
+GO
+
 CREATE TABLE [jobs].[Job]
 (
 	[IdJob] uniqueidentifier NOT NULL,
@@ -11,7 +40,11 @@ CREATE TABLE [jobs].[Job]
 	[IdleTimeoutInSeconds] int NULL,
 	[CronExpression] nvarchar(63) NULL,
 	[CronExpressionIncludeSeconds] bit NOT NULL,
+	[IdDefaultHost] uniqueidentifier NOT NULL,
+	[IdCurrentHost] uniqueidentifier NOT NULL,
+	[AttachedToCurrentHostUtc] datetime2(7) NOT NULL,
 	[LastProcessingUtc] datetime2(7) NULL,
+	[LastProcessingFinishedUtc] datetime2(7) NULL,
 	[NextProcessinUtc] datetime2(7) NOT NULL,
 	[TimeoutForProcessingInSeconds] int NOT NULL,
 	[MaxProcessingRetryCount] int NOT NULL
@@ -95,7 +128,7 @@ CREATE TABLE [jobs].[JobStatistics]
 (
 	[IdJobStatistics] uniqueidentifier NOT NULL,
 	[IdJob] uniqueidentifier NOT NULL,
-	[StartHoutUtc] datetime2(7) NOT NULL,
+	[StartHourUtc] datetime2(7) NOT NULL,
 	[ExecutionCount] int NOT NULL,
 	[ErrorCount] int NOT NULL,
 	[AverageDuration] decimal(18) NOT NULL
@@ -217,6 +250,24 @@ CREATE TABLE [orch].[OrchestrationStepProcessingStatus]
 	[Code] nvarchar(63) NOT NULL,
 	[Name] nvarchar(127) NOT NULL
 )
+GO
+
+ALTER TABLE [hosts].[Host] 
+ ADD CONSTRAINT [PK_Host]
+	PRIMARY KEY CLUSTERED ([IdHost] ASC)
+GO
+
+ALTER TABLE [hosts].[Host] 
+ ADD CONSTRAINT [UQ_Host_Name] UNIQUE NONCLUSTERED ([Name] ASC)
+GO
+
+ALTER TABLE [hosts].[HostLog] 
+ ADD CONSTRAINT [PK_HostLog]
+	PRIMARY KEY CLUSTERED ([IdHostLog] ASC)
+GO
+
+CREATE NONCLUSTERED INDEX [IXFK_HostLog_Host] 
+ ON [hosts].[HostLog] ([IdHost] ASC)
 GO
 
 ALTER TABLE [jobs].[Job] 
@@ -400,6 +451,10 @@ GO
 ALTER TABLE [orch].[OrchestrationStepProcessingStatus] 
  ADD CONSTRAINT [PK_OrchestrationStepProcessingStatus]
 	PRIMARY KEY CLUSTERED ([IdOrchestrationStepProcessingStatus] ASC)
+GO
+
+ALTER TABLE [hosts].[HostLog] ADD CONSTRAINT [FK_HostLog_IdHost]
+	FOREIGN KEY ([IdHost]) REFERENCES [hosts].[Host] ([IdHost]) ON DELETE No Action ON UPDATE No Action
 GO
 
 ALTER TABLE [jobs].[Job] ADD CONSTRAINT [FK_Job_IdJobRunType]

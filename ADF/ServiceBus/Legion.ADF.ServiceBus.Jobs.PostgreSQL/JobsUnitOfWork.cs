@@ -593,6 +593,11 @@ internal partial class JobsUnitOfWork : Legion.ADF.ServiceBus.Jobs.IJobsUnitOfWo
 		=> jobData ??= new Legion.ADF.ServiceBus.Jobs.PostgreSQL.Model.Repositories.JobDataRepository(ConnectionProvider);
 
 
+	private Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobExecutionRepository? jobExecution;
+	public Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobExecutionRepository JobExecutionRepository
+		=> jobExecution ??= new Legion.ADF.ServiceBus.Jobs.PostgreSQL.Model.Repositories.JobExecutionRepository(ConnectionProvider);
+
+
 	private Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobLogRepository? jobLog;
 	public Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobLogRepository JobLogRepository
 		=> jobLog ??= new Legion.ADF.ServiceBus.Jobs.PostgreSQL.Model.Repositories.JobLogRepository(ConnectionProvider);
@@ -611,6 +616,11 @@ internal partial class JobsUnitOfWork : Legion.ADF.ServiceBus.Jobs.IJobsUnitOfWo
 	private Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobRunTypeRepository? jobRunType;
 	public Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobRunTypeRepository JobRunTypeRepository
 		=> jobRunType ??= new Legion.ADF.ServiceBus.Jobs.PostgreSQL.Model.Repositories.JobRunTypeRepository(ConnectionProvider);
+
+
+	private Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobStatisticsRepository? jobStatistics;
+	public Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobStatisticsRepository JobStatisticsRepository
+		=> jobStatistics ??= new Legion.ADF.ServiceBus.Jobs.PostgreSQL.Model.Repositories.JobStatisticsRepository(ConnectionProvider);
 
 
 	private Legion.ADF.ServiceBus.Jobs.Model.Repositories.IJobStatusRepository? jobStatus;

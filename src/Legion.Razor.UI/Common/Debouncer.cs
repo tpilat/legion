@@ -3,7 +3,7 @@
 internal class Debouncer
 {
 	private System.Timers.Timer? timer;
-	DateTime TimerStarted { get; set; } = DateTime.UtcNow.AddYears(-1);
+	DateTime TimerStarted { get; set; } = GlobalContext.Instance.UtcNow.AddYears(-1);
 
 	public void Debounce(int interval, Func<Task> action)
 	{
@@ -39,7 +39,7 @@ internal class Debouncer
 		timer?.Stop();
 		timer = null;
 
-		var curTime = DateTime.UtcNow;
+		var curTime = GlobalContext.Instance.UtcNow;
 
 		if (curTime.Subtract(TimerStarted).TotalMilliseconds < interval)
 		{

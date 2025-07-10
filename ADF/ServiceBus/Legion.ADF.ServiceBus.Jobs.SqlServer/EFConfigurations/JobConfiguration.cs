@@ -50,7 +50,15 @@ public class JobConfiguration : IEntityTypeConfiguration<Jobs.Model.Job>
 
 		entityBuilder.Property(e => e.CronExpressionIncludeSeconds).HasColumnType("bit");
 
+		entityBuilder.Property(e => e.IdDefaultHost).HasColumnType("uniqueidentifier");
+
+		entityBuilder.Property(e => e.IdCurrentHost).HasColumnType("uniqueidentifier");
+
+		entityBuilder.Property(e => e.AttachedToCurrentHostUtc).HasColumnType("datetime2(7)");
+
 		entityBuilder.Property(e => e.LastProcessingUtc).HasColumnType("datetime2(7)");
+
+		entityBuilder.Property(e => e.LastProcessingFinishedUtc).HasColumnType("datetime2(7)");
 
 		entityBuilder.Property(e => e.NextProcessinUtc).HasColumnType("datetime2(7)");
 

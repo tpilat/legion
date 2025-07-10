@@ -1,6 +1,10 @@
 ﻿na zaciatku kazdej metody urob
 scopeContext = scopeContext.CreateNew();
 
+
+Kazda metoda ktora vracia IResult musi zabezpecit aby nedoslo k unhandled exceptionu -> try-catch
+
+
 Do kazdej metody Throw.* dopln scopeContext!!!!!!!
 
 

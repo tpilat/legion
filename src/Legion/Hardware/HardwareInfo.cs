@@ -138,7 +138,7 @@ public class HardwareInfo : Serializer.IDictionaryObject, Serializer.ITextSerial
 		return GetHash(thumbprintBase);
 	}
 
-	private static string GetHash(string source)
+	public static string GetHash(string source)
 	{
 		var csp = MD5.Create();
 		byte[] raw = Encoding.ASCII.GetBytes(source);

@@ -13,10 +13,14 @@ public partial class CacheDbContext : Legion.EntityFrameworkCore.Audit.Auditable
 	{
 		PrimaryKeyFormatters = new System.Collections.Generic.Dictionary<string, string>
 		{
+			{ nameof(Legion.ADF.Cache.Model.CacheData), SqlServer.CacheDataConfiguration.PrimaryKeyFormatter },
+			{ nameof(Legion.ADF.Cache.Model.DistributedLock), SqlServer.DistributedLockConfiguration.PrimaryKeyFormatter },
 			{ nameof(Legion.ADF.Cache.Model.ReloadableCacheKey), SqlServer.ReloadableCacheKeyConfiguration.PrimaryKeyFormatter },
 		};
 	}
 
+	public virtual DbSet<Legion.ADF.Cache.Model.CacheData> CacheData { get; set; }
+	public virtual DbSet<Legion.ADF.Cache.Model.DistributedLock> DistributedLock { get; set; }
 	public virtual DbSet<Legion.ADF.Cache.Model.ReloadableCacheKey> ReloadableCacheKey { get; set; }
 
 	public CacheDbContext(DbContextOptions<CacheDbContext> options, Microsoft.Extensions.Logging.ILogger<CacheDbContext> logger)
@@ -51,6 +55,8 @@ public partial class CacheDbContext : Legion.EntityFrameworkCore.Audit.Auditable
 	{
 		RegisterUnaccentFunction(modelBuilder);
 
+		SqlServer.CacheDataConfiguration.Build(modelBuilder);
+		SqlServer.DistributedLockConfiguration.Build(modelBuilder);
 		SqlServer.ReloadableCacheKeyConfiguration.Build(modelBuilder);
 	}
 }

@@ -22,7 +22,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
+    #line 1 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class ResxGenerator : Generator.GeneratorBase
     {
@@ -34,7 +34,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
         {
             this.Write("\r\n");
             
-            #line 11 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
+            #line 11 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
 
 	SetGenerationEnvironment(this.GenerationEnvironment);
 	
@@ -120,7 +120,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
                     "ourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyTo" +
                     "ken=b77a5c561934e089</value>\r\n  </resheader>\r\n");
             
-            #line 138 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
+            #line 138 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
 
 	foreach (var kvp in data.OrderBy(d => d.Key))
 	{
@@ -130,21 +130,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
             #line hidden
             this.Write("  <data name=\"");
             
-            #line 142 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
+            #line 142 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(kvp.Key));
             
             #line default
             #line hidden
             this.Write("\" xml:space=\"preserve\">\r\n    <value>");
             
-            #line 143 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
+            #line 143 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(kvp.Value));
             
             #line default
             #line hidden
             this.Write("</value>\r\n  </data>\r\n");
             
-            #line 145 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
+            #line 145 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
 
 	}
 
@@ -153,7 +153,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Shared
             #line hidden
             this.Write("</root>\r\n");
             
-            #line 149 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
+            #line 149 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Shared\ResxGenerator.tt"
 
 	Process();
 

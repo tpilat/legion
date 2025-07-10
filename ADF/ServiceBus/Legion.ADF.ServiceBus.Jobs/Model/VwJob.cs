@@ -87,6 +87,11 @@ public sealed partial class VwJob : Jobs.JobsBaseQueryEntity, Legion.Model.IQuer
 	/// </summary>
 	public int MaxProcessingRetryCount { get; private set; }
 
+	/// <summary>
+	/// Database DataType: uuid NULL
+	/// </summary>
+	public Guid? IdDefaultHost { get; private set; }
+
 
 	private VwJob()
 	{
@@ -112,6 +117,7 @@ public sealed partial class VwJob : Jobs.JobsBaseQueryEntity, Legion.Model.IQuer
 			{ nameof(NextProcessinUtc), NextProcessinUtc },
 			{ nameof(TimeoutForProcessingInSeconds), TimeoutForProcessingInSeconds },
 			{ nameof(MaxProcessingRetryCount), MaxProcessingRetryCount },
+			{ nameof(IdDefaultHost), IdDefaultHost },
 		};
 
 	public override string? ToString()

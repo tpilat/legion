@@ -12,6 +12,12 @@ public class SortDescriptorBuilder<T> : ISortDescriptorBuilder<T>, IQueryModifie
 		_sortStack = [];
 	}
 
+	public SortDescriptorBuilder(List<SortDescriptor<T>> sortDescriptorStack)
+	{
+		Throw.IfArgumentNull(sortDescriptorStack);
+		_sortStack = sortDescriptorStack.ToList();
+	}
+
 	public IEnumerable<SortDescriptor<T>> ToSortStack()
 		=> _sortStack.ToList();
 

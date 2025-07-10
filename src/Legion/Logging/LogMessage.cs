@@ -880,4 +880,14 @@ public class LogMessage : ILogMessage
 			this,
 			Exception);
 	}
+
+	public string? ToMessageText(bool includeStackTrace = true)
+		=> includeStackTrace
+			? InternalMessage
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, ClientMessage)
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, Detail)
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, StackTrace)
+			: InternalMessage
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, ClientMessage)
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, Detail);
 }

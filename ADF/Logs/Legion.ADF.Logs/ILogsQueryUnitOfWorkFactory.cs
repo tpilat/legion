@@ -11,7 +11,6 @@ public partial interface ILogsQueryUnitOfWorkFactory
 		System.Data.IsolationLevel? isolationLevel,
 		bool? allowLocking,
 		bool createAuditEntryStore);
-
 	ILogsQueryUnitOfWork CreateWithoutTransaction(
 		IServiceProvider serviceProvider,
 		string connectionStirng,

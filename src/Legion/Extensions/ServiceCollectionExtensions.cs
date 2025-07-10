@@ -87,6 +87,9 @@ public static partial class ServiceCollectionExtensions
 					&& !type.IsAbstract
 					&& type.Implements(iServiceCollectionOptionsBuilderType));
 
+		if (!types.Any())
+			return services;
+
 		foreach (var assembly in serviceBuilderAssembliesToScan)
 		{
 			var typesToScan =
@@ -131,6 +134,9 @@ public static partial class ServiceCollectionExtensions
 					!type.IsInterface
 					&& !type.IsAbstract
 					&& type.Implements(iServiceCollectionBuilderType));
+
+		if (!types.Any())
+			return services;
 
 		foreach (var assembly in serviceBuilderAssembliesToScan)
 		{

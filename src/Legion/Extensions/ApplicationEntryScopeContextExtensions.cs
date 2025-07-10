@@ -17,6 +17,15 @@ public static class ApplicationEntryScopeContextExtensions
 	//	return store.ApplicationEntryScopeContext;
 	//}
 
+	public static IApplicationEntryScopeContext GetRequiredApplicationEntryScopeContextClone(this IServiceProvider serviceProvider)
+	{
+		Throw.IfArgumentNull(serviceProvider);
+
+		var store = serviceProvider.GetRequiredService<ApplicationEntryScopeContextStore>();
+		var clone = store.GetApplicationEntryScopeContextClone();
+		return clone;
+	}
+
 	public static IApplicationEntryScopeContext? GetApplicationEntryScopeContextClone(this IServiceProvider serviceProvider)
 	{
 		Throw.IfArgumentNull(serviceProvider);

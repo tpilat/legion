@@ -19,7 +19,7 @@ public sealed partial class BlockedMessageType : MessageBox.MessageBoxBaseEntity
 			__IsNewObject = true,
 			IdBlockedMessageType = id,
 			Namespace = blockedNamespace,
-			CreatedUtc = DateTime.UtcNow,
+			CreatedUtc = GlobalContext.Instance.UtcNow,
 			IdMessageBoxInstance = Infrastructure.EnvironmentInfo.RUNTIME_UNIQUE_KEY
 		};
 

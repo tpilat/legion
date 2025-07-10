@@ -5,9 +5,9 @@ namespace Legion.Caching;
 public interface IADFCache : IDisposable
 {
 	T? GetValue<T>(string key, bool getClone = true, ICloneFactory? cloneFactory = null);
-	
+
 	IEnumerable<string> GetAllKeys();
-	
+
 	bool SetValuePermanently<T>(
 		string key,
 		T value,
@@ -102,7 +102,7 @@ public interface IADFCache : IDisposable
 		CancellationToken cancellationToken = default);
 
 	void RemoveValue(string key);
-	
+
 	void RemoveValuesForTag(string tag);
 
 	void RemoveValuesForWholeTags(List<string> tags);

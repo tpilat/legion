@@ -38,4 +38,30 @@ public static partial class ErrorCodes
 				"ADFCache_SVC_0001",
 				$"Unhandled exception in CacheKeyRemoveService"));
 	}
+
+	public static partial class CacheDataRemoveService
+	{
+		public static IErrorCode Default => _default.Value;
+		private static readonly Lazy<IErrorCode> _default = new(() =>
+			new ErrorCode(
+				"ADFPersCache_SVC_0000",
+				$"Unhandled exception in CacheDataRemoveService"));
+	}
+
+	public static partial class CacheDataRepositoryException
+	{
+		public static IErrorCode CacheDataConcurrentUpdate(string key)
+			=> new ErrorCode(
+				"ADFPersCache_0000",
+				$"Concurrent updates occured on key {key}");
+	}
+
+	public static partial class DistributedLockRemoveService
+	{
+		public static IErrorCode Default => _default.Value;
+		private static readonly Lazy<IErrorCode> _default = new(() =>
+			new ErrorCode(
+				"ADFDistLock_SVC_0000",
+				$"Unhandled exception in DistributedLockRemoveService"));
+	}
 }

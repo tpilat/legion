@@ -1,57 +1,58 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<LangVersion>12.0</LangVersion>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-		<RootNamespace>Legion.Database.SqlServer</RootNamespace>
-		<PackageId>Legion.Database.SqlServer</PackageId>
-		<Description>Legion.Database.SqlServer</Description>
-		<PackageTags></PackageTags>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<PackageReleaseNotes></PackageReleaseNotes>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/legion-dotnet/legion-database-sqlserver</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/legion-dotnet/legion-database-sqlserver</RepositoryUrl>
-		<PackageIcon>legion.png</PackageIcon>
-		<NeutralLanguage>en</NeutralLanguage>
-		<Copyright>Copyright LEGION</Copyright>
-		<Authors>Tomas Pilat</Authors>
-		<Version>1.0.0</Version>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>Latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <RootNamespace>Legion.Database.SqlServer</RootNamespace>
+    <PackageId>Legion.Database.SqlServer</PackageId>
+    <Description>Legion.Database.SqlServer</Description>
+    <PackageTags></PackageTags>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/legion-dotnet/legion</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/legion-dotnet/legion</RepositoryUrl>
+    <PackageIcon>legion.png</PackageIcon>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Copyright>Copyright LEGION</Copyright>
+    <Authors>Tomas Pilat</Authors>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+  </PropertyGroup>
 
-	<Import Project="../../SharedConfigurations.props" />
+  <Import Project="../../SharedConfigurations.props" />
 
-	<PropertyGroup>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<NoWarn>$(NoWarn);1591</NoWarn>
-	</PropertyGroup>
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<None Include="..\..\legion.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-	</ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\legion.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Legion\Legion.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Legion\Legion.csproj" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Content Include="..\\Legion\\bin\\Release\\net8.0\\Legion.dll">
-			<Pack>true</Pack>
-			<PackagePath>lib/net8.0/</PackagePath>
-		</Content>
-	</ItemGroup>
-	<PropertyGroup>
-		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
-	</PropertyGroup>
+  <ItemGroup>
+    <Content Include="..\\Legion\\bin\\Release\\net8.0\\Legion.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib/net8.0/</PackagePath>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
 
 </Project>

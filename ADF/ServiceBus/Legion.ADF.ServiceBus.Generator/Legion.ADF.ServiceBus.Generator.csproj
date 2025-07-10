@@ -28,10 +28,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\src\Legion.Generators\Legion.Generators.csproj" />
-		<ProjectReference Include="..\Legion.ADF.ServiceBus.Jobs.PostgreSQL\Legion.ADF.ServiceBus.Jobs.PostgreSQL.csproj" />
-		<ProjectReference Include="..\Legion.ADF.ServiceBus.Jobs.SqlServer\Legion.ADF.ServiceBus.Jobs.SqlServer.csproj" />
-		<ProjectReference Include="..\Legion.ADF.ServiceBus.Orchestrations.PostgreSQL\Legion.ADF.ServiceBus.Orchestrations.PostgreSQL.csproj" />
-		<ProjectReference Include="..\Legion.ADF.ServiceBus.Orchestrations.SqlServer\Legion.ADF.ServiceBus.Orchestrations.SqlServer.csproj" />
+		<ProjectReference Include="..\Legion.ADF.ServiceBus.PostgreSQL\Legion.ADF.ServiceBus.PostgreSQL.csproj" />
+		<ProjectReference Include="..\Legion.ADF.ServiceBus.SqlServer\Legion.ADF.ServiceBus.SqlServer.csproj" />
 		<!--<ProjectReference Include="..\Legion.ADF.ServiceBus.Jobs.SqlServer\Legion.ADF.ServiceBus.Jobs.SqlServer.csproj" />-->
 	</ItemGroup>
 

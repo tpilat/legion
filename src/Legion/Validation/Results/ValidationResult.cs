@@ -70,6 +70,29 @@ public class ValidationResult : IValidationResult
 		return result.Build();
 	}
 
+	public string? ToText(IScopeContext scopeContext, string? delimiter, bool withDetail = true, bool withSeverity = true)
+	{
+		var sb = new StringBuilder();
+
+		if (delimiter == null)
+			delimiter = Environment.NewLine;
+
+		int i = 0;
+		foreach (var failure in Failures)
+		{
+			i++;
+			sb.Append(failure.ToString(withDetail, withSeverity));
+
+			if (i < Failures.Count)
+				sb.Append(delimiter);
+		}
+
+		var result = sb.ToString();
+		return string.IsNullOrWhiteSpace(result)
+			? null
+			: result;
+	}
+
 	public ValidationException? ToException(IScopeContext scopeContext, IErrorCode? errorCode = null, bool clientMessageWithPropertyName = true, bool withErrorMessageDetails = false)
 	{
 		var result = ToResult(scopeContext, clientMessageWithPropertyName);

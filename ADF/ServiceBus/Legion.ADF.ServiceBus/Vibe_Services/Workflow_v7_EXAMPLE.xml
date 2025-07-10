@@ -1,0 +1,67 @@
+﻿<Sequential xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Step stepName="StartProcess" id="start" />
+  
+  <Retry retryCount="3" delay="PT2S" timeout="PT5S">
+    <Body>
+      <Step stepName="SendEmail" id="email" />
+    </Body>
+  </Retry>
+
+  <Parallel waitAll="true">
+    <Step stepName="ProcessA" />
+    <Step stepName="ProcessB" />
+  </Parallel>
+
+  <WaitForEvent eventName="UserConfirmed" timeout="PT10M" correlationProperty="userId" correlationValue="42" />
+
+  <If condition="data.isValid">
+    <Then>
+      <Step stepName="ValidateSuccess" />
+    </Then>
+    <Else>
+      <Step stepName="ValidateFailed" />
+    </Else>
+  </If>
+
+  <Switch expression="data.status">
+    <Case equals="Pending">
+      <Step stepName="HandlePending" />
+    </Case>
+    <Case equals="Approved">
+      <Step stepName="HandleApproved" />
+    </Case>
+    <Default>
+      <Step stepName="HandleDefault" />
+    </Default>
+  </Switch>
+
+  <While condition="data.counter &lt; 5">
+    <Body>
+      <Step stepName="IncrementCounter" />
+    </Body>
+  </While>
+
+  <Foreach collection="data.items" itemVar="item">
+    <Body>
+      <Step stepName="ProcessItem" />
+    </Body>
+  </Foreach>
+
+  <TryCatch>
+    <Try>
+      <Step stepName="TrySomething" />
+    </Try>
+    <Catch>
+      <Step stepName="HandleError" />
+    </Catch>
+  </TryCatch>
+
+  <Compensate>
+    <StepRef stepName="SendEmail" />
+    <StepRef stepName="ProcessItem" />
+  </Compensate>
+
+  <GoTo targetNodeId="start" />
+
+  <CallFlow flowName="Common/NotifyUser" id="notify" />
+</Sequential>

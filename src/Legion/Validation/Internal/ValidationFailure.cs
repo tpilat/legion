@@ -71,5 +71,26 @@ internal class ValidationFailure : IValidationFailure
 		=> $"{(string.IsNullOrWhiteSpace(basePath) ? "" : $"{basePath.TrimPostfix(".")}.")}{ObjectPath.ToString()?.TrimPrefix("_").TrimPrefix(".")}: {(Severity == ValidationSeverity.Error ? ErrorCode.Message : $"{Severity}: {ErrorCode.Message}")}";
 
 	public override string ToString()
-		=> Severity == ValidationSeverity.Error ? MessageWithPropertyName : $"{Severity}: {MessageWithPropertyName}";
+		=> Severity == ValidationSeverity.Error
+			? MessageWithPropertyName
+			: $"{Severity}: {MessageWithPropertyName}";
+
+	public string ToString(bool withDetail, bool withSeverity)
+		=> withDetail && !string.IsNullOrWhiteSpace(DetailInfo)
+			? (withSeverity
+				? $"{Severity}: {ErrorCode}: {GetMessageWithPropertyName()} | {DetailInfo}"
+				: $"{ErrorCode}: {GetMessageWithPropertyName()} | {DetailInfo}")
+			: (withSeverity
+				? $"{Severity}: {ErrorCode}: {GetMessageWithPropertyName()}"
+				: $"{ErrorCode}: {GetMessageWithPropertyName()}");
+
+	public string? GetPropertyName()
+		=> string.IsNullOrWhiteSpace(ObjectPath.PropertyName)
+			? null
+			: ObjectPath.ToString()?.TrimPrefix("_.");
+
+	public string GetMessageWithPropertyName()
+		=> string.IsNullOrWhiteSpace(ObjectPath.PropertyName)
+			? ErrorCode.Message
+			: $"{ObjectPath.ToString()?.TrimPrefix("_.")} - {ErrorCode.Message}";
 }

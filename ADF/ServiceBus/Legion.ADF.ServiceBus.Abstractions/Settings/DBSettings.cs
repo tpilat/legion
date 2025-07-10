@@ -57,12 +57,14 @@ public class DbConnectionSettings
 
 public static class DBSettingsExtensions
 {
-	public static IServiceCollection AddDBSettings(this IServiceCollection services)
+	public static IServiceCollection AddDBSettings(
+		this IServiceCollection services,
+		string esbConfigBindingPath)
 	{
 		services
 			.AddOptions<DBSettings>()
-			.BindConfiguration($"{AppSettings.PREFIX}:{nameof(DBSettings)}")
-			.AddOptionsValidator($"{AppSettings.PREFIX}.{nameof(DBSettings)}")
+			.BindConfiguration($"{esbConfigBindingPath}:{nameof(DBSettings)}")
+			.AddOptionsValidator($"{esbConfigBindingPath}.{nameof(DBSettings)}")
 			.ValidateOnStart();
 
 		return services;

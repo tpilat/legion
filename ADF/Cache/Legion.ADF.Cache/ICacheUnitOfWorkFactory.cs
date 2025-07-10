@@ -11,7 +11,6 @@ public partial interface ICacheUnitOfWorkFactory
 		System.Data.IsolationLevel? isolationLevel,
 		bool? allowLocking,
 		bool createAuditEntryStore);
-
 	ICacheUnitOfWork CreateWithoutTransaction(
 		IServiceProvider serviceProvider,
 		string connectionStirng,

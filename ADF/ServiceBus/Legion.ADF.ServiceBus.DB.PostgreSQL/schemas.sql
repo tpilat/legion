@@ -1,5 +1,8 @@
 SET client_min_messages TO WARNING; 
 
+DROP Schema If Exists hosts Cascade;
+CREATE Schema hosts;
+
 DROP Schema If Exists jobs Cascade;
 CREATE Schema jobs;
 
@@ -16,12 +19,12 @@ BEGIN
        || string_agg(format('%I.%I', schemaname, tablename), ', ')
        || ' RESTART IDENTITY CASCADE'
    FROM   pg_tables
-   WHERE  tableowner = 'postgres' AND schemaname in ('jobs', 'orch'));
+   WHERE  tableowner = 'postgres' AND schemaname in ('hosts', 'jobs', 'orch'));
 
   EXECUTE
   (SELECT
 		string_agg(format('SELECT setval(''%I.%I'', 1, FALSE)', s.sequence_schema, s.sequence_name), '; ')
 	FROM information_schema.sequences s
-	WHERE s.sequence_schema in ('jobs', 'orch'));
+	WHERE s.sequence_schema in ('hosts', 'jobs', 'orch'));
 END
 $func$ LANGUAGE plpgsql;

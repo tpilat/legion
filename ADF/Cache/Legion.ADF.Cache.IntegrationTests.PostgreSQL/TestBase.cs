@@ -1,4 +1,7 @@
-﻿using Legion.Database.PostgreSQL;
+﻿using Legion.Caching;
+using Legion.Database.PostgreSQL;
+using Legion.Locks;
+using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using System.Text;
 
@@ -32,6 +35,12 @@ public abstract class TestBase
 
 		SetupTestInternal();
 	}
+
+	public ISimplePersistentCache GetSimplePersistentCache(IServiceProvider sp)
+		=> sp.GetRequiredService<ISimplePersistentCache>();
+
+	public IDistributedLockProvider GetDistributedLockProvider(IServiceProvider sp)
+		=> sp.GetRequiredService<IDistributedLockProvider>();
 
 	[TearDown]
 	public async Task TearDownTest()

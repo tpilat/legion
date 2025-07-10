@@ -1,4 +1,5 @@
 ﻿using Legion.Serializer;
+using Legion.Text;
 using Microsoft.Extensions.Logging;
 using System.Text;
 
@@ -397,4 +398,14 @@ public class DeserializedLogMessage : ILogMessage
 		//return FullMessage;
 		return IdLogMessage.ToString();
 	}
+
+	public string? ToMessageText(bool includeStackTrace = true)
+		=> includeStackTrace
+			? InternalMessage
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, ClientMessage)
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, Detail)
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, StackTrace)
+			: InternalMessage
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, ClientMessage)
+				.ConcatIfNotNullOrEmpty(Environment.NewLine, Detail);
 }

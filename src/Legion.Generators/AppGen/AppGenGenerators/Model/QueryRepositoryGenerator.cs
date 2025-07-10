@@ -23,7 +23,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+    #line 1 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class QueryRepositoryGenerator : Generator.GeneratorBase
     {
@@ -35,7 +35,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
         {
             this.Write("\r\n");
             
-            #line 12 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 12 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
 
 	SetGenerationEnvironment(this.GenerationEnvironment);
 	
@@ -53,14 +53,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("using ");
             
-            #line 24 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 24 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(import));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 25 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 25 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
 
 	}
 	if (0 < repoDesc.InterfaceImports.Count)
@@ -71,7 +71,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 31 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 31 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
 
 	}
 
@@ -80,35 +80,35 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("namespace ");
             
-            #line 34 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 34 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repoDesc.InterfaceNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\npublic partial interface ");
             
-            #line 36 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 36 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repoDesc.InterfaceName));
             
             #line default
             #line hidden
             this.Write(" : Legion.Model.Repositories.IQueryRepositoryBase\r\n{\r\n}\r\n\r\npublic interface ");
             
-            #line 40 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 40 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repoDesc.InterfaceName));
             
             #line default
             #line hidden
             this.Write("<T> : Legion.Model.Repositories.IQueryRepositoryBase<T>, ");
             
-            #line 40 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 40 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repoDesc.InterfaceName));
             
             #line default
             #line hidden
             this.Write(", Legion.Model.Repositories.IQueryRepositoryBase\r\n{\r\n}\r\n");
             
-            #line 43 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 43 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
 
 	StartNewFile(repoDesc.BaseRepoTargetFolder, repoDesc.BaseRepoFileName);
 
@@ -122,14 +122,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("using ");
             
-            #line 51 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 51 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(import));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 52 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 52 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
 
 	}
 	if (0 < repoDesc.BaseRepoImports.Count)
@@ -140,7 +140,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 58 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 58 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
 
 	}
 
@@ -149,28 +149,28 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("namespace ");
             
-            #line 61 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 61 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repoDesc.BaseRepoNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\npublic abstract partial class ");
             
-            #line 63 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 63 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repoDesc.BaseRepoName));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 63 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 63 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repoDesc.InterfaceNamespace));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 63 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 63 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repoDesc.InterfaceName));
             
             #line default
@@ -178,7 +178,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write(", Legion.Model.Repositories.IQueryRepositoryBase\r\n{\r\n\tpublic IEFConnectionProvide" +
                     "r ConnectionProvider { get; }\r\n\r\n\tpublic ");
             
-            #line 67 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 67 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repoDesc.BaseRepoName));
             
             #line default
@@ -186,7 +186,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("(\r\n\t\tIEFConnectionProvider connectionProvider)\r\n\t{\r\n\t\tThrow.IfArgumentNull(connec" +
                     "tionProvider);\r\n\r\n\t\tConnectionProvider = connectionProvider;\r\n\t}\r\n\r\n\tprotected ");
             
-            #line 75 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 75 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repoDesc.DbContextFullName));
             
             #line default
@@ -194,35 +194,35 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write(" GetContext(IScopeContext scopeContext)\r\n\t\t=> ConnectionProvider.GetOrCreateDbCon" +
                     "text<");
             
-            #line 76 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 76 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(repoDesc.DbContextFullName));
             
             #line default
             #line hidden
             this.Write(">(scopeContext);\r\n\r\n\tprotected ");
             
-            #line 78 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 78 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dbConnection));
             
             #line default
             #line hidden
             this.Write(" GetDbConnection()\r\n\t\t=> (");
             
-            #line 79 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 79 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dbConnection));
             
             #line default
             #line hidden
             this.Write(")ConnectionProvider.GetDbConnection()!;\r\n\r\n\tprotected ");
             
-            #line 81 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 81 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dbConnection));
             
             #line default
             #line hidden
             this.Write(" GetOrCreateNewDbConnection(out bool isNewConnection)\r\n\t\t=> (");
             
-            #line 82 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 82 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dbConnection));
             
             #line default
@@ -230,21 +230,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write(")ConnectionProvider.GetOrCreateNewDbConnection(out isNewConnection)!;\r\n\r\n\tprotect" +
                     "ed ");
             
-            #line 84 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 84 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dbConnection));
             
             #line default
             #line hidden
             this.Write(" CreateNewDbConnection()\r\n\t\t=> (");
             
-            #line 85 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 85 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dbConnection));
             
             #line default
             #line hidden
             this.Write(")ConnectionProvider.CreateNewDbConnection()!;\r\n}\r\n");
             
-            #line 87 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
+            #line 87 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryRepositoryGenerator.tt"
 
 	Process();
 

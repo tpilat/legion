@@ -23,7 +23,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+    #line 1 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class EntityModelGenerator : Generator.GeneratorBase
     {
@@ -35,7 +35,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
         {
             this.Write("\r\n");
             
-            #line 12 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 12 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	SetGenerationEnvironment(this.GenerationEnvironment);
 	
@@ -66,14 +66,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("using ");
             
-            #line 37 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 37 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(import));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 38 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 38 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 	if (0 < entityDesc.Imports.Count)
@@ -84,7 +84,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 44 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 44 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 
@@ -93,77 +93,77 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("namespace ");
             
-            #line 47 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 47 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Namespace(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\npublic");
             
-            #line 49 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(@sealed));
             
             #line default
             #line hidden
             this.Write(" partial class ");
             
-            #line 49 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(" : ");
             
-            #line 49 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.GetBaseEntityName(modelName, contextName)));
             
             #line default
             #line hidden
             
-            #line 49 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iAuditEntry));
             
             #line default
             #line hidden
             
-            #line 49 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iSelfAuditableEntity));
             
             #line default
             #line hidden
             
-            #line 49 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iSynchronizable));
             
             #line default
             #line hidden
             
-            #line 49 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iConcurrent));
             
             #line default
             #line hidden
             
-            #line 49 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iCorrelable));
             
             #line default
             #line hidden
             
-            #line 49 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(customInterfaces));
             
             #line default
             #line hidden
             
-            #line 49 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(iAuditableEntity));
             
             #line default
             #line hidden
             this.Write(", Legion.Model.IEntity\r\n{\r\n");
             
-            #line 51 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 51 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	var wasSet = false;
 	foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
@@ -180,21 +180,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\tprivate List<");
             
-            #line 62 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 62 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write("> _");
             
-            #line 62 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 62 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.AsFieldName));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 63 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 63 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 		}
@@ -208,7 +208,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 72 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 72 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 
@@ -217,14 +217,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\tpublic static IValidator<");
             
-            #line 75 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 75 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write("> DefaultDBValidator { get; }\r\n");
             
-            #line 76 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 76 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 
 	foreach (var property in entityDesc.Properties.Where(x => !x.Data.IsIgnored))
@@ -257,21 +257,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\t/// <summary>\r\n\t/// Database DataType: ");
             
-            #line 105 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 105 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dbDataType));
             
             #line default
             #line hidden
             this.Write(" | --NO TARGET-- | ");
             
-            #line 105 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 105 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Data.ForeignKey.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t/// </summary>\r\n");
             
-            #line 107 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 107 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 			else
@@ -282,35 +282,35 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\t/// <summary>\r\n\t/// Database DataType: ");
             
-            #line 114 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 114 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dbDataType));
             
             #line default
             #line hidden
             this.Write(" | ");
             
-            #line 114 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 114 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc?.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 114 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 114 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Data.ForeignKey.DependentToPrincipal.Name));
             
             #line default
             #line hidden
             this.Write(" | ");
             
-            #line 114 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 114 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Data.ForeignKey.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t/// </summary>\r\n");
             
-            #line 116 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 116 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 		}
@@ -322,14 +322,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\t/// <summary>\r\n\t/// Database DataType: ");
             
-            #line 124 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 124 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(dbDataType));
             
             #line default
             #line hidden
             this.Write("\r\n\t/// </summary>\r\n");
             
-            #line 126 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 126 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 		}
 
@@ -341,46 +341,46 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\tpublic ");
             
-            #line 132 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 132 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Helpers.TypeHelper.TypeToCSharpSourceCode(property.ClrType)));
             
             #line default
             #line hidden
             
-            #line 132 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 132 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(nullableString));
             
             #line default
             #line hidden
             
-            #line 132 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 132 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(nullableByteArray));
             
             #line default
             #line hidden
             
-            #line 132 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 132 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(nullableList));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 132 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 132 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" { get; ");
             
-            #line 132 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 132 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture((property.Data.IsConcurrencyToken ? "" : "private ")));
             
             #line default
             #line hidden
             this.Write("set; }\r\n");
             
-            #line 133 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 133 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 		}
 	}
@@ -393,7 +393,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 141 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 141 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 	 
 	}
 
@@ -408,7 +408,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 151 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 151 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	if (navigation.Data.ForeignKey.PrincipalToDependent.IsCollection)
 	{
@@ -418,28 +418,28 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t/// <summary>\r\n\t/// _1:N ");
             
-            #line 156 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 156 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Helpers.TypeHelper.TypeToCSharpSourceCode(navigation.Data.ForeignKey.Properties[0].ClrType)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 156 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 156 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" | ");
             
-            #line 156 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 156 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t/// </summary>\r\n");
             
-            #line 158 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 158 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 	else
@@ -450,7 +450,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t/// <summary>\r\n");
             
-            #line 164 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 164 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 		foreach (var idx in navigation.Data.ForeignKey.Properties.SelectMany(fkp => fkp.Indexes).Where(ix => ix.IsUnique))
 		{
@@ -460,14 +460,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t/// UNIQUE INDEX: ");
             
-            #line 168 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 168 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(idx.Name));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 169 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 169 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 		}
 
@@ -476,28 +476,28 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t/// _1:1 ");
             
-            #line 172 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 172 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Helpers.TypeHelper.TypeToCSharpSourceCode(navigation.Data.ForeignKey.Properties[0].ClrType)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 172 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 172 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" | ");
             
-            #line 172 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 172 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t/// </summary>\r\n");
             
-            #line 174 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 174 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 
@@ -506,21 +506,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\tpublic ");
             
-            #line 177 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 177 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 177 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 177 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" { get; private set; }\r\n");
             
-            #line 178 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 178 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 		}
 	}
@@ -533,7 +533,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 186 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 186 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 	
 	}
 
@@ -550,49 +550,49 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\t/// <summary>\r\n\t/// N:_1 ");
             
-            #line 199 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 199 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 199 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 199 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" | ");
             
-            #line 199 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 199 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t/// </summary>\r\n\tpublic IReadOnlyList<");
             
-            #line 201 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 201 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write("> ");
             
-            #line 201 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 201 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" => _");
             
-            #line 201 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 201 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.AsFieldName));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 202 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 202 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 			else
@@ -603,42 +603,42 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\t/// <summary>\r\n\t/// 1:_1 ");
             
-            #line 209 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 209 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.PrincipalToDependent.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 209 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 209 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" | ");
             
-            #line 209 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 209 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t/// </summary>\r\n\tpublic ");
             
-            #line 211 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 211 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 211 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 211 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" { get; private set; }\r\n");
             
-            #line 212 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 212 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 		}
@@ -655,21 +655,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\t");
             
-            #line 224 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 224 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(constructorModifier));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 224 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 224 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write("()\r\n\t{\r\n");
             
-            #line 226 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 226 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	foreach (var navigation in entityDesc.BackNavigations.Where(bn => !bn.Data.Ignore && bn.Data.TargetType.ModelContextNames.ContainsKey(modelName) && bn.Data.IsCollection))
 	{
@@ -682,14 +682,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t\t_");
             
-            #line 233 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 233 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.AsFieldName));
             
             #line default
             #line hidden
             this.Write(" = [];\r\n");
             
-            #line 234 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 234 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 		}
 	}
@@ -702,7 +702,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\t}\r\n");
             
-            #line 242 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 242 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 if (enableFixupReferences)
 {
@@ -714,7 +714,7 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\tprivate Guid _fixToken;\r\n");
             
-            #line 250 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 250 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 
@@ -723,7 +723,7 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\tpublic void FixupReferences(Guid fixToken)\r\n\t{\r\n");
             
-            #line 256 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 256 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
  
 	if (hasAnyNavigationsOrBackNavigations)
 	{
@@ -733,7 +733,7 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\tif (_fixToken == fixToken)\r\n\t\t\treturn;\r\n\r\n\t\t_fixToken = fixToken;\r\n");
             
-            #line 264 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 264 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 	if (0 < entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)).Count()
@@ -745,7 +745,7 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n");
             
-            #line 271 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 271 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 	 
 	}
 
@@ -763,56 +763,56 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\tif (");
             
-            #line 283 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 283 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" != null)\r\n\t\t{\r\n\t\t\tif (");
             
-            #line 285 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 285 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(compare));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 285 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 285 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 285 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 285 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.Data.FirstPrimaryKey));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\t");
             
-            #line 286 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 286 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 286 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 286 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 286 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 286 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.Data.FirstPrimaryKey));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 287 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 287 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
 			{
@@ -822,14 +822,14 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\telse\r\n\t\t\t\t");
             
-            #line 292 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 292 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n");
             
-            #line 293 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 293 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 
@@ -838,7 +838,7 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n");
             
-            #line 297 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 297 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			if (!navigation.Data.BackNavigation.Ignore && navigation.Data.BackNavigation.TargetType.ModelContextNames.ContainsKey(modelName))
 			{
@@ -850,70 +850,70 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\tif (");
             
-            #line 303 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 303 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 303 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 303 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(" == null)\r\n\t\t\t\t");
             
-            #line 304 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 304 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 304 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 304 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(" = new List<");
             
-            #line 304 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 304 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(">();\r\n\r\n\t\t\tif (!");
             
-            #line 306 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 306 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 306 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 306 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(".Any(x => ReferenceEquals(x, this)))\r\n\t\t\t\t");
             
-            #line 307 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 307 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 307 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 307 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(".Add(this);\r\n\r\n");
             
-            #line 309 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 309 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 				else
@@ -924,21 +924,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\t");
             
-            #line 314 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 314 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 314 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 314 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(" = this;\r\n");
             
-            #line 315 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 315 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 			}
@@ -948,14 +948,14 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\t");
             
-            #line 319 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 319 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".FixupReferences(_fixToken);\r\n\t\t}\r\n\r\n");
             
-            #line 322 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 322 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 		}
 	}
@@ -977,49 +977,49 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\tif (");
             
-            #line 338 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 338 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" != null)\r\n\t\t{\r\n\t\t\tforeach (var item in ");
             
-            #line 340 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 340 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t{\r\n\t\t\t\tif (");
             
-            #line 342 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 342 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(compare));
             
             #line default
             #line hidden
             this.Write(" this.");
             
-            #line 342 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 342 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.FirstPrimaryKey));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\t\titem.");
             
-            #line 343 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 343 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" = this.");
             
-            #line 343 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 343 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.FirstPrimaryKey));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 344 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 344 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				if (navigation.Data.ForeignKey.Properties[0].IsNullable)
 				{
@@ -1029,14 +1029,14 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\t\telse\r\n\t\t\t\t\titem.");
             
-            #line 349 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 349 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n");
             
-            #line 350 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 350 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 
@@ -1045,14 +1045,14 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\t\t\titem.");
             
-            #line 354 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 354 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(" = this;\r\n\t\t\t\titem.FixupReferences(_fixToken);\r\n\t\t\t}\r\n\t\t}\r\n\r\n");
             
-            #line 359 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 359 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 			else
@@ -1063,49 +1063,49 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\tif (");
             
-            #line 364 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 364 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" != null)\r\n\t\t{\r\n\t\t\tif (");
             
-            #line 366 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 366 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(compare));
             
             #line default
             #line hidden
             this.Write(" this.");
             
-            #line 366 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 366 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.FirstPrimaryKey));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t\t");
             
-            #line 367 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 367 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 367 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 367 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" = this.");
             
-            #line 367 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 367 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Data.FirstPrimaryKey));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 368 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 368 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				if (navigation.Data.ForeignKey.Properties[0].IsNullable)
 				{
@@ -1115,21 +1115,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\telse\r\n\t\t\t\t");
             
-            #line 373 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 373 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 373 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 373 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n");
             
-            #line 374 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 374 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 
@@ -1138,28 +1138,28 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\t\t");
             
-            #line 378 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 378 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 378 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 378 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(" = this;\r\n\t\t\t");
             
-            #line 379 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 379 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".FixupReferences(_fixToken);\r\n\t\t}\r\n\r\n");
             
-            #line 382 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 382 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 		}
@@ -1170,7 +1170,7 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t}\r\n");
             
-            #line 388 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 388 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	foreach (var navigation in entityDesc.Navigations.Where(n => !n.Data.Ignore && n.Data.TargetType.ModelContextNames.ContainsKey(modelName)))
 	{
@@ -1183,35 +1183,35 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\tpublic ");
             
-            #line 396 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 396 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(" Set");
             
-            #line 396 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 396 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 396 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 396 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 396 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 396 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(")\r\n\t{\r\n");
             
-            #line 398 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 398 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
 			{
@@ -1221,21 +1221,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\tif (");
             
-            #line 402 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 402 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(" == null)\r\n\t\t{\r\n\t\t\tUnset");
             
-            #line 404 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 404 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write("();\r\n\t\t\treturn this;\r\n\t\t}\r\n");
             
-            #line 407 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 407 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 			else //not nullable
@@ -1246,21 +1246,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\tif (");
             
-            #line 412 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 412 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(" == null)\r\n\t\t\tthrow new ArgumentNullException(nameof(");
             
-            #line 413 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 413 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write("));\r\n");
             
-            #line 414 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 414 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 
@@ -1269,28 +1269,28 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 418 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 418 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 418 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 418 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 418 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 418 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.Data.FirstPrimaryKey));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 419 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 419 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			if (!navigation.Data.BackNavigation.Ignore && navigation.Data.BackNavigation.TargetType.ModelContextNames.ContainsKey(modelName))
 			{
@@ -1302,98 +1302,98 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\tif (");
             
-            #line 426 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 426 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 426 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 426 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(" != null)\r\n\t\t\t");
             
-            #line 427 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 427 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 427 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 427 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(".Remove(this);\r\n\r\n\t\tif (");
             
-            #line 429 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 429 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 429 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 429 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(" == null)\r\n\t\t\t");
             
-            #line 430 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 430 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 430 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 430 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(" = new List<");
             
-            #line 430 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 430 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(">();\r\n\r\n\t\tif (!");
             
-            #line 432 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 432 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 432 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 432 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(".Any(x => ReferenceEquals(x, this)))\r\n\t\t\t");
             
-            #line 433 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 433 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 433 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 433 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(".Add(this);\r\n");
             
-            #line 434 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 434 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 				else
@@ -1404,35 +1404,35 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 440 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 440 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 440 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 440 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n\t\t");
             
-            #line 441 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 441 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 441 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 441 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(" = this;\r\n");
             
-            #line 442 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 442 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 
@@ -1440,7 +1440,7 @@ if (enableFixupReferences)
             #line default
             #line hidden
             
-            #line 445 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 445 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 
@@ -1449,21 +1449,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 449 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 449 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 449 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 449 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\treturn this;\r\n\t}\r\n");
             
-            #line 452 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 452 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
 			{
@@ -1473,28 +1473,28 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\tpublic ");
             
-            #line 457 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 457 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(" Unset");
             
-            #line 457 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 457 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write("()\r\n\t{\r\n\t\t");
             
-            #line 459 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 459 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n");
             
-            #line 460 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 460 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			if (!navigation.Data.BackNavigation.Ignore && navigation.Data.BackNavigation.TargetType.ModelContextNames.ContainsKey(modelName))
 			{
@@ -1506,42 +1506,42 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\tif (");
             
-            #line 467 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 467 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" != null && ");
             
-            #line 467 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 467 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 467 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 467 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(" != null)\r\n\t\t\t");
             
-            #line 468 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 468 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 468 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 468 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(".Remove(this);\r\n");
             
-            #line 469 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 469 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 				else
@@ -1552,21 +1552,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 475 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 475 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 475 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 475 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.BackNavigation.Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n");
             
-            #line 476 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 476 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 
@@ -1574,7 +1574,7 @@ if (enableFixupReferences)
             #line default
             #line hidden
             
-            #line 479 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 479 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 
@@ -1583,14 +1583,14 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 483 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 483 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n\t\treturn this;\r\n\t}\r\n");
             
-            #line 486 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 486 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 		}
@@ -1607,35 +1607,35 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\tpublic ");
             
-            #line 498 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 498 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(" Set");
             
-            #line 498 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 498 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 498 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 498 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 498 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 498 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(")\r\n\t{\r\n");
             
-            #line 500 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 500 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
 			{
@@ -1645,21 +1645,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\tif (");
             
-            #line 504 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 504 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(" == null)\r\n\t\t{\r\n\t\t\tUnset");
             
-            #line 506 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 506 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write("();\r\n\t\t\treturn this;\r\n\t\t}\r\n");
             
-            #line 509 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 509 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 			else //not nullable
@@ -1670,21 +1670,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\tif (");
             
-            #line 514 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 514 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(" == null)\r\n\t\t\tthrow new ArgumentNullException(nameof(");
             
-            #line 515 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 515 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write("));\r\n");
             
-            #line 516 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 516 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 			if (!navigation.Data.Navigation.Ignore && navigation.Data.Navigation.TargetType.ModelContextNames.ContainsKey(modelName))
@@ -1697,119 +1697,119 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 524 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 524 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 524 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 524 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 524 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 524 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.Data.FirstPrimaryKey));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\n\t\tif (");
             
-            #line 526 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 526 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 526 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 526 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(" != null)\r\n\t\t\t");
             
-            #line 527 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 527 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 527 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 527 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(".Remove(this);\r\n\r\n\t\tif (");
             
-            #line 529 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 529 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 529 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 529 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(" == null)\r\n\t\t\t");
             
-            #line 530 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 530 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 530 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 530 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(" = new List<");
             
-            #line 530 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 530 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(">();\r\n\r\n\t\tif (!");
             
-            #line 532 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 532 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 532 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 532 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(".Any(x => ReferenceEquals(x, this)))\r\n\t\t\t");
             
-            #line 533 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 533 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 533 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 533 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(".Add(this);\r\n");
             
-            #line 534 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 534 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 				else
@@ -1820,35 +1820,35 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 540 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 540 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 540 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 540 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n\t\t");
             
-            #line 541 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 541 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 541 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 541 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(" = this;\r\n");
             
-            #line 542 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 542 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 			}
@@ -1858,21 +1858,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 547 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 547 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" = ");
             
-            #line 547 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 547 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(targetEntityDesc.AsFieldName));
             
             #line default
             #line hidden
             this.Write(";\r\n\t\treturn this;\r\n\t}\r\n");
             
-            #line 550 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 550 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
 			{
@@ -1882,21 +1882,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\tpublic ");
             
-            #line 555 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 555 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(" Unset");
             
-            #line 555 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 555 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write("()\r\n\t{\r\n");
             
-            #line 557 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 557 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			if (!navigation.Data.Navigation.Ignore && navigation.Data.Navigation.TargetType.ModelContextNames.ContainsKey(modelName))
 			{
@@ -1908,49 +1908,49 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t");
             
-            #line 563 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 563 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n\r\n\t\tif (");
             
-            #line 565 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 565 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" != null && ");
             
-            #line 565 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 565 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 565 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 565 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(" != null)\r\n\t\t\t");
             
-            #line 566 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 566 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 566 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 566 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(".Remove(this);\r\n");
             
-            #line 567 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 567 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 				else
@@ -1961,21 +1961,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t");
             
-            #line 572 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 572 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".");
             
-            #line 572 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 572 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.Navigation.Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n");
             
-            #line 573 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 573 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 				}
 			}
@@ -1985,14 +1985,14 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\t\t");
             
-            #line 578 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 578 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n\t\treturn this;\r\n\t}\r\n");
             
-            #line 581 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 581 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 		}
@@ -2009,28 +2009,28 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\tpublic ");
             
-            #line 593 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 593 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(" Clear");
             
-            #line 593 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 593 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write("()\r\n\t{\r\n\t\tif (");
             
-            #line 595 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 595 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(" != null)\r\n\t\t{\r\n");
             
-            #line 597 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 597 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			if (navigation.Data.ForeignKey.Properties[0].IsNullable)
 			{
@@ -2040,21 +2040,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\tforeach (var item in ");
             
-            #line 601 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 601 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t{\r\n\t\t\t\titem.");
             
-            #line 603 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 603 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.Properties[0].Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n");
             
-            #line 604 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 604 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			if (!navigation.Data.ForeignKey.DependentToPrincipal.Ignore && navigation.Data.ForeignKey.DependentToPrincipal.TargetType.ModelContextNames.ContainsKey(modelName))
 			{
@@ -2064,14 +2064,14 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\t\titem.");
             
-            #line 608 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 608 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Data.ForeignKey.DependentToPrincipal.Name));
             
             #line default
             #line hidden
             this.Write(" = null;\r\n");
             
-            #line 609 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 609 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 
@@ -2080,7 +2080,7 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\t}\r\n\r\n");
             
-            #line 614 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 614 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 
@@ -2089,14 +2089,14 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\t");
             
-            #line 617 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 617 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(navigation.Name));
             
             #line default
             #line hidden
             this.Write(".Clear();\r\n\t\t}\r\n\r\n\t\treturn this;\r\n\t}\r\n");
             
-            #line 622 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 622 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 		}
 	}
@@ -2122,7 +2122,7 @@ if (enableFixupReferences)
 	}
 ");
             
-            #line 642 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 642 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 
@@ -2135,14 +2135,14 @@ if (enableFixupReferences)
             this.Write("\r\n\t[System.ComponentModel.DataAnnotations.Schema.NotMapped]\r\n\tstring Legion.Model" +
                     ".Concurrence.IConcurrent.ConcurrencyTokenPropertyName => nameof(");
             
-            #line 650 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 650 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(concurrencyProp.Name));
             
             #line default
             #line hidden
             this.Write(");\r\n\r\n\tpublic void SetNewConcurrencyToken()\r\n\t{\r\n");
             
-            #line 654 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 654 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	if (Helpers.TypeHelper.TypeToCSharpSourceCode(concurrencyProp.ClrType) == "Guid")
 	{
@@ -2152,14 +2152,14 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t");
             
-            #line 658 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 658 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(concurrencyProp.Name));
             
             #line default
             #line hidden
             this.Write(" = Guid.NewGuid();\r\n");
             
-            #line 659 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 659 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 	else
@@ -2170,7 +2170,7 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\tBUG!!! expected GUID\r\n\t\tthrow new NotImplementedException();\r\n");
             
-            #line 666 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 666 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 
@@ -2179,7 +2179,7 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t}\r\n");
             
-            #line 670 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 670 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 
@@ -2192,21 +2192,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\tstatic ");
             
-            #line 678 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 678 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write("()\r\n\t{\r\n\t\tDefaultDBValidator = SetDBValidatorRules(new ValidatorBuilder<");
             
-            #line 680 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 680 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write(">()).Build();\r\n\t}\r\n");
             
-            #line 682 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 682 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 
@@ -2215,7 +2215,7 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\r\n\tpublic Dictionary<string, object?> ToDictionary()\r\n\t\t=> new()\r\n\t\t{\r\n");
             
-            #line 689 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 689 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	foreach (var property in entityDesc.Properties.Where(x => !x.Data.IsIgnored))
 	{
@@ -2225,21 +2225,21 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\t{ nameof(");
             
-            #line 693 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 693 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write("), ");
             
-            #line 693 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 693 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" },\r\n");
             
-            #line 694 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 694 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	}
 
@@ -2249,7 +2249,7 @@ if (enableFixupReferences)
             this.Write("\t\t};\r\n\r\n\tpublic void TrimStringValuesToFitDatabaseMaxLengths(string? postfix = nu" +
                     "ll)\r\n\t{\r\n");
             
-            #line 701 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 701 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	foreach (var property in entityDesc.Properties.Where(x => !x.Data.IsIgnored))
 	{
@@ -2269,28 +2269,28 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t");
             
-            #line 715 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 715 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" = Legion.Text.StringHelper.TrimToFitMaxLength(");
             
-            #line 715 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 715 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(", ");
             
-            #line 715 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 715 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Data.MaxLength));
             
             #line default
             #line hidden
             this.Write(", postfix);\r\n");
             
-            #line 716 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 716 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 			}
 	}
@@ -2300,35 +2300,35 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t}\r\n\r\n\tpublic override string? GetPrimaryKeyValue()\r\n\t{\r\n\t\treturn ");
             
-            #line 724 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 724 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.PropertyToString(entityDesc.Data.FirstPrimaryKey)));
             
             #line default
             #line hidden
             this.Write(";\r\n\t}\r\n\r\n\tpublic override string? ToString()\r\n\t{\r\n\t\treturn ");
             
-            #line 729 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 729 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.PropertyToString(entityDesc.Data.MainColumn)));
             
             #line default
             #line hidden
             this.Write(";\r\n\t}\r\n\r\n\tpublic static ValidatorBuilder<");
             
-            #line 732 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 732 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write("> SetDBValidatorRules(ValidatorBuilder<");
             
-            #line 732 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 732 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityDesc.Name));
             
             #line default
             #line hidden
             this.Write("> builder)\r\n\t\t=> builder\r\n");
             
-            #line 734 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 734 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	foreach (var property in entityDesc.Properties.Where(x => !x.Data.IsIgnored))
 	{
@@ -2348,7 +2348,6 @@ if (enableFixupReferences)
 				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._real, StringComparison.InvariantCultureIgnoreCase)
 				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._integer, StringComparison.InvariantCultureIgnoreCase)
 				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._int, StringComparison.InvariantCultureIgnoreCase)
-				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._interval, StringComparison.InvariantCultureIgnoreCase)
 				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._numeric, StringComparison.InvariantCultureIgnoreCase)
 				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._numeric, StringComparison.InvariantCultureIgnoreCase)
 				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._decimal, StringComparison.InvariantCultureIgnoreCase)
@@ -2359,7 +2358,6 @@ if (enableFixupReferences)
 				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._date, StringComparison.InvariantCultureIgnoreCase)
 				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._datetime, StringComparison.InvariantCultureIgnoreCase)
 				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._datetime2, StringComparison.InvariantCultureIgnoreCase)
-				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._time, StringComparison.InvariantCultureIgnoreCase)
 				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._smalldatetime, StringComparison.InvariantCultureIgnoreCase)
 				|| property.Data.ColumnType.Equals(Database.PostgreSQL.PostgreSQLOriginalDataTypes._uuid, StringComparison.InvariantCultureIgnoreCase)
 				|| property.Data.ColumnType.Equals(Database.SqlServer.SqlServerOriginalDataTypes._uniqueidentifier, StringComparison.InvariantCultureIgnoreCase)
@@ -2395,34 +2393,34 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t\t");
             
-            #line 793 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 793 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(skipValidator));
             
             #line default
             #line hidden
             this.Write(".ForProperty(x => x.");
             
-            #line 793 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 793 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(", v => v");
             
-            #line 793 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 793 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(validator));
             
             #line default
             #line hidden
             
-            #line 793 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 793 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(fkValidator));
             
             #line default
             #line hidden
             this.Write(")\r\n");
             
-            #line 794 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 794 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 		}
 	}
@@ -2432,7 +2430,7 @@ if (enableFixupReferences)
             #line hidden
             this.Write("\t\t;\r\n}\r\n");
             
-            #line 800 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
+            #line 800 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 
 	Process();
 

@@ -2,8 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>Latest</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <RootNamespace>Legion.EntityFrameworkCore.PostgreSQL</RootNamespace>
+    <PackageId>Legion.EntityFrameworkCore.PostgreSQL</PackageId>
+    <Description>Legion.EntityFrameworkCore.PostgreSQL</Description>
+    <PackageTags></PackageTags>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/legion-dotnet/legion</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/legion-dotnet/legion</RepositoryUrl>
+    <PackageIcon>legion.png</PackageIcon>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Copyright>Copyright LEGION</Copyright>
+    <Authors>Tomas Pilat</Authors>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 
   <Import Project="../../SharedConfigurations.props" />
@@ -12,25 +29,25 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
   </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\Legion.EntityFrameworkCore\Legion.EntityFrameworkCore.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Legion.EntityFrameworkCore\Legion.EntityFrameworkCore.csproj" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<Content Include="..\\Legion\\bin\\Release\\net8.0\\Legion.dll">
-			<Pack>true</Pack>
-			<PackagePath>lib/net8.0/</PackagePath>
-		</Content>
-	</ItemGroup>
+  <ItemGroup>
+    <Content Include="..\\Legion\\bin\\Release\\net8.0\\Legion.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib/net8.0/</PackagePath>
+    </Content>
+  </ItemGroup>
 
-	<ItemGroup>
-		<Content Include="..\\Legion.EntityFrameworkCore\\bin\\Release\\net8.0\\Legion.EntityFrameworkCore.dll">
-			<Pack>true</Pack>
-			<PackagePath>lib/net8.0/</PackagePath>
-		</Content>
-	</ItemGroup>
-	<PropertyGroup>
-		<SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
-	</PropertyGroup>
+  <ItemGroup>
+    <Content Include="..\\Legion.EntityFrameworkCore\\bin\\Release\\net8.0\\Legion.EntityFrameworkCore.dll">
+      <Pack>true</Pack>
+      <PackagePath>lib/net8.0/</PackagePath>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
 
 </Project>

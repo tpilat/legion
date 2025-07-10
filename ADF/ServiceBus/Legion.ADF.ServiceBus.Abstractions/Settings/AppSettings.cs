@@ -1,5 +1,4 @@
-﻿using Legion;
-using Legion.Extensions;
+﻿using Legion.Extensions;
 using Legion.Reflection.ObjectPaths;
 using Legion.Validation;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,8 +9,6 @@ namespace Legion.ADF.ServiceBus.Settings;
 
 public class AppSettings
 {
-	public const string PREFIX = "ADFServiceBus";
-
 	private static bool _initialized;
 	public static AppSettings Instance { get; private set; }
 	public static string ApplicationVersion { get; private set; }
@@ -75,11 +72,13 @@ public class AppSettings
 
 public static class AppSettingsExtensions
 {
-	public static IServiceCollection AddAppSettings(this IServiceCollection services)
+	public static IServiceCollection AddAppSettings(
+		this IServiceCollection services,
+		string esbConfigBindingPath)
 	{
 		services
 			.AddOptions<AppSettings>()
-			.BindConfiguration($"{AppSettings.PREFIX}")
+			.BindConfiguration($"{esbConfigBindingPath}")
 			.Configure(o =>
 			{
 				AppSettings.Initialize(
@@ -87,11 +86,11 @@ public static class AppSettingsExtensions
 					typeof(AppSettings).Assembly.GetName().Version!.ToString(),
 					System.AppDomain.CurrentDomain.BaseDirectory);
 			})
-			.AddOptionsValidator($"{AppSettings.PREFIX}.{nameof(AppSettings)}")
+			.AddOptionsValidator($"{esbConfigBindingPath}.{nameof(AppSettings)}")
 			.ValidateOnStart();
 
-		services.AddDBSettings();
-		services.AddServiceBusStoreOptions();
+		services.AddDBSettings(esbConfigBindingPath);
+		services.AddEnterpriseServiceBusOptions(esbConfigBindingPath);
 
 		return services;
 	}

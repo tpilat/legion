@@ -7,11 +7,13 @@ namespace Legion.Results;
 
 public class ResultDto : IResult
 {
-	public List<ILogMessage> SuccessMessages { get; set; }
+	public string Name { get; set; }
 
-	public List<ILogMessage> WarningMessages { get; set; }
+	public List<LogMessageDto> SuccessMessages { get; set; }
 
-	public List<IErrorMessage> ErrorMessages { get; set; }
+	public List<LogMessageDto> WarningMessages { get; set; }
+
+	public List<ErrorMessageDto> ErrorMessages { get; set; }
 
 	public bool HasSuccessMessage => 0 < SuccessMessages.Count;
 
@@ -23,7 +25,7 @@ public class ResultDto : IResult
 
 	public virtual bool CanStoreData => false;
 
-	public bool DataWasSet { get; protected set; }
+	public bool DataWasSet { get; set; }
 
 	[Newtonsoft.Json.JsonIgnore]
 #if NET6_0_OR_GREATER
@@ -36,11 +38,26 @@ public class ResultDto : IResult
 
 	public long? AffectedEntities { get; set; }
 
+	List<ILogMessage> IResult.SuccessMessages => SuccessMessages?.Select(x => (ILogMessage)x.ToLogMessage()).ToList() ?? [];
+
+	List<ILogMessage> IResult.WarningMessages => SuccessMessages?.Select(x => (ILogMessage)x.ToLogMessage()).ToList() ?? [];
+
+	List<IErrorMessage> IResult.ErrorMessages => SuccessMessages?.Select(x => (IErrorMessage)x.ToLogMessage()).ToList() ?? [];
+
 	public ResultDto()
 	{
 		SuccessMessages = [];
 		WarningMessages = [];
 		ErrorMessages = [];
+	}
+
+	internal ResultDto(Result result)
+	{
+		SuccessMessages = result.SuccessMessages?.Select(x => x.ToClientDto()).ToList() ?? [];
+		WarningMessages = result.WarningMessages?.Select(x => x.ToClientDto()).ToList() ?? [];
+		ErrorMessages = result.ErrorMessages?.Select(x => x.ToClientDto()).ToList() ?? [];
+		DataWasSet = result.DataWasSet;
+		AffectedEntities = result.AffectedEntities;
 	}
 
 	public void Log(
@@ -147,6 +164,9 @@ public class ResultDto : IResult
 		data = default;
 		return false;
 	}
+
+	public ResultDto ToDto()
+		=> this;
 }
 
 public class ResultDto<TData> : ResultDto, IResult<TData>, IResult
@@ -158,6 +178,16 @@ public class ResultDto<TData> : ResultDto, IResult<TData>, IResult
 	public ResultDto()
 		: base()
 	{
+	}
+
+	internal ResultDto(Result<TData> result)
+	{
+		SuccessMessages = result.SuccessMessages?.Select(x => x.ToClientDto()).ToList() ?? [];
+		WarningMessages = result.WarningMessages?.Select(x => x.ToClientDto()).ToList() ?? [];
+		ErrorMessages = result.ErrorMessages?.Select(x => x.ToClientDto()).ToList() ?? [];
+		DataWasSet = result.DataWasSet;
+		AffectedEntities = result.AffectedEntities;
+		Data = result.Data;
 	}
 
 	public void ClearData()
@@ -188,4 +218,7 @@ public class ResultDto<TData> : ResultDto, IResult<TData>, IResult
 		data = default!;
 		return false;
 	}
+
+	public ResultDto<TData> ToDto()
+		=> this;
 }

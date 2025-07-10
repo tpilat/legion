@@ -1,3 +1,8 @@
+CREATE VIEW hosts."VwHost"
+AS
+SELECT *
+FROM hosts."Host";
+
 CREATE VIEW jobs."VwJob"
 AS
 SELECT
@@ -17,7 +22,8 @@ SELECT
 	j."LastProcessingUtc",
 	j."NextProcessinUtc",
 	j."TimeoutForProcessingInSeconds",
-	j."MaxProcessingRetryCount"
+	j."MaxProcessingRetryCount",
+	j."IdDefaultHost"
 FROM jobs."Job" as j
 JOIN jobs."JobStatus" js ON j."IdJobStatus" = js."IdJobStatus"
 JOIN jobs."JobRunType" jrt ON j."IdJobRunType" = jrt."IdJobRunType";

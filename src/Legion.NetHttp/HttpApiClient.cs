@@ -98,6 +98,9 @@ public abstract class HttpApiClient
 		if (string.IsNullOrWhiteSpace(request.BaseAddress))
 			request.BaseAddress = Options.BaseAddress;
 
+		if (string.IsNullOrWhiteSpace(request.BaseAddress))
+			request.BaseAddress = _client.BaseAddress?.ToString();
+
 		if (!request.RequestTimeout.HasValue && Options.DefaultTimeoutInSeconds.HasValue)
 			request.RequestTimeout = TimeSpan.FromSeconds(Options.DefaultTimeoutInSeconds.Value);
 

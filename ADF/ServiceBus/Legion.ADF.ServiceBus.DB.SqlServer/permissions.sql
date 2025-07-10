@@ -1,3 +1,6 @@
+GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::hosts To #TargetDbUsername#;
+GO
+
 GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::jobs To #TargetDbUsername#;
 GO
 

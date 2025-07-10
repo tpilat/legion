@@ -37,26 +37,26 @@ internal class Program
 			solutionDirectoryPath,
 			new RepoGeneratorOptions
 			{
-				RepoName = "Legion.ADF.ServiceBus.Jobs Repositories",
-				ModelNamespace = "Legion.ADF.ServiceBus.Jobs",
-				EFNamespace = "Legion.ADF.ServiceBus.Jobs.PostgreSQL",
-				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Jobs",
+				RepoName = "Legion.ADF.ServiceBus Repositories",
+				ModelNamespace = "Legion.ADF.ServiceBus",
+				EFNamespace = "Legion.ADF.ServiceBus.PostgreSQL",
+				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus",
 				DatabaseProviderType = Database.Metamodel.DatabaseProviderType.PostgreSQL,
-				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Jobs.PostgreSQL",
-				ContextName = "Legion.ADF.ServiceBus.Jobs.PostgreSQL.IJobsDbContext",
-				UnitOfWorkName = "JobsUnitOfWork",
-				IRepositry = "Legion.ADF.ServiceBus.Jobs.IJobsRepository",
-				RepositoryBase = "Legion.ADF.ServiceBus.Jobs.PostgreSQL.JobsRepositoryBase",
+				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.PostgreSQL",
+				ContextName = "Legion.ADF.ServiceBus.PostgreSQL.IServiceBusDbContext",
+				UnitOfWorkName = "ServiceBusUnitOfWork",
+				IRepositry = "Legion.ADF.ServiceBus.IServiceBusRepository",
+				RepositoryBase = "Legion.ADF.ServiceBus.PostgreSQL.ServiceBusRepositoryBase",
 				UoWObsoletePrefix = "MM_Mod",
 				IgnoredTypes =
 				[
-					"Legion.ADF.ServiceBus.Jobs.JobsBaseEntity"
+					"Legion.ADF.ServiceBus.ServiceBusBaseEntity"
 				],
 				QueryCompileTypes =
 				[
-					typeof(Legion.ADF.ServiceBus.Jobs.JobsBaseEntity),
-					typeof(Legion.ADF.ServiceBus.Jobs.PostgreSQL.IJobsDbContext),
-					typeof(Legion.ADF.ServiceBus.Jobs.IJobsRepository)
+					typeof(Legion.ADF.ServiceBus.ServiceBusBaseEntity),
+					typeof(Legion.ADF.ServiceBus.PostgreSQL.IServiceBusDbContext),
+					typeof(Legion.ADF.ServiceBus.IServiceBusRepository)
 				]
 			});
 
@@ -64,26 +64,26 @@ internal class Program
 			solutionDirectoryPath,
 			new RepoGeneratorOptions
 			{
-				RepoName = "Legion.ADF.ServiceBus.Jobs QueryRepositories",
-				ModelNamespace = "Legion.ADF.ServiceBus.Jobs",
-				EFNamespace = "Legion.ADF.ServiceBus.Jobs.PostgreSQL",
-				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Jobs",
+				RepoName = "Legion.ADF.ServiceBus QueryRepositories",
+				ModelNamespace = "Legion.ADF.ServiceBus",
+				EFNamespace = "Legion.ADF.ServiceBus.PostgreSQL",
+				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus",
 				DatabaseProviderType = Database.Metamodel.DatabaseProviderType.PostgreSQL,
-				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Jobs.PostgreSQL",
-				ContextName = "Legion.ADF.ServiceBus.Jobs.PostgreSQL.IJobsQueryDbContext",
-				UnitOfWorkName = "JobsQueryUnitOfWork",
-				IRepositry = "Legion.ADF.ServiceBus.Jobs.IJobsQueryRepository",
-				RepositoryBase = "Legion.ADF.ServiceBus.Jobs.PostgreSQL.JobsQueryRepositoryBase",
+				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.PostgreSQL",
+				ContextName = "Legion.ADF.ServiceBus.PostgreSQL.IServiceBusQueryDbContext",
+				UnitOfWorkName = "ServiceBusQueryUnitOfWork",
+				IRepositry = "Legion.ADF.ServiceBus.IServiceBusQueryRepository",
+				RepositoryBase = "Legion.ADF.ServiceBus.PostgreSQL.ServiceBusQueryRepositoryBase",
 				UoWObsoletePrefix = "MM_Mod",
 				IgnoredTypes =
 				[
-					"Legion.ADF.ServiceBus.Jobs.JobsBaseQueryEntity"
+					"Legion.ADF.ServiceBus.ServiceBusBaseQueryEntity"
 				],
 				QueryCompileTypes =
 				[
-					typeof(Legion.ADF.ServiceBus.Jobs.JobsBaseQueryEntity),
-					typeof(Legion.ADF.ServiceBus.Jobs.PostgreSQL.IJobsQueryDbContext),
-					typeof(Legion.ADF.ServiceBus.Jobs.IJobsQueryRepository)
+					typeof(Legion.ADF.ServiceBus.ServiceBusBaseQueryEntity),
+					typeof(Legion.ADF.ServiceBus.PostgreSQL.IServiceBusQueryDbContext),
+					typeof(Legion.ADF.ServiceBus.IServiceBusQueryRepository)
 				]
 			});
 
@@ -91,26 +91,26 @@ internal class Program
 			solutionDirectoryPath,
 			new RepoGeneratorOptions
 			{
-				RepoName = "Legion.ADF.ServiceBus.Jobs Repositories",
-				ModelNamespace = "Legion.ADF.ServiceBus.Jobs",
-				EFNamespace = "Legion.ADF.ServiceBus.Jobs.SqlServer",
-				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Jobs",
+				RepoName = "Legion.ADF.ServiceBus Repositories",
+				ModelNamespace = "Legion.ADF.ServiceBus",
+				EFNamespace = "Legion.ADF.ServiceBus.SqlServer",
+				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus",
 				DatabaseProviderType = Database.Metamodel.DatabaseProviderType.SqlServer,
-				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Jobs.SqlServer",
-				ContextName = "Legion.ADF.ServiceBus.Jobs.SqlServer.IJobsDbContext",
-				UnitOfWorkName = "JobsUnitOfWork",
-				IRepositry = "Legion.ADF.ServiceBus.Jobs.IJobsRepository",
-				RepositoryBase = "Legion.ADF.ServiceBus.Jobs.SqlServer.JobsRepositoryBase",
+				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.SqlServer",
+				ContextName = "Legion.ADF.ServiceBus.SqlServer.IServiceBusDbContext",
+				UnitOfWorkName = "ServiceBusUnitOfWork",
+				IRepositry = "Legion.ADF.ServiceBus.IServiceBusRepository",
+				RepositoryBase = "Legion.ADF.ServiceBus.SqlServer.ServiceBusRepositoryBase",
 				UoWObsoletePrefix = "MM_Mod",
 				IgnoredTypes =
 				[
-					"Legion.ADF.ServiceBus.Jobs.JobsBaseEntity"
+					"Legion.ADF.ServiceBus.ServiceBusBaseEntity"
 				],
 				QueryCompileTypes =
 				[
-					typeof(Legion.ADF.ServiceBus.Jobs.JobsBaseEntity),
-					typeof(Legion.ADF.ServiceBus.Jobs.SqlServer.IJobsDbContext),
-					typeof(Legion.ADF.ServiceBus.Jobs.IJobsRepository)
+					typeof(Legion.ADF.ServiceBus.ServiceBusBaseEntity),
+					typeof(Legion.ADF.ServiceBus.SqlServer.IServiceBusDbContext),
+					typeof(Legion.ADF.ServiceBus.IServiceBusRepository)
 				]
 			});
 
@@ -118,134 +118,26 @@ internal class Program
 			solutionDirectoryPath,
 			new RepoGeneratorOptions
 			{
-				RepoName = "Legion.ADF.ServiceBus.Jobs QueryRepositories",
-				ModelNamespace = "Legion.ADF.ServiceBus.Jobs",
-				EFNamespace = "Legion.ADF.ServiceBus.Jobs.SqlServer",
-				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Jobs",
+				RepoName = "Legion.ADF.ServiceBus QueryRepositories",
+				ModelNamespace = "Legion.ADF.ServiceBus",
+				EFNamespace = "Legion.ADF.ServiceBus.SqlServer",
+				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus",
 				DatabaseProviderType = Database.Metamodel.DatabaseProviderType.SqlServer,
-				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Jobs.SqlServer",
-				ContextName = "Legion.ADF.ServiceBus.Jobs.SqlServer.IJobsQueryDbContext",
-				UnitOfWorkName = "JobsQueryUnitOfWork",
-				IRepositry = "Legion.ADF.ServiceBus.Jobs.IJobsQueryRepository",
-				RepositoryBase = "Legion.ADF.ServiceBus.Jobs.SqlServer.JobsQueryRepositoryBase",
+				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.SqlServer",
+				ContextName = "Legion.ADF.ServiceBus.SqlServer.IServiceBusQueryDbContext",
+				UnitOfWorkName = "ServiceBusQueryUnitOfWork",
+				IRepositry = "Legion.ADF.ServiceBus.IServiceBusQueryRepository",
+				RepositoryBase = "Legion.ADF.ServiceBus.SqlServer.ServiceBusQueryRepositoryBase",
 				UoWObsoletePrefix = "MM_Mod",
 				IgnoredTypes =
 				[
-					"Legion.ADF.ServiceBus.Jobs.JobsBaseQueryEntity"
+					"Legion.ADF.ServiceBus.ServiceBusBaseQueryEntity"
 				],
 				QueryCompileTypes =
 				[
-					typeof(Legion.ADF.ServiceBus.Jobs.JobsBaseQueryEntity),
-					typeof(Legion.ADF.ServiceBus.Jobs.SqlServer.IJobsQueryDbContext),
-					typeof(Legion.ADF.ServiceBus.Jobs.IJobsQueryRepository)
-				]
-			});
-
-		EntityRepositoriesGenerator.Generate(
-			solutionDirectoryPath,
-			new RepoGeneratorOptions
-			{
-				RepoName = "Legion.ADF.ServiceBus.Orchestrations Repositories",
-				ModelNamespace = "Legion.ADF.ServiceBus.Orchestrations",
-				EFNamespace = "Legion.ADF.ServiceBus.Orchestrations.PostgreSQL",
-				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Orchestrations",
-				DatabaseProviderType = Database.Metamodel.DatabaseProviderType.PostgreSQL,
-				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Orchestrations.PostgreSQL",
-				ContextName = "Legion.ADF.ServiceBus.Orchestrations.PostgreSQL.IOrchestrationsDbContext",
-				UnitOfWorkName = "OrchestrationsUnitOfWork",
-				IRepositry = "Legion.ADF.ServiceBus.Orchestrations.IOrchestrationsRepository",
-				RepositoryBase = "Legion.ADF.ServiceBus.Orchestrations.PostgreSQL.OrchestrationsRepositoryBase",
-				UoWObsoletePrefix = "MM_Mod",
-				IgnoredTypes =
-				[
-					"Legion.ADF.ServiceBus.Orchestrations.OrchestrationsBaseEntity"
-				],
-				QueryCompileTypes =
-				[
-					typeof(Legion.ADF.ServiceBus.Orchestrations.OrchestrationsBaseEntity),
-					typeof(Legion.ADF.ServiceBus.Orchestrations.PostgreSQL.IOrchestrationsDbContext),
-					typeof(Legion.ADF.ServiceBus.Orchestrations.IOrchestrationsRepository)
-				]
-			});
-
-		QueryRepositoriesGenerator.Generate(
-			solutionDirectoryPath,
-			new RepoGeneratorOptions
-			{
-				RepoName = "Legion.ADF.ServiceBus.Orchestrations QueryRepositories",
-				ModelNamespace = "Legion.ADF.ServiceBus.Orchestrations",
-				EFNamespace = "Legion.ADF.ServiceBus.Orchestrations.PostgreSQL",
-				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Orchestrations",
-				DatabaseProviderType = Database.Metamodel.DatabaseProviderType.PostgreSQL,
-				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Orchestrations.PostgreSQL",
-				ContextName = "Legion.ADF.ServiceBus.Orchestrations.PostgreSQL.IOrchestrationsQueryDbContext",
-				UnitOfWorkName = "OrchestrationsQueryUnitOfWork",
-				IRepositry = "Legion.ADF.ServiceBus.Orchestrations.IOrchestrationsQueryRepository",
-				RepositoryBase = "Legion.ADF.ServiceBus.Orchestrations.PostgreSQL.OrchestrationsQueryRepositoryBase",
-				UoWObsoletePrefix = "MM_Mod",
-				IgnoredTypes =
-				[
-					"Legion.ADF.ServiceBus.Orchestrations.OrchestrationsBaseQueryEntity"
-				],
-				QueryCompileTypes =
-				[
-					typeof(Legion.ADF.ServiceBus.Orchestrations.OrchestrationsBaseQueryEntity),
-					typeof(Legion.ADF.ServiceBus.Orchestrations.PostgreSQL.IOrchestrationsQueryDbContext),
-					typeof(Legion.ADF.ServiceBus.Orchestrations.IOrchestrationsQueryRepository)
-				]
-			});
-
-		EntityRepositoriesGenerator.Generate(
-			solutionDirectoryPath,
-			new RepoGeneratorOptions
-			{
-				RepoName = "Legion.ADF.ServiceBus.Orchestrations Repositories",
-				ModelNamespace = "Legion.ADF.ServiceBus.Orchestrations",
-				EFNamespace = "Legion.ADF.ServiceBus.Orchestrations.SqlServer",
-				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Orchestrations",
-				DatabaseProviderType = Database.Metamodel.DatabaseProviderType.SqlServer,
-				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Orchestrations.SqlServer",
-				ContextName = "Legion.ADF.ServiceBus.Orchestrations.SqlServer.IOrchestrationsDbContext",
-				UnitOfWorkName = "OrchestrationsUnitOfWork",
-				IRepositry = "Legion.ADF.ServiceBus.Orchestrations.IOrchestrationsRepository",
-				RepositoryBase = "Legion.ADF.ServiceBus.Orchestrations.SqlServer.OrchestrationsRepositoryBase",
-				UoWObsoletePrefix = "MM_Mod",
-				IgnoredTypes =
-				[
-					"Legion.ADF.ServiceBus.Orchestrations.OrchestrationsBaseEntity"
-				],
-				QueryCompileTypes =
-				[
-					typeof(Legion.ADF.ServiceBus.Orchestrations.OrchestrationsBaseEntity),
-					typeof(Legion.ADF.ServiceBus.Orchestrations.SqlServer.IOrchestrationsDbContext),
-					typeof(Legion.ADF.ServiceBus.Orchestrations.IOrchestrationsRepository)
-				]
-			});
-
-		QueryRepositoriesGenerator.Generate(
-			solutionDirectoryPath,
-			new RepoGeneratorOptions
-			{
-				RepoName = "Legion.ADF.ServiceBus.Orchestrations QueryRepositories",
-				ModelNamespace = "Legion.ADF.ServiceBus.Orchestrations",
-				EFNamespace = "Legion.ADF.ServiceBus.Orchestrations.SqlServer",
-				ModelProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Orchestrations",
-				DatabaseProviderType = Database.Metamodel.DatabaseProviderType.SqlServer,
-				SQLProjectPath = $@"{solutionDirectoryPath}\Legion.ADF.ServiceBus.Orchestrations.SqlServer",
-				ContextName = "Legion.ADF.ServiceBus.Orchestrations.SqlServer.IOrchestrationsQueryDbContext",
-				UnitOfWorkName = "OrchestrationsQueryUnitOfWork",
-				IRepositry = "Legion.ADF.ServiceBus.Orchestrations.IOrchestrationsQueryRepository",
-				RepositoryBase = "Legion.ADF.ServiceBus.Orchestrations.SqlServer.OrchestrationsQueryRepositoryBase",
-				UoWObsoletePrefix = "MM_Mod",
-				IgnoredTypes =
-				[
-					"Legion.ADF.ServiceBus.Orchestrations.OrchestrationsBaseQueryEntity"
-				],
-				QueryCompileTypes =
-				[
-					typeof(Legion.ADF.ServiceBus.Orchestrations.OrchestrationsBaseQueryEntity),
-					typeof(Legion.ADF.ServiceBus.Orchestrations.SqlServer.IOrchestrationsQueryDbContext),
-					typeof(Legion.ADF.ServiceBus.Orchestrations.IOrchestrationsQueryRepository)
+					typeof(Legion.ADF.ServiceBus.ServiceBusBaseQueryEntity),
+					typeof(Legion.ADF.ServiceBus.SqlServer.IServiceBusQueryDbContext),
+					typeof(Legion.ADF.ServiceBus.IServiceBusQueryRepository)
 				]
 			});
 	}

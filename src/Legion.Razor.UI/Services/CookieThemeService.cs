@@ -54,7 +54,7 @@ public class CookieThemeService
 
 	private void OnThemeChanged()
 	{
-		var expiration = DateTime.Now.Add(options.Duration);
+		var expiration = GlobalContext.Instance.Now.Add(options.Duration);
 
 		_ = jsRuntime.InvokeVoidAsync("eval", $"document.cookie = \"{options.Name}={themeService.Theme}; expires={expiration:R}; path=/\"");
 	}

@@ -23,7 +23,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+    #line 1 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class QueryContextModelBuilderGenerator : Generator.GeneratorBase
     {
@@ -35,7 +35,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
         {
             this.Write("\r\n");
             
-            #line 12 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 12 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
 
 	SetGenerationEnvironment(this.GenerationEnvironment);
 	
@@ -61,14 +61,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("using ");
             
-            #line 32 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 32 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(import));
             
             #line default
             #line hidden
             this.Write(";\r\n");
             
-            #line 33 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 33 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
 
 		}
 	if (0 < queryEntityDesc.QueryContextModelBuilderImports.Count)
@@ -79,7 +79,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n");
             
-            #line 39 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 39 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
 
 	}
 
@@ -88,28 +88,28 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("namespace ");
             
-            #line 42 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 42 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(queryEntityDesc.QueryContextModelBuilderNamespace));
             
             #line default
             #line hidden
             this.Write(";\r\n\r\npublic class ");
             
-            #line 44 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 44 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(queryEntityDesc.QueryContextModelBuilderName));
             
             #line default
             #line hidden
             this.Write(" : IEntityTypeConfiguration<");
             
-            #line 44 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 44 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(queryEntityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(">\r\n{\r\n\tpublic void Configure(EntityTypeBuilder<");
             
-            #line 46 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 46 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(queryEntityDesc.BaseName(modelName, contextName)));
             
             #line default
@@ -117,27 +117,27 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("> entityBuilder)\r\n\t\t=> ConfigureEntity(entityBuilder);\r\n\r\n\tpublic static void Con" +
                     "figureEntity(EntityTypeBuilder<");
             
-            #line 49 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 49 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(queryEntityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write("> entityBuilder)\r\n\t{\r\n\t\tentityBuilder.ToView(");
             
-            #line 51 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 51 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Text.StringHelper.DelimitString(queryEntity.TableName)));
             
             #line default
             #line hidden
             
-            #line 51 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 51 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(queryEntity.IsExplicitSchemaName ? (", " + Text.StringHelper.DelimitString(queryEntity.Schema)) : ""));
             
             #line default
             #line hidden
             this.Write(")\r\n\t\t\t.HasNoKey();\r\n");
             
-            #line 53 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 53 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
 
 		foreach (var property in queryEntity.Properties)
 		{
@@ -195,21 +195,21 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             #line hidden
             this.Write("\r\n\t\tentityBuilder.Property(e => e.");
             
-            #line 106 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 106 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(")");
             
-            #line 106 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 106 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(propertyFluent));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 107 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 107 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
 
 			}
 		}
@@ -220,14 +220,14 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             this.Write("\t}\r\n\r\n\tpublic static ModelBuilder Build(ModelBuilder modelBuilder)\r\n\t\t=> modelBui" +
                     "lder.Entity<");
             
-            #line 114 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 114 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(queryEntityDesc.BaseName(modelName, contextName)));
             
             #line default
             #line hidden
             this.Write(">(ConfigureEntity);\r\n}\r\n");
             
-            #line 116 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+            #line 116 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
 
 	}
 
@@ -239,7 +239,7 @@ namespace Legion.Generators.AppGen.AppGenGenerators.Model
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 121 "C:\code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
+        #line 121 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\QueryContextModelBuilderGenerator.tt"
 
 string MultiLineFluentApi(params string[] lines)
 {

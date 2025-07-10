@@ -72,7 +72,15 @@ public sealed partial class Job : Jobs.JobsBaseEntity, Legion.Model.IEntity
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.CronExpressionIncludeSeconds)) && obj1.CronExpressionIncludeSeconds != obj2.CronExpressionIncludeSeconds)
 						return false;
+					if (conds.CanCompare(obj1, nameof(obj1.IdDefaultHost)) && obj1.IdDefaultHost != obj2.IdDefaultHost)
+						return false;
+					if (conds.CanCompare(obj1, nameof(obj1.IdCurrentHost)) && obj1.IdCurrentHost != obj2.IdCurrentHost)
+						return false;
+					if (conds.CanCompare(obj1, nameof(obj1.AttachedToCurrentHostUtc)) && obj1.AttachedToCurrentHostUtc != obj2.AttachedToCurrentHostUtc)
+						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.LastProcessingUtc)) && obj1.LastProcessingUtc != obj2.LastProcessingUtc)
+						return false;
+					if (conds.CanCompare(obj1, nameof(obj1.LastProcessingFinishedUtc)) && obj1.LastProcessingFinishedUtc != obj2.LastProcessingFinishedUtc)
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.NextProcessinUtc)) && obj1.NextProcessinUtc != obj2.NextProcessinUtc)
 						return false;
@@ -105,7 +113,15 @@ public sealed partial class Job : Jobs.JobsBaseEntity, Legion.Model.IEntity
 						return false;
 					if (obj1.CronExpressionIncludeSeconds != obj2.CronExpressionIncludeSeconds)
 						return false;
+					if (obj1.IdDefaultHost != obj2.IdDefaultHost)
+						return false;
+					if (obj1.IdCurrentHost != obj2.IdCurrentHost)
+						return false;
+					if (obj1.AttachedToCurrentHostUtc != obj2.AttachedToCurrentHostUtc)
+						return false;
 					if (obj1.LastProcessingUtc != obj2.LastProcessingUtc)
+						return false;
+					if (obj1.LastProcessingFinishedUtc != obj2.LastProcessingFinishedUtc)
 						return false;
 					if (obj1.NextProcessinUtc != obj2.NextProcessinUtc)
 						return false;

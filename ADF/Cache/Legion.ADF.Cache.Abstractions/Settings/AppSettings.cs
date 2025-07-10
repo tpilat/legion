@@ -92,7 +92,11 @@ public static class AppSettingsExtensions
 		services.AddDBSettings();
 		services.AddReloadableCacheKeyStoreOptions();
 		services.AddADFCacheOptions();
+		services.AddADFPersistentCacheOptions();
+		services.AddDistributedLockOptions();
 		services.AddCacheKeyRemoveServiceOptions();
+		services.AddCacheDataRemoveServiceOptions();
+		services.AddDistributedLockRemoveServiceOptions();
 
 		return services;
 	}
