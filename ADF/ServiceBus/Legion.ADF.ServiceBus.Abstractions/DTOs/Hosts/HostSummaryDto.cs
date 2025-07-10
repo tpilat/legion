@@ -9,4 +9,5 @@ public class HostSummaryDto
 	public DateTime? StartedUtc { get; private set; }
 	public DateTime LastActivityUtc { get; private set; }
 	public bool IsDistributedManagerAvailable { get; private set; }
+	public List<Jobs.JobSummaryDto> Jobs { get; set; }
 }

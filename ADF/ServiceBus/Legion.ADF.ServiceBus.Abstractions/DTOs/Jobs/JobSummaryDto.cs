@@ -22,20 +22,9 @@ public class JobSummaryDto
 
 	public int TimeoutForProcessingInSeconds { get; private set; }
 
-	public HostInfoDto DefaultHost { get; private set; }
+	public Hosts.HostSummaryDto DefaultHost { get; private set; }
 
-	public HostInfoDto CurrentHost { get; private set; }
+	public Hosts.HostSummaryDto CurrentHost { get; private set; }
 
 	public List<JobExecutionTypeEnum> JobExecutionTypes { get; set; }
-}
-
-public class HostInfoDto
-{
-	public string Name { get; private set; }
-
-	public string Description { get; private set; }
-
-	public bool IsEnabled { get; private set; }
-
-	public DateTime LastActivityUtc { get; private set; }
 }
