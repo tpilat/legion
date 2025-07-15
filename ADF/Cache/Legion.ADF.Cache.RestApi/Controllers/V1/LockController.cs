@@ -28,7 +28,12 @@ public class LockController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<LockController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 
@@ -50,7 +55,12 @@ public class LockController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<LockController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 
@@ -75,7 +85,12 @@ public class LockController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<LockController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 
@@ -100,7 +115,12 @@ public class LockController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<LockController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 
@@ -125,7 +145,12 @@ public class LockController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<LockController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 }

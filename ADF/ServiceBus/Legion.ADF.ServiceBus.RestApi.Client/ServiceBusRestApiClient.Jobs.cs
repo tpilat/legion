@@ -1,82 +1,70 @@
 ﻿using Legion.ADF.ServiceBus.DTOs.Jobs;
 using Legion.ADF.ServiceBus.RestApi.Client.Requests;
 using Legion.NetHttp;
-using Legion.Queries.Sorting;
 
 namespace Legion.ADF.ServiceBus.RestApi.Client;
 
-public partial class ServiceBusRestApiClient : HttpApiClient<ServiceBusRestApiClientOptions>
+public partial class ServiceBusRestApiClient : HttpApiClient<ServiceBusRestApiClientOptions>, IServiceBusMonitor
 {
-	public async Task<IResult<List<JobSummaryDto>>> GetJobsSummaryAsync(
+	public async Task<IResult<JobDetailDto>> GetJobDetailV1Async(
 		IScopeContext scopeContext,
-		ISortDescriptorBuilder<JobSummaryDto> sortDescriptor,
-		int pageIndex,
-		int pageSize,
+		DTOs.Jobs.GetJobDetailRequest req,
 		int? timeoutInSeconds = null,
 		CancellationToken cancellationToken = default)
 	{
 		scopeContext = scopeContext.CreateNew()
 			.AddContextProperty(nameof(Options.BaseAddress), Options?.BaseAddress)
-			.AddContextProperty(nameof(URI), URI.Jobs.V1.GetJobsSummary);
+			.AddContextProperty(nameof(URI), URI.Job.V1.GetDetail);
 
-		var result = new ResultBuilder<List<JobSummaryDto>>();
+		var result = new ResultBuilder<JobDetailDto>();
 
-		if (result.IsNull(scopeContext, sortDescriptor))
-			return result.Build();
-
-		if (result.IsLessThanOrEqual(scopeContext, pageIndex, 0))
-			return result.Build();
-
-		if (result.IsLessThanOrEqual(scopeContext, pageSize, 0))
+		if (result.IsArgumentNull(scopeContext, req))
 			return result.Build();
 
 		var request = JsonRequestFactory.Create(
 			Options!,
 			Legion.Http.HttpMethod.Post,
-			URI.Jobs.V1.GetJobsSummary,
+			URI.Job.V1.GetDetail,
 			timeoutInSeconds,
 			queryString: null,
-			new
-			{
-				SortDescriptor = sortDescriptor.Serialize(),
-				PageIndex = pageIndex,
-				PageSize = pageSize
-			});
+			req);
 
 		try
 		{
 			using var response = await SendAsync(request, scopeContext, serviceProvider: null, cancellationToken: cancellationToken);
-			var jsonResponse = await ToJsonResultAsync<List<JobSummaryDto>>(scopeContext, request, response, cancellationToken);
+			var jsonResponse = await ToJsonResultAsync<JobDetailDto>(scopeContext, request, response, cancellationToken);
 			return jsonResponse!;
 		}
 		catch (Exception ex)
 		{
 			return
-				new ResultBuilder<List<JobSummaryDto>>()
+				new ResultBuilder<JobDetailDto>()
 					.WithError(scopeContext, Legion.ADF.ServiceBus.RestApi.Client.Internal.ErrorCodes.ApiClientException.Default(nameof(ServiceBusRestApiClient)), x => x.ExceptionInfo(ex));
 		}
 	}
 
-	public async Task<IResult<List<JobStatisticsDto>>> GetJobsStatisticsAsync(
+	public async Task<IResult<List<JobStatisticsDto>>> GetJobStatisticsV1Async(
 		IScopeContext scopeContext,
-		DateTime from,
-		DateTime to,
-		JobExecutionTypeEnum jobExecutionType,
+		DTOs.Jobs.GetJobStatisticsRequest req,
 		int? timeoutInSeconds = null,
 		CancellationToken cancellationToken = default)
 	{
 		scopeContext = scopeContext.CreateNew()
 			.AddContextProperty(nameof(Options.BaseAddress), Options?.BaseAddress)
-			.AddContextProperty(nameof(URI), URI.Jobs.V1.GetJobsStatistics);
+			.AddContextProperty(nameof(URI), URI.Job.V1.GetStatistics);
 
 		var result = new ResultBuilder<List<JobStatisticsDto>>();
+
+		if (result.IsArgumentNull(scopeContext, req))
+			return result.Build();
 
 		var request = JsonRequestFactory.Create(
 			Options!,
 			Legion.Http.HttpMethod.Post,
-			URI.Jobs.V1.GetJobsStatistics,
+			URI.Job.V1.GetStatistics,
 			timeoutInSeconds,
-			queryString: null);
+			queryString: null,
+			req);
 
 		try
 		{
@@ -92,39 +80,28 @@ public partial class ServiceBusRestApiClient : HttpApiClient<ServiceBusRestApiCl
 		}
 	}
 
-	public async Task<IResult<List<JobExecutionDto>>> GetJobExecutionsAsync(
+	public async Task<IResult<List<JobExecutionDto>>> GetJobExecutionsV1Async(
 		IScopeContext scopeContext,
-		Guid idJob,
-		DateTime from,
-		DateTime to,
-		int pageIndex,
-		int pageSize,
+		DTOs.Jobs.GetJobExecutionsRequest req,
 		int? timeoutInSeconds = null,
 		CancellationToken cancellationToken = default)
 	{
 		scopeContext = scopeContext.CreateNew()
 			.AddContextProperty(nameof(Options.BaseAddress), Options?.BaseAddress)
-			.AddContextProperty(nameof(URI), URI.Jobs.V1.GetJobExecutions)
-			.AddContextProperty(nameof(idJob), idJob.ToString())
-			.AddContextProperty(nameof(from), from.ToString())
-			.AddContextProperty(nameof(to), to.ToString());
+			.AddContextProperty(nameof(URI), URI.Job.V1.GetExecutions);
 
 		var result = new ResultBuilder<List<JobExecutionDto>>();
+
+		if (result.IsArgumentNull(scopeContext, req))
+			return result.Build();
 
 		var request = JsonRequestFactory.Create(
 			Options!,
 			Legion.Http.HttpMethod.Post,
-			URI.Jobs.V1.GetJobExecutions,
+			URI.Job.V1.GetExecutions,
 			timeoutInSeconds,
 			queryString: null,
-			new
-			{
-				IdJob = idJob,
-				From = from,
-				To = to,
-				PageIndex = pageIndex,
-				PageSize = pageSize
-			});
+			req);
 
 		try
 		{
@@ -140,39 +117,28 @@ public partial class ServiceBusRestApiClient : HttpApiClient<ServiceBusRestApiCl
 		}
 	}
 
-	public async Task<IResult<List<JobLogDto>>> GetJobLogsAsync(
+	public async Task<IResult<List<JobLogDto>>> GetJobLogsV1Async(
 		IScopeContext scopeContext,
-		Guid idJob,
-		DateTime from,
-		DateTime to,
-		int pageIndex,
-		int pageSize,
+		DTOs.Jobs.GetJobLogsRequest req,
 		int? timeoutInSeconds = null,
 		CancellationToken cancellationToken = default)
 	{
 		scopeContext = scopeContext.CreateNew()
 			.AddContextProperty(nameof(Options.BaseAddress), Options?.BaseAddress)
-			.AddContextProperty(nameof(URI), URI.Jobs.V1.GetJobLogs)
-			.AddContextProperty(nameof(idJob), idJob.ToString())
-			.AddContextProperty(nameof(from), from.ToString())
-			.AddContextProperty(nameof(to), to.ToString());
+			.AddContextProperty(nameof(URI), URI.Job.V1.GetLogs);
 
 		var result = new ResultBuilder<List<JobLogDto>>();
+
+		if (result.IsArgumentNull(scopeContext, req))
+			return result.Build();
 
 		var request = JsonRequestFactory.Create(
 			Options!,
 			Legion.Http.HttpMethod.Post,
-			URI.Jobs.V1.GetJobLogs,
+			URI.Job.V1.GetLogs,
 			timeoutInSeconds,
 			queryString: null,
-			new
-			{
-				IdJob = idJob,
-				From = from,
-				To = to,
-				PageIndex = pageIndex,
-				PageSize = pageSize
-			});
+			req);
 
 		try
 		{
@@ -186,5 +152,90 @@ public partial class ServiceBusRestApiClient : HttpApiClient<ServiceBusRestApiCl
 				new ResultBuilder<List<JobLogDto>>()
 					.WithError(scopeContext, Legion.ADF.ServiceBus.RestApi.Client.Internal.ErrorCodes.ApiClientException.Default(nameof(ServiceBusRestApiClient)), x => x.ExceptionInfo(ex));
 		}
+	}
+
+	async Task<IResult<JobDetailDto>> IServiceBusMonitor.GetJobDetailAsync(
+		IScopeContext scopeContext,
+		Guid idJob,
+		CancellationToken cancellationToken)
+	{
+		scopeContext = scopeContext.CreateNew();
+
+		var result = new ResultBuilder<JobDetailDto>();
+
+		var res = await GetJobDetailV1Async(
+			scopeContext,
+			new GetJobDetailRequest { IdJob = idJob },
+			timeoutInSeconds: null,
+			cancellationToken).ConfigureAwait(false);
+
+		result.MergeAllWithDataHasError(res);
+		return result.Build();
+	}
+
+	async Task<IResult<List<JobStatisticsDto>>> IServiceBusMonitor.GetJobStatisticsAsync(
+		IScopeContext scopeContext,
+		GetJobStatisticsRequest request,
+		CancellationToken cancellationToken)
+	{
+		scopeContext = scopeContext.CreateNew();
+
+		var result = new ResultBuilder<List<JobStatisticsDto>>();
+
+		if (result.IsArgumentNull(scopeContext, request))
+			return result.Build();
+
+		var res = await GetJobStatisticsV1Async(
+			scopeContext,
+			request,
+			timeoutInSeconds: null,
+			cancellationToken).ConfigureAwait(false);
+
+		result.MergeAllWithDataHasError(res);
+		return result.Build();
+	}
+
+	async Task<IResult<List<JobExecutionDto>>> IServiceBusMonitor.GetJobExecutionsAsync(
+		IScopeContext scopeContext,
+		GetJobExecutionsRequest request,
+		CancellationToken cancellationToken)
+	{
+		scopeContext = scopeContext.CreateNew();
+
+		var result = new ResultBuilder<List<JobExecutionDto>>();
+
+		if (result.IsArgumentNull(scopeContext, request))
+			return result.Build();
+
+		var res = await GetJobExecutionsV1Async(
+			scopeContext,
+			request,
+			timeoutInSeconds: null,
+			cancellationToken).ConfigureAwait(false);
+
+		result.MergeAllWithDataHasError(res);
+		return result.Build();
+	}
+
+	async Task<IResult<List<JobLogDto>>> IServiceBusMonitor.GetJobLogsAsync(
+		IScopeContext scopeContext,
+		GetJobLogsRequest request,
+		CancellationToken cancellationToken)
+	{
+		scopeContext = scopeContext.CreateNew();
+
+		var result = new ResultBuilder<List<JobLogDto>>();
+
+		if (result.IsArgumentNull(scopeContext, request))
+			return result.Build();
+
+		var res = await GetJobLogsV1Async(
+			scopeContext,
+			request,
+			timeoutInSeconds: null,
+			cancellationToken).ConfigureAwait(false);
+
+		result.MergeAllWithDataHasError(res);
+		return result.Build();
 	}
 }

@@ -95,7 +95,7 @@ public class LogMessage : ILogMessage
 	{
 		Throw.IfArgumentNull(scopeContext);
 
-		IdLogMessage = Guid.NewGuid();
+		IdLogMessage = GlobalContext.Instance.NewGuid();
 		CreatedUtc = DateTimeOffset.UtcNow;
 		ScopeContext = scopeContext;
 		ErrorCode = errorCode;

@@ -61,7 +61,7 @@ public abstract class DbContextBase : Microsoft.EntityFrameworkCore.DbContext, I
 		: base(options)
 	{
 #if TRACK_OBJECTS
-		IdDbContextBase = Guid.NewGuid();
+		IdDbContextBase = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdDbContextBase.ToString());
 #endif
 
@@ -75,7 +75,7 @@ public abstract class DbContextBase : Microsoft.EntityFrameworkCore.DbContext, I
 		: base()
 	{
 #if TRACK_OBJECTS
-		IdDbContextBase = Guid.NewGuid();
+		IdDbContextBase = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdDbContextBase.ToString());
 #endif
 
@@ -166,7 +166,7 @@ public abstract class DbContextBase : Microsoft.EntityFrameworkCore.DbContext, I
 		//TODO: nuget EntityFramework.Exceptions
 		//try
 		//{
-			var auditCorrelationId = Guid.NewGuid();
+			var auditCorrelationId = GlobalContext.Instance.NewGuid();
 			var auditEntriesWithTempProperty = OnBeforeSaveChanges(auditCorrelationId, options, scopeContext);
 
 			var result = base.SaveChanges(acceptAllChangesOnSuccess);
@@ -241,7 +241,7 @@ public abstract class DbContextBase : Microsoft.EntityFrameworkCore.DbContext, I
 		//TODO: nuget EntityFramework.Exceptions
 		//try
 		//{
-			var auditCorrelationId = Guid.NewGuid();
+			var auditCorrelationId = GlobalContext.Instance.NewGuid();
 			var auditEntriesWithTempProperty = OnBeforeSaveChanges(auditCorrelationId, options, scopeContext);
 
 			var result = await base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
@@ -346,14 +346,14 @@ public abstract class DbContextBase : Microsoft.EntityFrameworkCore.DbContext, I
 					case EntityState.Added:
 						if (Guid.Empty.Equals(synchronizable.SyncToken))
 						{
-							synchronizable.SyncToken = Guid.NewGuid();
+							synchronizable.SyncToken = GlobalContext.Instance.NewGuid();
 							postModifiedProperties.Add(nameof(synchronizable.SyncToken));
 						}
 						break;
 					case EntityState.Modified:
 						if (WasModifiedNotIgnorredProperty(entry, synchronizable))
 						{
-							synchronizable.SyncToken = Guid.NewGuid();
+							synchronizable.SyncToken = GlobalContext.Instance.NewGuid();
 							postModifiedProperties.Add(nameof(synchronizable.SyncToken));
 						}
 						break;
@@ -370,7 +370,7 @@ public abstract class DbContextBase : Microsoft.EntityFrameworkCore.DbContext, I
 					case EntityState.Added:
 						if (Guid.Empty.Equals(correlable.CorrelationId))
 						{
-							correlable.CorrelationId = Guid.NewGuid();
+							correlable.CorrelationId = GlobalContext.Instance.NewGuid();
 							postModifiedProperties.Add(nameof(correlable.CorrelationId));
 						}
 						break;

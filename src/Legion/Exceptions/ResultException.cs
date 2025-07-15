@@ -5,25 +5,29 @@ namespace Legion.Exceptions;
 
 public class ResultException : LegionException, ILegionException
 {
-	public ResultException(IErrorCode? errorCode = null, string? detail = null, IScopeContext? scopeContext = null)
+	public IResult Result { get; }
+
+	public ResultException(IResult result, IErrorCode? errorCode = null, string? detail = null, IScopeContext? scopeContext = null)
 		: base(errorCode ?? ErrorCodes.ResultException.Default, detail, scopeContext)
 	{
+		Result = result;
 	}
 
-	public ResultException(IErrorCode? errorCode, string? detail, Exception? innerException, IScopeContext? scopeContext = null)
+	public ResultException(IResult result, IErrorCode? errorCode, string? detail, Exception? innerException, IScopeContext? scopeContext = null)
 		: base(errorCode ?? ErrorCodes.ResultException.Default, detail, innerException, scopeContext)
 	{
+		Result = result;
 	}
 
 	[System.Diagnostics.StackTraceHidden]
-	public static new void ThrowIf(bool condition, IErrorCode? errorCode = null, string? detail = null, IScopeContext? scopeContext = null)
+	public static void ThrowIf(bool condition, IResult result, IErrorCode? errorCode = null, string? detail = null, IScopeContext? scopeContext = null)
 	{
 		if (condition)
-			Throw(errorCode, detail, scopeContext);
+			Throw(result, errorCode, detail, scopeContext);
 	}
 
 	[System.Diagnostics.StackTraceHidden]
 	[DoesNotReturn]
-	public static new void Throw(IErrorCode? errorCode, string? detail = null, IScopeContext? scopeContext = null, Exception? innerException = null)
-		=> throw new ResultException(errorCode, detail, innerException, scopeContext);
+	public static void Throw(IResult result, IErrorCode? errorCode, string? detail = null, IScopeContext? scopeContext = null, Exception? innerException = null)
+		=> throw new ResultException(result, errorCode, detail, innerException, scopeContext);
 }

@@ -9,7 +9,7 @@ namespace Legion.Trackers;
 /// <example>
 /// <code>
 /// public MyClass() {
-///		IdMyClass = Guid.NewGuid();
+///		IdMyClass = Legion.GlobalContext.Instance.NewGuid();
 ///		ObjectLifetimeTracker.Track(this, IdMyClass.ToString());
 /// }
 /// </code>

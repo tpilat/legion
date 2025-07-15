@@ -18,6 +18,8 @@ public class JobLogConfiguration : IEntityTypeConfiguration<ServiceBus.Model.Job
 
 		entityBuilder.HasIndex(e => e.IdJob, "IXFK_JobLog_Job");
 
+		entityBuilder.HasIndex(e => e.IdJobExecution, "IXFK_JobLog_JobExecution");
+
 		entityBuilder.HasIndex(e => e.IdJobStatus, "IXFK_JobLog_JobStatus");
 
 		entityBuilder.Property(e => e.IdJobLog)
@@ -41,11 +43,18 @@ public class JobLogConfiguration : IEntityTypeConfiguration<ServiceBus.Model.Job
 
 		entityBuilder.Property(e => e.IdMessageProcessingLog).HasColumnType("uuid");
 
+		entityBuilder.Property(e => e.IdJobExecution).HasColumnType("uuid");
+
 		entityBuilder.HasOne(d => d.Job)
 			.WithMany(p => p.JobLogs)
 			.HasForeignKey(d => d.IdJob)
 			.OnDelete(DeleteBehavior.ClientSetNull)
 			.HasConstraintName("FK_JobLog_IdJob");
+
+		entityBuilder.HasOne(d => d.JobExecution)
+			.WithMany(p => p.JobLogs)
+			.HasForeignKey(d => d.IdJobExecution)
+			.HasConstraintName("FK_JobLog_IdJobExecution");
 
 		entityBuilder.HasOne(d => d.JobStatus)
 			.WithMany(p => p.JobLogs)

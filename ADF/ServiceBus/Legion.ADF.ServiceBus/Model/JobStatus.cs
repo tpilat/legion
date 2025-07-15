@@ -4,9 +4,9 @@ namespace Legion.ADF.ServiceBus.Model;
 
 public sealed partial class JobStatus : ServiceBus.ServiceBusBaseEntity, Legion.Model.IEntity
 {
+	private List<ServiceBus.Model.JobActivity> _jobActivities;
 	private List<ServiceBus.Model.JobExecution> _jobExecutions;
 	private List<ServiceBus.Model.JobLog> _jobLogs;
-	private List<ServiceBus.Model.Job> _jobs;
 
 	public static IValidator<JobStatus> DefaultDBValidator { get; }
 
@@ -27,6 +27,11 @@ public sealed partial class JobStatus : ServiceBus.ServiceBusBaseEntity, Legion.
 
 
 	/// <summary>
+	/// N:_1 ServiceBus.Model.JobActivity.IdJobStatus | FK_JobActivity_IdJobStatus
+	/// </summary>
+	public IReadOnlyList<ServiceBus.Model.JobActivity> JobActivities => _jobActivities;
+
+	/// <summary>
 	/// N:_1 ServiceBus.Model.JobExecution.IdJobStatus | FK_JobExecution_IdJobStatus
 	/// </summary>
 	public IReadOnlyList<ServiceBus.Model.JobExecution> JobExecutions => _jobExecutions;
@@ -36,16 +41,11 @@ public sealed partial class JobStatus : ServiceBus.ServiceBusBaseEntity, Legion.
 	/// </summary>
 	public IReadOnlyList<ServiceBus.Model.JobLog> JobLogs => _jobLogs;
 
-	/// <summary>
-	/// N:_1 ServiceBus.Model.Job.IdJobStatus | FK_Job_IdJobStatus
-	/// </summary>
-	public IReadOnlyList<ServiceBus.Model.Job> Jobs => _jobs;
-
 	private JobStatus()
 	{
+		_jobActivities = [];
 		_jobExecutions = [];
 		_jobLogs = [];
-		_jobs = [];
 	}
 
 	public Dictionary<string, object?> ToDictionary()

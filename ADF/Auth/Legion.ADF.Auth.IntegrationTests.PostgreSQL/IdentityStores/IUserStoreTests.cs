@@ -394,7 +394,7 @@ public class IUserStoreTests : TestBase
 
 		await userClaimStore.AddClaimsAsync(user, [claim], cancellationToken: default);
 
-		var idPermission = Guid.NewGuid();
+		var idPermission = GlobalContext.Instance.NewGuid();
 		var permissionName = $"TEST_{GetDatetimeTicks()}";
 		using (var npgsqlConnection = new Npgsql.NpgsqlConnection(SetUp.ConncetionString))
 		{
@@ -455,7 +455,7 @@ public class IUserStoreTests : TestBase
 		if (!updateResult.Succeeded)
 			Assert.Fail($"{nameof(updateResult)} ERRORS: {string.Join(Environment.NewLine, updateResult.Errors)}", scopeContext);
 
-		var idPermission = Guid.NewGuid();
+		var idPermission = GlobalContext.Instance.NewGuid();
 		var permissionName = $"TEST_{GetDatetimeTicks()}";
 		using (var npgsqlConnection = new Npgsql.NpgsqlConnection(SetUp.ConncetionString))
 		{

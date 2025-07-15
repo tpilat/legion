@@ -72,15 +72,16 @@ public partial class DistributedLockRepository : Legion.ADF.Cache.SqlServer.Cach
 				USING (SELECT @keyHash AS KeyHash) AS source
 				ON target.[KeyHash] = source.[KeyHash]
 				WHEN NOT MATCHED THEN
-					INSERT ([KeyHash], [LockKey], [LockId], [Metadata], [ExpiresUtc])
-					VALUES (@keyHash, @lockKey, @lockId, @metadata, @expires);";
+					INSERT ([KeyHash], [LockKey], [LockId], [Metadata], [ExpiresUtc], [CreatedUtc])
+					VALUES (@keyHash, @lockKey, @lockId, @metadata, @expires, @createdutc);";
 
 			var affected = await context.Database.ExecuteSqlRawAsync(sql, [
 				new Microsoft.Data.SqlClient.SqlParameter("keyHash", distributedLock.KeyHash),
 				new Microsoft.Data.SqlClient.SqlParameter("lockKey", distributedLock.LockKey),
 				new Microsoft.Data.SqlClient.SqlParameter("lockId", distributedLock.LockId),
 				new Microsoft.Data.SqlClient.SqlParameter("metadata", distributedLock.Metadata),
-				new Microsoft.Data.SqlClient.SqlParameter("expires", distributedLock.ExpiresUtc)
+				new Microsoft.Data.SqlClient.SqlParameter("expires", distributedLock.ExpiresUtc),
+				new Microsoft.Data.SqlClient.SqlParameter("createdutc", GlobalContext.Instance.UtcNow)
 			], cancellationToken);
 
 			if (affected == 1)

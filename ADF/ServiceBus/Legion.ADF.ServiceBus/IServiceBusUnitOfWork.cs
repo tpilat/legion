@@ -8,9 +8,13 @@ public partial interface IServiceBusUnitOfWork : Legion.Model.Repositories.IUnit
 
 	Legion.ADF.ServiceBus.Model.Repositories.IHostRepository HostRepository { get; }
 
+	Legion.ADF.ServiceBus.Model.Repositories.IHostActivityRepository HostActivityRepository { get; }
+
 	Legion.ADF.ServiceBus.Model.Repositories.IHostLogRepository HostLogRepository { get; }
 
 	Legion.ADF.ServiceBus.Model.Repositories.IJobRepository JobRepository { get; }
+
+	Legion.ADF.ServiceBus.Model.Repositories.IJobActivityRepository JobActivityRepository { get; }
 
 	Legion.ADF.ServiceBus.Model.Repositories.IJobDataRepository JobDataRepository { get; }
 

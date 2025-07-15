@@ -13,11 +13,8 @@ public class QueryTableInfoProvider : Legion.ADF.ServiceBus.IQueryTableInfoProvi
 					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.Description), typeof(string), "[Description]", "varchar(511)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.CreatedUtc), typeof(DateTime), "[CreatedUtc]", "datetime2", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.IsEnabled), typeof(bool), "[IsEnabled]", "bit", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.StartedUtc), typeof(DateTime?), "[StartedUtc]", "datetime2", true),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.LastActivityUtc), typeof(DateTime), "[LastActivityUtc]", "datetime2", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.StoppedUtc), typeof(DateTime?), "[StoppedUtc]", "datetime2", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.Configuration), typeof(string), "[Configuration]", "nvarchar(max)", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.IsDistributedManagerAvailable), typeof(bool), "[IsDistributedManagerAvailable]", "bit", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.RowVersion), typeof(Guid), "[RowVersion]", "uniqueidentifier", false),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetVwHostTableInfo()
@@ -31,20 +28,16 @@ public class QueryTableInfoProvider : Legion.ADF.ServiceBus.IQueryTableInfoProvi
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.Name), typeof(string), "[Name]", "nvarchar(255)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.Description), typeof(string), "[Description]", "nvarchar(1023)", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.IdJobRunType), typeof(Guid), "[IdJobRunType]", "uniqueidentifier", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.JobRunType), typeof(string), "[JobRunType]", "nvarchar(63)", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.IdJobStatus), typeof(Guid), "[IdJobStatus]", "uniqueidentifier", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.JobStatus), typeof(string), "[JobStatus]", "nvarchar(63)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.Namespace), typeof(string), "[Namespace]", "nvarchar(1023)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.Properties), typeof(string), "[Properties]", "nvarchar(max)", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.DelayedStartInSeconds), typeof(int?), "[DelayedStartInSeconds]", "int", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.IdleTimeoutInSeconds), typeof(int?), "[IdleTimeoutInSeconds]", "int", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.CronExpression), typeof(string), "[CronExpression]", "nvarchar(63)", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.CronExpressionIncludeSeconds), typeof(bool), "[CronExpressionIncludeSeconds]", "bit", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.LastProcessingUtc), typeof(DateTime?), "[LastProcessingUtc]", "datetime2", true),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.NextProcessinUtc), typeof(DateTime), "[NextProcessinUtc]", "datetime2", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.TimeoutForProcessingInSeconds), typeof(int), "[TimeoutForProcessingInSeconds]", "int", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.MaxProcessingRetryCount), typeof(int), "[MaxProcessingRetryCount]", "int", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.IdDefaultHost), typeof(Guid), "[IdDefaultHost]", "uniqueidentifier", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.RequestedToDisable), typeof(bool), "[RequestedToDisable]", "bit", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.TimeoutForProcessingInSeconds), typeof(int), "[TimeoutForProcessingInSeconds]", "int", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.RowVersion), typeof(Guid), "[RowVersion]", "uniqueidentifier", false),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetVwJobTableInfo()

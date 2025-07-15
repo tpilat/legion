@@ -1,6 +1,6 @@
 namespace Legion.ADF.Config.PostgreSQL;
 
-public partial class ConfigUnitOfWorkFactory : IConfigUnitOfWorkFactory
+public partial class ConfigUnitOfWorkFactory : IConfigUnitOfWorkFactory, Legion.Model.Repositories.IUnitOfWorkFactory<IConfigUnitOfWork>
 {
 	public IConfigUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

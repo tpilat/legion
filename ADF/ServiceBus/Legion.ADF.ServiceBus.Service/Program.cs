@@ -22,7 +22,7 @@ public class Program
 				"Legion.ADF.ServiceBus SERVICE",
 				removePreviousSameMethodFrame: true,
 				previousScopeContext: null,
-				correlationId: Guid.NewGuid(),
+				correlationId: GlobalContext.Instance.NewGuid(),
 				principal: null,
 				idUser: null,
 				businessProcess: null, //TODO: nastavit pri application entry v controlleri / Handleri

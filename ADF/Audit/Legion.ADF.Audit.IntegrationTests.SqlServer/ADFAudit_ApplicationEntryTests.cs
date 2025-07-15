@@ -11,10 +11,10 @@ public class ADFAudit_ApplicationEntryTests : TestBase
 	[Test]
 	public async Task ApplicationEntry_ShouldCreateApplicationEntry()
 	{
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var auditStore = sp.GetRequiredService<AuditStore>();
@@ -43,7 +43,7 @@ public class ADFAudit_ApplicationEntryTests : TestBase
 		var appEntryToken = saveResult.Data!;
 
 		var idAuditOperation = Model.AuditOperation.Update;
-		var aggregateIdentifier = Guid.NewGuid().ToString();
+		var aggregateIdentifier = GlobalContext.Instance.NewGuid().ToString();
 		var uri = "http://10.60.20.15:31003/sk/Forms/ZiadostiOPrihlaskuPohladavky/Update?handler=Import";
 
 		var requestString = "My audit info";

@@ -1,57 +1,58 @@
-{
-		"DbDeploy": {
-				"ConncetionString": "Host=localhost;Database=legion_adf_cache;Port=5432;Username=postgres;Password={0};Timeout=120;CommandTimeout=120;MaxPoolSize=80;ApplicationName=DbDeployEXE",
-				"TargetDbUsername": "cacheusr",
-				"TargetDbPassword": "cachepwd",
-				"UseGlobalTransaction": false,
-				"SqlFiles": [
-						{
-								"FilePath": "dropCreate.sql",
-								"Transaction": null,
-								"CurrentDatabase": "postgres",
-								"FilledScriptPostfix": "_filled"
-						},
-						{
-								"FilePath": "configuredb.sql",
-								"Transaction": "Local"
-						},
-						{
-								"FilePath": "schemas.sql",
-								"Transaction": "Local"
-						},
-						{
-								"FilePath": "tables.sql",
-								"Transaction": "Local"
-						},
-						{
-								"FilePath": "views.sql",
-								"Transaction": "Local"
-						},
-						{
-								"FilePath": "permissions.sql",
-								"Transaction": "Local"
-						},
-						{
-								"FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.PostgreSQL\\schemas.sql",
-								"Transaction": "Local"
-						},
-						{
-								"FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.PostgreSQL\\tables.sql",
-								"Transaction": "Local"
-						},
-						{
-								"FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.PostgreSQL\\views.sql",
-								"Transaction": "Local"
-						},
-						{
-								"FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.PostgreSQL\\data_initial.sql",
-								"Transaction": "Local"
-						},
-						{
-								"FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.PostgreSQL\\permissions.sql",
-								"Transaction": "Local"
-						}
-				],
-				"DbPatch": null
-		}
+﻿{
+  "DbDeploy": {
+    "//ConncetionString": "Host=10.60.20.16;Database=legion_adf_cache;Port=5432;Username=postgres;Password=postgres_w;Timeout=120;CommandTimeout=120;MaxPoolSize=80;ApplicationName=DbDeployEXE",
+    "ConncetionString": "Host=localhost;Database=legion_adf_cache;Port=5432;Username=postgres;Password={0};Timeout=120;CommandTimeout=120;MaxPoolSize=80;ApplicationName=DbDeployEXE",
+    "TargetDbUsername": "cacheusr",
+    "TargetDbPassword": "cachepwd",
+    "UseGlobalTransaction": false,
+    "SqlFiles": [
+      {
+        "FilePath": "dropCreate.sql",
+        "Transaction": null,
+        "CurrentDatabase": "postgres",
+        "FilledScriptPostfix": "_filled"
+      },
+      {
+        "FilePath": "configuredb.sql",
+        "Transaction": "Local"
+      },
+      {
+        "FilePath": "schemas.sql",
+        "Transaction": "Local"
+      },
+      {
+        "FilePath": "tables.sql",
+        "Transaction": "Local"
+      },
+      {
+        "FilePath": "views.sql",
+        "Transaction": "Local"
+      },
+      {
+        "FilePath": "permissions.sql",
+        "Transaction": "Local"
+      },
+      {
+        "FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.PostgreSQL\\schemas.sql",
+        "Transaction": "Local"
+      },
+      {
+        "FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.PostgreSQL\\tables.sql",
+        "Transaction": "Local"
+      },
+      {
+        "FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.PostgreSQL\\views.sql",
+        "Transaction": "Local"
+      },
+      {
+        "FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.PostgreSQL\\data_initial.sql",
+        "Transaction": "Local"
+      },
+      {
+        "FilePath": "..\\..\\..\\Logs\\Legion.ADF.Logs.DB.PostgreSQL\\permissions.sql",
+        "Transaction": "Local"
+      }
+    ],
+    "DbPatch": null
+  }
 }

@@ -14,7 +14,7 @@ public static class ADFServiceBusBuilderExtensions
 		Throw.IfArgumentNull(builder);
 
 		if (!builder.ADFServiceBusBuilderContext.Configured())
-			Throw.InvalidOperationException($"{nameof(ServiceBus)} already configured");
+			Throw.InvalidOperationException($"{nameof(ADFServiceBusBuilderContext)} already configured");
 
 		Assembly[] assemblies = [
 			typeof(EnterpriseServiceBus).Assembly
@@ -34,7 +34,39 @@ public static class ADFServiceBusBuilderExtensions
 
 		builder.Services.AddCacheRestApiClient("CacheRestApi");
 
+		builder.Services.AddTransient<HostService>();
 		builder.Services.AddHostedService<EnterpriseServiceBus>();
+
+		return builder;
+	}
+
+	public static ADFServiceBusMonitorBuilder ConfigureServiceBusMonitor(
+		this ADFServiceBusMonitorBuilder builder)
+	{
+		Throw.IfArgumentNull(builder);
+
+		if (!builder.ADFServiceBusBuilderContext.Configured())
+			Throw.InvalidOperationException($"{nameof(ADFServiceBusBuilderContext)} already configured");
+
+		Assembly[] assemblies = [
+			typeof(EnterpriseServiceBus).Assembly
+		];
+
+		//Add all validators from Legion.ADF.ServiceBus.dll
+		builder.Services.AddValidators(ServiceLifetime.Singleton, assemblies);
+
+		//add all TOption builders
+		builder.Services.ConfigureOptionsBuilders(assemblies);
+
+		if (builder.Configuration != null)
+		{
+			//add all service builders
+			builder.Services.ConfigureServiceCollectionBuilders(builder.Configuration, assemblies);
+		}
+
+		builder.Services.AddCacheRestApiClient("CacheRestApi");
+
+		builder.Services.AddTransient<IServiceBusMonitor, ServiceBusMonitorService>();
 
 		return builder;
 	}

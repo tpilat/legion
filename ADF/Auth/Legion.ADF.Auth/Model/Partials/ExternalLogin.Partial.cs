@@ -18,7 +18,7 @@ public sealed partial class ExternalLogin : Auth.AuthBaseEntity, Legion.Model.IE
 		var externalLogin = new ExternalLogin
 		{
 			__IsNewObject = true,
-			IdExternalLogin = Guid.NewGuid(),
+			IdExternalLogin = GlobalContext.Instance.NewGuid(),
 			IdLoginProvider = idLoginProvider,
 			IdUser = idUser,
 			ExternalUserIdentifier = externalUserIdentifier,

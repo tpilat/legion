@@ -32,9 +32,9 @@ public sealed partial class JobStatistics : ServiceBus.ServiceBusBaseEntity, Leg
 	public int ErrorCount { get; private set; }
 
 	/// <summary>
-	/// Database DataType: numeric NOT NULL
+	/// Database DataType: bigint NOT NULL
 	/// </summary>
-	public decimal AverageDuration { get; private set; }
+	public long DurationSumInSeconds { get; private set; }
 
 
 	/// <summary>
@@ -59,7 +59,7 @@ public sealed partial class JobStatistics : ServiceBus.ServiceBusBaseEntity, Leg
 			{ nameof(StartHourUtc), StartHourUtc },
 			{ nameof(ExecutionCount), ExecutionCount },
 			{ nameof(ErrorCount), ErrorCount },
-			{ nameof(AverageDuration), AverageDuration },
+			{ nameof(DurationSumInSeconds), DurationSumInSeconds },
 		};
 
 	public void TrimStringValuesToFitDatabaseMaxLengths(string? postfix = null)
@@ -83,6 +83,6 @@ public sealed partial class JobStatistics : ServiceBus.ServiceBusBaseEntity, Leg
 			//.ForProperty(x => x.StartHourUtc, v => v.NotDefaultOrEmpty())
 			//.ForProperty(x => x.ExecutionCount, v => v.NotDefaultOrEmpty())
 			//.ForProperty(x => x.ErrorCount, v => v.NotDefaultOrEmpty())
-			//.ForProperty(x => x.AverageDuration, v => v.NotDefaultOrEmpty())
+			//.ForProperty(x => x.DurationSumInSeconds, v => v.NotDefaultOrEmpty())
 		;
 }

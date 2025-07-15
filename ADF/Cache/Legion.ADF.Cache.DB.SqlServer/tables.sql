@@ -7,8 +7,9 @@ CREATE TABLE [cache].[CacheData]
 	[KeyPrefix450] nvarchar(450) NOT NULL,
 	[ExpiresUtc] datetime2(7) NULL,
 	[SlidingTime] time(7) NULL,
+	[CreatedUtc] datetime2(7) NOT NULL,
 	[LastAccessedUtc] datetime2(7) NOT NULL,
-	[RowVersion] bigint NOT NULL
+	[RowVersion] uniqueidentifier NOT NULL
 )
 GO
 
@@ -18,6 +19,7 @@ CREATE TABLE [cache].[DistributedLock]
 	[LockKey] nvarchar(max) NOT NULL,
 	[LockId] nvarchar(32) NOT NULL,
 	[Metadata] nvarchar(max) NULL,
+	[CreatedUtc] datetime2(7) NOT NULL,
 	[ExpiresUtc] datetime2(7) NOT NULL
 )
 GO
@@ -52,6 +54,10 @@ GO
 ALTER TABLE [cache].[DistributedLock] 
  ADD CONSTRAINT [PK_DistributedLock]
 	PRIMARY KEY CLUSTERED ([KeyHash] ASC)
+GO
+
+CREATE NONCLUSTERED INDEX [IX_DistributedLock_LockId] 
+ ON [cache].[DistributedLock] ([LockId] ASC)
 GO
 
 ALTER TABLE [cache].[ReloadableCacheKey] 

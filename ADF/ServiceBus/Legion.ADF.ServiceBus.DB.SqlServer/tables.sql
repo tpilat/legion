@@ -5,11 +5,20 @@ CREATE TABLE [hosts].[Host]
 	[Description] varchar(511) NOT NULL,
 	[CreatedUtc] datetime2(7) NOT NULL,
 	[IsEnabled] bit NOT NULL,
-	[StartedUtc] datetime2(7) NULL,
+	[Configuration] nvarchar(max) NOT NULL,
+	[RowVersion] uniqueidentifier NOT NULL
+)
+GO
+
+CREATE TABLE [hosts].[HostActivity]
+(
+	[IdHostActivity] uniqueidentifier NOT NULL,
+	[IdHost] uniqueidentifier NOT NULL,
+	[StartedUtc] datetime2(7) NOT NULL,
 	[LastActivityUtc] datetime2(7) NOT NULL,
 	[StoppedUtc] datetime2(7) NULL,
-	[Configuration] nvarchar(max) NOT NULL,
-	[IsDistributedManagerAvailable] bit NOT NULL
+	[IsDistributedManagerAvailable] bit NOT NULL,
+	[RowVersion] uniqueidentifier NOT NULL
 )
 GO
 
@@ -33,7 +42,6 @@ CREATE TABLE [jobs].[Job]
 	[Name] nvarchar(255) NOT NULL,
 	[Description] nvarchar(1023) NULL,
 	[IdJobRunType] uniqueidentifier NOT NULL,
-	[IdJobStatus] uniqueidentifier NOT NULL,
 	[Namespace] nvarchar(1023) NOT NULL,
 	[Properties] nvarchar(max) NULL,
 	[DelayedStartInSeconds] int NULL,
@@ -41,13 +49,24 @@ CREATE TABLE [jobs].[Job]
 	[CronExpression] nvarchar(63) NULL,
 	[CronExpressionIncludeSeconds] bit NOT NULL,
 	[IdDefaultHost] uniqueidentifier NOT NULL,
+	[RequestedToDisable] bit NOT NULL,
+	[TimeoutForProcessingInSeconds] int NOT NULL,
+	[RowVersion] uniqueidentifier NOT NULL
+)
+GO
+
+CREATE TABLE [jobs].[JobActivity]
+(
+	[IdJobActivity] uniqueidentifier NOT NULL,
+	[IdJob] uniqueidentifier NOT NULL,
+	[IdJobStatus] uniqueidentifier NOT NULL,
 	[IdCurrentHost] uniqueidentifier NOT NULL,
 	[AttachedToCurrentHostUtc] datetime2(7) NOT NULL,
-	[LastProcessingUtc] datetime2(7) NULL,
+	[LastStatusChangedUtc] datetime2(7) NOT NULL,
+	[LastProcessingStartedUtc] datetime2(7) NULL,
 	[LastProcessingFinishedUtc] datetime2(7) NULL,
-	[NextProcessinUtc] datetime2(7) NOT NULL,
-	[TimeoutForProcessingInSeconds] int NOT NULL,
-	[MaxProcessingRetryCount] int NOT NULL
+	[DelayedToUtc] datetime2(7) NULL,
+	[RowVersion] uniqueidentifier NOT NULL
 )
 GO
 
@@ -79,7 +98,8 @@ CREATE TABLE [jobs].[JobExecution]
 	[TraceCorrelationId] uniqueidentifier NOT NULL,
 	[StartUtc] datetime2(7) NOT NULL,
 	[EndUtc] datetime2(7) NULL,
-	[IdJobStatus] uniqueidentifier NOT NULL
+	[IdJobStatus] uniqueidentifier NOT NULL,
+	[StatisticsStartHourUtc] datetime2(7) NOT NULL
 )
 GO
 
@@ -94,7 +114,8 @@ CREATE TABLE [jobs].[JobLog]
 	[IdLogMessage] uniqueidentifier NULL,
 	[Code] nvarchar(127) NOT NULL,
 	[Detail] nvarchar(max) NULL,
-	[IdMessageProcessingLog] uniqueidentifier NULL
+	[IdMessageProcessingLog] uniqueidentifier NULL,
+	[IdJobExecution] uniqueidentifier NULL
 )
 GO
 
@@ -131,7 +152,7 @@ CREATE TABLE [jobs].[JobStatistics]
 	[StartHourUtc] datetime2(7) NOT NULL,
 	[ExecutionCount] int NOT NULL,
 	[ErrorCount] int NOT NULL,
-	[AverageDuration] decimal(18) NOT NULL
+	[DurationSumInSeconds] bigint NOT NULL
 )
 GO
 
@@ -261,6 +282,19 @@ ALTER TABLE [hosts].[Host]
  ADD CONSTRAINT [UQ_Host_Name] UNIQUE NONCLUSTERED ([Name] ASC)
 GO
 
+ALTER TABLE [hosts].[HostActivity] 
+ ADD CONSTRAINT [PK_HostActivity]
+	PRIMARY KEY CLUSTERED ([IdHostActivity] ASC)
+GO
+
+ALTER TABLE [hosts].[HostActivity] 
+ ADD CONSTRAINT [UQ_HostActivity_IdHost] UNIQUE NONCLUSTERED ([IdHost] ASC)
+GO
+
+CREATE NONCLUSTERED INDEX [IXFK_HostActivity_Host] 
+ ON [hosts].[HostActivity] ([IdHost] ASC)
+GO
+
 ALTER TABLE [hosts].[HostLog] 
  ADD CONSTRAINT [PK_HostLog]
 	PRIMARY KEY CLUSTERED ([IdHostLog] ASC)
@@ -275,12 +309,29 @@ ALTER TABLE [jobs].[Job]
 	PRIMARY KEY CLUSTERED ([IdJob] ASC)
 GO
 
+ALTER TABLE [jobs].[Job] 
+ ADD CONSTRAINT [UQ_Job_Name] UNIQUE NONCLUSTERED ([Name] ASC)
+GO
+
 CREATE NONCLUSTERED INDEX [IXFK_Job_JobRunType] 
  ON [jobs].[Job] ([IdJobRunType] ASC)
 GO
 
-CREATE NONCLUSTERED INDEX [IXFK_Job_JobStatus] 
- ON [jobs].[Job] ([IdJobStatus] ASC)
+ALTER TABLE [jobs].[JobActivity] 
+ ADD CONSTRAINT [PK_JobActivity]
+	PRIMARY KEY CLUSTERED ([IdJobActivity] ASC)
+GO
+
+ALTER TABLE [jobs].[JobActivity] 
+ ADD CONSTRAINT [UQ_JobActivity_IdJob] UNIQUE NONCLUSTERED ([IdJob] ASC)
+GO
+
+CREATE NONCLUSTERED INDEX [IXFK_JobActivity_Job] 
+ ON [jobs].[JobActivity] ([IdJob] ASC)
+GO
+
+CREATE NONCLUSTERED INDEX [IXFK_JobActivity_JobStatus] 
+ ON [jobs].[JobActivity] ([IdJobStatus] ASC)
 GO
 
 ALTER TABLE [jobs].[JobData] 
@@ -305,6 +356,10 @@ CREATE NONCLUSTERED INDEX [IXFK_JobExecution_JobStatus]
  ON [jobs].[JobExecution] ([IdJobStatus] ASC)
 GO
 
+CREATE NONCLUSTERED INDEX [IX_JobExecution_StatisticsStartHourUtc] 
+ ON [jobs].[JobExecution] ([StatisticsStartHourUtc] ASC)
+GO
+
 ALTER TABLE [jobs].[JobLog] 
  ADD CONSTRAINT [PK_JobLog]
 	PRIMARY KEY CLUSTERED ([IdJobLog] ASC)
@@ -312,6 +367,10 @@ GO
 
 CREATE NONCLUSTERED INDEX [IXFK_JobLog_Job] 
  ON [jobs].[JobLog] ([IdJob] ASC)
+GO
+
+CREATE NONCLUSTERED INDEX [IXFK_JobLog_JobExecution] 
+ ON [jobs].[JobLog] ([IdJobExecution] ASC)
 GO
 
 CREATE NONCLUSTERED INDEX [IXFK_JobLog_JobStatus] 
@@ -344,6 +403,10 @@ GO
 ALTER TABLE [jobs].[JobStatistics] 
  ADD CONSTRAINT [PK_JobStatistics]
 	PRIMARY KEY CLUSTERED ([IdJobStatistics] ASC)
+GO
+
+ALTER TABLE [jobs].[JobStatistics] 
+ ADD CONSTRAINT [UQ_JobStatistics_IdJob_StartHour] UNIQUE NONCLUSTERED ([IdJob] ASC,[StartHourUtc] ASC)
 GO
 
 CREATE NONCLUSTERED INDEX [IXFK_JobStatistics_Job] 
@@ -453,6 +516,10 @@ ALTER TABLE [orch].[OrchestrationStepProcessingStatus]
 	PRIMARY KEY CLUSTERED ([IdOrchestrationStepProcessingStatus] ASC)
 GO
 
+ALTER TABLE [hosts].[HostActivity] ADD CONSTRAINT [FK_HostActivity_IdHost]
+	FOREIGN KEY ([IdHost]) REFERENCES [hosts].[Host] ([IdHost]) ON DELETE No Action ON UPDATE No Action
+GO
+
 ALTER TABLE [hosts].[HostLog] ADD CONSTRAINT [FK_HostLog_IdHost]
 	FOREIGN KEY ([IdHost]) REFERENCES [hosts].[Host] ([IdHost]) ON DELETE No Action ON UPDATE No Action
 GO
@@ -461,7 +528,11 @@ ALTER TABLE [jobs].[Job] ADD CONSTRAINT [FK_Job_IdJobRunType]
 	FOREIGN KEY ([IdJobRunType]) REFERENCES [jobs].[JobRunType] ([IdJobRunType]) ON DELETE No Action ON UPDATE No Action
 GO
 
-ALTER TABLE [jobs].[Job] ADD CONSTRAINT [FK_Job_IdJobStatus]
+ALTER TABLE [jobs].[JobActivity] ADD CONSTRAINT [FK_JobActivity_IdJob]
+	FOREIGN KEY ([IdJob]) REFERENCES [jobs].[Job] ([IdJob]) ON DELETE No Action ON UPDATE No Action
+GO
+
+ALTER TABLE [jobs].[JobActivity] ADD CONSTRAINT [FK_JobActivity_IdJobStatus]
 	FOREIGN KEY ([IdJobStatus]) REFERENCES [jobs].[JobStatus] ([IdJobStatus]) ON DELETE No Action ON UPDATE No Action
 GO
 
@@ -479,6 +550,10 @@ GO
 
 ALTER TABLE [jobs].[JobLog] ADD CONSTRAINT [FK_JobLog_IdJob]
 	FOREIGN KEY ([IdJob]) REFERENCES [jobs].[Job] ([IdJob]) ON DELETE No Action ON UPDATE No Action
+GO
+
+ALTER TABLE [jobs].[JobLog] ADD CONSTRAINT [FK_JobLog_IdJobExecution]
+	FOREIGN KEY ([IdJobExecution]) REFERENCES [jobs].[JobExecution] ([IdJobExecution]) ON DELETE No Action ON UPDATE No Action
 GO
 
 ALTER TABLE [jobs].[JobLog] ADD CONSTRAINT [FK_JobLog_IdJobStatus]

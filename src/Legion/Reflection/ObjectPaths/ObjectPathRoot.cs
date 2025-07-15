@@ -13,7 +13,7 @@ public class ObjectPathRoot<T> : ObjectPath<T>, IObjectPathRoot, IObjectPath<T>,
 	}
 
 	internal ObjectPathRoot()
-		: this(Guid.NewGuid())
+		: this(GlobalContext.Instance.NewGuid())
 	{
 		Parent = null;
 		PropertyName = null;

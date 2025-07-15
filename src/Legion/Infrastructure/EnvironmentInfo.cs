@@ -24,7 +24,7 @@ public struct EnvironmentInfo(
 {
 	public const string DEFAULT_SYSTEM_NAME = "_";
 
-	public static readonly Guid RUNTIME_UNIQUE_KEY = Guid.NewGuid();
+	public static readonly Guid RUNTIME_UNIQUE_KEY = GlobalContext.Instance.NewGuid();
 
 	public static readonly EnvironmentInfo Empty = new(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null!);
 

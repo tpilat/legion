@@ -14,8 +14,10 @@ public partial class ServiceBusDbContext : Legion.EntityFrameworkCore.Audit.Audi
 		PrimaryKeyFormatters = new System.Collections.Generic.Dictionary<string, string>
 		{
 			{ nameof(Legion.ADF.ServiceBus.Model.Host), PostgreSQL.HostConfiguration.PrimaryKeyFormatter },
+			{ nameof(Legion.ADF.ServiceBus.Model.HostActivity), PostgreSQL.HostActivityConfiguration.PrimaryKeyFormatter },
 			{ nameof(Legion.ADF.ServiceBus.Model.HostLog), PostgreSQL.HostLogConfiguration.PrimaryKeyFormatter },
 			{ nameof(Legion.ADF.ServiceBus.Model.Job), PostgreSQL.JobConfiguration.PrimaryKeyFormatter },
+			{ nameof(Legion.ADF.ServiceBus.Model.JobActivity), PostgreSQL.JobActivityConfiguration.PrimaryKeyFormatter },
 			{ nameof(Legion.ADF.ServiceBus.Model.JobData), PostgreSQL.JobDataConfiguration.PrimaryKeyFormatter },
 			{ nameof(Legion.ADF.ServiceBus.Model.JobExecution), PostgreSQL.JobExecutionConfiguration.PrimaryKeyFormatter },
 			{ nameof(Legion.ADF.ServiceBus.Model.JobLog), PostgreSQL.JobLogConfiguration.PrimaryKeyFormatter },
@@ -38,8 +40,10 @@ public partial class ServiceBusDbContext : Legion.EntityFrameworkCore.Audit.Audi
 	}
 
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.Host> Host { get; set; }
+	public virtual DbSet<Legion.ADF.ServiceBus.Model.HostActivity> HostActivity { get; set; }
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.HostLog> HostLog { get; set; }
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.Job> Job { get; set; }
+	public virtual DbSet<Legion.ADF.ServiceBus.Model.JobActivity> JobActivity { get; set; }
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.JobData> JobData { get; set; }
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.JobExecution> JobExecution { get; set; }
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.JobLog> JobLog { get; set; }
@@ -92,8 +96,10 @@ public partial class ServiceBusDbContext : Legion.EntityFrameworkCore.Audit.Audi
 		RegisterUnaccentFunction(modelBuilder);
 
 		PostgreSQL.HostConfiguration.Build(modelBuilder);
+		PostgreSQL.HostActivityConfiguration.Build(modelBuilder);
 		PostgreSQL.HostLogConfiguration.Build(modelBuilder);
 		PostgreSQL.JobConfiguration.Build(modelBuilder);
+		PostgreSQL.JobActivityConfiguration.Build(modelBuilder);
 		PostgreSQL.JobDataConfiguration.Build(modelBuilder);
 		PostgreSQL.JobExecutionConfiguration.Build(modelBuilder);
 		PostgreSQL.JobLogConfiguration.Build(modelBuilder);

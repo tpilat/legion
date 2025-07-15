@@ -41,6 +41,12 @@ public partial class HostRepository : Legion.ADF.ServiceBus.SqlServer.ServiceBus
 	public IQueryable<Legion.ADF.ServiceBus.Model.Host> AsReadOnlyQueryable(IScopeContext scopeContext, bool checkReadPermissions)
 		=> AsQueryable(scopeContext, checkReadPermissions).AsNoTracking();
 	
+	public Legion.ADF.ServiceBus.Queries.Host.IGetAllHosts GetAllHosts(
+		Legion.ADF.ServiceBus.Queries.Host.GetAllHostsQuery getAllHosts)
+		=> new Legion.ADF.ServiceBus.Queries.Host.GetAllHosts(
+			ConnectionProvider,
+			getAllHosts);
+
 	public Legion.ADF.ServiceBus.Queries.Host.IGetHostById GetHostById(
 		Legion.ADF.ServiceBus.Queries.Host.GetHostByIdQuery getHostById)
 		=> new Legion.ADF.ServiceBus.Queries.Host.GetHostById(

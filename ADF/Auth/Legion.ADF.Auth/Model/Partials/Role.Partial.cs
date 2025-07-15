@@ -20,7 +20,7 @@ public partial class Role : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		var role = new Role
 		{
 			__IsNewObject = true,
-			IdRole = Guid.NewGuid(),
+			IdRole = GlobalContext.Instance.NewGuid(),
 			Name = roleName,
 			NormalizedName = normalizedRoleName,
 			ADGroupDistinguishedName = null,
@@ -33,7 +33,7 @@ public partial class Role : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 			AuditModifiedUtc = null,
 			IdAuditCreatedBy = scopeContext.IdUser,
 			IdAuditModifiedBy = null,
-			ConcurrencyToken = Guid.NewGuid(),
+			ConcurrencyToken = GlobalContext.Instance.NewGuid(),
 			DeletedUtc = DateTime.MinValue
 		};
 
@@ -64,7 +64,7 @@ public partial class Role : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -94,7 +94,7 @@ public partial class Role : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -119,7 +119,7 @@ public partial class Role : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = DeletedUtc;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =

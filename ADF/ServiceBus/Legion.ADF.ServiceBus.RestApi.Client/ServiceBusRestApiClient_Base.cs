@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Legion.ADF.ServiceBus.RestApi.Client;
 
-public partial class ServiceBusRestApiClient : HttpApiClient<ServiceBusRestApiClientOptions>
+public partial class ServiceBusRestApiClient : HttpApiClient<ServiceBusRestApiClientOptions>, IServiceBusMonitor
 {
 	private const string CLIENT_NAME = nameof(ServiceBusRestApiClient);
 
@@ -23,6 +23,24 @@ public partial class ServiceBusRestApiClient : HttpApiClient<ServiceBusRestApiCl
 		ILogger<HttpApiClient> logger)
 		: base(client, serviceProvider, options, logger)
 	{
+	}
+
+	protected async Task<TData> ToJsonAsync<TData>(IScopeContext scopeContext, IHttpClientRequest request, IHttpClientResponse response, CancellationToken cancellationToken)
+	{
+		scopeContext = scopeContext.CreateNew();
+
+		if (response.HasError(true))
+		{
+			var errorBuilder = LogError(scopeContext, Legion.ADF.ServiceBus.RestApi.Client.Internal.ErrorCodes.ApiClientException.ErrorResponse(nameof(ServiceBusRestApiClient)), request, response);
+			errorBuilder!.AppendDetail(CLIENT_NAME);
+
+			throw errorBuilder.Build().ToException();
+		}
+		else //OK
+		{
+			var result = await response.ReadJsonContentAsAsync<TData>(_jsonSerializerSettings.Value, cancellationToken);
+			return result!;
+		}
 	}
 
 	protected async Task<IResult<TData>> ToJsonResultAsync<TData>(IScopeContext scopeContext, IHttpClientRequest request, IHttpClientResponse response, CancellationToken cancellationToken)
@@ -91,4 +109,11 @@ public partial class ServiceBusRestApiClient : HttpApiClient<ServiceBusRestApiCl
 			}
 		}
 	}
+
+	void IDisposable.Dispose()
+	{
+	}
+
+	ValueTask IAsyncDisposable.DisposeAsync()
+		=> ValueTask.CompletedTask;
 }

@@ -21,7 +21,7 @@ public class DBConfigurationManager : IDBConfigurationManager, IDBConfigurationL
 		string connectionString)
 	{
 #if TRACK_OBJECTS
-		IdDBConfigurationManager = Guid.NewGuid();
+		IdDBConfigurationManager = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdDBConfigurationManager.ToString());
 #endif
 

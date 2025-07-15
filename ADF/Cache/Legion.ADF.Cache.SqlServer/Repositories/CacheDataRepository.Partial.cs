@@ -6,6 +6,24 @@ namespace Legion.ADF.Cache.SqlServer.Model.Repositories;
 
 public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepositoryBase, Legion.ADF.Cache.ICacheRepository<Legion.ADF.Cache.Model.CacheData>, Legion.ADF.Cache.Model.Repositories.ICacheDataRepository
 {
+	public async Task<bool> IsAliveAsync(
+		IScopeContext scopeContext,
+		CancellationToken cancellationToken = default)
+	{
+		scopeContext = scopeContext.CreateNew();
+
+		try
+		{
+			await using var context = ConnectionProvider.GetOrCreateDbContext<Legion.ADF.Cache.SqlServer.ICacheDbContext>(scopeContext);
+			var result = await context.Database.ExecuteSqlRawAsync("SELECT 1", cancellationToken);
+			return true; // no exception, DB is alive
+		}
+		catch
+		{
+			return false;
+		}
+	}
+
 	public async Task<Cache.Model.CacheData?> TryGetCacheDataAsync(
 		IScopeContext scopeContext,
 		string key,
@@ -36,12 +54,13 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 			updateSlidingResult.ThrowIfError(scopeContext, null, true);
 		}
 
-		//this method does not update row version!!!!
-
 		var updateLastResult = cacheData.UpdateLastAccess(scopeContext, nowUtc);
 		updateLastResult.ThrowIfError(scopeContext, null, true);
 
-		await context.SaveAsync(scopeContext);
+		await context.SaveAsync(scopeContext, new Legion.Model.SaveOptions
+		{
+			SetConcurrencyToken = false, //this method does not update row version!!!!
+		});
 
 		return cacheData;
 	}
@@ -61,7 +80,7 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 		IScopeContext scopeContext,
 		string key,
 		string value,
-		long? currentRowVersion,
+		Guid? currentRowVersion,
 		MemoryCacheEntryOptions? options,
 		CancellationToken cancellationToken = default)
 	{
@@ -89,6 +108,8 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 
 		await using var context = ConnectionProvider.GetOrCreateDbContext<Legion.ADF.Cache.SqlServer.ICacheDbContext>(scopeContext);
 
+		var nextRowVersion = GlobalContext.Instance.NewGuid();
+
 		if (currentRowVersion.HasValue)
 		{
 			var sql = """
@@ -102,7 +123,9 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 				@expiresUtc AS ExpiresUtc,
 				@sliding AS SlidingTime,
 				@now AS LastAccessedUtc,
-				@currentRowVersion AS CurrentRowVersion
+				@currentRowVersion AS CurrentRowVersion,
+				@nextRowVersion AS NextRowVersion,
+				@createdUtc AS CreatedUtc
 			) AS source
 			ON target.[KeyHash] = source.[KeyHash] AND target.[RowVersion] = source.[CurrentRowVersion]
 			WHEN MATCHED THEN
@@ -114,14 +137,14 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 					target.[ExpiresUtc] = source.[ExpiresUtc],
 					target.[SlidingTime] = source.[SlidingTime],
 					target.[LastAccessedUtc] = source.[LastAccessedUtc],
-					target.[RowVersion] = target.[RowVersion] + 1
+					target.[RowVersion] = source.[NextRowVersion]
 			WHEN NOT MATCHED THEN
 				INSERT (
 					[KeyHash], [ValueHash], [Key], [Value],
-					[KeyPrefix450], [ExpiresUtc], [SlidingTime], [LastAccessedUtc], [RowVersion])
+					[KeyPrefix450], [ExpiresUtc], [SlidingTime], [LastAccessedUtc], [RowVersion], [CreatedUtc])
 				VALUES (
 					source.[KeyHash], source.[ValueHash], source.[Key], source.[Value],
-					source.[KeyPrefix450], source.[ExpiresUtc], source.[SlidingTime], source.[LastAccessedUtc], 0);
+					source.[KeyPrefix450], source.[ExpiresUtc], source.[SlidingTime], source.[LastAccessedUtc], source.[NextRowVersion], source.[CreatedUtc]);
 		""";
 
 			var rows = await context.Database.ExecuteSqlRawAsync(sql, [
@@ -133,7 +156,9 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 				new Microsoft.Data.SqlClient.SqlParameter("expiresUtc", cacheData.ExpiresUtc ?? (object)DBNull.Value),
 				new Microsoft.Data.SqlClient.SqlParameter("sliding", cacheData.SlidingTime ?? (object)DBNull.Value),
 				new Microsoft.Data.SqlClient.SqlParameter("now", nowUtc),
-				new Microsoft.Data.SqlClient.SqlParameter("currentRowVersion", currentRowVersion ?? (object)DBNull.Value)
+				new Microsoft.Data.SqlClient.SqlParameter("currentRowVersion", currentRowVersion ?? (object)DBNull.Value),
+				new Microsoft.Data.SqlClient.SqlParameter("nextRowVersion", nextRowVersion),
+				new Microsoft.Data.SqlClient.SqlParameter("createdUtc", GlobalContext.Instance.UtcNow)
 				]);
 
 			return rows == 1;
@@ -150,7 +175,9 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 				@keyPrefix AS KeyPrefix450,
 				@expiresUtc AS ExpiresUtc,
 				@sliding AS SlidingTime,
-				@now AS LastAccessedUtc
+				@now AS LastAccessedUtc,
+				@nextRowVersion AS NextRowVersion,
+				@createdUtc AS CreatedUtc
 			) AS source
 			ON target.[KeyHash] = source.[KeyHash]
 			WHEN MATCHED THEN
@@ -162,14 +189,14 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 					target.[ExpiresUtc] = source.[ExpiresUtc],
 					target.[SlidingTime] = source.[SlidingTime],
 					target.[LastAccessedUtc] = source.[LastAccessedUtc],
-					target.[RowVersion] = target.[RowVersion] + 1
+					target.[RowVersion] = source.[NextRowVersion]
 			WHEN NOT MATCHED THEN
 				INSERT (
 					[KeyHash], [ValueHash], [Key], [Value],
-					[KeyPrefix450], [ExpiresUtc], [SlidingTime], [LastAccessedUtc], [RowVersion])
+					[KeyPrefix450], [ExpiresUtc], [SlidingTime], [LastAccessedUtc], [RowVersion], [CreatedUtc])
 				VALUES (
 					source.[KeyHash], source.[ValueHash], source.[Key], source.[Value],
-					source.[KeyPrefix450], source.[ExpiresUtc], source.[SlidingTime], source.[LastAccessedUtc], 0);
+					source.[KeyPrefix450], source.[ExpiresUtc], source.[SlidingTime], source.[LastAccessedUtc], source.[NextRowVersion], source.[CreatedUtc]);
 		""";
 
 			var rows = await context.Database.ExecuteSqlRawAsync(sql, [
@@ -180,7 +207,9 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 				new Microsoft.Data.SqlClient.SqlParameter("keyPrefix", cacheData.KeyPrefix450),
 				new Microsoft.Data.SqlClient.SqlParameter("expiresUtc", cacheData.ExpiresUtc ?? (object)DBNull.Value),
 				new Microsoft.Data.SqlClient.SqlParameter("sliding", cacheData.SlidingTime ?? (object)DBNull.Value),
-				new Microsoft.Data.SqlClient.SqlParameter("now", nowUtc)
+				new Microsoft.Data.SqlClient.SqlParameter("now", nowUtc),
+				new Microsoft.Data.SqlClient.SqlParameter("nextRowVersion", nextRowVersion),
+				new Microsoft.Data.SqlClient.SqlParameter("createdUtc", GlobalContext.Instance.UtcNow)
 				]);
 
 			return rows == 1;
@@ -192,7 +221,7 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 		string key,
 		string oldValue,
 		string newValue,
-		long currentRowVersion,
+		Guid currentRowVersion,
 		MemoryCacheEntryOptions? options = null,
 		CancellationToken cancellationToken = default)
 	{
@@ -229,7 +258,7 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 				[ExpiresUtc] = @expiresUtc,
 				[SlidingTime] = @sliding,
 				[LastAccessedUtc] = @now,
-				[RowVersion] = @currentRowVersion + 1
+				[RowVersion] = @nextRowVersion
 			WHERE [KeyHash] = @keyHash AND [ValueHash] = @oldValueHash AND [RowVersion] = @currentRowVersion;
 		""";
 
@@ -246,7 +275,8 @@ public partial class CacheDataRepository : Legion.ADF.Cache.SqlServer.CacheRepos
 			new Microsoft.Data.SqlClient.SqlParameter("now", nowUtc),
 			new Microsoft.Data.SqlClient.SqlParameter("keyHash", cacheData.KeyHash),
 			new Microsoft.Data.SqlClient.SqlParameter("oldValueHash", oldValueHash),
-			new Microsoft.Data.SqlClient.SqlParameter("currentRowVersion", currentRowVersion)
+			new Microsoft.Data.SqlClient.SqlParameter("currentRowVersion", currentRowVersion),
+			new Microsoft.Data.SqlClient.SqlParameter("nextRowVersion", GlobalContext.Instance.NewGuid())
 		]);
 
 		return rows == 1;

@@ -191,7 +191,7 @@ public<#= @sealed #> partial class <#= entityDesc.Name #> : <#= entityDesc.GetBa
 				else
 				{
 #>
-			target.<#= navigation.Name #> = <#= navigation.Name #>?.MapTo(target.<#= targetEntityDesc.FullName(modelName, contextName) #>, referenceModifier, conds?.GetConditions(x => x.<#= navigation.Name #>), instanceFactory, cache)!;
+			target.<#= navigation.Name #> = <#= navigation.Name #>?.MapTo(target.<#= navigation.Name #>, referenceModifier, conds?.GetConditions(x => x.<#= navigation.Name #>), instanceFactory, cache)!;
 <#
 				}
 			}

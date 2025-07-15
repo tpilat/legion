@@ -17,7 +17,7 @@ COPY ["ADF/Cache/Legion.ADF.Cache.RestApi/Legion.ADF.Cache.RestApi.csproj", "ADF
 COPY ["src/Legion.AspNetCore/Legion.AspNetCore.csproj", "src/Legion.AspNetCore/"]
 COPY ["src/Legion/Legion.csproj", "src/Legion/"]
 COPY ["ADF/Logs/Legion.ADF.Logs.PostgreSQL/Legion.ADF.Logs.PostgreSQL.csproj", "ADF/Logs/Legion.ADF.Logs.PostgreSQL/"]
-COPY ["src/Legion.Database.PostgreSql/Legion.Database.PostgreSQL.csproj", "src/Legion.Database.PostgreSql/"]
+COPY ["src/Legion.Database.PostgreSQL/Legion.Database.PostgreSQL.csproj", "src/Legion.Database.PostgreSQL/"]
 COPY ["src/Legion.EntityFrameworkCore.PostgreSQL/Legion.EntityFrameworkCore.PostgreSQL.csproj", "src/Legion.EntityFrameworkCore.PostgreSQL/"]
 COPY ["src/Legion.EntityFrameworkCore/Legion.EntityFrameworkCore.csproj", "src/Legion.EntityFrameworkCore/"]
 COPY ["ADF/Logs/Legion.ADF.Logs/Legion.ADF.Logs.csproj", "ADF/Logs/Legion.ADF.Logs/"]

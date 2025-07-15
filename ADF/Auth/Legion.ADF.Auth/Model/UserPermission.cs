@@ -88,7 +88,7 @@ public sealed partial class UserPermission : Auth.AuthBaseEntity, Legion.Model.A
 
 	public void SetNewConcurrencyToken()
 	{
-		ConcurrencyToken = Guid.NewGuid();
+		ConcurrencyToken = GlobalContext.Instance.NewGuid();
 	}
 
 	static UserPermission()

@@ -3,5 +3,5 @@
 public class CachedValueDto
 {
 	public string Value { get; set; }
-	public long? RowVersion { get; set; }
+	public Guid? RowVersion { get; set; }
 }

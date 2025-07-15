@@ -7,8 +7,10 @@ namespace Legion.ADF.ServiceBus.PostgreSQL;
 public interface IServiceBusDbContext : Legion.EntityFrameworkCore.Audit.IAuditableDbContext, Legion.EntityFrameworkCore.IDbContext, IDisposable, IAsyncDisposable
 {
 	DbSet<Legion.ADF.ServiceBus.Model.Host> Host { get; }
+	DbSet<Legion.ADF.ServiceBus.Model.HostActivity> HostActivity { get; }
 	DbSet<Legion.ADF.ServiceBus.Model.HostLog> HostLog { get; }
 	DbSet<Legion.ADF.ServiceBus.Model.Job> Job { get; }
+	DbSet<Legion.ADF.ServiceBus.Model.JobActivity> JobActivity { get; }
 	DbSet<Legion.ADF.ServiceBus.Model.JobData> JobData { get; }
 	DbSet<Legion.ADF.ServiceBus.Model.JobExecution> JobExecution { get; }
 	DbSet<Legion.ADF.ServiceBus.Model.JobLog> JobLog { get; }

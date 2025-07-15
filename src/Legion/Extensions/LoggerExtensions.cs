@@ -555,7 +555,7 @@ public static partial class LoggerExtensions
 	//	logger.LogInformation($"{LoggerSettings.EnvironmentInfo_Template}", environmentInfo.ToDictionary());
 	//}
 
-	public static void LogResultErrorMessages(
+	public static IResult LogResultErrorMessages(
 		this ILogger logger,
 		IResult result,
 		bool skipIfAlreadyLogged,
@@ -583,9 +583,11 @@ public static partial class LoggerExtensions
 			foreach (var warningMessage in result.WarningMessages)
 				logger.LogWarningMessage(warningMessage, skipIfAlreadyLogged);
 		}
+
+		return result;
 	}
 
-	public static void LogResultErrorMessages(
+	public static IResult LogResultErrorMessages(
 		this ILogger logger,
 		IScopeContext scopeContext,
 		IErrorCode errorCode,
@@ -625,6 +627,84 @@ public static partial class LoggerExtensions
 
 		if (!loggedError && dataMustBeNotNull && result.HasErrorOrNullData)
 			logger.LogErrorMessage(ErrorMessage.CreateErrorMessage(scopeContext, errorCode, x => x.InternalMessage("Result has no data")), skipIfAlreadyLogged);
+
+		return result;
+	}
+
+	public static IResult<T> LogResultErrorMessages<T>(
+		this ILogger logger,
+		IResult<T> result,
+		bool skipIfAlreadyLogged,
+		bool logWarnings)
+	{
+		Throw.IfArgumentNull(logger);
+		Throw.IfArgumentNull(result);
+
+		foreach (var errorMessage in result.ErrorMessages)
+		{
+			if (errorMessage.LogLevel == LogLevel.Error)
+			{
+				logger.LogErrorMessage(errorMessage, skipIfAlreadyLogged);
+			}
+			else if (errorMessage.LogLevel == LogLevel.Critical)
+			{
+				logger.LogCriticalMessage(errorMessage, skipIfAlreadyLogged);
+			}
+			else
+				throw new NotSupportedException($"{nameof(errorMessage.LogLevel)} = {errorMessage.LogLevel}");
+		}
+
+		if (logWarnings)
+		{
+			foreach (var warningMessage in result.WarningMessages)
+				logger.LogWarningMessage(warningMessage, skipIfAlreadyLogged);
+		}
+
+		return result;
+	}
+
+	public static IResult<T> LogResultErrorMessages<T>(
+		this ILogger logger,
+		IScopeContext scopeContext,
+		IErrorCode errorCode,
+		IResult<T> result,
+		bool dataMustBeNotNull,
+		bool skipIfAlreadyLogged,
+		bool logWarnings)
+	{
+		Throw.IfArgumentNull(logger);
+		Throw.IfArgumentNull(scopeContext);
+		Throw.IfArgumentNull(errorCode);
+		Throw.IfArgumentNull(result);
+
+		var loggedError = false;
+
+		foreach (var errorMessage in result.ErrorMessages)
+		{
+			if (errorMessage.LogLevel == LogLevel.Error)
+			{
+				logger.LogErrorMessage(errorMessage, skipIfAlreadyLogged);
+				loggedError = true;
+			}
+			else if (errorMessage.LogLevel == LogLevel.Critical)
+			{
+				logger.LogCriticalMessage(errorMessage, skipIfAlreadyLogged);
+				loggedError = true;
+			}
+			else
+				throw new NotSupportedException($"{nameof(errorMessage.LogLevel)} = {errorMessage.LogLevel}");
+		}
+
+		if (logWarnings)
+		{
+			foreach (var warningMessage in result.WarningMessages)
+				logger.LogWarningMessage(warningMessage, skipIfAlreadyLogged);
+		}
+
+		if (!loggedError && dataMustBeNotNull && result.HasErrorOrNullData)
+			logger.LogErrorMessage(ErrorMessage.CreateErrorMessage(scopeContext, errorCode, x => x.InternalMessage("Result has no data")), skipIfAlreadyLogged);
+
+		return result;
 	}
 
 	//public static void LogResultAllMessages(

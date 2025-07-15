@@ -23,21 +23,6 @@ public sealed partial class VwJob : ServiceBus.ServiceBusBaseQueryEntity, Legion
 	public Guid IdJobRunType { get; private set; }
 
 	/// <summary>
-	/// Database DataType: varchar(63) NOT NULL
-	/// </summary>
-	public string JobRunType { get; private set; }
-
-	/// <summary>
-	/// Database DataType: uuid NOT NULL
-	/// </summary>
-	public Guid IdJobStatus { get; private set; }
-
-	/// <summary>
-	/// Database DataType: varchar(63) NOT NULL
-	/// </summary>
-	public string JobStatus { get; private set; }
-
-	/// <summary>
 	/// Database DataType: varchar(1023) NOT NULL
 	/// </summary>
 	public string Namespace { get; private set; }
@@ -68,14 +53,14 @@ public sealed partial class VwJob : ServiceBus.ServiceBusBaseQueryEntity, Legion
 	public bool CronExpressionIncludeSeconds { get; private set; }
 
 	/// <summary>
-	/// Database DataType: timestamp with time zone NULL
+	/// Database DataType: uuid NOT NULL
 	/// </summary>
-	public DateTime? LastProcessingUtc { get; private set; }
+	public Guid IdDefaultHost { get; private set; }
 
 	/// <summary>
-	/// Database DataType: timestamp with time zone NOT NULL
+	/// Database DataType: boolean NOT NULL
 	/// </summary>
-	public DateTime NextProcessinUtc { get; private set; }
+	public bool RequestedToDisable { get; private set; }
 
 	/// <summary>
 	/// Database DataType: integer NOT NULL
@@ -83,14 +68,9 @@ public sealed partial class VwJob : ServiceBus.ServiceBusBaseQueryEntity, Legion
 	public int TimeoutForProcessingInSeconds { get; private set; }
 
 	/// <summary>
-	/// Database DataType: integer NOT NULL
+	/// Database DataType: uuid NOT NULL
 	/// </summary>
-	public int MaxProcessingRetryCount { get; private set; }
-
-	/// <summary>
-	/// Database DataType: uuid NULL
-	/// </summary>
-	public Guid? IdDefaultHost { get; private set; }
+	public Guid RowVersion { get; private set; }
 
 
 	private VwJob()
@@ -104,20 +84,16 @@ public sealed partial class VwJob : ServiceBus.ServiceBusBaseQueryEntity, Legion
 			{ nameof(Name), Name },
 			{ nameof(Description), Description },
 			{ nameof(IdJobRunType), IdJobRunType },
-			{ nameof(JobRunType), JobRunType },
-			{ nameof(IdJobStatus), IdJobStatus },
-			{ nameof(JobStatus), JobStatus },
 			{ nameof(Namespace), Namespace },
 			{ nameof(Properties), Properties },
 			{ nameof(DelayedStartInSeconds), DelayedStartInSeconds },
 			{ nameof(IdleTimeoutInSeconds), IdleTimeoutInSeconds },
 			{ nameof(CronExpression), CronExpression },
 			{ nameof(CronExpressionIncludeSeconds), CronExpressionIncludeSeconds },
-			{ nameof(LastProcessingUtc), LastProcessingUtc },
-			{ nameof(NextProcessinUtc), NextProcessinUtc },
-			{ nameof(TimeoutForProcessingInSeconds), TimeoutForProcessingInSeconds },
-			{ nameof(MaxProcessingRetryCount), MaxProcessingRetryCount },
 			{ nameof(IdDefaultHost), IdDefaultHost },
+			{ nameof(RequestedToDisable), RequestedToDisable },
+			{ nameof(TimeoutForProcessingInSeconds), TimeoutForProcessingInSeconds },
+			{ nameof(RowVersion), RowVersion },
 		};
 
 	public override string? ToString()

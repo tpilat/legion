@@ -6,7 +6,7 @@ public class ADFCache_DistributedLockTests : TestBase
 	[Test]
 	public async Task CacheData_ShouldWriteDistributedLock()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var distributedLockProvider = GetDistributedLockProvider(sp);
@@ -32,7 +32,7 @@ public class ADFCache_DistributedLockTests : TestBase
 	[Test]
 	public async Task CacheData_ShouldNotWriteDistributedLockTwice()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var distributedLockProvider = GetDistributedLockProvider(sp);
@@ -56,7 +56,7 @@ public class ADFCache_DistributedLockTests : TestBase
 	[Test]
 	public async Task CacheData_ShouldReleaseDistributedLock()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var distributedLockProvider = GetDistributedLockProvider(sp);
@@ -82,7 +82,7 @@ public class ADFCache_DistributedLockTests : TestBase
 	[Test]
 	public async Task CacheData_ShouldRenewDistributedLock()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var distributedLockProvider = GetDistributedLockProvider(sp);

@@ -74,7 +74,8 @@ public static class AppSettingsExtensions
 {
 	public static IServiceCollection AddAppSettings(
 		this IServiceCollection services,
-		string esbConfigBindingPath)
+		string esbConfigBindingPath,
+		bool service)
 	{
 		services
 			.AddOptions<AppSettings>()
@@ -90,8 +91,12 @@ public static class AppSettingsExtensions
 			.ValidateOnStart();
 
 		services.AddDBSettings(esbConfigBindingPath);
-		services.AddEnterpriseServiceBusOptions(esbConfigBindingPath);
 
-		return services;
+		if (service)
+			services.AddEnterpriseServiceBusOptions(esbConfigBindingPath);
+		else
+			services.AddServiceBusMonitorOptions(esbConfigBindingPath);
+
+			return services;
 	}
 }

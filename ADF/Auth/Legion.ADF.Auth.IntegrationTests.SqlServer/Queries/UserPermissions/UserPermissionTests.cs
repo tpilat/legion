@@ -30,7 +30,7 @@ public class UserPermissionTests : TestBase
 		if (!updateResult.Succeeded)
 			Assert.Fail($"{nameof(updateResult)} ERRORS: {string.Join(Environment.NewLine, updateResult.Errors)}", scopeContext);
 
-		var idPermission = Guid.NewGuid();
+		var idPermission = GlobalContext.Instance.NewGuid();
 		var permissionName = $"TEST_{GetDatetimeTicks()}";
 		using (var npgsqlConnection = new Microsoft.Data.SqlClient.SqlConnection(SetUp.ConncetionString))
 		{
@@ -114,7 +114,7 @@ public class UserPermissionTests : TestBase
 
 		await userClaimStore.AddClaimsAsync(user, [claim], cancellationToken: default);
 
-		var idPermission = Guid.NewGuid();
+		var idPermission = GlobalContext.Instance.NewGuid();
 		var permissionName = $"TEST_{GetDatetimeTicks()}";
 		using (var npgsqlConnection = new Microsoft.Data.SqlClient.SqlConnection(SetUp.ConncetionString))
 		{

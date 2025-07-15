@@ -58,7 +58,7 @@ public class DomainEventProcessingService : BackgroundService
 
 		while (!cancellationToken.IsCancellationRequested)
 		{
-			var scopeContext = ScopeContext.Create(scopeContextGlobal, correlationId: Guid.NewGuid());
+			var scopeContext = ScopeContext.Create(scopeContextGlobal, correlationId: GlobalContext.Instance.NewGuid());
 
 			_logger.LogTraceMessage(scopeContext, x => x.InternalMessage($"{nameof(DomainEventProcessingService)}.{nameof(ExecuteAsync)}: START"));
 
@@ -152,7 +152,7 @@ public class DomainEventProcessingService : BackgroundService
 		MessagingDomainEventsStoreOptions options,
 		CancellationToken cancellationToken = default)
 	{
-		scopeContext = ScopeContext.Create(scopeContext, correlationId: Guid.NewGuid())
+		scopeContext = ScopeContext.Create(scopeContext, correlationId: GlobalContext.Instance.NewGuid())
 			.AddContextProperty(nameof(idDomainEvent), idDomainEvent.ToString());
 
 		try

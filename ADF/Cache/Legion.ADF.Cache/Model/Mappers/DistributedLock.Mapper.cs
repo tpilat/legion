@@ -55,6 +55,8 @@ public sealed partial class DistributedLock : Cache.CacheBaseEntity, Legion.Mode
 				target.LockId = LockId;
 			if (conds.CanMap(this, nameof(Metadata)))
 				target.Metadata = Metadata;
+			if (conds.CanMap(this, nameof(CreatedUtc)))
+				target.CreatedUtc = CreatedUtc;
 			if (conds.CanMap(this, nameof(ExpiresUtc)))
 				target.ExpiresUtc = ExpiresUtc;
 		}
@@ -64,6 +66,7 @@ public sealed partial class DistributedLock : Cache.CacheBaseEntity, Legion.Mode
 			target.LockKey = LockKey;
 			target.LockId = LockId;
 			target.Metadata = Metadata;
+			target.CreatedUtc = CreatedUtc;
 			target.ExpiresUtc = ExpiresUtc;
 		}
 

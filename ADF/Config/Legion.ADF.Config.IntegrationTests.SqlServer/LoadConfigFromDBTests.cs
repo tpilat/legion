@@ -12,7 +12,7 @@ public class LoadConfigFromDBTests : TestBase
 	[Test]
 	public async Task LoadConfiguration_ShouldLoadFromDB()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var configStore = sp.GetRequiredService<ConfigStore>();

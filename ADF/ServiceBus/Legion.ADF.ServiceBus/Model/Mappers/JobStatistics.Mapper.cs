@@ -57,8 +57,8 @@ public sealed partial class JobStatistics : ServiceBus.ServiceBusBaseEntity, Leg
 				target.ExecutionCount = ExecutionCount;
 			if (conds.CanMap(this, nameof(ErrorCount)))
 				target.ErrorCount = ErrorCount;
-			if (conds.CanMap(this, nameof(AverageDuration)))
-				target.AverageDuration = AverageDuration;
+			if (conds.CanMap(this, nameof(DurationSumInSeconds)))
+				target.DurationSumInSeconds = DurationSumInSeconds;
 		}
 		else
 		{
@@ -67,7 +67,7 @@ public sealed partial class JobStatistics : ServiceBus.ServiceBusBaseEntity, Leg
 			target.StartHourUtc = StartHourUtc;
 			target.ExecutionCount = ExecutionCount;
 			target.ErrorCount = ErrorCount;
-			target.AverageDuration = AverageDuration;
+			target.DurationSumInSeconds = DurationSumInSeconds;
 		}
 
 		cache.Add(this, target);

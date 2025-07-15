@@ -60,7 +60,7 @@ public sealed partial class JobStatistics : ServiceBus.ServiceBusBaseEntity, Leg
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.ErrorCount)) && obj1.ErrorCount != obj2.ErrorCount)
 						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.AverageDuration)) && obj1.AverageDuration != obj2.AverageDuration)
+					if (conds.CanCompare(obj1, nameof(obj1.DurationSumInSeconds)) && obj1.DurationSumInSeconds != obj2.DurationSumInSeconds)
 						return false;
 				}
 				else
@@ -75,7 +75,7 @@ public sealed partial class JobStatistics : ServiceBus.ServiceBusBaseEntity, Leg
 						return false;
 					if (obj1.ErrorCount != obj2.ErrorCount)
 						return false;
-					if (obj1.AverageDuration != obj2.AverageDuration)
+					if (obj1.DurationSumInSeconds != obj2.DurationSumInSeconds)
 						return false;
 				}
 			}

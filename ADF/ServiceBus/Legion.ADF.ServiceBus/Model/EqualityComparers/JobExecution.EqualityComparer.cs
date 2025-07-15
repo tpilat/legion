@@ -62,6 +62,8 @@ public sealed partial class JobExecution : ServiceBus.ServiceBusBaseEntity, Legi
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.IdJobStatus)) && obj1.IdJobStatus != obj2.IdJobStatus)
 						return false;
+					if (conds.CanCompare(obj1, nameof(obj1.StatisticsStartHourUtc)) && obj1.StatisticsStartHourUtc != obj2.StatisticsStartHourUtc)
+						return false;
 				}
 				else
 				{
@@ -76,6 +78,8 @@ public sealed partial class JobExecution : ServiceBus.ServiceBusBaseEntity, Legi
 					if (obj1.EndUtc != obj2.EndUtc)
 						return false;
 					if (obj1.IdJobStatus != obj2.IdJobStatus)
+						return false;
+					if (obj1.StatisticsStartHourUtc != obj2.StatisticsStartHourUtc)
 						return false;
 				}
 			}
@@ -93,6 +97,8 @@ public sealed partial class JobExecution : ServiceBus.ServiceBusBaseEntity, Legi
 				if (!Job.JobEqualityComparer.EqualsTo(obj1.Job, obj2.Job, comparisonOptions, conds?.GetConditions(x => x.Job), cache))
 					return false;
 				if (!JobStatus.JobStatusEqualityComparer.EqualsTo(obj1.JobStatus, obj2.JobStatus, comparisonOptions, conds?.GetConditions(x => x.JobStatus), cache))
+					return false;
+				if (!ComparisonHelper.SequenceEqual(obj1.JobLogs, obj2.JobLogs, new JobLog.JobLogEqualityComparer(comparisonOptions, conds?.GetConditions(x => x.JobLogs), cache)))
 					return false;
 		}
 

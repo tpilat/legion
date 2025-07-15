@@ -41,6 +41,12 @@ public partial class JobLogRepository : Legion.ADF.ServiceBus.PostgreSQL.Service
 	public IQueryable<Legion.ADF.ServiceBus.Model.JobLog> AsReadOnlyQueryable(IScopeContext scopeContext, bool checkReadPermissions)
 		=> AsQueryable(scopeContext, checkReadPermissions).AsNoTracking();
 	
+	public Legion.ADF.ServiceBus.Queries.JobLog.IGetJobLogsByIdJob GetJobLogsByIdJob(
+		Legion.ADF.ServiceBus.Queries.JobLog.GetJobLogsByIdJobQuery getJobLogsByIdJobQuery)
+		=> new Legion.ADF.ServiceBus.Queries.JobLog.GetJobLogsByIdJob(
+			ConnectionProvider,
+			getJobLogsByIdJobQuery);
+
 	public void Add(IScopeContext scopeContext, Legion.ADF.ServiceBus.Model.JobLog entity)
 	{
 		var dbContext = GetContext(scopeContext);

@@ -18,7 +18,7 @@ public sealed partial class QueuedMessage : MessageBox.MessageBoxBaseEntity, Leg
 			return result.Build();
 
 		var nowUtc = GlobalContext.Instance.UtcNow;
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var queuedMessage = new QueuedMessage
 		{
 			__IsNewObject = true,

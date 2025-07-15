@@ -6,6 +6,24 @@ namespace Legion.ADF.Cache.PostgreSQL.Model.Repositories;
 
 public partial class CacheDataRepository : Legion.ADF.Cache.PostgreSQL.CacheRepositoryBase, Legion.ADF.Cache.ICacheRepository<Legion.ADF.Cache.Model.CacheData>, Legion.ADF.Cache.Model.Repositories.ICacheDataRepository
 {
+	public async Task<bool> IsAliveAsync(
+		IScopeContext scopeContext,
+		CancellationToken cancellationToken = default)
+	{
+		scopeContext = scopeContext.CreateNew();
+
+		try
+		{
+			await using var context = ConnectionProvider.GetOrCreateDbContext<Legion.ADF.Cache.PostgreSQL.ICacheDbContext>(scopeContext);
+			var result = await context.Database.ExecuteSqlRawAsync("SELECT 1", cancellationToken);
+			return true; // no exception, DB is alive
+		}
+		catch
+		{
+			return false;
+		}
+	}
+
 	public async Task<Cache.Model.CacheData?> TryGetCacheDataAsync(
 		IScopeContext scopeContext,
 		string key,
@@ -36,12 +54,13 @@ public partial class CacheDataRepository : Legion.ADF.Cache.PostgreSQL.CacheRepo
 			updateSlidingResult.ThrowIfError(scopeContext, null, true);
 		}
 
-		//this method does not update row version!!!!
-
 		var updateLastResult = cacheData.UpdateLastAccess(scopeContext, nowUtc);
 		updateLastResult.ThrowIfError(scopeContext, null, true);
 
-		await context.SaveAsync(scopeContext);
+		await context.SaveAsync(scopeContext, new Legion.Model.SaveOptions
+		{
+			SetConcurrencyToken = false, //this method does not update row version!!!!
+		});
 
 		return cacheData;
 	}
@@ -61,7 +80,7 @@ public partial class CacheDataRepository : Legion.ADF.Cache.PostgreSQL.CacheRepo
 		IScopeContext scopeContext,
 		string key,
 		string value,
-		long? currentRowVersion,
+		Guid? currentRowVersion,
 		MemoryCacheEntryOptions? options,
 		CancellationToken cancellationToken = default)
 	{
@@ -89,14 +108,16 @@ public partial class CacheDataRepository : Legion.ADF.Cache.PostgreSQL.CacheRepo
 
 		await using var context = ConnectionProvider.GetOrCreateDbContext<Legion.ADF.Cache.PostgreSQL.ICacheDbContext>(scopeContext);
 
+		var nextRowVersion = GlobalContext.Instance.NewGuid();
+
 		if (currentRowVersion.HasValue)
 		{
 			var sql = """
 				INSERT INTO cache."CacheData" (
-					"KeyHash", "ValueHash", "Key", "Value", "KeyPrefix450", "ExpiresUtc", "SlidingTime", "LastAccessedUtc", "RowVersion")
+					"KeyHash", "ValueHash", "Key", "Value", "KeyPrefix450", "ExpiresUtc", "SlidingTime", "LastAccessedUtc", "RowVersion", "CreatedUtc")
 				VALUES (
 					@p0, @p1, @p2, @p3,
-					@p4, @p5, @p6, @p7, 0)
+					@p4, @p5, @p6, @p7, @p9, @p10)
 				ON CONFLICT ("KeyHash") DO UPDATE SET
 					"ValueHash" = EXCLUDED."ValueHash",
 					"Key" = EXCLUDED."Key",
@@ -105,20 +126,22 @@ public partial class CacheDataRepository : Legion.ADF.Cache.PostgreSQL.CacheRepo
 					"ExpiresUtc" = EXCLUDED."ExpiresUtc",
 					"SlidingTime" = EXCLUDED."SlidingTime",
 					"LastAccessedUtc" = EXCLUDED."LastAccessedUtc",
-					"RowVersion" = cache."CacheData"."RowVersion" + 1
+					"RowVersion" = @p9
 				WHERE cache."CacheData"."RowVersion" = @p8;
 			""";
 
 			var rows = await context.Database.ExecuteSqlRawAsync(sql, [
-				cacheData.KeyHash,
-				cacheData.ValueHash,
-				cacheData.Key,
-				cacheData.Value,
-				cacheData.KeyPrefix450,
-				cacheData.ExpiresUtc,
-				cacheData.SlidingTime,
-				cacheData.LastAccessedUtc,
-				currentRowVersion
+				cacheData.KeyHash, //p0
+				cacheData.ValueHash, //p1
+				cacheData.Key, //p2
+				cacheData.Value, //p3
+				cacheData.KeyPrefix450, //p4
+				cacheData.ExpiresUtc, //p5
+				cacheData.SlidingTime, //p6
+				cacheData.LastAccessedUtc, //p7
+				currentRowVersion, //p8
+				nextRowVersion, //p9
+				GlobalContext.Instance.UtcNow //p10
 				]);
 
 			return rows == 1;
@@ -127,10 +150,10 @@ public partial class CacheDataRepository : Legion.ADF.Cache.PostgreSQL.CacheRepo
 		{
 			var sql = """
 				INSERT INTO cache."CacheData" (
-					"KeyHash", "ValueHash", "Key", "Value", "KeyPrefix450", "ExpiresUtc", "SlidingTime", "LastAccessedUtc", "RowVersion")
+					"KeyHash", "ValueHash", "Key", "Value", "KeyPrefix450", "ExpiresUtc", "SlidingTime", "LastAccessedUtc", "RowVersion", "CreatedUtc")
 				VALUES (
 					@p0, @p1, @p2, @p3,
-					@p4, @p5, @p6, @p7, 0)
+					@p4, @p5, @p6, @p7, @p8, @p9)
 				ON CONFLICT ("KeyHash") DO UPDATE SET
 					"ValueHash" = EXCLUDED."ValueHash",
 					"Key" = EXCLUDED."Key",
@@ -139,18 +162,20 @@ public partial class CacheDataRepository : Legion.ADF.Cache.PostgreSQL.CacheRepo
 					"ExpiresUtc" = EXCLUDED."ExpiresUtc",
 					"SlidingTime" = EXCLUDED."SlidingTime",
 					"LastAccessedUtc" = EXCLUDED."LastAccessedUtc",
-					"RowVersion" = cache."CacheData"."RowVersion" + 1;
+					"RowVersion" = @p8;
 			""";
 
 			var rows = await context.Database.ExecuteSqlRawAsync(sql, [
-				cacheData.KeyHash,
-				cacheData.ValueHash,
-				cacheData.Key,
-				cacheData.Value,
-				cacheData.KeyPrefix450,
-				cacheData.ExpiresUtc,
-				cacheData.SlidingTime,
-				cacheData.LastAccessedUtc
+				cacheData.KeyHash, //p0
+				cacheData.ValueHash, //p1
+				cacheData.Key, //p2
+				cacheData.Value, //p3
+				cacheData.KeyPrefix450, //p4
+				cacheData.ExpiresUtc, //p5
+				cacheData.SlidingTime, //p6
+				cacheData.LastAccessedUtc, //p7
+				nextRowVersion, //p8
+				GlobalContext.Instance.UtcNow //p9
 				]);
 
 			return rows == 1;
@@ -162,7 +187,7 @@ public partial class CacheDataRepository : Legion.ADF.Cache.PostgreSQL.CacheRepo
 		string key,
 		string oldValue,
 		string newValue,
-		long currentRowVersion,
+		Guid currentRowVersion,
 		MemoryCacheEntryOptions? options = null,
 		CancellationToken cancellationToken = default)
 	{
@@ -199,7 +224,7 @@ public partial class CacheDataRepository : Legion.ADF.Cache.PostgreSQL.CacheRepo
 				"ExpiresUtc" = @expiresUtc,
 				"SlidingTime" = @sliding,
 				"LastAccessedUtc" = @now,
-				"RowVersion" = @currentRowVersion + 1
+				"RowVersion" = @nextRowVersion
 			WHERE "KeyHash" = @keyHash AND "ValueHash" = @oldValueHash AND "RowVersion" = @currentRowVersion;
 		""";
 
@@ -216,7 +241,8 @@ public partial class CacheDataRepository : Legion.ADF.Cache.PostgreSQL.CacheRepo
 			new Npgsql.NpgsqlParameter("now", nowUtc),
 			new Npgsql.NpgsqlParameter("keyHash", cacheData.KeyHash),
 			new Npgsql.NpgsqlParameter("oldValueHash", oldValueHash),
-			new Npgsql.NpgsqlParameter("currentRowVersion", currentRowVersion)
+			new Npgsql.NpgsqlParameter("currentRowVersion", currentRowVersion),
+			new Npgsql.NpgsqlParameter("nextRowVersion", GlobalContext.Instance.NewGuid())
 		]);
 
 		return rows == 1;

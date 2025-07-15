@@ -132,12 +132,12 @@ public static class ExceptionHelper
 
 		if (0 < result.ErrorMessages?.Count)
 		{
-			var exception = ToException(result.ErrorMessages.Cast<ILogMessage>().ToList(), msg => new ResultException(errorCode, msg), withErrorMessageDetails);
+			var exception = ToException(result.ErrorMessages.Cast<ILogMessage>().ToList(), msg => new ResultException(result, errorCode, msg), withErrorMessageDetails);
 			return exception;
 		}
 		else if (dataMustBeNotNull && result.HasErrorOrNullData)
 		{
-			var exception = new ResultException(null, "Result has no data");
+			var exception = new ResultException(result, null, "Result has no data");
 			return exception;
 		}
 

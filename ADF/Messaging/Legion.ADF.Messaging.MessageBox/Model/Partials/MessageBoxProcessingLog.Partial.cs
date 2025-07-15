@@ -21,7 +21,7 @@ public sealed partial class MessageBoxProcessingLog : MessageBox.MessageBoxBaseE
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, logMessage.Detail))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageBoxProcessingLog = new MessageBoxProcessingLog
 		{
 			__IsNewObject = true,
@@ -65,7 +65,7 @@ public sealed partial class MessageBoxProcessingLog : MessageBox.MessageBoxBaseE
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, code))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageBoxProcessingLog = new MessageBoxProcessingLog
 		{
 			__IsNewObject = true,

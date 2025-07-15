@@ -40,7 +40,7 @@ internal class SequentialNode : WorkflowNodeBase
 
 			var result = await exec.ExecuteNodeAsync(
 				childId,
-				Guid.NewGuid(),
+				GlobalContext.Instance.NewGuid(),
 				restart: false,
 				onExecuted: async res =>
 				{

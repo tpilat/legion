@@ -50,7 +50,7 @@ public sealed partial class ApplicationEntryResponse : Audit.AuditBaseEntity, Le
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, statusCode))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var applicationEntryResponse = new ApplicationEntryResponse
 		{
 			__IsNewObject = true,
@@ -107,7 +107,7 @@ public sealed partial class ApplicationEntryResponse : Audit.AuditBaseEntity, Le
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, statusCode))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var applicationEntryResponse = new ApplicationEntryResponse
 		{
 			__IsNewObject = true,
@@ -164,7 +164,7 @@ public sealed partial class ApplicationEntryResponse : Audit.AuditBaseEntity, Le
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, statusCode))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var applicationEntryResponse = new ApplicationEntryResponse
 		{
 			__IsNewObject = true,
@@ -221,7 +221,7 @@ public sealed partial class ApplicationEntryResponse : Audit.AuditBaseEntity, Le
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, statusCode))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var applicationEntryResponse = new ApplicationEntryResponse
 		{
 			__IsNewObject = true,
@@ -275,7 +275,7 @@ public sealed partial class ApplicationEntryResponse : Audit.AuditBaseEntity, Le
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, statusCode))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var applicationEntryResponse = new ApplicationEntryResponse
 		{
 			__IsNewObject = true,
@@ -332,7 +332,7 @@ public sealed partial class ApplicationEntryResponse : Audit.AuditBaseEntity, Le
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, statusCode))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var applicationEntryResponse = new ApplicationEntryResponse
 		{
 			__IsNewObject = true,

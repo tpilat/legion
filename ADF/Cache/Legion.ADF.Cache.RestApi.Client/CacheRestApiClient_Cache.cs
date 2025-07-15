@@ -8,6 +8,41 @@ namespace Legion.ADF.Cache.RestApi.Client;
 
 public partial class CacheRestApiClient : HttpApiClient<CacheRestApiClientOptions>, ISimplePersistentCache, IDistributedLockProvider
 {
+	public async Task<IResult<bool>> IsAliveV1Async(
+		IScopeContext scopeContext,
+		int? timeoutInSeconds = null,
+		CancellationToken cancellationToken = default)
+	{
+		scopeContext = scopeContext.CreateNew()
+			.AddContextProperty(nameof(Options.BaseAddress), Options?.BaseAddress)
+			.AddContextProperty(nameof(URI), URI.Cache.V1.IsAlive);
+
+		var result = new ResultBuilder<bool>();
+
+		if (timeoutInSeconds.HasValue && result.IsArgumentLessThanOrEqual(scopeContext, timeoutInSeconds.Value, 0))
+			return result.Build();
+
+		var request = JsonRequestFactory.Create(
+			Options!,
+			Legion.Http.HttpMethod.Post,
+			URI.Cache.V1.IsAlive,
+			timeoutInSeconds,
+			queryString: null);
+
+		try
+		{
+			using var response = await SendAsync(request, scopeContext, serviceProvider: null, cancellationToken: cancellationToken);
+			var jsonResponse = await ToJsonResultAsync<bool>(scopeContext, request, response, cancellationToken);
+			return jsonResponse!;
+		}
+		catch (Exception ex)
+		{
+			return
+				new ResultBuilder<bool>()
+					.WithError(scopeContext, Legion.ADF.Cache.RestApi.Client.Internal.ErrorCodes.ApiClientException.Default(nameof(CacheRestApiClient)), x => x.ExceptionInfo(ex));
+		}
+	}
+
 	public async Task<IResult<CachedValueDto?>> GetValueV1Async(
 		IScopeContext scopeContext,
 		string key,
@@ -198,6 +233,58 @@ public partial class CacheRestApiClient : HttpApiClient<CacheRestApiClientOption
 		}
 	}
 
+	public async Task<IResult<bool>> SetValueWithAbsoluteServerSideExpirationV1Async(
+		IScopeContext scopeContext,
+		SetCacheDataDto setCacheData,
+		int? timeoutInSeconds = null,
+		CancellationToken cancellationToken = default)
+	{
+		scopeContext = scopeContext.CreateNew()
+			.AddContextProperty(nameof(Options.BaseAddress), Options?.BaseAddress)
+			.AddContextProperty(nameof(URI), URI.Cache.V1.SetValueWithAbsoluteServerSideExpiration);
+
+		var result = new ResultBuilder<bool>();
+
+		if (result.IsArgumentNull(scopeContext, setCacheData))
+			return result.Build();
+
+		if (result.IsArgumentNullOrWhiteSpace(scopeContext, setCacheData.Key))
+			return result.Build();
+
+		if (result.IsArgumentNullOrWhiteSpace(scopeContext, setCacheData.Value))
+			return result.Build();
+
+		if (result.IsArgumentNull(scopeContext, setCacheData.SlidingTime))
+			return result.Build();
+
+		if (result.IsArgumentLessThanOrEqual(scopeContext, setCacheData.SlidingTime.Value, TimeSpan.Zero))
+			return result.Build();
+
+		if (timeoutInSeconds.HasValue && result.IsArgumentLessThanOrEqual(scopeContext, timeoutInSeconds.Value, 0))
+			return result.Build();
+
+		var request = JsonRequestFactory.Create(
+			Options!,
+			Legion.Http.HttpMethod.Post,
+			URI.Cache.V1.SetValueWithAbsoluteServerSideExpiration,
+			timeoutInSeconds,
+			queryString: null,
+			setCacheData);
+
+		try
+		{
+			using var response = await SendAsync(request, scopeContext, serviceProvider: null, cancellationToken: cancellationToken);
+			var jsonResponse = await ToJsonResultAsync<bool>(scopeContext, request, response, cancellationToken);
+			return jsonResponse!;
+		}
+		catch (Exception ex)
+		{
+			return
+				new ResultBuilder<bool>()
+					.WithError(scopeContext, Legion.ADF.Cache.RestApi.Client.Internal.ErrorCodes.ApiClientException.Default(nameof(CacheRestApiClient)), x => x.ExceptionInfo(ex));
+		}
+	}
+
 	public async Task<IResult<bool>> TryUpdateValuePermanentlyV1Async(
 		IScopeContext scopeContext,
 		UpdateCacheDataDto updateCacheData,
@@ -357,6 +444,61 @@ public partial class CacheRestApiClient : HttpApiClient<CacheRestApiClientOption
 		}
 	}
 
+	public async Task<IResult<bool>> TryUpdateValueWithAbsoluteServerSideExpirationV1Async(
+		IScopeContext scopeContext,
+		UpdateCacheDataDto updateCacheData,
+		int? timeoutInSeconds = null,
+		CancellationToken cancellationToken = default)
+	{
+		scopeContext = scopeContext.CreateNew()
+			.AddContextProperty(nameof(Options.BaseAddress), Options?.BaseAddress)
+			.AddContextProperty(nameof(URI), URI.Cache.V1.TryUpdateValueWithAbsoluteServerSideExpiration);
+
+		var result = new ResultBuilder<bool>();
+
+		if (result.IsArgumentNull(scopeContext, updateCacheData))
+			return result.Build();
+
+		if (result.IsArgumentNullOrWhiteSpace(scopeContext, updateCacheData.Key))
+			return result.Build();
+
+		if (result.IsArgumentNullOrWhiteSpace(scopeContext, updateCacheData.OldValue))
+			return result.Build();
+
+		if (result.IsArgumentNullOrWhiteSpace(scopeContext, updateCacheData.NewValue))
+			return result.Build();
+
+		if (result.IsArgumentNull(scopeContext, updateCacheData.SlidingTime))
+			return result.Build();
+
+		if (result.IsArgumentLessThanOrEqual(scopeContext, updateCacheData.SlidingTime.Value, TimeSpan.Zero))
+			return result.Build();
+
+		if (timeoutInSeconds.HasValue && result.IsArgumentLessThanOrEqual(scopeContext, timeoutInSeconds.Value, 0))
+			return result.Build();
+
+		var request = JsonRequestFactory.Create(
+			Options!,
+			Legion.Http.HttpMethod.Post,
+			URI.Cache.V1.TryUpdateValueWithAbsoluteServerSideExpiration,
+			timeoutInSeconds,
+			queryString: null,
+			updateCacheData);
+
+		try
+		{
+			using var response = await SendAsync(request, scopeContext, serviceProvider: null, cancellationToken: cancellationToken);
+			var jsonResponse = await ToJsonResultAsync<bool>(scopeContext, request, response, cancellationToken);
+			return jsonResponse!;
+		}
+		catch (Exception ex)
+		{
+			return
+				new ResultBuilder<bool>()
+					.WithError(scopeContext, Legion.ADF.Cache.RestApi.Client.Internal.ErrorCodes.ApiClientException.Default(nameof(CacheRestApiClient)), x => x.ExceptionInfo(ex));
+		}
+	}
+
 	public async Task<IResult<bool>> RemoveValueV1Async(
 		IScopeContext scopeContext,
 		string key,
@@ -396,8 +538,15 @@ public partial class CacheRestApiClient : HttpApiClient<CacheRestApiClientOption
 					.WithError(scopeContext, Legion.ADF.Cache.RestApi.Client.Internal.ErrorCodes.ApiClientException.Default(nameof(CacheRestApiClient)), x => x.ExceptionInfo(ex));
 		}
 	}
+	async Task<bool> ISimplePersistentCache.IsAliveAsync(CancellationToken cancellationToken)
+	{
+		var scopeContext = ScopeContext.Create("Legion.ADF.Cache.RestApi.Client");
+		var result = await IsAliveV1Async(scopeContext, timeoutInSeconds: null, cancellationToken).ConfigureAwait(false);
+		result.ThrowIfError(scopeContext, null, true);
+		return result.Data;
+	}
 
-	async Task<(string? Value, long? RowVersion)> ISimplePersistentCache.GetValue(
+	async Task<(string? Value, Guid? RowVersion)> ISimplePersistentCache.GetValueAsync(
 		string key,
 		CancellationToken cancellationToken)
 	{
@@ -470,11 +619,32 @@ public partial class CacheRestApiClient : HttpApiClient<CacheRestApiClientOption
 		return result.Data;
 	}
 
+	async Task<bool> ISimplePersistentCache.SetValueWithAbsoluteServerSideExpirationAsync(
+		string key,
+		string value,
+		TimeSpan deltaToNowUtc,
+		CancellationToken cancellationToken)
+	{
+		var scopeContext = ScopeContext.Create("Legion.ADF.Cache.RestApi.Client");
+		var result = await SetValueWithAbsoluteServerSideExpirationV1Async(
+			scopeContext,
+			new SetCacheDataDto
+			{
+				Key = key,
+				Value = value,
+				SlidingTime = deltaToNowUtc
+			},
+			null,
+			cancellationToken).ConfigureAwait(false);
+		result.ThrowIfErrorOrNullData(scopeContext, null, true);
+		return result.Data;
+	}
+
 	async Task<bool> ISimplePersistentCache.TryUpdateValuePermanentlyAsync(
 		string key,
 		string oldValue,
 		string newValue,
-		long currentRowVersion,
+		Guid currentRowVersion,
 		CancellationToken cancellationToken)
 	{
 		var scopeContext = ScopeContext.Create("Legion.ADF.Cache.RestApi.Client");
@@ -498,7 +668,7 @@ public partial class CacheRestApiClient : HttpApiClient<CacheRestApiClientOption
 		string key,
 		string oldValue,
 		string newValue,
-		long currentRowVersion,
+		Guid currentRowVersion,
 		TimeSpan slidingTime,
 		CancellationToken cancellationToken)
 	{
@@ -523,7 +693,7 @@ public partial class CacheRestApiClient : HttpApiClient<CacheRestApiClientOption
 		string key,
 		string oldValue,
 		string newValue,
-		long currentRowVersion,
+		Guid currentRowVersion,
 		DateTime keepUntil,
 		CancellationToken cancellationToken)
 	{
@@ -537,6 +707,31 @@ public partial class CacheRestApiClient : HttpApiClient<CacheRestApiClientOption
 				NewValue = newValue,
 				CurrentRowVersion = currentRowVersion,
 				KeepUntil = keepUntil
+			},
+			null,
+			cancellationToken).ConfigureAwait(false);
+		result.ThrowIfErrorOrNullData(scopeContext, null, true);
+		return result.Data;
+	}
+
+	async Task<bool> ISimplePersistentCache.TryUpdateValueWithAbsoluteServerSideExpirationAsync(
+		string key,
+		string oldValue,
+		string newValue,
+		Guid currentRowVersion,
+		TimeSpan deltaToNowUtc,
+		CancellationToken cancellationToken)
+	{
+		var scopeContext = ScopeContext.Create("Legion.ADF.Cache.RestApi.Client");
+		var result = await TryUpdateValueWithAbsoluteServerSideExpirationV1Async(
+			scopeContext,
+			new UpdateCacheDataDto
+			{
+				Key = key,
+				OldValue = oldValue,
+				NewValue = newValue,
+				CurrentRowVersion = currentRowVersion,
+				SlidingTime = deltaToNowUtc
 			},
 			null,
 			cancellationToken).ConfigureAwait(false);

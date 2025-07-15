@@ -41,6 +41,18 @@ public partial class JobStatisticsRepository : Legion.ADF.ServiceBus.SqlServer.S
 	public IQueryable<Legion.ADF.ServiceBus.Model.JobStatistics> AsReadOnlyQueryable(IScopeContext scopeContext, bool checkReadPermissions)
 		=> AsQueryable(scopeContext, checkReadPermissions).AsNoTracking();
 	
+	public Legion.ADF.ServiceBus.Queries.JobStatistics.IGetJobStatisticsByJobId GetJobStatisticsByJobId(
+		Legion.ADF.ServiceBus.Queries.JobStatistics.GetJobStatisticsByJobIdQuery getJobStatisticsById)
+		=> new Legion.ADF.ServiceBus.Queries.JobStatistics.GetJobStatisticsByJobId(
+			ConnectionProvider,
+			getJobStatisticsById);
+
+	public Legion.ADF.ServiceBus.Queries.JobStatistics.IGetJobStatisticsByJobIdAndStartHour GetJobStatisticsByJobIdAndStartHour(
+		Legion.ADF.ServiceBus.Queries.JobStatistics.GetJobStatisticsByJobIdAndStartHourQuery getJobStatisticsByIdAndStartHour)
+		=> new Legion.ADF.ServiceBus.Queries.JobStatistics.GetJobStatisticsByJobIdAndStartHour(
+			ConnectionProvider,
+			getJobStatisticsByIdAndStartHour);
+
 	public void Add(IScopeContext scopeContext, Legion.ADF.ServiceBus.Model.JobStatistics entity)
 	{
 		var dbContext = GetContext(scopeContext);

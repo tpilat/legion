@@ -11,6 +11,8 @@ public class EnterpriseServiceBusOptions
 	public string HostName { get; set; }
 	public string? StoreId { get; set; }
 	public int NoHostTimeoutInSeconds { get; set; }
+	public bool AllowDistributedHosts { get; set; }
+	public string CacheKeySystemName { get; set; }
 
 	public class Validator : ValidatorBase<EnterpriseServiceBusOptions>
 	{
@@ -24,7 +26,8 @@ public class EnterpriseServiceBusOptions
 		{
 			builder?
 				.ForProperty(x => x.HostName, v => v.NotDefaultOrWhiteSpace())
-				.ForProperty(x => x.NoHostTimeoutInSeconds, v => v.GreaterThan(0));
+				.ForProperty(x => x.NoHostTimeoutInSeconds, v => v.GreaterThan(0))
+				.ForProperty(x => x.CacheKeySystemName, v => v.NotDefaultOrWhiteSpace());
 		}
 	}
 }

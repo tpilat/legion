@@ -20,6 +20,8 @@ public class JobExecutionConfiguration : IEntityTypeConfiguration<ServiceBus.Mod
 
 		entityBuilder.HasIndex(e => e.IdJobStatus, "IXFK_JobExecution_JobStatus");
 
+		entityBuilder.HasIndex(e => e.StatisticsStartHourUtc, "IX_JobExecution_StatisticsStartHourUtc");
+
 		entityBuilder.Property(e => e.IdJobExecution)
 			.HasColumnType("uuid")
 		.ValueGeneratedNever();
@@ -33,6 +35,8 @@ public class JobExecutionConfiguration : IEntityTypeConfiguration<ServiceBus.Mod
 		entityBuilder.Property(e => e.EndUtc).HasColumnType("timestamptz");
 
 		entityBuilder.Property(e => e.IdJobStatus).HasColumnType("uuid");
+
+		entityBuilder.Property(e => e.StatisticsStartHourUtc).HasColumnType("timestamptz");
 
 		entityBuilder.HasOne(d => d.Job)
 			.WithMany(p => p.JobExecutions)

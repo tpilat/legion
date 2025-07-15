@@ -35,15 +35,13 @@ public class HostConfiguration : IEntityTypeConfiguration<ServiceBus.Model.Host>
 
 		entityBuilder.Property(e => e.CreatedUtc).HasColumnType("timestamptz");
 
-		entityBuilder.Property(e => e.StartedUtc).HasColumnType("timestamptz");
-
-		entityBuilder.Property(e => e.LastActivityUtc).HasColumnType("timestamptz");
-
-		entityBuilder.Property(e => e.StoppedUtc).HasColumnType("timestamptz");
-
 		entityBuilder.Property(e => e.Configuration)
 			.IsRequired()
 			.HasColumnType("jsonb");
+
+		entityBuilder.Property(e => e.RowVersion)
+			.HasColumnType("uuid")
+				.IsConcurrencyToken();
 	}
 
 	public static ModelBuilder Build(ModelBuilder modelBuilder)

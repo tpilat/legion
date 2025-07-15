@@ -18,6 +18,9 @@ public class JobStatisticsConfiguration : IEntityTypeConfiguration<ServiceBus.Mo
 
 		entityBuilder.HasIndex(e => e.IdJob, "IXFK_JobStatistics_Job");
 
+		entityBuilder.HasIndex(e => new { e.IdJob, e.StartHourUtc }, "UQ_JobStatistics_IdJob_StartHour")
+				.IsUnique();
+
 		entityBuilder.Property(e => e.IdJobStatistics)
 			.HasColumnType("uuid")
 		.ValueGeneratedNever();

@@ -1,6 +1,6 @@
 namespace Legion.ADF.Messaging.Outbox.SqlServer;
 
-public partial class OutboxQueryUnitOfWorkFactory : IOutboxQueryUnitOfWorkFactory
+public partial class OutboxQueryUnitOfWorkFactory : IOutboxQueryUnitOfWorkFactory, Legion.Model.Repositories.IQueryUnitOfWorkFactory<IOutboxQueryUnitOfWork>
 {
 	public IOutboxQueryUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

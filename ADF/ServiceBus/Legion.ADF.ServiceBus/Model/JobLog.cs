@@ -56,11 +56,21 @@ public sealed partial class JobLog : ServiceBus.ServiceBusBaseEntity, Legion.Mod
 	/// </summary>
 	public Guid? IdMessageProcessingLog { get; private set; }
 
+	/// <summary>
+	/// Database DataType: uuid NULL | ServiceBus.Model.JobExecution.JobExecution | FK_JobLog_IdJobExecution
+	/// </summary>
+	public Guid? IdJobExecution { get; private set; }
+
 
 	/// <summary>
 	/// _1:N Guid IdJob | FK_JobLog_IdJob
 	/// </summary>
 	public ServiceBus.Model.Job Job { get; private set; }
+
+	/// <summary>
+	/// _1:N Guid? IdJobExecution | FK_JobLog_IdJobExecution
+	/// </summary>
+	public ServiceBus.Model.JobExecution JobExecution { get; private set; }
 
 	/// <summary>
 	/// _1:N Guid IdJobStatus | FK_JobLog_IdJobStatus
@@ -89,6 +99,7 @@ public sealed partial class JobLog : ServiceBus.ServiceBusBaseEntity, Legion.Mod
 			{ nameof(Code), Code },
 			{ nameof(Detail), Detail },
 			{ nameof(IdMessageProcessingLog), IdMessageProcessingLog },
+			{ nameof(IdJobExecution), IdJobExecution },
 		};
 
 	public void TrimStringValuesToFitDatabaseMaxLengths(string? postfix = null)

@@ -11,10 +11,10 @@ public class ADFMessaging_InboxQueueTests : TestBase
 	[Test]
 	public async Task InboxQueue_ShouldCreateInboxQueue()
 	{
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var messageBus = sp.GetRequiredService<IMessageBus<ConnectionStringProvider>>();

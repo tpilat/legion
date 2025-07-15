@@ -1,6 +1,6 @@
 namespace Legion.ADF.Cache.SqlServer;
 
-public partial class CacheQueryUnitOfWorkFactory : ICacheQueryUnitOfWorkFactory
+public partial class CacheQueryUnitOfWorkFactory : ICacheQueryUnitOfWorkFactory, Legion.Model.Repositories.IQueryUnitOfWorkFactory<ICacheQueryUnitOfWork>
 {
 	public ICacheQueryUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

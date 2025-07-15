@@ -24,9 +24,9 @@ public class ADFMessaging_InboxMessageTests : TestBase
 		var inboxMessageDto = DTOs.InboxMessageDto.CreateStringMessage(
 			@namespace,
 			message,
-			 Guid.NewGuid().ToString(),
+			 GlobalContext.Instance.NewGuid().ToString(),
 			"TargetTopic",
-			 Guid.NewGuid().ToString(),
+			 GlobalContext.Instance.NewGuid().ToString(),
 			 targetTopic: null,
 			 "TargetQueueName");
 
@@ -46,10 +46,10 @@ public class ADFMessaging_InboxMessageTests : TestBase
 	[Test]
 	public async Task InboxMessage_ShouldCreateInboxMessage()
 	{
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var messageBus = sp.GetRequiredService<IMessageBus<ConnectionStringProvider>>();
@@ -151,10 +151,10 @@ public class ADFMessaging_InboxMessageTests : TestBase
 	[Test]
 	public async Task InboxMessage_ShouldArchivateInboxMessage()
 	{
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var messageBus = sp.GetRequiredService<IMessageBus<ConnectionStringProvider>>();

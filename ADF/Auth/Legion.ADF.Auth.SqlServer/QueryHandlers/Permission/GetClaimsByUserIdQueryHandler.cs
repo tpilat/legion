@@ -1,3 +1,4 @@
+using Legion;
 using Legion.MessageBus.MessageHandlers;
 using Legion.Model.Repositories;
 

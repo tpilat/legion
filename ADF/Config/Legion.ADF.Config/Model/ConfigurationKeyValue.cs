@@ -67,7 +67,7 @@ public sealed partial class ConfigurationKeyValue : Config.ConfigBaseEntity, Leg
 
 	public void SetNewConcurrencyToken()
 	{
-		ConcurrencyToken = Guid.NewGuid();
+		ConcurrencyToken = GlobalContext.Instance.NewGuid();
 	}
 
 	static ConfigurationKeyValue()

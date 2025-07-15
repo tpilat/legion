@@ -1,4 +1,13 @@
-﻿na zaciatku kazdej metody urob
+﻿
+PREROB	ILogMessage tak aby obsahoval aj errory typu
+	FATAL => no db commit
+	aj SOFT => povoleny DB commit, len vrati error pre usera, ale zaroven aj zapise do DB InternalErrorMessage a dalsie veci z ILogMessage
+
+
+Do kazdeho Throw.If*(daj na vstupe scopeContext)
+
+
+na zaciatku kazdej metody urob
 scopeContext = scopeContext.CreateNew();
 
 

@@ -32,6 +32,12 @@ public interface IGlobalContext
 	/// <summary>
 	/// Initializes a new instance of the System.Guid structure.
 	/// </summary>
-	/// <returns>A new GUID object.</returns>
+	/// <returns>A new GUID v7 - new version with timestamp.</returns>
 	Guid NewGuid();
+
+	/// <summary>
+	/// Initializes a new instance of the System.Guid structure.
+	/// </summary>
+	/// <returns>A new GUID v4 - old version without timestamp</returns>
+	Guid NewGuidV4();
 }

@@ -108,7 +108,7 @@ public sealed partial class InboxMessage : Inbox.InboxBaseEntity, Legion.Model.I
 			return result.Build();
 
 		var nowUtc = GlobalContext.Instance.UtcNow;
-		var id = messageContent?.IdInboxMessageContent ?? Guid.NewGuid();
+		var id = messageContent?.IdInboxMessageContent ?? GlobalContext.Instance.NewGuid();
 		var inboxMessage = new InboxMessage
 		{
 			__IsNewObject = true,

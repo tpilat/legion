@@ -21,7 +21,7 @@ public sealed partial class InboxMessageType : Inbox.InboxBaseEntity, Legion.Mod
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, @namespace))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var inboxMessageType = new InboxMessageType
 		{
 			__IsNewObject = true,

@@ -59,6 +59,8 @@ public sealed partial class JobExecution : ServiceBus.ServiceBusBaseEntity, Legi
 				target.EndUtc = EndUtc;
 			if (conds.CanMap(this, nameof(IdJobStatus)))
 				target.IdJobStatus = IdJobStatus;
+			if (conds.CanMap(this, nameof(StatisticsStartHourUtc)))
+				target.StatisticsStartHourUtc = StatisticsStartHourUtc;
 		}
 		else
 		{
@@ -68,6 +70,7 @@ public sealed partial class JobExecution : ServiceBus.ServiceBusBaseEntity, Legi
 			target.StartUtc = StartUtc;
 			target.EndUtc = EndUtc;
 			target.IdJobStatus = IdJobStatus;
+			target.StatisticsStartHourUtc = StatisticsStartHourUtc;
 		}
 
 		cache.Add(this, target);
@@ -76,11 +79,13 @@ public sealed partial class JobExecution : ServiceBus.ServiceBusBaseEntity, Legi
 		{
 			target.Job = Job?.MapTo(target.Job, referenceModifier, conds?.GetConditions(x => x.Job), instanceFactory, cache)!;
 			target.JobStatus = JobStatus?.MapTo(target.JobStatus, referenceModifier, conds?.GetConditions(x => x.JobStatus), instanceFactory, cache)!;
+			target._jobLogs = MapperHelper.MapToList(JobLogs, target._jobLogs, Legion.ADF.ServiceBus.Model.JobLog.Map, referenceModifier, conds?.GetConditions(x => x.JobLogs), instanceFactory, cache)!;
 		}
 		else if (referenceModifier == ReferenceModifier.SetNull)
 		{
 			target.Job = null!;
 			target.JobStatus = null!;
+			target._jobLogs = [];
 		}
 
 		return target;

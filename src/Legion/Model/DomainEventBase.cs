@@ -11,7 +11,7 @@ public abstract record DomainEventBase : IDomainEvent, Legion.MessageBus.Message
 
 	protected DomainEventBase()
 	{
-		Id = Guid.NewGuid();
+		Id = GlobalContext.Instance.NewGuid();
 		Namespace = this.GetType().GetSimplifiedAssemblyQualifiedName();
 		Saved = false;
 	}

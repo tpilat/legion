@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Legion.ADF.ServiceBus.Model;
 
-public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model.IEntity
+public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model.Concurrence.IConcurrent, Legion.Model.IEntity
 {
 	public bool EqualsTo(
 		ServiceBus.Model.Host? obj,
@@ -60,15 +60,9 @@ public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.IsEnabled)) && obj1.IsEnabled != obj2.IsEnabled)
 						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.StartedUtc)) && obj1.StartedUtc != obj2.StartedUtc)
-						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.LastActivityUtc)) && obj1.LastActivityUtc != obj2.LastActivityUtc)
-						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.StoppedUtc)) && obj1.StoppedUtc != obj2.StoppedUtc)
-						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.Configuration)) && !string.Equals(obj1.Configuration, obj2.Configuration))
 						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.IsDistributedManagerAvailable)) && obj1.IsDistributedManagerAvailable != obj2.IsDistributedManagerAvailable)
+					if (conds.CanCompare(obj1, nameof(obj1.RowVersion)) && obj1.RowVersion != obj2.RowVersion)
 						return false;
 				}
 				else
@@ -83,15 +77,9 @@ public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model
 						return false;
 					if (obj1.IsEnabled != obj2.IsEnabled)
 						return false;
-					if (obj1.StartedUtc != obj2.StartedUtc)
-						return false;
-					if (obj1.LastActivityUtc != obj2.LastActivityUtc)
-						return false;
-					if (obj1.StoppedUtc != obj2.StoppedUtc)
-						return false;
 					if (!string.Equals(obj1.Configuration, obj2.Configuration))
 						return false;
-					if (obj1.IsDistributedManagerAvailable != obj2.IsDistributedManagerAvailable)
+					if (obj1.RowVersion != obj2.RowVersion)
 						return false;
 				}
 			}
@@ -106,6 +94,8 @@ public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model
 
 			if ((ComparisonOptions.CompareReferences & comparisonOptions) == ComparisonOptions.CompareReferences)
 			{
+				if (!HostActivity.HostActivityEqualityComparer.EqualsTo(obj1.HostActivity, obj2.HostActivity, comparisonOptions, conds?.GetConditions(x => x.HostActivity), cache))
+					return false;
 				if (!ComparisonHelper.SequenceEqual(obj1.HostLogs, obj2.HostLogs, new HostLog.HostLogEqualityComparer(comparisonOptions, conds?.GetConditions(x => x.HostLogs), cache)))
 					return false;
 		}

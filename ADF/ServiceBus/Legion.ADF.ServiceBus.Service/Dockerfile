@@ -15,7 +15,7 @@ COPY ["ADF/ServiceBus/Legion.ADF.ServiceBus.Service/Legion.ADF.ServiceBus.Servic
 COPY ["src/Legion.Hosting/Legion.Hosting.csproj", "src/Legion.Hosting/"]
 COPY ["src/Legion/Legion.csproj", "src/Legion/"]
 COPY ["ADF/Logs/Legion.ADF.Logs.PostgreSQL/Legion.ADF.Logs.PostgreSQL.csproj", "ADF/Logs/Legion.ADF.Logs.PostgreSQL/"]
-COPY ["src/Legion.Database.PostgreSql/Legion.Database.PostgreSQL.csproj", "src/Legion.Database.PostgreSql/"]
+COPY ["src/Legion.Database.PostgreSQL/Legion.Database.PostgreSQL.csproj", "src/Legion.Database.PostgreSQL/"]
 COPY ["src/Legion.EntityFrameworkCore.PostgreSQL/Legion.EntityFrameworkCore.PostgreSQL.csproj", "src/Legion.EntityFrameworkCore.PostgreSQL/"]
 COPY ["src/Legion.EntityFrameworkCore/Legion.EntityFrameworkCore.csproj", "src/Legion.EntityFrameworkCore/"]
 COPY ["ADF/Logs/Legion.ADF.Logs/Legion.ADF.Logs.csproj", "ADF/Logs/Legion.ADF.Logs/"]

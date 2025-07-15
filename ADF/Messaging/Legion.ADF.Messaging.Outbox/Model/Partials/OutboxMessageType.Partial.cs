@@ -21,7 +21,7 @@ public sealed partial class OutboxMessageType : Outbox.OutboxBaseEntity, Legion.
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, @namespace))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var outboxMessageType = new OutboxMessageType
 		{
 			__IsNewObject = true,

@@ -1,4 +1,4 @@
-﻿namespace Legion.ADF.Messaging.MessageBox.Queries.SubscribedMessage;
+namespace Legion.ADF.Messaging.MessageBox.Queries.SubscribedMessage;
 
 public partial interface IGetNextSubscribedMessagesBySubscription
 {

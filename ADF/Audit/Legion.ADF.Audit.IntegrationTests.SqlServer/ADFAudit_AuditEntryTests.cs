@@ -10,10 +10,10 @@ public class ADFAudit_AuditEntryTests : TestBase
 	[Test]
 	public async Task AuditEntry_ShouldCreateAuditEntry()
 	{
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var auditStore = sp.GetRequiredService<AuditStore>();
@@ -27,7 +27,7 @@ public class ADFAudit_AuditEntryTests : TestBase
 		var oldValues = "{\"ClosedAt\": \"2000-08-03T15:19:24.8527282+02:00\"}";
 		var newValues = "{\"ClosedAt\": \"2024-09-03T15:19:24.8527282+02:00\"}";
 		var affectedColumns = "[\"ClosedAt\"]";
-		var auditCorrelationId = Guid.NewGuid();
+		var auditCorrelationId = GlobalContext.Instance.NewGuid();
 		var traceFrame = "trace frames";
 
 		var writeResult = await auditStore.WriteAuditEntryAsync(

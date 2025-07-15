@@ -26,10 +26,10 @@ public class QueuedMessageProcessingServiceTests : TestBase
 	public async Task ExecuteAsync_ShouldProcessMessageBox_WithNoHandler()
 	{
 		var serviceTimeoutInSeconds = 2;
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<QueuedMessageProcessingService>();
@@ -53,9 +53,9 @@ public class QueuedMessageProcessingServiceTests : TestBase
 
 		var messageDto = DTOs.MessageBoxMessageDto.CreateJsonMessage(
 			message,
-			Guid.NewGuid().ToString(),
+			GlobalContext.Instance.NewGuid().ToString(),
 			"my-publicher",
-			 Guid.NewGuid().ToString());
+			 GlobalContext.Instance.NewGuid().ToString());
 
 		var createResult = await messageBoxStore.CreateMessageAsync(
 			scopeContext,
@@ -94,10 +94,10 @@ public class QueuedMessageProcessingServiceTests : TestBase
 	public async Task ExecuteAsync_ShouldProcessMessageBox_WithHandler()
 	{
 		var serviceTimeoutInSeconds = 2;
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<QueuedMessageProcessingService>();
@@ -121,9 +121,9 @@ public class QueuedMessageProcessingServiceTests : TestBase
 
 		var messageDto = DTOs.MessageBoxMessageDto.CreateJsonMessage(
 			message,
-			Guid.NewGuid().ToString(),
+			GlobalContext.Instance.NewGuid().ToString(),
 			"my-publicher",
-			 Guid.NewGuid().ToString());
+			 GlobalContext.Instance.NewGuid().ToString());
 
 		var createResult = await messageBoxStore.CreateMessageAsync(
 			scopeContext,
@@ -163,10 +163,10 @@ public class QueuedMessageProcessingServiceTests : TestBase
 	public async Task ExecuteAsync_ShouldProcessMessageBox_ExceedingMaxRetryCount()
 	{
 		var serviceTimeoutInSeconds = 2;
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<QueuedMessageProcessingService>();
@@ -191,9 +191,9 @@ public class QueuedMessageProcessingServiceTests : TestBase
 		var messageDto = DTOs.MessageBoxMessageDto.CreateStringMessage(
 			"myString",
 			"MyMessageContent with error handler",
-			Guid.NewGuid().ToString(),
+			GlobalContext.Instance.NewGuid().ToString(),
 			"my-publicher",
-			 Guid.NewGuid().ToString());
+			 GlobalContext.Instance.NewGuid().ToString());
 
 		var createResult = await messageBoxStore.CreateMessageAsync(
 			scopeContext,
@@ -258,10 +258,10 @@ public class QueuedMessageProcessingServiceTests : TestBase
 	public async Task ExecuteAsync_ShouldNotProcessMessageBox_ForBlockedMessage()
 	{
 		var serviceTimeoutInSeconds = 2;
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<QueuedMessageProcessingService>();
@@ -284,9 +284,9 @@ public class QueuedMessageProcessingServiceTests : TestBase
 		var messageDto = DTOs.MessageBoxMessageDto.CreateStringMessage(
 			"myString",
 			"Blocked MyMessageContent",
-			 Guid.NewGuid().ToString(),
+			 GlobalContext.Instance.NewGuid().ToString(),
 			"my-publicher",
-			 Guid.NewGuid().ToString());
+			 GlobalContext.Instance.NewGuid().ToString());
 
 		var createResult = await messageBoxStore.CreateMessageAsync(
 			scopeContext,
@@ -329,10 +329,10 @@ public class QueuedMessageProcessingServiceTests : TestBase
 	public async Task ExecuteAsync_ShouldNotProcessMessageBox_ForInvalidMessage()
 	{
 		var serviceTimeoutInSeconds = 2;
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<QueuedMessageProcessingService>();
@@ -355,9 +355,9 @@ public class QueuedMessageProcessingServiceTests : TestBase
 		var messageDto = DTOs.MessageBoxMessageDto.CreateStringMessage(
 			"myString",
 			"Blocked MyMessageContent",
-			Guid.NewGuid().ToString(),
+			GlobalContext.Instance.NewGuid().ToString(),
 			"my-publicher",
-			 Guid.NewGuid().ToString());
+			 GlobalContext.Instance.NewGuid().ToString());
 
 		var createResult = await messageBoxStore.CreateMessageAsync(
 			scopeContext,

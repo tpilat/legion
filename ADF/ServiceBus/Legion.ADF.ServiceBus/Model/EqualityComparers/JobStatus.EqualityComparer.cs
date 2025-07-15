@@ -62,11 +62,11 @@ public sealed partial class JobStatus : ServiceBus.ServiceBusBaseEntity, Legion.
 
 			if ((ComparisonOptions.CompareReferences & comparisonOptions) == ComparisonOptions.CompareReferences)
 			{
+				if (!ComparisonHelper.SequenceEqual(obj1.JobActivities, obj2.JobActivities, new JobActivity.JobActivityEqualityComparer(comparisonOptions, conds?.GetConditions(x => x.JobActivities), cache)))
+					return false;
 				if (!ComparisonHelper.SequenceEqual(obj1.JobExecutions, obj2.JobExecutions, new JobExecution.JobExecutionEqualityComparer(comparisonOptions, conds?.GetConditions(x => x.JobExecutions), cache)))
 					return false;
 				if (!ComparisonHelper.SequenceEqual(obj1.JobLogs, obj2.JobLogs, new JobLog.JobLogEqualityComparer(comparisonOptions, conds?.GetConditions(x => x.JobLogs), cache)))
-					return false;
-				if (!ComparisonHelper.SequenceEqual(obj1.Jobs, obj2.Jobs, new Job.JobEqualityComparer(comparisonOptions, conds?.GetConditions(x => x.Jobs), cache)))
 					return false;
 		}
 

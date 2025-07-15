@@ -21,7 +21,7 @@ internal class DBConfigurationDataProvider : IDBConfigurationDataProvider, IDisp
 	public DBConfigurationDataProvider(IServiceProvider serviceProvider)
 	{
 #if TRACK_OBJECTS
-		IdDBConfigurationDataProvider = Guid.NewGuid();
+		IdDBConfigurationDataProvider = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdDBConfigurationDataProvider.ToString());
 #endif
 

@@ -15,7 +15,7 @@ internal static class JsonRequestFactory
 			.RelativePath(relativePath)
 			.Method(httpMethod.ToHttpMethod())
 			.RequestTimeout(timeoutInSeconds.HasValue ? TimeSpan.FromSeconds(timeoutInSeconds.Value) : null)
-			.ConfigureHeaders(x => x.CustomHeaders.Add(new ForceableKeyValuePair { Key = "X-API-KEY", Value = options?.ApiKey! }))
+			//.ConfigureHeaders(x => x.CustomHeaders.Add(new ForceableKeyValuePair { Key = "X-API-KEY", Value = options?.ApiKey! }))
 			.QueryString(queryString)
 			.Build();
 
@@ -32,7 +32,7 @@ internal static class JsonRequestFactory
 			.RelativePath(relativePath)
 			.Method(httpMethod.ToHttpMethod())
 			.RequestTimeout(timeoutInSeconds.HasValue ? TimeSpan.FromSeconds(timeoutInSeconds.Value) : null)
-			.ConfigureHeaders(x => x.CustomHeaders.Add(new ForceableKeyValuePair { Key = "X-API-KEY", Value = options?.ApiKey! }))
+			//.ConfigureHeaders(x => x.CustomHeaders.Add(new ForceableKeyValuePair { Key = "X-API-KEY", Value = options?.ApiKey! }))
 			.QueryString(queryString)
 			.AddJsonContent(
 				new JsonContent<T>

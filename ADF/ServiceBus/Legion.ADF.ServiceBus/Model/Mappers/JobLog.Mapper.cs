@@ -67,6 +67,8 @@ public sealed partial class JobLog : ServiceBus.ServiceBusBaseEntity, Legion.Mod
 				target.Detail = Detail;
 			if (conds.CanMap(this, nameof(IdMessageProcessingLog)))
 				target.IdMessageProcessingLog = IdMessageProcessingLog;
+			if (conds.CanMap(this, nameof(IdJobExecution)))
+				target.IdJobExecution = IdJobExecution;
 		}
 		else
 		{
@@ -80,6 +82,7 @@ public sealed partial class JobLog : ServiceBus.ServiceBusBaseEntity, Legion.Mod
 			target.Code = Code;
 			target.Detail = Detail;
 			target.IdMessageProcessingLog = IdMessageProcessingLog;
+			target.IdJobExecution = IdJobExecution;
 		}
 
 		cache.Add(this, target);
@@ -87,11 +90,13 @@ public sealed partial class JobLog : ServiceBus.ServiceBusBaseEntity, Legion.Mod
 		if (referenceModifier == ReferenceModifier.MapAllReferences)
 		{
 			target.Job = Job?.MapTo(target.Job, referenceModifier, conds?.GetConditions(x => x.Job), instanceFactory, cache)!;
+			target.JobExecution = JobExecution?.MapTo(target.JobExecution, referenceModifier, conds?.GetConditions(x => x.JobExecution), instanceFactory, cache)!;
 			target.JobStatus = JobStatus?.MapTo(target.JobStatus, referenceModifier, conds?.GetConditions(x => x.JobStatus), instanceFactory, cache)!;
 		}
 		else if (referenceModifier == ReferenceModifier.SetNull)
 		{
 			target.Job = null!;
+			target.JobExecution = null!;
 			target.JobStatus = null!;
 		}
 

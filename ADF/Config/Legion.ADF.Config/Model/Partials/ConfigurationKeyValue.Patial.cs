@@ -16,7 +16,7 @@ public sealed partial class ConfigurationKeyValue : Config.ConfigBaseEntity, Leg
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, key))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var configurationKeyValue = new ConfigurationKeyValue
 		{
 			__IsNewObject = true,
@@ -55,7 +55,7 @@ public sealed partial class ConfigurationKeyValue : Config.ConfigBaseEntity, Leg
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		RaiseDomainEventOnCommit(new ConfigValueChangedEvent(Key));

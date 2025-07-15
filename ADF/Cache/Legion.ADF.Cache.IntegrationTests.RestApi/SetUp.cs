@@ -35,13 +35,7 @@ public class SetUp
 			//.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
 			//.AddEnvironmentVariables()
 			//.AddCommandLine([] /*args*/)
-			.AddConfigurationData(new Dictionary<string, string?>
-				{
-					//{
-					//	"CacheRestApi:BaseAddress",
-					//	"https://localhost:7139/api/v1"
-					//}
-				})
+			.AddConfigurationData(new Dictionary<string, string?>())
 			.Build();
 	}
 
@@ -73,7 +67,7 @@ public class SetUp
 					"TEST_BASE",
 					removePreviousSameMethodFrame: true,
 					previousScopeContext: null,
-					correlationId: Guid.NewGuid(),
+					correlationId: GlobalContext.Instance.NewGuid(),
 					principal: null,
 					idUser: null,
 					businessProcess: null,

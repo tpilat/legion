@@ -23,7 +23,7 @@ public sealed partial class AuditEntry : Audit.AuditBaseEntity, Legion.Model.IEn
 		var auditEntry = new AuditEntry
 		{
 			__IsNewObject = true,
-			IdAuditEntry = Guid.NewGuid(),
+			IdAuditEntry = GlobalContext.Instance.NewGuid(),
 			CreatedUtc = GlobalContext.Instance.UtcNow,
 			IdAuditOperation = idAuditOperation,
 			TableName = tableName,
@@ -64,7 +64,7 @@ public sealed partial class AuditEntry : Audit.AuditBaseEntity, Legion.Model.IEn
 		var auditEntry = new AuditEntry
 		{
 			__IsNewObject = true,
-			IdAuditEntry = Guid.NewGuid(),
+			IdAuditEntry = GlobalContext.Instance.NewGuid(),
 			CreatedUtc = GlobalContext.Instance.UtcNow,
 			IdAuditOperation = iauditEntry.IdAuditOperation,
 			TableName = iauditEntry.TableName,

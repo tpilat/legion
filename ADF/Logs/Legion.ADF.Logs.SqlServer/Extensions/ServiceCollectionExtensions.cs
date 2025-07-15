@@ -4,6 +4,7 @@ using Legion.Database.SqlServer.Extensions;
 using Legion.EntityFrameworkCore.Database;
 using Legion.EntityFrameworkCore.Extensions;
 using Legion.Extensions;
+using Legion.Model.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -24,6 +25,8 @@ public static class ServiceCollectionExtensions
 		builder.Services.AddQueryUnitOfWork<ILogsQueryUnitOfWork>(efConnectionProvider => new LogsQueryUnitOfWork(efConnectionProvider));
 		builder.Services.TryAddSingleton<ILogsUnitOfWorkFactory, LogsUnitOfWorkFactory>();
 		builder.Services.TryAddSingleton<ILogsQueryUnitOfWorkFactory, LogsQueryUnitOfWorkFactory>();
+		builder.Services.TryAddSingleton<IUnitOfWorkFactory<ILogsUnitOfWork>, LogsUnitOfWorkFactory>();
+		builder.Services.TryAddSingleton<IQueryUnitOfWorkFactory<ILogsQueryUnitOfWork>, LogsQueryUnitOfWorkFactory>();
 		builder.Services.AddDbContext<LogsDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);
 		builder.Services.TryAddTransient<ILogsDbContext, LogsDbContext>();
 		builder.Services.AddDbContext<LogsQueryDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);

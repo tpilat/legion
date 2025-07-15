@@ -1,4 +1,4 @@
-using Legion;
+﻿using Legion;
 using Legion.EntityFrameworkCore;
 using Legion.Model.Audit;
 using Legion.EntityFrameworkCore.Queries;
@@ -24,7 +24,7 @@ internal partial class AuthQueryUnitOfWork : Legion.ADF.Auth.IAuthQueryUnitOfWor
 	public AuthQueryUnitOfWork(IEFConnectionProvider connectionProvider)
 	{
 #if TRACK_OBJECTS
-		IdAuthQueryUnitOfWork = Guid.NewGuid();
+		IdAuthQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdAuthQueryUnitOfWork.ToString());
 #endif
 
@@ -37,7 +37,7 @@ internal partial class AuthQueryUnitOfWork : Legion.ADF.Auth.IAuthQueryUnitOfWor
 	public AuthQueryUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbUnitOfWork dbUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdAuthQueryUnitOfWork = Guid.NewGuid();
+		IdAuthQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdAuthQueryUnitOfWork.ToString());
 #endif
 
@@ -50,7 +50,7 @@ internal partial class AuthQueryUnitOfWork : Legion.ADF.Auth.IAuthQueryUnitOfWor
 	public AuthQueryUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbQueryUnitOfWork dbQueryUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdAuthQueryUnitOfWork = Guid.NewGuid();
+		IdAuthQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdAuthQueryUnitOfWork.ToString());
 #endif
 
@@ -68,7 +68,7 @@ internal partial class AuthQueryUnitOfWork : Legion.ADF.Auth.IAuthQueryUnitOfWor
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdAuthQueryUnitOfWork = Guid.NewGuid();
+		IdAuthQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdAuthQueryUnitOfWork.ToString());
 #endif
 
@@ -92,7 +92,7 @@ internal partial class AuthQueryUnitOfWork : Legion.ADF.Auth.IAuthQueryUnitOfWor
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdAuthQueryUnitOfWork = Guid.NewGuid();
+		IdAuthQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdAuthQueryUnitOfWork.ToString());
 #endif
 

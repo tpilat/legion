@@ -13,7 +13,7 @@ public sealed partial class OutboxMessageArchive : Outbox.OutboxBaseEntity, Legi
 		if (result.IsArgumentNull(scopeContext, outboxMessage))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var outboxMessageArchive = new OutboxMessageArchive
 		{
 			__IsNewObject = true,

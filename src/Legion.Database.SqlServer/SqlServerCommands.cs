@@ -48,7 +48,7 @@ public static class SqlServerCommands
 	}
 
 	public static string GetRandomTmpTableName()
-		=> $"tmp_{Guid.NewGuid():N}";
+		=> $"tmp_{GlobalContext.Instance.NewGuid():N}";
 
 	public static Task<string> CopyTableAsTempIfNotExistsAsync(
 		SqlConnection connection,

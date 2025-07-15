@@ -49,7 +49,13 @@ public class CacheDataConfiguration : IEntityTypeConfiguration<Cache.Model.Cache
 
 		entityBuilder.Property(e => e.SlidingTime).HasColumnType("time(7)");
 
+		entityBuilder.Property(e => e.CreatedUtc).HasColumnType("datetime2(7)");
+
 		entityBuilder.Property(e => e.LastAccessedUtc).HasColumnType("datetime2(7)");
+
+		entityBuilder.Property(e => e.RowVersion)
+			.HasColumnType("uniqueidentifier")
+				.IsConcurrencyToken();
 	}
 
 	public static ModelBuilder Build(ModelBuilder modelBuilder)

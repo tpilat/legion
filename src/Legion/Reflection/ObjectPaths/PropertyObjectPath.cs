@@ -13,7 +13,7 @@ public class PropertyObjectPath<T> : ObjectPath<T>, IPropertyObjectPath, IObject
 	}
 
 	internal PropertyObjectPath(ObjectPath parent, string propertyName)
-		: this(Guid.NewGuid())
+		: this(GlobalContext.Instance.NewGuid())
 	{
 		Throw.IfArgumentNull(parent);
 

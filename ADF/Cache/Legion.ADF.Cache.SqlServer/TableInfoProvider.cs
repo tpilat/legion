@@ -15,8 +15,9 @@ public class TableInfoProvider : Legion.ADF.Cache.ITableInfoProvider
 					new(nameof(Legion.ADF.Cache.Model.CacheData.KeyPrefix450), typeof(string), "[KeyPrefix450]", "nvarchar(450)", false),
 					new(nameof(Legion.ADF.Cache.Model.CacheData.ExpiresUtc), typeof(DateTime?), "[ExpiresUtc]", "datetime2", true),
 					new(nameof(Legion.ADF.Cache.Model.CacheData.SlidingTime), typeof(TimeSpan?), "[SlidingTime]", "time", true),
+					new(nameof(Legion.ADF.Cache.Model.CacheData.CreatedUtc), typeof(DateTime), "[CreatedUtc]", "datetime2", false),
 					new(nameof(Legion.ADF.Cache.Model.CacheData.LastAccessedUtc), typeof(DateTime), "[LastAccessedUtc]", "datetime2", false),
-					new(nameof(Legion.ADF.Cache.Model.CacheData.RowVersion), typeof(long), "[RowVersion]", "bigint", false),
+					new(nameof(Legion.ADF.Cache.Model.CacheData.RowVersion), typeof(Guid), "[RowVersion]", "uniqueidentifier", false),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetCacheDataTableInfo()
@@ -30,6 +31,7 @@ public class TableInfoProvider : Legion.ADF.Cache.ITableInfoProvider
 					new(nameof(Legion.ADF.Cache.Model.DistributedLock.LockKey), typeof(string), "[LockKey]", "nvarchar(max)", false),
 					new(nameof(Legion.ADF.Cache.Model.DistributedLock.LockId), typeof(string), "[LockId]", "nvarchar(32)", false),
 					new(nameof(Legion.ADF.Cache.Model.DistributedLock.Metadata), typeof(string), "[Metadata]", "nvarchar(max)", true),
+					new(nameof(Legion.ADF.Cache.Model.DistributedLock.CreatedUtc), typeof(DateTime), "[CreatedUtc]", "datetime2", false),
 					new(nameof(Legion.ADF.Cache.Model.DistributedLock.ExpiresUtc), typeof(DateTime), "[ExpiresUtc]", "datetime2", false),
 				]));
 

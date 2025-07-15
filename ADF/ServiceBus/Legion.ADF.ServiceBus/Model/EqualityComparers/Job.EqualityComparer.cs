@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Legion.ADF.ServiceBus.Model;
 
-public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.IEntity
+public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.Concurrence.IConcurrent, Legion.Model.IEntity
 {
 	public bool EqualsTo(
 		ServiceBus.Model.Job? obj,
@@ -58,8 +58,6 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.IdJobRunType)) && obj1.IdJobRunType != obj2.IdJobRunType)
 						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.IdJobStatus)) && obj1.IdJobStatus != obj2.IdJobStatus)
-						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.Namespace)) && !string.Equals(obj1.Namespace, obj2.Namespace))
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.Properties)) && !string.Equals(obj1.Properties, obj2.Properties))
@@ -74,19 +72,11 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.IdDefaultHost)) && obj1.IdDefaultHost != obj2.IdDefaultHost)
 						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.IdCurrentHost)) && obj1.IdCurrentHost != obj2.IdCurrentHost)
-						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.AttachedToCurrentHostUtc)) && obj1.AttachedToCurrentHostUtc != obj2.AttachedToCurrentHostUtc)
-						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.LastProcessingUtc)) && obj1.LastProcessingUtc != obj2.LastProcessingUtc)
-						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.LastProcessingFinishedUtc)) && obj1.LastProcessingFinishedUtc != obj2.LastProcessingFinishedUtc)
-						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.NextProcessinUtc)) && obj1.NextProcessinUtc != obj2.NextProcessinUtc)
+					if (conds.CanCompare(obj1, nameof(obj1.RequestedToDisable)) && obj1.RequestedToDisable != obj2.RequestedToDisable)
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.TimeoutForProcessingInSeconds)) && obj1.TimeoutForProcessingInSeconds != obj2.TimeoutForProcessingInSeconds)
 						return false;
-					if (conds.CanCompare(obj1, nameof(obj1.MaxProcessingRetryCount)) && obj1.MaxProcessingRetryCount != obj2.MaxProcessingRetryCount)
+					if (conds.CanCompare(obj1, nameof(obj1.RowVersion)) && obj1.RowVersion != obj2.RowVersion)
 						return false;
 				}
 				else
@@ -98,8 +88,6 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 					if (!string.Equals(obj1.Description, obj2.Description))
 						return false;
 					if (obj1.IdJobRunType != obj2.IdJobRunType)
-						return false;
-					if (obj1.IdJobStatus != obj2.IdJobStatus)
 						return false;
 					if (!string.Equals(obj1.Namespace, obj2.Namespace))
 						return false;
@@ -115,19 +103,11 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 						return false;
 					if (obj1.IdDefaultHost != obj2.IdDefaultHost)
 						return false;
-					if (obj1.IdCurrentHost != obj2.IdCurrentHost)
-						return false;
-					if (obj1.AttachedToCurrentHostUtc != obj2.AttachedToCurrentHostUtc)
-						return false;
-					if (obj1.LastProcessingUtc != obj2.LastProcessingUtc)
-						return false;
-					if (obj1.LastProcessingFinishedUtc != obj2.LastProcessingFinishedUtc)
-						return false;
-					if (obj1.NextProcessinUtc != obj2.NextProcessinUtc)
+					if (obj1.RequestedToDisable != obj2.RequestedToDisable)
 						return false;
 					if (obj1.TimeoutForProcessingInSeconds != obj2.TimeoutForProcessingInSeconds)
 						return false;
-					if (obj1.MaxProcessingRetryCount != obj2.MaxProcessingRetryCount)
+					if (obj1.RowVersion != obj2.RowVersion)
 						return false;
 				}
 			}
@@ -144,7 +124,7 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 			{
 				if (!JobRunType.JobRunTypeEqualityComparer.EqualsTo(obj1.JobRunType, obj2.JobRunType, comparisonOptions, conds?.GetConditions(x => x.JobRunType), cache))
 					return false;
-				if (!JobStatus.JobStatusEqualityComparer.EqualsTo(obj1.JobStatus, obj2.JobStatus, comparisonOptions, conds?.GetConditions(x => x.JobStatus), cache))
+				if (!JobActivity.JobActivityEqualityComparer.EqualsTo(obj1.JobActivity, obj2.JobActivity, comparisonOptions, conds?.GetConditions(x => x.JobActivity), cache))
 					return false;
 				if (!ComparisonHelper.SequenceEqual(obj1.JobDatas, obj2.JobDatas, new JobData.JobDataEqualityComparer(comparisonOptions, conds?.GetConditions(x => x.JobDatas), cache)))
 					return false;

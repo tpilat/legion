@@ -2,16 +2,18 @@
 
 public class JobExecutionDto
 {
-	public Guid IdJob { get; private set; }
+	public Guid IdJob { get; set; }
 
-	public Guid TraceCorrelationId { get; private set; }
+	public Guid TraceCorrelationId { get; set; }
 
-	public DateTime StartUtc { get; private set; }
+	public DateTime StartUtc { get; set; }
 
-	public DateTime? EndUtc { get; private set; }
+	public DateTime? EndUtc { get; set; }
 
-	public Guid IdJobStatus { get; private set; }
+	public Guid IdJobStatus { get; set; }
 
-	public string JobStatus { get; private set; }
+	public string JobStatus { get; set; }
+
+	public DateTime StatisticsStartHourAt { get; set; }
 
 }

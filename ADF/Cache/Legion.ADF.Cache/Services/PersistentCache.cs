@@ -64,7 +64,21 @@ internal class PersistentCache : IPersistentCache, IDisposable
 		return cacheData;
 	}
 
-	public async Task<(string? Value, long? RowVersion)> GetValue(
+	public async Task<bool> IsAliveAsync(CancellationToken cancellationToken = default)
+	{
+		var scopeContext = ScopeContext.Create("Legion.ADF.Cache");
+
+		await using var asyncServiceScope = _serviceProvider.CreateAsyncScope();
+		var scopedServiceProvider = asyncServiceScope.ServiceProvider;
+		var uow = CreateUnitOfWork(scopeContext, scopedServiceProvider);
+		await using var connectionProvider = uow.ConnectionProvider;
+
+		var isAlive = await uow.CacheDataRepository.IsAliveAsync(scopeContext, cancellationToken);
+
+		return isAlive;
+	}
+
+	public async Task<(string? Value, Guid? RowVersion)> GetValueAsync(
 		string key,
 		CancellationToken cancellationToken = default)
 	{
@@ -143,6 +157,20 @@ internal class PersistentCache : IPersistentCache, IDisposable
 				new MemoryCacheEntryOptions
 				{
 					AbsoluteExpiration = keepUntil
+				},
+				cancellationToken);
+
+	public Task<bool> SetValueWithAbsoluteServerSideExpirationAsync(
+		string key,
+		string value,
+		TimeSpan deltaToNowUtc,
+		CancellationToken cancellationToken = default)
+		 => SetValueAsync(
+				key,
+				value,
+				new MemoryCacheEntryOptions
+				{
+					AbsoluteExpiration = GlobalContext.Instance.UtcNow.Add(deltaToNowUtc)
 				},
 				cancellationToken);
 
@@ -314,7 +342,7 @@ internal class PersistentCache : IPersistentCache, IDisposable
 		string key,
 		string oldValue,
 		string newValue,
-		long currentRowVersion,
+		Guid currentRowVersion,
 		MemoryCacheEntryOptions? options,
 		CancellationToken cancellationToken = default)
 	{
@@ -342,7 +370,7 @@ internal class PersistentCache : IPersistentCache, IDisposable
 		string key,
 		string oldValue,
 		string newValue,
-		long currentRowVersion,
+		Guid currentRowVersion,
 		CancellationToken cancellationToken = default)
 		 => TryUpdateAsync(
 				key,
@@ -356,7 +384,7 @@ internal class PersistentCache : IPersistentCache, IDisposable
 		string key,
 		string oldValue,
 		string newValue,
-		long currentRowVersion,
+		Guid currentRowVersion,
 		TimeSpan slidingTime,
 		CancellationToken cancellationToken = default)
 		 => TryUpdateAsync(
@@ -374,7 +402,7 @@ internal class PersistentCache : IPersistentCache, IDisposable
 		string key,
 		string oldValue,
 		string newValue,
-		long currentRowVersion,
+		Guid currentRowVersion,
 		DateTime keepUntil,
 		CancellationToken cancellationToken = default)
 		 => TryUpdateAsync(
@@ -385,6 +413,24 @@ internal class PersistentCache : IPersistentCache, IDisposable
 				new MemoryCacheEntryOptions
 				{
 					AbsoluteExpiration = keepUntil
+				},
+				cancellationToken);
+
+	public Task<bool> TryUpdateValueWithAbsoluteServerSideExpirationAsync(
+		string key,
+		string oldValue,
+		string newValue,
+		Guid currentRowVersion,
+		TimeSpan deltaToNowUtc,
+		CancellationToken cancellationToken = default)
+		 => TryUpdateAsync(
+				key,
+				oldValue,
+				newValue,
+				currentRowVersion,
+				new MemoryCacheEntryOptions
+				{
+					AbsoluteExpiration = GlobalContext.Instance.UtcNow.Add(deltaToNowUtc)
 				},
 				cancellationToken);
 

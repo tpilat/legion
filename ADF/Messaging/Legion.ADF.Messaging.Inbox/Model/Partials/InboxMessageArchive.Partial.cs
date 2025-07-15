@@ -13,7 +13,7 @@ public sealed partial class InboxMessageArchive : Inbox.InboxBaseEntity, Legion.
 		if (result.IsArgumentNull(scopeContext, inboxMessage))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var inboxMessageArchive = new InboxMessageArchive
 		{
 			__IsNewObject = true,

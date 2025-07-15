@@ -15,7 +15,7 @@ public sealed partial class BlockedOutboxMessageType : Outbox.OutboxBaseEntity, 
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, blockedNamespace))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var dbBlockedOutboxMessageType = new BlockedOutboxMessageType
 		{
 			__IsNewObject = true,

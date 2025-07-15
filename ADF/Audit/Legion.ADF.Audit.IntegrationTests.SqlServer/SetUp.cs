@@ -100,7 +100,7 @@ public class SetUp
 					"TEST_BASE",
 					removePreviousSameMethodFrame: true,
 					previousScopeContext: null,
-					correlationId: Guid.NewGuid(),
+					correlationId: GlobalContext.Instance.NewGuid(),
 					principal: null,
 					idUser: null,
 					businessProcess: null,

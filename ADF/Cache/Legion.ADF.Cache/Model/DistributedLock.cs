@@ -29,6 +29,11 @@ public sealed partial class DistributedLock : Cache.CacheBaseEntity, Legion.Mode
 	/// <summary>
 	/// Database DataType: timestamp with time zone NOT NULL
 	/// </summary>
+	public DateTime CreatedUtc { get; private set; }
+
+	/// <summary>
+	/// Database DataType: timestamp with time zone NOT NULL
+	/// </summary>
 	public DateTime ExpiresUtc { get; private set; }
 
 	private DistributedLock()
@@ -47,6 +52,7 @@ public sealed partial class DistributedLock : Cache.CacheBaseEntity, Legion.Mode
 			{ nameof(LockKey), LockKey },
 			{ nameof(LockId), LockId },
 			{ nameof(Metadata), Metadata },
+			{ nameof(CreatedUtc), CreatedUtc },
 			{ nameof(ExpiresUtc), ExpiresUtc },
 		};
 
@@ -69,6 +75,7 @@ public sealed partial class DistributedLock : Cache.CacheBaseEntity, Legion.Mode
 			.ForProperty(x => x.KeyHash, v => v.NotDefaultOrEmpty())
 			.ForProperty(x => x.LockKey, v => v.NotDefaultOrEmpty())
 			.ForProperty(x => x.LockId, v => v.NotDefaultOrEmpty())
+			//.ForProperty(x => x.CreatedUtc, v => v.NotDefaultOrEmpty())
 			//.ForProperty(x => x.ExpiresUtc, v => v.NotDefaultOrEmpty())
 		;
 }

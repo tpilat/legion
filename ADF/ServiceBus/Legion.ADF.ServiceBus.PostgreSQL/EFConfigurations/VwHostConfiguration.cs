@@ -25,15 +25,11 @@ public class VwHostConfiguration : IEntityTypeConfiguration<ServiceBus.Model.VwH
 
 		entityBuilder.Property(e => e.CreatedUtc).HasColumnType("timestamptz");
 
-		entityBuilder.Property(e => e.StartedUtc).HasColumnType("timestamptz");
-
-		entityBuilder.Property(e => e.LastActivityUtc).HasColumnType("timestamptz");
-
-		entityBuilder.Property(e => e.StoppedUtc).HasColumnType("timestamptz");
-
 		entityBuilder.Property(e => e.Configuration)
 			.IsRequired()
 			.HasColumnType("jsonb");
+
+		entityBuilder.Property(e => e.RowVersion).HasColumnType("uuid");
 	}
 
 	public static ModelBuilder Build(ModelBuilder modelBuilder)

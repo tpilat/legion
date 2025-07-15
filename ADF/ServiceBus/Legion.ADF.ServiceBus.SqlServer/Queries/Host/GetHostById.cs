@@ -23,7 +23,7 @@ public class GetHostById :
 	protected override IQueryable<Model.Host> GetDefaultQuery(IScopeContext scopeContext)
 	{
 		var context = GetContext(scopeContext);
-		return context.Host;
+		return context.Host.Include(x => x.HostActivity);
 	}
 
 	public override IQueryable<Model.Host> GetQuery(IScopeContext scopeContext)

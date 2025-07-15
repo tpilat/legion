@@ -2,7 +2,7 @@
 
 namespace Legion.ADF.ServiceBus.Model;
 
-public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model.IEntity
+public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model.Concurrence.IConcurrent, Legion.Model.IEntity
 {
 	private List<ServiceBus.Model.HostLog> _hostLogs;
 
@@ -34,30 +34,20 @@ public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model
 	public bool IsEnabled { get; private set; }
 
 	/// <summary>
-	/// Database DataType: timestamp with time zone NULL
-	/// </summary>
-	public DateTime? StartedUtc { get; private set; }
-
-	/// <summary>
-	/// Database DataType: timestamp with time zone NOT NULL
-	/// </summary>
-	public DateTime LastActivityUtc { get; private set; }
-
-	/// <summary>
-	/// Database DataType: timestamp with time zone NULL
-	/// </summary>
-	public DateTime? StoppedUtc { get; private set; }
-
-	/// <summary>
 	/// Database DataType: jsonb NOT NULL
 	/// </summary>
 	public string Configuration { get; private set; }
 
 	/// <summary>
-	/// Database DataType: boolean NOT NULL
+	/// Database DataType: uuid NOT NULL
 	/// </summary>
-	public bool IsDistributedManagerAvailable { get; private set; }
+	public Guid RowVersion { get; set; }
 
+
+	/// <summary>
+	/// 1:_1 HostActivity.IdHost | FK_HostActivity_IdHost
+	/// </summary>
+	public ServiceBus.Model.HostActivity HostActivity { get; private set; }
 
 	/// <summary>
 	/// N:_1 ServiceBus.Model.HostLog.IdHost | FK_HostLog_IdHost
@@ -67,6 +57,14 @@ public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model
 	private Host()
 	{
 		_hostLogs = [];
+	}
+
+	[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+	string Legion.Model.Concurrence.IConcurrent.ConcurrencyTokenPropertyName => nameof(RowVersion);
+
+	public void SetNewConcurrencyToken()
+	{
+		RowVersion = Legion.GlobalContext.Instance.NewGuid();
 	}
 
 	static Host()
@@ -82,11 +80,8 @@ public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model
 			{ nameof(Description), Description },
 			{ nameof(CreatedUtc), CreatedUtc },
 			{ nameof(IsEnabled), IsEnabled },
-			{ nameof(StartedUtc), StartedUtc },
-			{ nameof(LastActivityUtc), LastActivityUtc },
-			{ nameof(StoppedUtc), StoppedUtc },
 			{ nameof(Configuration), Configuration },
-			{ nameof(IsDistributedManagerAvailable), IsDistributedManagerAvailable },
+			{ nameof(RowVersion), RowVersion },
 		};
 
 	public void TrimStringValuesToFitDatabaseMaxLengths(string? postfix = null)
@@ -111,7 +106,7 @@ public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model
 			.ForProperty(x => x.Name, v => v.NotDefaultOrEmpty().MaxLength(255))
 			.ForProperty(x => x.Description, v => v.NotDefaultOrEmpty().MaxLength(511))
 			//.ForProperty(x => x.CreatedUtc, v => v.NotDefaultOrEmpty())
-			//.ForProperty(x => x.LastActivityUtc, v => v.NotDefaultOrEmpty())
 			.ForProperty(x => x.Configuration, v => v.NotDefaultOrEmpty())
+			//.ForProperty(x => x.RowVersion, v => v.NotDefaultOrEmpty())
 		;
 }

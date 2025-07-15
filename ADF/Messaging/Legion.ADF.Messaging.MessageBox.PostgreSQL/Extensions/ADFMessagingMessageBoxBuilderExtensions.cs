@@ -4,6 +4,7 @@ using Legion.Database.PostgreSQL.Extensions;
 using Legion.EntityFrameworkCore.Database;
 using Legion.EntityFrameworkCore.Extensions;
 using Legion.Extensions;
+using Legion.Model.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -24,6 +25,8 @@ public static class ADFMessagingMessageBoxBuilderExtensions
 		builder.ADFMessagingBuilder.Services.AddQueryUnitOfWork<IMessageBoxQueryUnitOfWork>(efConnectionProvider => new MessageBoxQueryUnitOfWork(efConnectionProvider));
 		builder.ADFMessagingBuilder.Services.TryAddSingleton<IMessageBoxUnitOfWorkFactory, MessageBoxUnitOfWorkFactory>();
 		builder.ADFMessagingBuilder.Services.TryAddSingleton<IMessageBoxQueryUnitOfWorkFactory, MessageBoxQueryUnitOfWorkFactory>();
+		builder.ADFMessagingBuilder.Services.TryAddSingleton<IUnitOfWorkFactory<IMessageBoxUnitOfWork>, MessageBoxUnitOfWorkFactory>();
+		builder.ADFMessagingBuilder.Services.TryAddSingleton<IQueryUnitOfWorkFactory<IMessageBoxQueryUnitOfWork>, MessageBoxQueryUnitOfWorkFactory>();
 		builder.ADFMessagingBuilder.Services.AddDbContext<MessageBoxDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);
 		builder.ADFMessagingBuilder.Services.TryAddTransient<IMessageBoxDbContext, MessageBoxDbContext>();
 		builder.ADFMessagingBuilder.Services.AddDbContext<MessageBoxQueryDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);

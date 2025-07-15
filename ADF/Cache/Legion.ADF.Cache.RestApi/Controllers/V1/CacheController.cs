@@ -10,6 +10,31 @@ namespace Legion.ADF.Cache.RestApi.Controllers.V1;
 [Route("[controller]")]
 public class CacheController : ApiControllerBase
 {
+	[HttpPost, Route("IsAlive")]
+	public async Task<ResultDto<bool>> IsAliveAsync(CancellationToken cancellationToken = default)
+	{
+		var scopeContext = GetNewScopeContext();
+
+		var result = new ResultBuilder<bool>();
+
+		try
+		{
+			var cache = GetRequiredService<ISimplePersistentCache>();
+			var isAlive = await cache.IsAliveAsync(cancellationToken);
+
+			return result.WithData(isAlive).Build().ToDto();
+		}
+		catch (Exception ex)
+		{
+			return HttpContext.RequestServices.GetRequiredService<ILogger<CacheController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
+		}
+	}
+
 	[HttpPost, Route("GetValue")]
 	public async Task<ResultDto<CachedValueDto>> GetValueAsync(
 		[FromBody] string key,
@@ -25,7 +50,7 @@ public class CacheController : ApiControllerBase
 		try
 		{
 			var cache = GetRequiredService<ISimplePersistentCache>();
-			var cachedValue = await cache.GetValue(key, cancellationToken);
+			var cachedValue = await cache.GetValueAsync(key, cancellationToken);
 
 			return string.IsNullOrWhiteSpace(cachedValue.Value)
 				? result.WithData(null).Build().ToDto()
@@ -39,7 +64,12 @@ public class CacheController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<CacheController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 
@@ -64,7 +94,12 @@ public class CacheController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<CacheController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 
@@ -80,6 +115,9 @@ public class CacheController : ApiControllerBase
 		if (result.IsArgumentNull(scopeContext, request))
 			return result.Build().ToDto();
 
+		if (result.IsArgumentNull(scopeContext, request.SlidingTime))
+			return result.Build().ToDto();
+
 		try
 		{
 			var cache = GetRequiredService<ISimplePersistentCache>();
@@ -89,7 +127,12 @@ public class CacheController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<CacheController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 
@@ -105,8 +148,8 @@ public class CacheController : ApiControllerBase
 		if (result.IsArgumentNull(scopeContext, request))
 			return result.Build().ToDto();
 
-		Throw.IfArgumentNull(request.KeepUntil);
-		Throw.IfArgumentIsLessThanOrEqual(request.KeepUntil.Value, GlobalContext.Instance.UtcNow);
+		if (result.IsArgumentNull(scopeContext, request.KeepUntil))
+			return result.Build().ToDto();
 
 		try
 		{
@@ -117,7 +160,45 @@ public class CacheController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<CacheController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
+		}
+	}
+
+	[HttpPost, Route("SetValueWithAbsoluteServerSideExpiration")]
+	public async Task<ResultDto<bool>> SetValueWithAbsoluteServerSideExpirationAsync(
+		[FromBody] SetCacheDataDto request,
+		CancellationToken cancellationToken = default)
+	{
+		var scopeContext = GetNewScopeContext();
+
+		var result = new ResultBuilder<bool>();
+
+		if (result.IsArgumentNull(scopeContext, request))
+			return result.Build().ToDto();
+
+		if (result.IsArgumentNull(scopeContext, request.SlidingTime))
+			return result.Build().ToDto();
+
+		try
+		{
+			var cache = GetRequiredService<ISimplePersistentCache>();
+			var wasSet = await cache.SetValueWithAbsoluteServerSideExpirationAsync(request.Key, request.Value, request.SlidingTime.Value, cancellationToken);
+
+			return result.WithData(wasSet).Build().ToDto();
+		}
+		catch (Exception ex)
+		{
+			return HttpContext.RequestServices.GetRequiredService<ILogger<CacheController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 
@@ -142,7 +223,12 @@ public class CacheController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<CacheController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 
@@ -158,6 +244,9 @@ public class CacheController : ApiControllerBase
 		if (result.IsArgumentNull(scopeContext, request))
 			return result.Build().ToDto();
 
+		if (result.IsArgumentNull(scopeContext, request.SlidingTime))
+			return result.Build().ToDto();
+
 		try
 		{
 			var cache = GetRequiredService<ISimplePersistentCache>();
@@ -167,7 +256,12 @@ public class CacheController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<CacheController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 
@@ -183,6 +277,9 @@ public class CacheController : ApiControllerBase
 		if (result.IsArgumentNull(scopeContext, request))
 			return result.Build().ToDto();
 
+		if (result.IsArgumentNull(scopeContext, request.KeepUntil))
+			return result.Build().ToDto();
+
 		try
 		{
 			var cache = GetRequiredService<ISimplePersistentCache>();
@@ -192,7 +289,45 @@ public class CacheController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<CacheController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
+		}
+	}
+
+	[HttpPost, Route("TryUpdateValueWithAbsoluteServerSideExpiration")]
+	public async Task<ResultDto<bool>> TryUpdateValueWithAbsoluteServerSideExpirationAsync(
+		[FromBody] UpdateCacheDataDto request,
+		CancellationToken cancellationToken = default)
+	{
+		var scopeContext = GetNewScopeContext();
+
+		var result = new ResultBuilder<bool>();
+
+		if (result.IsArgumentNull(scopeContext, request))
+			return result.Build().ToDto();
+
+		if (result.IsArgumentNull(scopeContext, request.SlidingTime))
+			return result.Build().ToDto();
+
+		try
+		{
+			var cache = GetRequiredService<ISimplePersistentCache>();
+			var updated = await cache.TryUpdateValueWithAbsoluteServerSideExpirationAsync(request.Key, request.OldValue, request.NewValue, request.CurrentRowVersion, request.SlidingTime.Value, cancellationToken);
+
+			return result.WithData(updated).Build().ToDto();
+		}
+		catch (Exception ex)
+		{
+			return HttpContext.RequestServices.GetRequiredService<ILogger<CacheController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 
@@ -217,7 +352,12 @@ public class CacheController : ApiControllerBase
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex).ToDto();
+			return HttpContext.RequestServices.GetRequiredService<ILogger<CacheController>>()
+				.LogResultErrorMessages(
+					result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex),
+					skipIfAlreadyLogged: true,
+					logWarnings: true)
+				.ToDto();
 		}
 	}
 }

@@ -68,8 +68,8 @@ public partial class DistributedLockRepository : Legion.ADF.Cache.PostgreSQL.Cac
 			var distributedLock = createResult.Data!;
 
 			var sql = @"
-				INSERT INTO cache.""DistributedLock"" (""KeyHash"", ""LockKey"", ""LockId"", ""Metadata"", ""ExpiresUtc"")
-				VALUES(@keyHash, @lockKey, @lockId, @metadata, @expires)
+				INSERT INTO cache.""DistributedLock"" (""KeyHash"", ""LockKey"", ""LockId"", ""Metadata"", ""ExpiresUtc"", ""CreatedUtc"")
+				VALUES(@keyHash, @lockKey, @lockId, @metadata, @expires, @createdutc)
 				ON CONFLICT(""KeyHash"") DO NOTHING;";
 
 			var affected = await context.Database.ExecuteSqlRawAsync(sql, [
@@ -77,7 +77,8 @@ public partial class DistributedLockRepository : Legion.ADF.Cache.PostgreSQL.Cac
 				new Npgsql.NpgsqlParameter("lockKey", distributedLock.LockKey),
 				new Npgsql.NpgsqlParameter("lockId", distributedLock.LockId),
 				new Npgsql.NpgsqlParameter("metadata", distributedLock.Metadata),
-				new Npgsql.NpgsqlParameter("expires", distributedLock.ExpiresUtc)
+				new Npgsql.NpgsqlParameter("expires", distributedLock.ExpiresUtc),
+				new Npgsql.NpgsqlParameter("createdutc", GlobalContext.Instance.UtcNow)
 			], cancellationToken);
 
 			if (affected == 1)

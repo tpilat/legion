@@ -1,6 +1,6 @@
 namespace Legion.ADF.Config.SqlServer;
 
-public partial class ConfigQueryUnitOfWorkFactory : IConfigQueryUnitOfWorkFactory
+public partial class ConfigQueryUnitOfWorkFactory : IConfigQueryUnitOfWorkFactory, Legion.Model.Repositories.IQueryUnitOfWorkFactory<IConfigQueryUnitOfWork>
 {
 	public IConfigQueryUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

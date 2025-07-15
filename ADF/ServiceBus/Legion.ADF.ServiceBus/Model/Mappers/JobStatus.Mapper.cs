@@ -49,15 +49,15 @@ public sealed partial class JobStatus : ServiceBus.ServiceBusBaseEntity, Legion.
 
 		if (referenceModifier == ReferenceModifier.MapAllReferences)
 		{
+			target._jobActivities = MapperHelper.MapToList(JobActivities, target._jobActivities, Legion.ADF.ServiceBus.Model.JobActivity.Map, referenceModifier, conds?.GetConditions(x => x.JobActivities), instanceFactory, cache)!;
 			target._jobExecutions = MapperHelper.MapToList(JobExecutions, target._jobExecutions, Legion.ADF.ServiceBus.Model.JobExecution.Map, referenceModifier, conds?.GetConditions(x => x.JobExecutions), instanceFactory, cache)!;
 			target._jobLogs = MapperHelper.MapToList(JobLogs, target._jobLogs, Legion.ADF.ServiceBus.Model.JobLog.Map, referenceModifier, conds?.GetConditions(x => x.JobLogs), instanceFactory, cache)!;
-			target._jobs = MapperHelper.MapToList(Jobs, target._jobs, Legion.ADF.ServiceBus.Model.Job.Map, referenceModifier, conds?.GetConditions(x => x.Jobs), instanceFactory, cache)!;
 		}
 		else if (referenceModifier == ReferenceModifier.SetNull)
 		{
+			target._jobActivities = [];
 			target._jobExecutions = [];
 			target._jobLogs = [];
-			target._jobs = [];
 		}
 
 		return target;

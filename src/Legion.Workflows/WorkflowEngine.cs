@@ -49,7 +49,7 @@ public class WorkflowEngine
 		}
 		else
 		{
-			await exec.ExecuteNodeAsync(workflow.StartNode.IdNode, Guid.NewGuid(), restart: false);
+			await exec.ExecuteNodeAsync(workflow.StartNode.IdNode, GlobalContext.Instance.NewGuid(), restart: false);
 		}
 	}
 

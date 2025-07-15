@@ -16,11 +16,15 @@ public class DistributedLockConfiguration : IEntityTypeConfiguration<Cache.Model
 
 		entityBuilder.ToTable("DistributedLock", "cache");
 
+		entityBuilder.HasIndex(e => e.LockId, "IX_DistributedLock_LockId");
+
 		entityBuilder.Property(e => e.KeyHash).ValueGeneratedNever();
 
 		entityBuilder.Property(e => e.LockKey).IsRequired();
 
 		entityBuilder.Property(e => e.LockId).IsRequired();
+
+		entityBuilder.Property(e => e.CreatedUtc).HasColumnType("timestamptz");
 
 		entityBuilder.Property(e => e.ExpiresUtc).HasColumnType("timestamptz");
 	}

@@ -17,7 +17,7 @@ public sealed partial class DomainEventProcessingLog : DomainEvents.DomainEvents
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, code))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var domainEventProcessingLog = new DomainEventProcessingLog
 		{
 			__IsNewObject = true,

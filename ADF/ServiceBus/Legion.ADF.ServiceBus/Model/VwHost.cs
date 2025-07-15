@@ -28,29 +28,14 @@ public sealed partial class VwHost : ServiceBus.ServiceBusBaseQueryEntity, Legio
 	public bool IsEnabled { get; private set; }
 
 	/// <summary>
-	/// Database DataType: timestamp with time zone NULL
-	/// </summary>
-	public DateTime? StartedUtc { get; private set; }
-
-	/// <summary>
-	/// Database DataType: timestamp with time zone NOT NULL
-	/// </summary>
-	public DateTime LastActivityUtc { get; private set; }
-
-	/// <summary>
-	/// Database DataType: timestamp with time zone NULL
-	/// </summary>
-	public DateTime? StoppedUtc { get; private set; }
-
-	/// <summary>
 	/// Database DataType: jsonb NOT NULL
 	/// </summary>
 	public string Configuration { get; private set; }
 
 	/// <summary>
-	/// Database DataType: boolean NULL
+	/// Database DataType: uuid NULL
 	/// </summary>
-	public bool? IsDistributedManagerAvailable { get; private set; }
+	public Guid? RowVersion { get; private set; }
 
 
 	private VwHost()
@@ -65,11 +50,8 @@ public sealed partial class VwHost : ServiceBus.ServiceBusBaseQueryEntity, Legio
 			{ nameof(Description), Description },
 			{ nameof(CreatedUtc), CreatedUtc },
 			{ nameof(IsEnabled), IsEnabled },
-			{ nameof(StartedUtc), StartedUtc },
-			{ nameof(LastActivityUtc), LastActivityUtc },
-			{ nameof(StoppedUtc), StoppedUtc },
 			{ nameof(Configuration), Configuration },
-			{ nameof(IsDistributedManagerAvailable), IsDistributedManagerAvailable },
+			{ nameof(RowVersion), RowVersion },
 		};
 
 	public override string? ToString()

@@ -19,7 +19,7 @@ public sealed partial class UserToken : Auth.AuthBaseEntity, Legion.Model.IEntit
 		var userToken = new UserToken
 		{
 			__IsNewObject = true,
-			IdUserToken = Guid.NewGuid(),
+			IdUserToken = GlobalContext.Instance.NewGuid(),
 			IdLoginProvider = idLoginProvider,
 			IdUser = idUser,
 			Name = name,

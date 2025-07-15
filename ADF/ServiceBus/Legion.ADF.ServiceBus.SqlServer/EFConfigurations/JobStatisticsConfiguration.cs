@@ -18,6 +18,9 @@ public class JobStatisticsConfiguration : IEntityTypeConfiguration<ServiceBus.Mo
 
 		entityBuilder.HasIndex(e => e.IdJob, "IXFK_JobStatistics_Job");
 
+		entityBuilder.HasIndex(e => new { e.IdJob, e.StartHourUtc }, "UQ_JobStatistics_IdJob_StartHour")
+				.IsUnique();
+
 		entityBuilder.Property(e => e.IdJobStatistics)
 			.HasColumnType("uniqueidentifier")
 		.ValueGeneratedNever();
@@ -25,8 +28,6 @@ public class JobStatisticsConfiguration : IEntityTypeConfiguration<ServiceBus.Mo
 		entityBuilder.Property(e => e.IdJob).HasColumnType("uniqueidentifier");
 
 		entityBuilder.Property(e => e.StartHourUtc).HasColumnType("datetime2(7)");
-
-		entityBuilder.Property(e => e.AverageDuration).HasColumnType("decimal(18, 0)");
 
 		entityBuilder.HasOne(d => d.Job)
 			.WithMany(p => p.JobStatistics)

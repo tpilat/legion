@@ -166,7 +166,7 @@ public class LegionComponentBase : ComponentBase, IDisposable
 	/// </summary>
 	protected override void OnInitialized()
 	{
-		UniqueID = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Replace("/", "-").Replace("+", "-").Substring(0, 10);
+		UniqueID = Convert.ToBase64String(GlobalContext.Instance.NewGuid().ToByteArray()).Replace("/", "-").Replace("+", "-").Substring(0, 10);
 	}
 
 	private bool visibleChanged = false;

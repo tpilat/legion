@@ -41,6 +41,12 @@ public partial class HostLogRepository : Legion.ADF.ServiceBus.SqlServer.Service
 	public IQueryable<Legion.ADF.ServiceBus.Model.HostLog> AsReadOnlyQueryable(IScopeContext scopeContext, bool checkReadPermissions)
 		=> AsQueryable(scopeContext, checkReadPermissions).AsNoTracking();
 	
+	public Legion.ADF.ServiceBus.Queries.HostLog.IGetHostLogsByIdHost GetHostLogsByIdHost(
+		Legion.ADF.ServiceBus.Queries.HostLog.GetHostLogsByIdHostQuery getHostLogsByIdHostQuery)
+		=> new Legion.ADF.ServiceBus.Queries.HostLog.GetHostLogsByIdHost(
+			ConnectionProvider,
+			getHostLogsByIdHostQuery);
+
 	public void Add(IScopeContext scopeContext, Legion.ADF.ServiceBus.Model.HostLog entity)
 	{
 		var dbContext = GetContext(scopeContext);

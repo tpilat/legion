@@ -13,7 +13,7 @@ public sealed partial class BlockedMessageType : MessageBox.MessageBoxBaseEntity
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, blockedNamespace))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var dbBlockedMessageType = new BlockedMessageType
 		{
 			__IsNewObject = true,

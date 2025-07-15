@@ -2,7 +2,7 @@
 
 namespace Legion.ADF.ServiceBus.Model;
 
-public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.IEntity
+public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.Concurrence.IConcurrent, Legion.Model.IEntity
 {
 	private List<ServiceBus.Model.JobData> _jobDatas;
 	private List<ServiceBus.Model.JobExecution> _jobExecutions;
@@ -31,11 +31,6 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 	/// Database DataType: uuid NOT NULL | ServiceBus.Model.JobRunType.JobRunType | FK_Job_IdJobRunType
 	/// </summary>
 	public Guid IdJobRunType { get; private set; }
-
-	/// <summary>
-	/// Database DataType: uuid NOT NULL | ServiceBus.Model.JobStatus.JobStatus | FK_Job_IdJobStatus
-	/// </summary>
-	public Guid IdJobStatus { get; private set; }
 
 	/// <summary>
 	/// Database DataType: varchar(1023) NOT NULL
@@ -73,29 +68,9 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 	public Guid IdDefaultHost { get; private set; }
 
 	/// <summary>
-	/// Database DataType: uuid NOT NULL
+	/// Database DataType: boolean NOT NULL
 	/// </summary>
-	public Guid IdCurrentHost { get; private set; }
-
-	/// <summary>
-	/// Database DataType: timestamp with time zone NOT NULL
-	/// </summary>
-	public DateTime AttachedToCurrentHostUtc { get; private set; }
-
-	/// <summary>
-	/// Database DataType: timestamp with time zone NULL
-	/// </summary>
-	public DateTime? LastProcessingUtc { get; private set; }
-
-	/// <summary>
-	/// Database DataType: timestamp with time zone NULL
-	/// </summary>
-	public DateTime? LastProcessingFinishedUtc { get; private set; }
-
-	/// <summary>
-	/// Database DataType: timestamp with time zone NOT NULL
-	/// </summary>
-	public DateTime NextProcessinUtc { get; private set; }
+	public bool RequestedToDisable { get; private set; }
 
 	/// <summary>
 	/// Database DataType: integer NOT NULL
@@ -103,9 +78,9 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 	public int TimeoutForProcessingInSeconds { get; private set; }
 
 	/// <summary>
-	/// Database DataType: integer NOT NULL
+	/// Database DataType: uuid NOT NULL
 	/// </summary>
-	public int MaxProcessingRetryCount { get; private set; }
+	public Guid RowVersion { get; set; }
 
 
 	/// <summary>
@@ -113,11 +88,11 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 	/// </summary>
 	public ServiceBus.Model.JobRunType JobRunType { get; private set; }
 
-	/// <summary>
-	/// _1:N Guid IdJobStatus | FK_Job_IdJobStatus
-	/// </summary>
-	public ServiceBus.Model.JobStatus JobStatus { get; private set; }
 
+	/// <summary>
+	/// 1:_1 JobActivity.IdJob | FK_JobActivity_IdJob
+	/// </summary>
+	public ServiceBus.Model.JobActivity JobActivity { get; private set; }
 
 	/// <summary>
 	/// N:_1 ServiceBus.Model.JobData.IdJob | FK_JobData_IdJob
@@ -153,6 +128,14 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 		_jobStatistics = [];
 	}
 
+	[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+	string Legion.Model.Concurrence.IConcurrent.ConcurrencyTokenPropertyName => nameof(RowVersion);
+
+	public void SetNewConcurrencyToken()
+	{
+		RowVersion = Legion.GlobalContext.Instance.NewGuid();
+	}
+
 	static Job()
 	{
 		DefaultDBValidator = SetDBValidatorRules(new ValidatorBuilder<Job>()).Build();
@@ -165,7 +148,6 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 			{ nameof(Name), Name },
 			{ nameof(Description), Description },
 			{ nameof(IdJobRunType), IdJobRunType },
-			{ nameof(IdJobStatus), IdJobStatus },
 			{ nameof(Namespace), Namespace },
 			{ nameof(Properties), Properties },
 			{ nameof(DelayedStartInSeconds), DelayedStartInSeconds },
@@ -173,13 +155,9 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 			{ nameof(CronExpression), CronExpression },
 			{ nameof(CronExpressionIncludeSeconds), CronExpressionIncludeSeconds },
 			{ nameof(IdDefaultHost), IdDefaultHost },
-			{ nameof(IdCurrentHost), IdCurrentHost },
-			{ nameof(AttachedToCurrentHostUtc), AttachedToCurrentHostUtc },
-			{ nameof(LastProcessingUtc), LastProcessingUtc },
-			{ nameof(LastProcessingFinishedUtc), LastProcessingFinishedUtc },
-			{ nameof(NextProcessinUtc), NextProcessinUtc },
+			{ nameof(RequestedToDisable), RequestedToDisable },
 			{ nameof(TimeoutForProcessingInSeconds), TimeoutForProcessingInSeconds },
-			{ nameof(MaxProcessingRetryCount), MaxProcessingRetryCount },
+			{ nameof(RowVersion), RowVersion },
 		};
 
 	public void TrimStringValuesToFitDatabaseMaxLengths(string? postfix = null)
@@ -206,14 +184,10 @@ public sealed partial class Job : ServiceBus.ServiceBusBaseEntity, Legion.Model.
 			.ForProperty(x => x.Name, v => v.NotDefaultOrEmpty().MaxLength(255))
 			.ForProperty(x => x.Description, v => v.MaxLength(1023))
 			.ForProperty(x => x.IdJobRunType, v => v.NotDefaultOrEmpty(), (x, parent) => x.JobRunType == null)
-			.ForProperty(x => x.IdJobStatus, v => v.NotDefaultOrEmpty(), (x, parent) => x.JobStatus == null)
 			.ForProperty(x => x.Namespace, v => v.NotDefaultOrEmpty().MaxLength(1023))
 			.ForProperty(x => x.CronExpression, v => v.MaxLength(63))
 			//.ForProperty(x => x.IdDefaultHost, v => v.NotDefaultOrEmpty())
-			//.ForProperty(x => x.IdCurrentHost, v => v.NotDefaultOrEmpty())
-			//.ForProperty(x => x.AttachedToCurrentHostUtc, v => v.NotDefaultOrEmpty())
-			//.ForProperty(x => x.NextProcessinUtc, v => v.NotDefaultOrEmpty())
 			//.ForProperty(x => x.TimeoutForProcessingInSeconds, v => v.NotDefaultOrEmpty())
-			//.ForProperty(x => x.MaxProcessingRetryCount, v => v.NotDefaultOrEmpty())
+			//.ForProperty(x => x.RowVersion, v => v.NotDefaultOrEmpty())
 		;
 }

@@ -731,6 +731,15 @@ public static partial class ErrorCodes
 				$"Unable to move up from directory '{path1}' {count} times");
 	}
 
+	public static partial class UnitOfWorkException
+	{
+		public static IErrorCode InvalidUoW => _invalidUoW.Value;
+		private static readonly Lazy<IErrorCode> _invalidUoW = new(() =>
+			new ErrorCode(
+				"L_UoW_0001",
+				$"Cannot create UnitOfWork"));
+	}
+
 	//public static partial class ChangeTrackingVsCachingException
 	//{
 	//	public static IErrorCode Default => _default.Value;

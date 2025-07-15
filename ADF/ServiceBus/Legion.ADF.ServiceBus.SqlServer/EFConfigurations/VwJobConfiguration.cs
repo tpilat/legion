@@ -23,16 +23,6 @@ public class VwJobConfiguration : IEntityTypeConfiguration<ServiceBus.Model.VwJo
 
 		entityBuilder.Property(e => e.IdJobRunType).HasColumnType("uniqueidentifier");
 
-		entityBuilder.Property(e => e.JobRunType)
-			.IsRequired()
-			.HasColumnType("nvarchar(63)");
-
-		entityBuilder.Property(e => e.IdJobStatus).HasColumnType("uniqueidentifier");
-
-		entityBuilder.Property(e => e.JobStatus)
-			.IsRequired()
-			.HasColumnType("nvarchar(63)");
-
 		entityBuilder.Property(e => e.Namespace)
 			.IsRequired()
 			.HasColumnType("nvarchar(1023)");
@@ -43,11 +33,11 @@ public class VwJobConfiguration : IEntityTypeConfiguration<ServiceBus.Model.VwJo
 
 		entityBuilder.Property(e => e.CronExpressionIncludeSeconds).HasColumnType("bit");
 
-		entityBuilder.Property(e => e.LastProcessingUtc).HasColumnType("datetime2(7)");
-
-		entityBuilder.Property(e => e.NextProcessinUtc).HasColumnType("datetime2(7)");
-
 		entityBuilder.Property(e => e.IdDefaultHost).HasColumnType("uniqueidentifier");
+
+		entityBuilder.Property(e => e.RequestedToDisable).HasColumnType("bit");
+
+		entityBuilder.Property(e => e.RowVersion).HasColumnType("uniqueidentifier");
 	}
 
 	public static ModelBuilder Build(ModelBuilder modelBuilder)

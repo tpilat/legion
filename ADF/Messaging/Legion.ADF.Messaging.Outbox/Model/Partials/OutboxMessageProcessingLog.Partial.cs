@@ -18,7 +18,7 @@ public sealed partial class OutboxMessageProcessingLog : Outbox.OutboxBaseEntity
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, code))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var outboxMessageProcessingLog = new OutboxMessageProcessingLog
 		{
 			__IsNewObject = true,
@@ -55,7 +55,7 @@ public sealed partial class OutboxMessageProcessingLog : Outbox.OutboxBaseEntity
 		if (result.IsArgumentNull(scopeContext, outboxMessage))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var outboxMessageProcessingLog = new OutboxMessageProcessingLog
 		{
 			__IsNewObject = true,

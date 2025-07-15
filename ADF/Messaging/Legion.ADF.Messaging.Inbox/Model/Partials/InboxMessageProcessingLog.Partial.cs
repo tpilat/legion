@@ -18,7 +18,7 @@ public sealed partial class InboxMessageProcessingLog : Inbox.InboxBaseEntity, L
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, code))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var inboxMessageProcessingLog = new InboxMessageProcessingLog
 		{
 			__IsNewObject = true,
@@ -55,7 +55,7 @@ public sealed partial class InboxMessageProcessingLog : Inbox.InboxBaseEntity, L
 		if (result.IsArgumentNull(scopeContext, inboxMessage))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var inboxMessageProcessingLog = new InboxMessageProcessingLog
 		{
 			__IsNewObject = true,

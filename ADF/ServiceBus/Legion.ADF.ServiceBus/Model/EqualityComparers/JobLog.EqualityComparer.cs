@@ -70,6 +70,8 @@ public sealed partial class JobLog : ServiceBus.ServiceBusBaseEntity, Legion.Mod
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.IdMessageProcessingLog)) && obj1.IdMessageProcessingLog != obj2.IdMessageProcessingLog)
 						return false;
+					if (conds.CanCompare(obj1, nameof(obj1.IdJobExecution)) && obj1.IdJobExecution != obj2.IdJobExecution)
+						return false;
 				}
 				else
 				{
@@ -93,6 +95,8 @@ public sealed partial class JobLog : ServiceBus.ServiceBusBaseEntity, Legion.Mod
 						return false;
 					if (obj1.IdMessageProcessingLog != obj2.IdMessageProcessingLog)
 						return false;
+					if (obj1.IdJobExecution != obj2.IdJobExecution)
+						return false;
 				}
 			}
 
@@ -107,6 +111,8 @@ public sealed partial class JobLog : ServiceBus.ServiceBusBaseEntity, Legion.Mod
 			if ((ComparisonOptions.CompareReferences & comparisonOptions) == ComparisonOptions.CompareReferences)
 			{
 				if (!Job.JobEqualityComparer.EqualsTo(obj1.Job, obj2.Job, comparisonOptions, conds?.GetConditions(x => x.Job), cache))
+					return false;
+				if (!JobExecution.JobExecutionEqualityComparer.EqualsTo(obj1.JobExecution, obj2.JobExecution, comparisonOptions, conds?.GetConditions(x => x.JobExecution), cache))
 					return false;
 				if (!JobStatus.JobStatusEqualityComparer.EqualsTo(obj1.JobStatus, obj2.JobStatus, comparisonOptions, conds?.GetConditions(x => x.JobStatus), cache))
 					return false;

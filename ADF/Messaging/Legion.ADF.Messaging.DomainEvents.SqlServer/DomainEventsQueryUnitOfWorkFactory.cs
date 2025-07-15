@@ -1,6 +1,6 @@
 namespace Legion.ADF.Messaging.DomainEvents.SqlServer;
 
-public partial class DomainEventsQueryUnitOfWorkFactory : IDomainEventsQueryUnitOfWorkFactory
+public partial class DomainEventsQueryUnitOfWorkFactory : IDomainEventsQueryUnitOfWorkFactory, Legion.Model.Repositories.IQueryUnitOfWorkFactory<IDomainEventsQueryUnitOfWork>
 {
 	public IDomainEventsQueryUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

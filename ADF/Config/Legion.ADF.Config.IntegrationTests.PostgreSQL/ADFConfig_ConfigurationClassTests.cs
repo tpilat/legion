@@ -10,7 +10,7 @@ public class ADFConfig_ConfigurationClassTests : TestBase
 	[Test]
 	public async Task ConfigurationClass_ShouldWriteConfigurationClass()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var configStore = sp.GetRequiredService<ConfigStore>();
@@ -40,7 +40,7 @@ public class ADFConfig_ConfigurationClassTests : TestBase
 	[Test]
 	public async Task ConfigurationClass_ShouldUpdateConfigurationClass()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var configStore = sp.GetRequiredService<ConfigStore>();
@@ -80,7 +80,7 @@ public class ADFConfig_ConfigurationClassTests : TestBase
 	[Test]
 	public async Task ConfigurationClass_ShouldRemoveConfigurationClass()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var configStore = sp.GetRequiredService<ConfigStore>();

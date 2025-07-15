@@ -22,11 +22,11 @@ public class TransactionsController : ITransactionsController, IDisposable, IAsy
 	public TransactionsController()
 	{
 #if TRACK_OBJECTS
-		IdTransactionsController = Guid.NewGuid();
+		IdTransactionsController = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdTransactionsController.ToString());
 #endif
 
-		TransactionsControllerIdentifier = Guid.NewGuid();
+		TransactionsControllerIdentifier = GlobalContext.Instance.NewGuid();
 		_transactionStatus = TransactionsControllerStatus.Idle;
 		_transactionManagers = [];
 	}

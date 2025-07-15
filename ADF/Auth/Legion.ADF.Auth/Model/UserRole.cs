@@ -88,7 +88,7 @@ public sealed partial class UserRole : Auth.AuthBaseEntity, Legion.Model.Audit.I
 
 	public void SetNewConcurrencyToken()
 	{
-		ConcurrencyToken = Guid.NewGuid();
+		ConcurrencyToken = GlobalContext.Instance.NewGuid();
 	}
 
 	static UserRole()

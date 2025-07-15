@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Legion.ADF.Cache.Model;
 
-public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEntity
+public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.Concurrence.IConcurrent, Legion.Model.IEntity
 {
 	public bool EqualsTo(
 		Cache.Model.CacheData? obj,
@@ -64,6 +64,8 @@ public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEnt
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.SlidingTime)) && obj1.SlidingTime != obj2.SlidingTime)
 						return false;
+					if (conds.CanCompare(obj1, nameof(obj1.CreatedUtc)) && obj1.CreatedUtc != obj2.CreatedUtc)
+						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.LastAccessedUtc)) && obj1.LastAccessedUtc != obj2.LastAccessedUtc)
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.RowVersion)) && obj1.RowVersion != obj2.RowVersion)
@@ -84,6 +86,8 @@ public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEnt
 					if (obj1.ExpiresUtc != obj2.ExpiresUtc)
 						return false;
 					if (obj1.SlidingTime != obj2.SlidingTime)
+						return false;
+					if (obj1.CreatedUtc != obj2.CreatedUtc)
 						return false;
 					if (obj1.LastAccessedUtc != obj2.LastAccessedUtc)
 						return false;

@@ -1,6 +1,6 @@
 namespace Legion.ADF.Messaging.MessageBox.SqlServer;
 
-public partial class MessageBoxQueryUnitOfWorkFactory : IMessageBoxQueryUnitOfWorkFactory
+public partial class MessageBoxQueryUnitOfWorkFactory : IMessageBoxQueryUnitOfWorkFactory, Legion.Model.Repositories.IQueryUnitOfWorkFactory<IMessageBoxQueryUnitOfWork>
 {
 	public IMessageBoxQueryUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

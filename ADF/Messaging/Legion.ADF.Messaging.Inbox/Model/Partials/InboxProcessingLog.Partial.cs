@@ -19,7 +19,7 @@ public sealed partial class InboxProcessingLog : Inbox.InboxBaseEntity, Legion.M
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, logMessage.Detail))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var inboxProcessingLog = new InboxProcessingLog
 		{
 			__IsNewObject = true,
@@ -59,7 +59,7 @@ public sealed partial class InboxProcessingLog : Inbox.InboxBaseEntity, Legion.M
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, code))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var inboxProcessingLog = new InboxProcessingLog
 		{
 			__IsNewObject = true,

@@ -18,7 +18,7 @@ public sealed partial class SubscribedMessage : MessageBox.MessageBoxBaseEntity,
 			return result.Build();
 
 		var nowUtc = GlobalContext.Instance.UtcNow;
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var subscribedMessage = new SubscribedMessage
 		{
 			__IsNewObject = true,

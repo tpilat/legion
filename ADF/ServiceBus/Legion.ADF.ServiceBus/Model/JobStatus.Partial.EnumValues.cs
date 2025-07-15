@@ -5,7 +5,7 @@ public partial class JobStatus : ServiceBus.ServiceBusBaseEntity, Legion.Model.I
 	/// <summary>
 	/// 00000001-0000-0000-0000-000000000000
 	/// </summary>
-	public static JobStatus Disabled_NewObject => new(new Guid("00000001-0000-0000-0000-000000000000"), "Disabled", "Disabled");
+	public static JobStatus Disconnected_NewObject => new(new Guid("00000001-0000-0000-0000-000000000000"), "Disconnected", "Disconnected");
 
 	/// <summary>
 	/// 00000002-0000-0000-0000-000000000000
@@ -30,12 +30,22 @@ public partial class JobStatus : ServiceBus.ServiceBusBaseEntity, Legion.Model.I
 	/// <summary>
 	/// 00000006-0000-0000-0000-000000000000
 	/// </summary>
-	public static JobStatus Suspended_NewObject => new(new Guid("00000006-0000-0000-0000-000000000000"), "Suspended", "Suspended");
+	public static JobStatus Disabling_NewObject => new(new Guid("00000006-0000-0000-0000-000000000000"), "Disabling", "Disabling");
 
 	/// <summary>
 	/// 00000007-0000-0000-0000-000000000000
 	/// </summary>
-	public static JobStatus Stopped_NewObject => new(new Guid("00000007-0000-0000-0000-000000000000"), "Stopped", "Stopped");
+	public static JobStatus Disabled_NewObject => new(new Guid("00000007-0000-0000-0000-000000000000"), "Disabled", "Disabled");
+
+	/// <summary>
+	/// 00000008-0000-0000-0000-000000000000
+	/// </summary>
+	public static JobStatus Canceling_NewObject => new(new Guid("00000008-0000-0000-0000-000000000000"), "Canceling", "Canceling");
+
+	/// <summary>
+	/// 00000009-0000-0000-0000-000000000000
+	/// </summary>
+	public static JobStatus Stopping_NewObject => new(new Guid("00000009-0000-0000-0000-000000000000"), "Stopping", "Stopping");
 
 	private JobStatus(Guid idJobStatus, string code, string name)
 		: this()
@@ -79,23 +89,27 @@ public partial class JobStatus : ServiceBus.ServiceBusBaseEntity, Legion.Model.I
 
 	public static readonly Lazy<IReadOnlyDictionary<Guid, JobStatus>> DictionaryMap = new(() => new Dictionary<Guid, JobStatus>
 	{
-			{ new Guid("00000001-0000-0000-0000-000000000000"), Disabled_NewObject },
+			{ new Guid("00000001-0000-0000-0000-000000000000"), Disconnected_NewObject },
 			{ new Guid("00000002-0000-0000-0000-000000000000"), Started_NewObject },
 			{ new Guid("00000003-0000-0000-0000-000000000000"), Idle_NewObject },
 			{ new Guid("00000004-0000-0000-0000-000000000000"), Running_NewObject },
 			{ new Guid("00000005-0000-0000-0000-000000000000"), Error_NewObject },
-			{ new Guid("00000006-0000-0000-0000-000000000000"), Suspended_NewObject },
-			{ new Guid("00000007-0000-0000-0000-000000000000"), Stopped_NewObject }
+			{ new Guid("00000006-0000-0000-0000-000000000000"), Disabling_NewObject },
+			{ new Guid("00000007-0000-0000-0000-000000000000"), Disabled_NewObject },
+			{ new Guid("00000008-0000-0000-0000-000000000000"), Canceling_NewObject },
+			{ new Guid("00000009-0000-0000-0000-000000000000"), Stopping_NewObject }
 	});
 
 	public static IEnumerable<JobStatus> AsEnumerable_NewObjects()
 	{
-		yield return Disabled_NewObject;
+		yield return Disconnected_NewObject;
 		yield return Started_NewObject;
 		yield return Idle_NewObject;
 		yield return Running_NewObject;
 		yield return Error_NewObject;
-		yield return Suspended_NewObject;
-		yield return Stopped_NewObject;
+		yield return Disabling_NewObject;
+		yield return Disabled_NewObject;
+		yield return Canceling_NewObject;
+		yield return Stopping_NewObject;
 	}
 }

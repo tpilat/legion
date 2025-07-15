@@ -10,7 +10,7 @@ public class ADFAudit_ApplicationEntryTokenTests : TestBase
 	[Test]
 	public async Task ApplicationEntryToken_ShouldCreateApplicationEntryToken()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var auditStore = sp.GetRequiredService<AuditStore>();
@@ -53,7 +53,7 @@ public class ADFAudit_ApplicationEntryTokenTests : TestBase
 	[Test]
 	public async Task ApplicationEntryToken_ShouldUpdateApplicationEntryToken()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var auditStore = sp.GetRequiredService<AuditStore>();

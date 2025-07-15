@@ -1,10 +1,21 @@
 ﻿using Legion.Serializer;
+using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Legion.ADF.ServiceBus.Model;
 
 public sealed partial class Host : ServiceBusBaseEntity, Legion.Model.IEntity
 {
-	public static IResult<Host> Create(
+	[NotMapped]
+	internal List<Job>? DefaultJobs { get; set; }
+
+	[NotMapped]
+	internal List<Job>? RunningOwnJobs { get; set; }
+
+	[NotMapped]
+	internal List<Job>? RunningForeignJobs { get; set; }
+
+	internal static IResult<Host> Create(
 		IScopeContext scopeContext,
 		string name,
 		string description,
@@ -21,7 +32,7 @@ public sealed partial class Host : ServiceBusBaseEntity, Legion.Model.IEntity
 			return result.Build();
 
 		var utcNow = GlobalContext.Instance.UtcNow;
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var host = new Host
 		{
 			__IsNewObject = true,
@@ -29,8 +40,7 @@ public sealed partial class Host : ServiceBusBaseEntity, Legion.Model.IEntity
 			Name = name,
 			Description = description,
 			CreatedUtc = utcNow,
-			IsEnabled = isEnabled,
-			LastActivityUtc = utcNow
+			IsEnabled = isEnabled
 		};
 
 		var validationResult =
@@ -43,18 +53,18 @@ public sealed partial class Host : ServiceBusBaseEntity, Legion.Model.IEntity
 		return result.WithData(host).Build();
 	}
 
-	public IResult SetStart(
-		IScopeContext scopeContext)
+	internal IResult AttachActivity(
+		IScopeContext scopeContext,
+		HostActivity hostActivity)
 	{
 		scopeContext = scopeContext.CreateNew();
 
 		var result = new ResultBuilder();
 
-		if (!IsEnabled)
-			return result.WithInitializationException(scopeContext, null, $"Host {Name}::{IdHost} is disabled");
+		if (result.IsArgumentNull(scopeContext, hostActivity))
+			return result.Build();
 
-		StartedUtc = GlobalContext.Instance.UtcNow;
-		LastActivityUtc = StartedUtc.Value;
+		HostActivity = hostActivity;
 
 		var validationResult =
 			DefaultDBValidator
@@ -66,51 +76,7 @@ public sealed partial class Host : ServiceBusBaseEntity, Legion.Model.IEntity
 		return result.Build();
 	}
 
-	public IResult UpdateLastActivity(
-		IScopeContext scopeContext)
-	{
-		scopeContext = scopeContext.CreateNew();
-
-		var result = new ResultBuilder();
-
-		if (!IsEnabled)
-			return result.WithInitializationException(scopeContext, null, $"Host {Name}::{IdHost} is disabled");
-
-		LastActivityUtc = GlobalContext.Instance.UtcNow;
-
-		var validationResult =
-			DefaultDBValidator
-				.Validate(this);
-
-		if (result.MergeHasError(scopeContext, validationResult, true))
-			return result.Build();
-
-		return result.Build();
-	}
-
-	public IResult SetStop(
-		IScopeContext scopeContext)
-	{
-		scopeContext = scopeContext.CreateNew();
-
-		var result = new ResultBuilder();
-
-		StoppedUtc = GlobalContext.Instance.UtcNow;
-
-		if (!IsEnabled)
-			LastActivityUtc = StoppedUtc.Value;
-
-		var validationResult =
-			DefaultDBValidator
-				.Validate(this);
-
-		if (result.MergeHasError(scopeContext, validationResult, true))
-			return result.Build();
-
-		return result.Build();
-	}
-
-	public IResult SetConfiguration(
+	internal IResult SetConfiguration(
 		IScopeContext scopeContext,
 		DTOs.Hosts.HostConfigurationDto hostConfiguration)
 	{
@@ -140,7 +106,7 @@ public sealed partial class Host : ServiceBusBaseEntity, Legion.Model.IEntity
 		return result.Build();
 	}
 
-	public IResult<DTOs.Hosts.HostConfigurationDto> GetHostConfiguration(IScopeContext scopeContext)
+	internal IResult<DTOs.Hosts.HostConfigurationDto> GetHostConfiguration(IScopeContext scopeContext)
 	{
 		scopeContext = scopeContext.CreateNew();
 
@@ -160,7 +126,86 @@ public sealed partial class Host : ServiceBusBaseEntity, Legion.Model.IEntity
 		}
 		catch (Exception ex)
 		{
-			return result.WithInvalidOperationException(scopeContext, errorCode: null, detail: null, ex);
+			return result.WithInvalidOperationException(scopeContext, Exceptions.Internal.ErrorCodes.ServiceBusHostException.InvalidHostConfig(Name), detail: null, ex);
 		}
 	}
+
+	internal DTOs.Hosts.HostDto ToDto(
+		IScopeContext scopeContext,
+		ILogger logger)
+	{
+		var cfgResult = GetHostConfiguration(scopeContext);
+		logger.LogResultErrorMessages(
+			scopeContext,
+			Exceptions.Internal.ErrorCodes.ServiceBusHostException.InvalidHostConfig(Name),
+			cfgResult,
+			dataMustBeNotNull: true,
+			skipIfAlreadyLogged: true,
+			logWarnings: true);
+
+		var cfg = cfgResult.Data;
+
+		var dto = new DTOs.Hosts.HostDto
+		{
+			IdHost = IdHost,
+			Name = Name,
+			Description = Description,
+			IsEnabled = IsEnabled,
+			LastActivityAt = HostActivity?.LastActivityUtc.ToLocalTime(),
+			IsDistributedManagerAvailable = HostActivity?.IsDistributedManagerAvailable ?? false,
+			IsAvailable =
+				HostActivity != null
+				&& cfg != null
+				&& GlobalContext.Instance.UtcNow <= HostActivity.LastActivityUtc.AddSeconds(cfg.HeartbeatInSeconds + Services.Internal.Dto.HostContext._heartbeatDelayDeltaInSeconds)
+		};
+
+		return dto;
+	}
+
+	internal DTOs.Hosts.HostDetailDto ToDetailDto(
+		IScopeContext scopeContext,
+		ILogger logger)
+	{
+		var cfgResult = GetHostConfiguration(scopeContext);
+		logger.LogResultErrorMessages(
+			scopeContext,
+			Exceptions.Internal.ErrorCodes.ServiceBusHostException.InvalidHostConfig(Name),
+			cfgResult,
+			dataMustBeNotNull: true,
+			skipIfAlreadyLogged: true,
+			logWarnings: true);
+
+		var cfg = cfgResult.Data;
+
+		var dto = new DTOs.Hosts.HostDetailDto
+		{
+			IdHost = IdHost,
+			Name = Name,
+			Description = Description,
+			IsEnabled = IsEnabled,
+			StartedAt = HostActivity?.StartedUtc.ToLocalTime(),
+			Configuration = Configuration,
+			LastActivityAt = HostActivity?.LastActivityUtc.ToLocalTime(),
+			IsDistributedManagerAvailable = HostActivity?.IsDistributedManagerAvailable ?? false,
+			IsAvailable =
+				HostActivity != null
+				&& cfg != null
+				&& GlobalContext.Instance.UtcNow <= HostActivity.LastActivityUtc.AddSeconds(cfg.HeartbeatInSeconds + Services.Internal.Dto.HostContext._heartbeatDelayDeltaInSeconds)
+		};
+
+		return dto;
+	}
+
+	internal string GetDistributedCacheKey(
+		string systemName,
+		string? operation)
+		=> GetHostDistributedCacheKey(systemName, Name, operation);
+
+	public static string GetHostDistributedCacheKey(
+		string systemName,
+		string hostName,
+		string? operation)
+		=> string.IsNullOrEmpty(operation)
+			? $"{systemName}:Legion.ADF.ServiceBus.Host:{hostName}"
+			: $"{systemName}:Legion.ADF.ServiceBus.Host:{hostName}:{operation}";
 }

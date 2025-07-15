@@ -4,6 +4,8 @@ namespace Legion.ADF.ServiceBus.Model;
 
 public sealed partial class JobExecution : ServiceBus.ServiceBusBaseEntity, Legion.Model.IEntity
 {
+	private List<ServiceBus.Model.JobLog> _jobLogs;
+
 	public static IValidator<JobExecution> DefaultDBValidator { get; }
 
 	/// <summary>
@@ -36,6 +38,11 @@ public sealed partial class JobExecution : ServiceBus.ServiceBusBaseEntity, Legi
 	/// </summary>
 	public Guid IdJobStatus { get; private set; }
 
+	/// <summary>
+	/// Database DataType: timestamp with time zone NOT NULL
+	/// </summary>
+	public DateTime StatisticsStartHourUtc { get; private set; }
+
 
 	/// <summary>
 	/// _1:N Guid IdJob | FK_JobExecution_IdJob
@@ -47,8 +54,15 @@ public sealed partial class JobExecution : ServiceBus.ServiceBusBaseEntity, Legi
 	/// </summary>
 	public ServiceBus.Model.JobStatus JobStatus { get; private set; }
 
+
+	/// <summary>
+	/// N:_1 ServiceBus.Model.JobLog.IdJobExecution | FK_JobLog_IdJobExecution
+	/// </summary>
+	public IReadOnlyList<ServiceBus.Model.JobLog> JobLogs => _jobLogs;
+
 	private JobExecution()
 	{
+		_jobLogs = [];
 	}
 
 	static JobExecution()
@@ -65,6 +79,7 @@ public sealed partial class JobExecution : ServiceBus.ServiceBusBaseEntity, Legi
 			{ nameof(StartUtc), StartUtc },
 			{ nameof(EndUtc), EndUtc },
 			{ nameof(IdJobStatus), IdJobStatus },
+			{ nameof(StatisticsStartHourUtc), StatisticsStartHourUtc },
 		};
 
 	public void TrimStringValuesToFitDatabaseMaxLengths(string? postfix = null)
@@ -88,5 +103,6 @@ public sealed partial class JobExecution : ServiceBus.ServiceBusBaseEntity, Legi
 			//.ForProperty(x => x.TraceCorrelationId, v => v.NotDefaultOrEmpty())
 			//.ForProperty(x => x.StartUtc, v => v.NotDefaultOrEmpty())
 			.ForProperty(x => x.IdJobStatus, v => v.NotDefaultOrEmpty(), (x, parent) => x.JobStatus == null)
+			//.ForProperty(x => x.StatisticsStartHourUtc, v => v.NotDefaultOrEmpty())
 		;
 }

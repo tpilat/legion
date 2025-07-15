@@ -54,7 +54,7 @@
 //	{
 //		var state = new OrchestrationState
 //		{
-//			CorrelationId = Guid.NewGuid(),
+//			CorrelationId = Legion.GlobalContext.Instance.NewGuid(),
 //			CurrentStep = "ValidateCustomer"
 //		};
 

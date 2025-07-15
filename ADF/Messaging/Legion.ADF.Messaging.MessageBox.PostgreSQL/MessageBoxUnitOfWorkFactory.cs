@@ -1,6 +1,6 @@
 namespace Legion.ADF.Messaging.MessageBox.PostgreSQL;
 
-public partial class MessageBoxUnitOfWorkFactory : IMessageBoxUnitOfWorkFactory
+public partial class MessageBoxUnitOfWorkFactory : IMessageBoxUnitOfWorkFactory, Legion.Model.Repositories.IUnitOfWorkFactory<IMessageBoxUnitOfWork>
 {
 	public IMessageBoxUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

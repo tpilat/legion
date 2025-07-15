@@ -20,7 +20,7 @@ public sealed partial class ReloadableCacheKey : Cache.CacheBaseEntity, Legion.M
 		}
 
 		var nowUtc = GlobalContext.Instance.UtcNow;
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var reloadableCacheKey = new ReloadableCacheKey
 		{
 			__IsNewObject = true,

@@ -13,11 +13,8 @@ public class QueryTableInfoProvider : Legion.ADF.ServiceBus.IQueryTableInfoProvi
 					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.Description), typeof(string), "\"Description\"", "varchar(511)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.CreatedUtc), typeof(DateTime), "\"CreatedUtc\"", "timestamp with time zone", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.IsEnabled), typeof(bool), "\"IsEnabled\"", "boolean", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.StartedUtc), typeof(DateTime?), "\"StartedUtc\"", "timestamp with time zone", true),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.LastActivityUtc), typeof(DateTime), "\"LastActivityUtc\"", "timestamp with time zone", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.StoppedUtc), typeof(DateTime?), "\"StoppedUtc\"", "timestamp with time zone", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.Configuration), typeof(string), "\"Configuration\"", "jsonb", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.IsDistributedManagerAvailable), typeof(bool?), "\"IsDistributedManagerAvailable\"", "boolean", true),
+					new(nameof(Legion.ADF.ServiceBus.Model.VwHost.RowVersion), typeof(Guid?), "\"RowVersion\"", "uuid", true),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetVwHostTableInfo()
@@ -31,20 +28,16 @@ public class QueryTableInfoProvider : Legion.ADF.ServiceBus.IQueryTableInfoProvi
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.Name), typeof(string), "\"Name\"", "varchar(255)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.Description), typeof(string), "\"Description\"", "varchar(1023)", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.IdJobRunType), typeof(Guid), "\"IdJobRunType\"", "uuid", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.JobRunType), typeof(string), "\"JobRunType\"", "varchar(63)", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.IdJobStatus), typeof(Guid), "\"IdJobStatus\"", "uuid", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.JobStatus), typeof(string), "\"JobStatus\"", "varchar(63)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.Namespace), typeof(string), "\"Namespace\"", "varchar(1023)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.Properties), typeof(string), "\"Properties\"", "jsonb", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.DelayedStartInSeconds), typeof(int?), "\"DelayedStartInSeconds\"", "integer", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.IdleTimeoutInSeconds), typeof(int?), "\"IdleTimeoutInSeconds\"", "integer", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.CronExpression), typeof(string), "\"CronExpression\"", "varchar(63)", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.CronExpressionIncludeSeconds), typeof(bool), "\"CronExpressionIncludeSeconds\"", "boolean", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.LastProcessingUtc), typeof(DateTime?), "\"LastProcessingUtc\"", "timestamp with time zone", true),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.NextProcessinUtc), typeof(DateTime), "\"NextProcessinUtc\"", "timestamp with time zone", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.IdDefaultHost), typeof(Guid), "\"IdDefaultHost\"", "uuid", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.RequestedToDisable), typeof(bool), "\"RequestedToDisable\"", "boolean", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.TimeoutForProcessingInSeconds), typeof(int), "\"TimeoutForProcessingInSeconds\"", "integer", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.MaxProcessingRetryCount), typeof(int), "\"MaxProcessingRetryCount\"", "integer", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.IdDefaultHost), typeof(Guid?), "\"IdDefaultHost\"", "uuid", true),
+					new(nameof(Legion.ADF.ServiceBus.Model.VwJob.RowVersion), typeof(Guid), "\"RowVersion\"", "uuid", false),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetVwJobTableInfo()

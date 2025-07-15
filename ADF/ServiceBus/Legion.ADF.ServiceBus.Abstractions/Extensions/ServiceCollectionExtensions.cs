@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
 		IConfiguration? configuration = null)
 	{
 		//settings / options
-		services.AddAppSettings(esbConfigBindingPath);
+		services.AddAppSettings(esbConfigBindingPath, service: true);
 
 		Assembly[] assemblies = [
 			typeof(ADFServiceBusBuilder).Assembly
@@ -41,7 +41,7 @@ public static class ServiceCollectionExtensions
 		IConfiguration? configuration = null)
 	{
 		//settings / options
-		services.AddAppSettings(esbConfigBindingPath);
+		services.AddAppSettings(esbConfigBindingPath, service: false);
 
 		Assembly[] assemblies = [
 			typeof(ADFServiceBusMonitorBuilder).Assembly

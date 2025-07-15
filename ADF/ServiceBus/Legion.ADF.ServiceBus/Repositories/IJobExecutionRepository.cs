@@ -4,4 +4,6 @@ public partial interface IJobExecutionRepository : Legion.ADF.ServiceBus.IServic
 {
 	Legion.ACL.IAccessControlManager<Legion.ADF.ServiceBus.Model.JobExecution>? AccessControlManager { get; }
 
+	Legion.ADF.ServiceBus.Queries.JobExecution.IGetJobExecutionById GetJobExecutionById(
+		Legion.ADF.ServiceBus.Queries.JobExecution.GetJobExecutionByIdQuery getJobExecutionById);
 }

@@ -24,7 +24,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		var user = new User
 		{
 			__IsNewObject = true,
-			IdUser = Guid.NewGuid(),
+			IdUser = GlobalContext.Instance.NewGuid(),
 			Login = login,
 			NormalizedLogin = normalizedLogin,
 			TenantIdentifier = scopeContext.TenantIdentifier,
@@ -48,7 +48,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 			AuditModifiedUtc = null,
 			IdAuditCreatedBy = scopeContext.IdUser,
 			IdAuditModifiedBy = null,
-			ConcurrencyToken = Guid.NewGuid(),
+			ConcurrencyToken = GlobalContext.Instance.NewGuid(),
 			DeletedUtc = DateTime.MinValue
 		};
 
@@ -79,7 +79,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -109,7 +109,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -139,7 +139,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -169,7 +169,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -196,7 +196,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -221,7 +221,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -246,7 +246,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -273,7 +273,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -300,7 +300,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -327,7 +327,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -354,7 +354,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -381,7 +381,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -408,7 +408,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -435,7 +435,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = GlobalContext.Instance.UtcNow;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =
@@ -460,7 +460,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 		{
 			AuditModifiedUtc = DeletedUtc;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =

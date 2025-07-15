@@ -36,7 +36,13 @@ public class CacheDataConfiguration : IEntityTypeConfiguration<Cache.Model.Cache
 
 		entityBuilder.Property(e => e.SlidingTime).HasColumnType("interval");
 
+		entityBuilder.Property(e => e.CreatedUtc).HasColumnType("timestamptz");
+
 		entityBuilder.Property(e => e.LastAccessedUtc).HasColumnType("timestamptz");
+
+		entityBuilder.Property(e => e.RowVersion)
+			.HasColumnType("uuid")
+				.IsConcurrencyToken();
 	}
 
 	public static ModelBuilder Build(ModelBuilder modelBuilder)

@@ -39,7 +39,7 @@ public sealed partial class Queue : MessageBox.MessageBoxBaseEntity, Legion.Mode
 		if (isSequentialFIFO && (maxDegreeOfParallelism == 0 || 1 < maxDegreeOfParallelism))
 			return result.WithArgumentException(scopeContext, maxDegreeOfParallelism, null, $"{nameof(maxDegreeOfParallelism)} must be NULL or 1 if {nameof(isSequentialFIFO)} is true.");
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var queue = new Queue
 		{
 			__IsNewObject = true,

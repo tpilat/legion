@@ -52,7 +52,7 @@ public sealed partial class ApplicationEntryRequest : Audit.AuditBaseEntity, Leg
 		if (result.IsArgumentNullOrEmpty(scopeContext, content.ByteArray))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var applicationEntryRequest = new ApplicationEntryRequest
 		{
 			__IsNewObject = true,
@@ -103,7 +103,7 @@ public sealed partial class ApplicationEntryRequest : Audit.AuditBaseEntity, Leg
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, content.Json))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var applicationEntryRequest = new ApplicationEntryRequest
 		{
 			__IsNewObject = true,
@@ -154,7 +154,7 @@ public sealed partial class ApplicationEntryRequest : Audit.AuditBaseEntity, Leg
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, content.String))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var applicationEntryRequest = new ApplicationEntryRequest
 		{
 			__IsNewObject = true,
@@ -202,7 +202,7 @@ public sealed partial class ApplicationEntryRequest : Audit.AuditBaseEntity, Leg
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, content.MimeType))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var applicationEntryRequest = new ApplicationEntryRequest
 		{
 			__IsNewObject = true,
@@ -253,7 +253,7 @@ public sealed partial class ApplicationEntryRequest : Audit.AuditBaseEntity, Leg
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, content.RelativePath))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var applicationEntryRequest = new ApplicationEntryRequest
 		{
 			__IsNewObject = true,

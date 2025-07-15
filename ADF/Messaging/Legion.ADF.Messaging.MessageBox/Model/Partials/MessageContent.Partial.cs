@@ -19,7 +19,7 @@ public sealed partial class MessageContent : MessageBox.MessageBoxBaseEntity, Le
 		if (result.IsArgumentNullOrEmpty(scopeContext, content.ByteArray))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageContent = new MessageContent
 		{
 			__IsNewObject = true,
@@ -64,7 +64,7 @@ public sealed partial class MessageContent : MessageBox.MessageBoxBaseEntity, Le
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, content.Json))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageContent = new MessageContent
 		{
 			__IsNewObject = true,
@@ -109,7 +109,7 @@ public sealed partial class MessageContent : MessageBox.MessageBoxBaseEntity, Le
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, content.String))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageContent = new MessageContent
 		{
 			__IsNewObject = true,
@@ -151,7 +151,7 @@ public sealed partial class MessageContent : MessageBox.MessageBoxBaseEntity, Le
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, content.MimeType))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageContent = new MessageContent
 		{
 			__IsNewObject = true,
@@ -196,7 +196,7 @@ public sealed partial class MessageContent : MessageBox.MessageBoxBaseEntity, Le
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, content.RelativePath))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageContent = new MessageContent
 		{
 			__IsNewObject = true,

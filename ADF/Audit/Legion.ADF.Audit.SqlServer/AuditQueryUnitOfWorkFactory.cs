@@ -1,6 +1,6 @@
 namespace Legion.ADF.Audit.SqlServer;
 
-public partial class AuditQueryUnitOfWorkFactory : IAuditQueryUnitOfWorkFactory
+public partial class AuditQueryUnitOfWorkFactory : IAuditQueryUnitOfWorkFactory, Legion.Model.Repositories.IQueryUnitOfWorkFactory<IAuditQueryUnitOfWork>
 {
 	public IAuditQueryUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

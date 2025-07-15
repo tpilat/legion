@@ -1,6 +1,6 @@
 namespace Legion.ADF.ServiceBus.PostgreSQL;
 
-public partial class ServiceBusQueryUnitOfWorkFactory : IServiceBusQueryUnitOfWorkFactory
+public partial class ServiceBusQueryUnitOfWorkFactory : IServiceBusQueryUnitOfWorkFactory, Legion.Model.Repositories.IQueryUnitOfWorkFactory<IServiceBusQueryUnitOfWork>
 {
 	public IServiceBusQueryUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

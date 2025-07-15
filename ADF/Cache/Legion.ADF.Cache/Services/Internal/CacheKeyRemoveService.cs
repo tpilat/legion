@@ -40,7 +40,7 @@ public class CacheKeyRemoveService : BackgroundService
 
 		while (!cancellationToken.IsCancellationRequested)
 		{
-			var scopeContext = ScopeContext.Create(scopeContextGlobal, correlationId: Guid.NewGuid());
+			var scopeContext = ScopeContext.Create(scopeContextGlobal, correlationId: GlobalContext.Instance.NewGuid());
 
 			_logger.LogTraceMessage(scopeContext, x => x.InternalMessage($"{nameof(CacheKeyRemoveService)}.{nameof(ExecuteAsync)}: START"));
 

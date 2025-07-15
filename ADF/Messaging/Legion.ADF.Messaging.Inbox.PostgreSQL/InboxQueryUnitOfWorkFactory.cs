@@ -1,6 +1,6 @@
 namespace Legion.ADF.Messaging.Inbox.PostgreSQL;
 
-public partial class InboxQueryUnitOfWorkFactory : IInboxQueryUnitOfWorkFactory
+public partial class InboxQueryUnitOfWorkFactory : IInboxQueryUnitOfWorkFactory, Legion.Model.Repositories.IQueryUnitOfWorkFactory<IInboxQueryUnitOfWork>
 {
 	public IInboxQueryUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

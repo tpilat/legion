@@ -51,7 +51,7 @@ public abstract class ConnectionProvider : IConnectionProvider, IDisposable, IAs
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdConnectionProvider = Guid.NewGuid();
+		IdConnectionProvider = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdConnectionProvider.ToString());
 #endif
 

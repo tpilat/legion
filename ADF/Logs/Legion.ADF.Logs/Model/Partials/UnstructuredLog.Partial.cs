@@ -19,7 +19,7 @@ public sealed partial class UnstructuredLog : Logs.LogsBaseEntity, Legion.Model.
 		var unstructuredLog = new UnstructuredLog
 		{
 			__IsNewObject = true,
-			IdUnstructuredLog = dto.Id ?? Guid.NewGuid(),
+			IdUnstructuredLog = dto.Id ?? GlobalContext.Instance.NewGuid(),
 			CreatedUtc = dto.CreatedUtc ?? GlobalContext.Instance.UtcNow,
 			IdLogLevel = (int)dto.LogLevel,
 			Message = dto.Message,

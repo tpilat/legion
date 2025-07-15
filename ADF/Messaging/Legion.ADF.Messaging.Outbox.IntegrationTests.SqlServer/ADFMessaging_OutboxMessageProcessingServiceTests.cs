@@ -26,10 +26,10 @@ public class OutboxMessageProcessingServiceTests : TestBase
 	public async Task ExecuteAsync_ShouldProcessOutbox_WithNoHandler()
 	{
 		var serviceTimeoutInSeconds = 2;
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<OutboxMessageProcessingService>();
@@ -53,9 +53,9 @@ public class OutboxMessageProcessingServiceTests : TestBase
 
 		var outboxMessageDto = DTOs.OutboxMessageDto.CreateJsonMessage(
 			outboxMessage,
-			Guid.NewGuid().ToString(),
+			GlobalContext.Instance.NewGuid().ToString(),
 			"TargetTopic",
-			 Guid.NewGuid().ToString(),
+			 GlobalContext.Instance.NewGuid().ToString(),
 			 targetTopic: null,
 			 "TargetQueueName");
 
@@ -95,10 +95,10 @@ public class OutboxMessageProcessingServiceTests : TestBase
 	public async Task ExecuteAsync_ShouldProcessOutbox_WithHandler()
 	{
 		var serviceTimeoutInSeconds = 2;
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<OutboxMessageProcessingService>();
@@ -122,9 +122,9 @@ public class OutboxMessageProcessingServiceTests : TestBase
 
 		var outboxMessageDto = DTOs.OutboxMessageDto.CreateJsonMessage(
 			outboxMessage,
-			Guid.NewGuid().ToString(),
+			GlobalContext.Instance.NewGuid().ToString(),
 			"TargetTopic",
-			 Guid.NewGuid().ToString(),
+			 GlobalContext.Instance.NewGuid().ToString(),
 			 targetTopic: null,
 			 "TargetQueueName");
 
@@ -164,10 +164,10 @@ public class OutboxMessageProcessingServiceTests : TestBase
 	public async Task ExecuteAsync_ShouldProcessOutbox_ExceedingMaxRetryCount()
 	{
 		var serviceTimeoutInSeconds = 2;
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<OutboxMessageProcessingService>();
@@ -192,9 +192,9 @@ public class OutboxMessageProcessingServiceTests : TestBase
 		var outboxMessageDto = DTOs.OutboxMessageDto.CreateStringMessage(
 			"myString",
 			"MyMessageContent with error handler",
-			Guid.NewGuid().ToString(),
+			GlobalContext.Instance.NewGuid().ToString(),
 			"TargetTopic",
-			 Guid.NewGuid().ToString(),
+			 GlobalContext.Instance.NewGuid().ToString(),
 			 targetTopic: null,
 			 "TargetQueueName");
 
@@ -259,10 +259,10 @@ public class OutboxMessageProcessingServiceTests : TestBase
 	public async Task ExecuteAsync_ShouldNotProcessOutbox_ForBlockedOutboxMessage()
 	{
 		var serviceTimeoutInSeconds = 2;
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<OutboxMessageProcessingService>();
@@ -285,9 +285,9 @@ public class OutboxMessageProcessingServiceTests : TestBase
 		var outboxMessageDto = DTOs.OutboxMessageDto.CreateStringMessage(
 			"myString",
 			"Blocked MyMessageContent",
-			 Guid.NewGuid().ToString(),
+			 GlobalContext.Instance.NewGuid().ToString(),
 			"TargetTopic",
-			 Guid.NewGuid().ToString(),
+			 GlobalContext.Instance.NewGuid().ToString(),
 			 targetTopic: null,
 			 "TargetQueueName");
 
@@ -330,10 +330,10 @@ public class OutboxMessageProcessingServiceTests : TestBase
 	public async Task ExecuteAsync_ShouldNotProcessOutbox_ForInvalidOutboxMessage()
 	{
 		var serviceTimeoutInSeconds = 2;
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
-		var correlationId = Guid.NewGuid();
-		var externalCorrelationId = Guid.NewGuid().ToString();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
+		var externalCorrelationId = GlobalContext.Instance.NewGuid().ToString();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		var logger = sp.GetRequiredService<ILoggerFactory>().CreateLogger<OutboxMessageProcessingService>();
@@ -356,9 +356,9 @@ public class OutboxMessageProcessingServiceTests : TestBase
 		var outboxMessageDto = DTOs.OutboxMessageDto.CreateStringMessage(
 			"myString",
 			"Blocked MyMessageContent",
-			Guid.NewGuid().ToString(),
+			GlobalContext.Instance.NewGuid().ToString(),
 			"TargetTopic",
-			 Guid.NewGuid().ToString(),
+			 GlobalContext.Instance.NewGuid().ToString(),
 			 targetTopic: null,
 			 "TargetQueueName");
 

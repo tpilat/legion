@@ -3,7 +3,7 @@ using Legion.Model.Mappers;
 
 namespace Legion.ADF.Cache.Model;
 
-public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEntity
+public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.Concurrence.IConcurrent, Legion.Model.IEntity
 {
 	public static Cache.Model.CacheData? Map(
 		Cache.Model.CacheData source,
@@ -61,6 +61,8 @@ public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEnt
 				target.ExpiresUtc = ExpiresUtc;
 			if (conds.CanMap(this, nameof(SlidingTime)))
 				target.SlidingTime = SlidingTime;
+			if (conds.CanMap(this, nameof(CreatedUtc)))
+				target.CreatedUtc = CreatedUtc;
 			if (conds.CanMap(this, nameof(LastAccessedUtc)))
 				target.LastAccessedUtc = LastAccessedUtc;
 			if (conds.CanMap(this, nameof(RowVersion)))
@@ -75,6 +77,7 @@ public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEnt
 			target.KeyPrefix450 = KeyPrefix450;
 			target.ExpiresUtc = ExpiresUtc;
 			target.SlidingTime = SlidingTime;
+			target.CreatedUtc = CreatedUtc;
 			target.LastAccessedUtc = LastAccessedUtc;
 			target.RowVersion = RowVersion;
 		}

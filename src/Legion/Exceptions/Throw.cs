@@ -879,24 +879,24 @@ public static class Throw
 
 	[System.Diagnostics.StackTraceHidden]
 	[DoesNotReturn]
-	public static void ResultException(IErrorCode? errorCode, IScopeContext? scopeContext = null, Exception? innerException = null)
-		=> Exceptions.ResultException.Throw(errorCode, detail: null, scopeContext, innerException);
+	public static void ResultException(IResult result, IErrorCode? errorCode, IScopeContext? scopeContext = null, Exception? innerException = null)
+		=> Exceptions.ResultException.Throw(result, errorCode, detail: null, scopeContext, innerException);
 
 
 	[System.Diagnostics.StackTraceHidden]
 	[DoesNotReturn]
-	public static void ResultException(IErrorCode? errorCode, string? detail, IScopeContext? scopeContext = null, Exception? innerException = null)
-		=> Exceptions.ResultException.Throw(errorCode, detail, scopeContext, innerException);
+	public static void ResultException(IResult result, IErrorCode? errorCode, string? detail, IScopeContext? scopeContext = null, Exception? innerException = null)
+		=> Exceptions.ResultException.Throw(result, errorCode, detail, scopeContext, innerException);
 
 	[System.Diagnostics.StackTraceHidden]
 	[DoesNotReturn]
-	public static void ResultException(string? detail = null, IScopeContext? scopeContext = null, Exception? innerException = null)
-		=> Exceptions.ResultException.Throw(ErrorCodes.ResultException.Default, detail, scopeContext, innerException);
+	public static void ResultException(IResult result, string? detail = null, IScopeContext? scopeContext = null, Exception? innerException = null)
+		=> Exceptions.ResultException.Throw(result, ErrorCodes.ResultException.Default, detail, scopeContext, innerException);
 
 	[System.Diagnostics.StackTraceHidden]
 	[DoesNotReturn]
-	public static void ResultException(IScopeContext? scopeContext, Exception? innerException = null)
-		=> Exceptions.ResultException.Throw(ErrorCodes.ResultException.Default, detail: null, scopeContext, innerException);
+	public static void ResultException(IResult result, IScopeContext? scopeContext, Exception? innerException = null)
+		=> Exceptions.ResultException.Throw(result, ErrorCodes.ResultException.Default, detail: null, scopeContext, innerException);
 
 	[System.Diagnostics.StackTraceHidden]
 	[DoesNotReturn]

@@ -1,4 +1,4 @@
-using Legion;
+﻿using Legion;
 using Legion.Database;
 using Legion.EntityFrameworkCore;
 using Legion.Model.Audit;
@@ -31,7 +31,7 @@ internal partial class DomainEventsUnitOfWork : Legion.ADF.Messaging.DomainEvent
 	public DomainEventsUnitOfWork(IEFConnectionProvider connectionProvider)
 	{
 #if TRACK_OBJECTS
-		IdDomainEventsUnitOfWork = Guid.NewGuid();
+		IdDomainEventsUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdDomainEventsUnitOfWork.ToString());
 #endif
 
@@ -44,7 +44,7 @@ internal partial class DomainEventsUnitOfWork : Legion.ADF.Messaging.DomainEvent
 	public DomainEventsUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbUnitOfWork dbUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdDomainEventsUnitOfWork = Guid.NewGuid();
+		IdDomainEventsUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdDomainEventsUnitOfWork.ToString());
 #endif
 
@@ -57,7 +57,7 @@ internal partial class DomainEventsUnitOfWork : Legion.ADF.Messaging.DomainEvent
 	public DomainEventsUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbQueryUnitOfWork dbQueryUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdDomainEventsUnitOfWork = Guid.NewGuid();
+		IdDomainEventsUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdDomainEventsUnitOfWork.ToString());
 #endif
 
@@ -75,7 +75,7 @@ internal partial class DomainEventsUnitOfWork : Legion.ADF.Messaging.DomainEvent
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdDomainEventsUnitOfWork = Guid.NewGuid();
+		IdDomainEventsUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdDomainEventsUnitOfWork.ToString());
 #endif
 
@@ -99,7 +99,7 @@ internal partial class DomainEventsUnitOfWork : Legion.ADF.Messaging.DomainEvent
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdDomainEventsUnitOfWork = Guid.NewGuid();
+		IdDomainEventsUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdDomainEventsUnitOfWork.ToString());
 #endif
 

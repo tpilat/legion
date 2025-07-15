@@ -60,7 +60,7 @@ public class QueuedMessageProcessingService : BackgroundService
 		var noQueue = false;
 		while (!cancellationToken.IsCancellationRequested)
 		{
-			var scopeContext = ScopeContext.Create(scopeContextGlobal, correlationId: Guid.NewGuid());
+			var scopeContext = ScopeContext.Create(scopeContextGlobal, correlationId: GlobalContext.Instance.NewGuid());
 
 			if (_options.LogLevel <= LogLevel.Information)
 				_logger?.LogInformationMessage(scopeContext, x => x.InternalMessage($"{nameof(QueuedMessageProcessingService)}.{nameof(ExecuteAsync)}: START"));
@@ -316,7 +316,7 @@ public class QueuedMessageProcessingService : BackgroundService
 		MessagingMessageBoxStoreOptions storeOptions,
 		CancellationToken cancellationToken = default)
 	{
-		scopeContext = ScopeContext.Create(scopeContext, correlationId: Guid.NewGuid())
+		scopeContext = ScopeContext.Create(scopeContext, correlationId: GlobalContext.Instance.NewGuid())
 			.AddContextProperty(nameof(idQueuedMessage), idQueuedMessage.ToString());
 
 		try

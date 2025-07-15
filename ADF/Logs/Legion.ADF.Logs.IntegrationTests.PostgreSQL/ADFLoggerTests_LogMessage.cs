@@ -12,17 +12,17 @@ public class ADFLoggerTests_LogMessage : TestBase
 	[Test]
 	public async Task ILogger_ShouldLogErrorMessage()
 	{
-		var idApplicationEntry = Guid.NewGuid();
+		var idApplicationEntry = GlobalContext.Instance.NewGuid();
 		var component = "com1";
 		var sourceSystemName = "TEST ScopeContext";
-		var correlationId = Guid.NewGuid();
+		var correlationId = GlobalContext.Instance.NewGuid();
 		var externalCorrelationId = "EXT_CORR";
 		var customCorrelationId = "CUSTOM_CORR";
 		var contextPropertyKey = "cpKey";
 		var contextPropertyValue = "cpValue";
 		var contextProperties = $"{{\"{contextPropertyKey}\": \"{contextPropertyValue}\"}}";
-		var idUser = Guid.NewGuid();
-		var tenantIdentifier = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
+		var tenantIdentifier = GlobalContext.Instance.NewGuid();
 		var propertyName = "My Property name";
 		var displayPropertyName = "display my Property name";
 
@@ -47,7 +47,7 @@ public class ADFLoggerTests_LogMessage : TestBase
 		var internalMessage = "test internal message";
 		var detail = "de ta il";
 		var clientMessage = "CLIENT msg";
-		var aggregateIdentifier = Guid.NewGuid().ToString();
+		var aggregateIdentifier = GlobalContext.Instance.NewGuid().ToString();
 		var aggregateName = "agregaat";
 
 		var exception = new Exception(internalMessage);

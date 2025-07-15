@@ -18,7 +18,7 @@ public sealed partial class ConfigurationClass : Config.ConfigBaseEntity, Legion
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, displayName))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var configurationClass = new ConfigurationClass
 		{
 			__IsNewObject = true,

@@ -124,7 +124,7 @@ public sealed partial class Message : MessageBox.MessageBoxBaseEntity, Legion.Mo
 			return result.WithArgumentException(scopeContext, idQueue, errorCode: null, detail: "Both are set", paramName: $"{nameof(idQueue)} != null && {nameof(idTopic)} != null");
 
 		var nowUtc = GlobalContext.Instance.UtcNow;
-		var id = messageContent?.IdMessageContent ?? Guid.NewGuid();
+		var id = messageContent?.IdMessageContent ?? GlobalContext.Instance.NewGuid();
 		var message = new Message
 		{
 			__IsNewObject = true,

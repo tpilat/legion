@@ -2,6 +2,6 @@
 
 public abstract class FlowNode
 {
-	public string Id { get; set; } = Guid.NewGuid().ToString();
+	public string Id { get; set; } = GlobalContext.Instance.NewGuid().ToString();
 	public abstract Task ExecuteAsync(OrchestrationState state, OrchestrationEngine engine);
 }

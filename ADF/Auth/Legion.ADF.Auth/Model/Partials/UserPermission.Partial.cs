@@ -14,7 +14,7 @@ public sealed partial class UserPermission : Auth.AuthBaseEntity, Legion.Model.A
 		var userPermission = new UserPermission
 		{
 			__IsNewObject = true,
-			IdUserPermission = Guid.NewGuid(),
+			IdUserPermission = GlobalContext.Instance.NewGuid(),
 			IdUser = idUser,
 			IdPermission = idPermission,
 			TenantIdentifier = scopeContext.TenantIdentifier ?? Guid.Empty,
@@ -22,7 +22,7 @@ public sealed partial class UserPermission : Auth.AuthBaseEntity, Legion.Model.A
 			AuditModifiedUtc = null,
 			IdAuditCreatedBy = scopeContext.IdUser,
 			IdAuditModifiedBy = null,
-			ConcurrencyToken = Guid.NewGuid(),
+			ConcurrencyToken = GlobalContext.Instance.NewGuid(),
 			DeletedUtc = DateTime.MinValue
 		};
 
@@ -48,7 +48,7 @@ public sealed partial class UserPermission : Auth.AuthBaseEntity, Legion.Model.A
 		{
 			AuditModifiedUtc = DeletedUtc;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =

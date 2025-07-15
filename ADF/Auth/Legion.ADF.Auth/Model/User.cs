@@ -187,7 +187,7 @@ public partial class User : Auth.AuthBaseEntity, Legion.Model.Audit.ISelfAuditab
 
 	public void SetNewConcurrencyToken()
 	{
-		ConcurrencyToken = Guid.NewGuid();
+		ConcurrencyToken = GlobalContext.Instance.NewGuid();
 	}
 
 	static User()

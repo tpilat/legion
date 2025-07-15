@@ -2,7 +2,7 @@
 
 namespace Legion.ADF.Cache.Model;
 
-public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEntity
+public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.Concurrence.IConcurrent, Legion.Model.IEntity
 {
 	public static IValidator<CacheData> DefaultDBValidator { get; }
 
@@ -44,15 +44,28 @@ public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEnt
 	/// <summary>
 	/// Database DataType: timestamp with time zone NOT NULL
 	/// </summary>
+	public DateTime CreatedUtc { get; private set; }
+
+	/// <summary>
+	/// Database DataType: timestamp with time zone NOT NULL
+	/// </summary>
 	public DateTime LastAccessedUtc { get; private set; }
 
 	/// <summary>
-	/// Database DataType: bigint NOT NULL
+	/// Database DataType: uuid NOT NULL
 	/// </summary>
-	public long RowVersion { get; private set; }
+	public Guid RowVersion { get; set; }
 
 	private CacheData()
 	{
+	}
+
+	[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+	string Legion.Model.Concurrence.IConcurrent.ConcurrencyTokenPropertyName => nameof(RowVersion);
+
+	public void SetNewConcurrencyToken()
+	{
+		RowVersion = GlobalContext.Instance.NewGuid();
 	}
 
 	static CacheData()
@@ -70,6 +83,7 @@ public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEnt
 			{ nameof(KeyPrefix450), KeyPrefix450 },
 			{ nameof(ExpiresUtc), ExpiresUtc },
 			{ nameof(SlidingTime), SlidingTime },
+			{ nameof(CreatedUtc), CreatedUtc },
 			{ nameof(LastAccessedUtc), LastAccessedUtc },
 			{ nameof(RowVersion), RowVersion },
 		};
@@ -95,6 +109,7 @@ public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEnt
 			.ForProperty(x => x.Key, v => v.NotDefaultOrEmpty())
 			.ForProperty(x => x.Value, v => v.NotDefaultOrEmpty())
 			.ForProperty(x => x.KeyPrefix450, v => v.NotDefaultOrEmpty())
+			//.ForProperty(x => x.CreatedUtc, v => v.NotDefaultOrEmpty())
 			//.ForProperty(x => x.LastAccessedUtc, v => v.NotDefaultOrEmpty())
 			//.ForProperty(x => x.RowVersion, v => v.NotDefaultOrEmpty())
 		;

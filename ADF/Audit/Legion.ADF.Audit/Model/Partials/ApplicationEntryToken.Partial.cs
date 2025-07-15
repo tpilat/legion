@@ -23,7 +23,7 @@ public sealed partial class ApplicationEntryToken : Audit.AuditBaseEntity, Legio
 		var applicationEntryToken = new ApplicationEntryToken
 		{
 			__IsNewObject = true,
-			IdApplicationEntryToken = Guid.NewGuid(),
+			IdApplicationEntryToken = GlobalContext.Instance.NewGuid(),
 			Token = token,
 			SourceFilePath = sourceFilePath,
 			MethodInfo = methodInfo,

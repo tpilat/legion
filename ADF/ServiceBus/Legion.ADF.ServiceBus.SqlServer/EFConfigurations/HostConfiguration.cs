@@ -37,17 +37,13 @@ public class HostConfiguration : IEntityTypeConfiguration<ServiceBus.Model.Host>
 
 		entityBuilder.Property(e => e.IsEnabled).HasColumnType("bit");
 
-		entityBuilder.Property(e => e.StartedUtc).HasColumnType("datetime2(7)");
-
-		entityBuilder.Property(e => e.LastActivityUtc).HasColumnType("datetime2(7)");
-
-		entityBuilder.Property(e => e.StoppedUtc).HasColumnType("datetime2(7)");
-
 		entityBuilder.Property(e => e.Configuration)
 			.IsRequired()
 			.HasColumnType("nvarchar(max)");
 
-		entityBuilder.Property(e => e.IsDistributedManagerAvailable).HasColumnType("bit");
+		entityBuilder.Property(e => e.RowVersion)
+			.HasColumnType("uniqueidentifier")
+				.IsConcurrencyToken();
 	}
 
 	public static ModelBuilder Build(ModelBuilder modelBuilder)

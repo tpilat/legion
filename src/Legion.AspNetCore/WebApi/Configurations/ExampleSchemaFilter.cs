@@ -13,7 +13,58 @@ public class ExampleSchemaFilter : ISchemaFilter
 		if (_unsupportedTypes.Contains(context.Type))
 			return;
 
-		if (context.Type.GetGenericTypeDefinitionIfExists() == typeof(Results.ResultDto<>))
+		if (context.Type.GetGenericTypeDefinitionIfExists() == typeof(Results.ResultDto))
+		{
+			if (schema.Properties.ContainsKey("successMessages"))
+			{
+				schema.Properties["successMessages"].Example = new Microsoft.OpenApi.Any.OpenApiNull(); //new OpenApiArray();
+			}
+
+			if (schema.Properties.ContainsKey("warningMessages"))
+			{
+				schema.Properties["warningMessages"].Example = new Microsoft.OpenApi.Any.OpenApiNull(); //new OpenApiArray();
+			}
+
+			if (schema.Properties.ContainsKey("errorMessages"))
+			{
+				schema.Properties["errorMessages"].Example = new Microsoft.OpenApi.Any.OpenApiNull(); //new OpenApiArray();
+			}
+		}
+		else if (context.Type.GetGenericTypeDefinitionIfExists() == typeof(Results.ResultDto<>))
+		{
+			if (schema.Properties.ContainsKey("successMessages"))
+			{
+				schema.Properties["successMessages"].Example = new Microsoft.OpenApi.Any.OpenApiNull(); //new OpenApiArray();
+			}
+
+			if (schema.Properties.ContainsKey("warningMessages"))
+			{
+				schema.Properties["warningMessages"].Example = new Microsoft.OpenApi.Any.OpenApiNull(); //new OpenApiArray();
+			}
+
+			if (schema.Properties.ContainsKey("errorMessages"))
+			{
+				schema.Properties["errorMessages"].Example = new Microsoft.OpenApi.Any.OpenApiNull(); //new OpenApiArray();
+			}
+		}
+		else if (context.Type.GetGenericTypeDefinitionIfExists() == typeof(IResult))
+		{
+			if (schema.Properties.ContainsKey("successMessages"))
+			{
+				schema.Properties["successMessages"].Example = new Microsoft.OpenApi.Any.OpenApiNull(); //new OpenApiArray();
+			}
+
+			if (schema.Properties.ContainsKey("warningMessages"))
+			{
+				schema.Properties["warningMessages"].Example = new Microsoft.OpenApi.Any.OpenApiNull(); //new OpenApiArray();
+			}
+
+			if (schema.Properties.ContainsKey("errorMessages"))
+			{
+				schema.Properties["errorMessages"].Example = new Microsoft.OpenApi.Any.OpenApiNull(); //new OpenApiArray();
+			}
+		}
+		else if (context.Type.GetGenericTypeDefinitionIfExists() == typeof(IResult<>))
 		{
 			if (schema.Properties.ContainsKey("successMessages"))
 			{

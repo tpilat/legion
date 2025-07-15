@@ -2,7 +2,7 @@
 
 public class HostLogDto
 {
-	public Guid IdHost { get; private set; }
+	public Guid IdHost { get; set; }
 
 	public int IdLogLevel { get; set; }
 

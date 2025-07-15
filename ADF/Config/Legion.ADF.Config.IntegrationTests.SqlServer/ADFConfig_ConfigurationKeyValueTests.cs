@@ -9,7 +9,7 @@ public class ADFConfig_ConfigurationKeyValueTests : TestBase
 	[Test]
 	public async Task ConfigurationKeyValue_ShouldWriteConfigurationKeyValue()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var configStore = sp.GetRequiredService<ConfigStore>();
@@ -38,7 +38,7 @@ public class ADFConfig_ConfigurationKeyValueTests : TestBase
 	[Test]
 	public async Task ConfigurationKeyValue_ShouldUpdateConfigurationKeyValue()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var configStore = sp.GetRequiredService<ConfigStore>();
@@ -73,7 +73,7 @@ public class ADFConfig_ConfigurationKeyValueTests : TestBase
 	[Test]
 	public async Task ConfigurationKeyValue_ShouldRemoveConfigurationKeyValue()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var configStore = sp.GetRequiredService<ConfigStore>();

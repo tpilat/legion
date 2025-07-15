@@ -18,7 +18,8 @@ public class JobConfiguration : IEntityTypeConfiguration<ServiceBus.Model.Job>
 
 		entityBuilder.HasIndex(e => e.IdJobRunType, "IXFK_Job_JobRunType");
 
-		entityBuilder.HasIndex(e => e.IdJobStatus, "IXFK_Job_JobStatus");
+		entityBuilder.HasIndex(e => e.Name, "UQ_Job_Name")
+				.IsUnique();
 
 		entityBuilder.Property(e => e.IdJob)
 			.HasColumnType("uuid")
@@ -35,8 +36,6 @@ public class JobConfiguration : IEntityTypeConfiguration<ServiceBus.Model.Job>
 
 		entityBuilder.Property(e => e.IdJobRunType).HasColumnType("uuid");
 
-		entityBuilder.Property(e => e.IdJobStatus).HasColumnType("uuid");
-
 		entityBuilder.Property(e => e.Namespace)
 			.IsRequired()
 			.HasColumnType("varchar(1023)")
@@ -50,27 +49,15 @@ public class JobConfiguration : IEntityTypeConfiguration<ServiceBus.Model.Job>
 
 		entityBuilder.Property(e => e.IdDefaultHost).HasColumnType("uuid");
 
-		entityBuilder.Property(e => e.IdCurrentHost).HasColumnType("uuid");
-
-		entityBuilder.Property(e => e.AttachedToCurrentHostUtc).HasColumnType("timestamptz");
-
-		entityBuilder.Property(e => e.LastProcessingUtc).HasColumnType("timestamptz");
-
-		entityBuilder.Property(e => e.LastProcessingFinishedUtc).HasColumnType("timestamptz");
-
-		entityBuilder.Property(e => e.NextProcessinUtc).HasColumnType("timestamptz");
+		entityBuilder.Property(e => e.RowVersion)
+			.HasColumnType("uuid")
+				.IsConcurrencyToken();
 
 		entityBuilder.HasOne(d => d.JobRunType)
 			.WithMany(p => p.Jobs)
 			.HasForeignKey(d => d.IdJobRunType)
 			.OnDelete(DeleteBehavior.ClientSetNull)
 			.HasConstraintName("FK_Job_IdJobRunType");
-
-		entityBuilder.HasOne(d => d.JobStatus)
-			.WithMany(p => p.Jobs)
-			.HasForeignKey(d => d.IdJobStatus)
-			.OnDelete(DeleteBehavior.ClientSetNull)
-			.HasConstraintName("FK_Job_IdJobStatus");
 	}
 
 	public static ModelBuilder Build(ModelBuilder modelBuilder)

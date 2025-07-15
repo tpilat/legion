@@ -38,7 +38,7 @@ public static class ExceptionExtensions
 	}
 
 	private static string GetNewKey()
-		=> $"{Legion_LOG_MESSAGE}_{Guid.NewGuid()}";
+		=> $"{Legion_LOG_MESSAGE}_{GlobalContext.Instance.NewGuid()}";
 
 	public static IEnumerable<ILogMessage> GetLogMessages(this Exception exception)
 	{

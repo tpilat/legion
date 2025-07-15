@@ -13,7 +13,7 @@ public sealed partial class MessageArchive : MessageBox.MessageBoxBaseEntity, Le
 		if (result.IsArgumentNull(scopeContext, message))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageArchive = new MessageArchive
 		{
 			__IsNewObject = true,

@@ -1,4 +1,4 @@
-using Legion;
+﻿using Legion;
 using Legion.Database;
 using Legion.EntityFrameworkCore;
 using Legion.Model.Audit;
@@ -31,7 +31,7 @@ internal partial class ConfigUnitOfWork : Legion.ADF.Config.IConfigUnitOfWork, L
 	public ConfigUnitOfWork(IEFConnectionProvider connectionProvider)
 	{
 #if TRACK_OBJECTS
-		IdConfigUnitOfWork = Guid.NewGuid();
+		IdConfigUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdConfigUnitOfWork.ToString());
 #endif
 
@@ -44,7 +44,7 @@ internal partial class ConfigUnitOfWork : Legion.ADF.Config.IConfigUnitOfWork, L
 	public ConfigUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbUnitOfWork dbUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdConfigUnitOfWork = Guid.NewGuid();
+		IdConfigUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdConfigUnitOfWork.ToString());
 #endif
 
@@ -57,7 +57,7 @@ internal partial class ConfigUnitOfWork : Legion.ADF.Config.IConfigUnitOfWork, L
 	public ConfigUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbQueryUnitOfWork dbQueryUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdConfigUnitOfWork = Guid.NewGuid();
+		IdConfigUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdConfigUnitOfWork.ToString());
 #endif
 
@@ -75,7 +75,7 @@ internal partial class ConfigUnitOfWork : Legion.ADF.Config.IConfigUnitOfWork, L
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdConfigUnitOfWork = Guid.NewGuid();
+		IdConfigUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdConfigUnitOfWork.ToString());
 #endif
 
@@ -99,7 +99,7 @@ internal partial class ConfigUnitOfWork : Legion.ADF.Config.IConfigUnitOfWork, L
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdConfigUnitOfWork = Guid.NewGuid();
+		IdConfigUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdConfigUnitOfWork.ToString());
 #endif
 

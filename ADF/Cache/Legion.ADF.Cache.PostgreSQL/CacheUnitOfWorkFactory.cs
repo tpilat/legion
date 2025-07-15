@@ -1,6 +1,6 @@
 namespace Legion.ADF.Cache.PostgreSQL;
 
-public partial class CacheUnitOfWorkFactory : ICacheUnitOfWorkFactory
+public partial class CacheUnitOfWorkFactory : ICacheUnitOfWorkFactory, Legion.Model.Repositories.IUnitOfWorkFactory<ICacheUnitOfWork>
 {
 	public ICacheUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

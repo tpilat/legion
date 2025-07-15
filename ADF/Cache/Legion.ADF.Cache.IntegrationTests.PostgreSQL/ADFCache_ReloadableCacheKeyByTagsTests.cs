@@ -9,7 +9,7 @@ public class ADFCache_ReloadableCacheKeyByTagsTests : TestBase
 	[Test]
 	public async Task ReloadableCacheKey_ShouldWriteReloadableCacheKey()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var cacheStore = sp.GetRequiredService<ReloadableCacheKeyStore>();
@@ -36,7 +36,7 @@ public class ADFCache_ReloadableCacheKeyByTagsTests : TestBase
 	[Test]
 	public async Task ReloadableCacheKey_ShouldUpdateReloadableCacheKey()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var cacheStore = sp.GetRequiredService<ReloadableCacheKeyStore>();
@@ -68,7 +68,7 @@ public class ADFCache_ReloadableCacheKeyByTagsTests : TestBase
 	[Test]
 	public async Task ReloadableCacheKey_ShouldRemoveReloadableCacheKey()
 	{
-		var idUser = Guid.NewGuid();
+		var idUser = GlobalContext.Instance.NewGuid();
 
 		var sp = await SetUp.CreateScopedServiceProviderAsync();
 		using var cacheStore = sp.GetRequiredService<ReloadableCacheKeyStore>();

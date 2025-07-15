@@ -31,7 +31,7 @@ internal partial class ServiceBusUnitOfWork : Legion.ADF.ServiceBus.IServiceBusU
 	public ServiceBusUnitOfWork(IEFConnectionProvider connectionProvider)
 	{
 #if TRACK_OBJECTS
-		IdServiceBusUnitOfWork = Guid.NewGuid();
+		IdServiceBusUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdServiceBusUnitOfWork.ToString());
 #endif
 
@@ -44,7 +44,7 @@ internal partial class ServiceBusUnitOfWork : Legion.ADF.ServiceBus.IServiceBusU
 	public ServiceBusUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbUnitOfWork dbUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdServiceBusUnitOfWork = Guid.NewGuid();
+		IdServiceBusUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdServiceBusUnitOfWork.ToString());
 #endif
 
@@ -57,7 +57,7 @@ internal partial class ServiceBusUnitOfWork : Legion.ADF.ServiceBus.IServiceBusU
 	public ServiceBusUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbQueryUnitOfWork dbQueryUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdServiceBusUnitOfWork = Guid.NewGuid();
+		IdServiceBusUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdServiceBusUnitOfWork.ToString());
 #endif
 
@@ -75,7 +75,7 @@ internal partial class ServiceBusUnitOfWork : Legion.ADF.ServiceBus.IServiceBusU
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdServiceBusUnitOfWork = Guid.NewGuid();
+		IdServiceBusUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdServiceBusUnitOfWork.ToString());
 #endif
 
@@ -99,7 +99,7 @@ internal partial class ServiceBusUnitOfWork : Legion.ADF.ServiceBus.IServiceBusU
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdServiceBusUnitOfWork = Guid.NewGuid();
+		IdServiceBusUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdServiceBusUnitOfWork.ToString());
 #endif
 
@@ -588,6 +588,11 @@ internal partial class ServiceBusUnitOfWork : Legion.ADF.ServiceBus.IServiceBusU
 		=> host ??= new Legion.ADF.ServiceBus.SqlServer.Model.Repositories.HostRepository(ConnectionProvider);
 
 
+	private Legion.ADF.ServiceBus.Model.Repositories.IHostActivityRepository? hostActivity;
+	public Legion.ADF.ServiceBus.Model.Repositories.IHostActivityRepository HostActivityRepository
+		=> hostActivity ??= new Legion.ADF.ServiceBus.SqlServer.Model.Repositories.HostActivityRepository(ConnectionProvider);
+
+
 	private Legion.ADF.ServiceBus.Model.Repositories.IHostLogRepository? hostLog;
 	public Legion.ADF.ServiceBus.Model.Repositories.IHostLogRepository HostLogRepository
 		=> hostLog ??= new Legion.ADF.ServiceBus.SqlServer.Model.Repositories.HostLogRepository(ConnectionProvider);
@@ -596,6 +601,11 @@ internal partial class ServiceBusUnitOfWork : Legion.ADF.ServiceBus.IServiceBusU
 	private Legion.ADF.ServiceBus.Model.Repositories.IJobRepository? job;
 	public Legion.ADF.ServiceBus.Model.Repositories.IJobRepository JobRepository
 		=> job ??= new Legion.ADF.ServiceBus.SqlServer.Model.Repositories.JobRepository(ConnectionProvider);
+
+
+	private Legion.ADF.ServiceBus.Model.Repositories.IJobActivityRepository? jobActivity;
+	public Legion.ADF.ServiceBus.Model.Repositories.IJobActivityRepository JobActivityRepository
+		=> jobActivity ??= new Legion.ADF.ServiceBus.SqlServer.Model.Repositories.JobActivityRepository(ConnectionProvider);
 
 
 	private Legion.ADF.ServiceBus.Model.Repositories.IJobDataRepository? jobData;

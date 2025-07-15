@@ -3,6 +3,7 @@ using Legion.Database.SqlServer.Extensions;
 using Legion.EntityFrameworkCore.Database;
 using Legion.EntityFrameworkCore.Extensions;
 using Legion.Extensions;
+using Legion.Model.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -23,6 +24,8 @@ public static class ServiceCollectionExtensions
 		builder.Services.AddQueryUnitOfWork<IAuditQueryUnitOfWork>(efConnectionProvider => new AuditQueryUnitOfWork(efConnectionProvider));
 		builder.Services.TryAddSingleton<IAuditUnitOfWorkFactory, AuditUnitOfWorkFactory>();
 		builder.Services.TryAddSingleton<IAuditQueryUnitOfWorkFactory, AuditQueryUnitOfWorkFactory>();
+		builder.Services.TryAddSingleton<IUnitOfWorkFactory<IAuditUnitOfWork>, AuditUnitOfWorkFactory>();
+		builder.Services.TryAddSingleton<IQueryUnitOfWorkFactory<IAuditQueryUnitOfWork>, AuditQueryUnitOfWorkFactory>();
 		builder.Services.AddDbContext<AuditDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);
 		builder.Services.TryAddTransient<IAuditDbContext, AuditDbContext>();
 		builder.Services.AddDbContext<AuditQueryDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);

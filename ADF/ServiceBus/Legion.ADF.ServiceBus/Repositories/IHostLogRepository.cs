@@ -4,4 +4,6 @@ public partial interface IHostLogRepository : Legion.ADF.ServiceBus.IServiceBusR
 {
 	Legion.ACL.IAccessControlManager<Legion.ADF.ServiceBus.Model.HostLog>? AccessControlManager { get; }
 
+	Legion.ADF.ServiceBus.Queries.HostLog.IGetHostLogsByIdHost GetHostLogsByIdHost(
+		Legion.ADF.ServiceBus.Queries.HostLog.GetHostLogsByIdHostQuery getHostLogsByIdHostQuery);
 }

@@ -5,11 +5,19 @@ CREATE TABLE hosts."Host"
 	"Description" varchar(511) NOT NULL,
 	"CreatedUtc" timestamp with time zone NOT NULL,
 	"IsEnabled" boolean NOT NULL,
-	"StartedUtc" timestamp with time zone NULL,
+	"Configuration" jsonb NOT NULL,
+	"RowVersion" uuid NOT NULL
+);
+
+CREATE TABLE hosts."HostActivity"
+(
+	"IdHostActivity" uuid NOT NULL,
+	"IdHost" uuid NOT NULL,
+	"StartedUtc" timestamp with time zone NOT NULL,
 	"LastActivityUtc" timestamp with time zone NOT NULL,
 	"StoppedUtc" timestamp with time zone NULL,
-	"Configuration" jsonb NOT NULL,
-	"IsDistributedManagerAvailable" boolean NOT NULL
+	"IsDistributedManagerAvailable" boolean NOT NULL,
+	"RowVersion" uuid NOT NULL
 );
 
 CREATE TABLE hosts."HostLog"
@@ -31,7 +39,6 @@ CREATE TABLE jobs."Job"
 	"Name" varchar(255) NOT NULL,
 	"Description" varchar(1023) NULL,
 	"IdJobRunType" uuid NOT NULL,
-	"IdJobStatus" uuid NOT NULL,
 	"Namespace" varchar(1023) NOT NULL,
 	"Properties" jsonb NULL,
 	"DelayedStartInSeconds" integer NULL,
@@ -39,13 +46,23 @@ CREATE TABLE jobs."Job"
 	"CronExpression" varchar(63) NULL,
 	"CronExpressionIncludeSeconds" boolean NOT NULL,
 	"IdDefaultHost" uuid NOT NULL,
+	"RequestedToDisable" boolean NOT NULL,
+	"TimeoutForProcessingInSeconds" integer NOT NULL,
+	"RowVersion" uuid NOT NULL
+);
+
+CREATE TABLE jobs."JobActivity"
+(
+	"IdJobActivity" uuid NOT NULL,
+	"IdJob" uuid NOT NULL,
+	"IdJobStatus" uuid NOT NULL,
 	"IdCurrentHost" uuid NOT NULL,
 	"AttachedToCurrentHostUtc" timestamp with time zone NOT NULL,
-	"LastProcessingUtc" timestamp with time zone NULL,
+	"LastStatusChangedUtc" timestamp with time zone NOT NULL,
+	"LastProcessingStartedUtc" timestamp with time zone NULL,
 	"LastProcessingFinishedUtc" timestamp with time zone NULL,
-	"NextProcessinUtc" timestamp with time zone NOT NULL,
-	"TimeoutForProcessingInSeconds" integer NOT NULL,
-	"MaxProcessingRetryCount" integer NOT NULL
+	"DelayedToUtc" timestamp with time zone NULL,
+	"RowVersion" uuid NOT NULL
 );
 
 CREATE TABLE jobs."JobData"
@@ -75,7 +92,8 @@ CREATE TABLE jobs."JobExecution"
 	"TraceCorrelationId" uuid NOT NULL,
 	"StartUtc" timestamp with time zone NOT NULL,
 	"EndUtc" timestamp with time zone NULL,
-	"IdJobStatus" uuid NOT NULL
+	"IdJobStatus" uuid NOT NULL,
+	"StatisticsStartHourUtc" timestamp with time zone NOT NULL
 );
 
 CREATE TABLE jobs."JobLog"
@@ -89,7 +107,8 @@ CREATE TABLE jobs."JobLog"
 	"IdLogMessage" uuid NULL,
 	"Code" varchar(127) NOT NULL,
 	"Detail" text NULL,
-	"IdMessageProcessingLog" uuid NULL
+	"IdMessageProcessingLog" uuid NULL,
+	"IdJobExecution" uuid NULL
 );
 
 CREATE TABLE jobs."JobMessage"
@@ -122,7 +141,7 @@ CREATE TABLE jobs."JobStatistics"
 	"StartHourUtc" timestamp with time zone NOT NULL,
 	"ExecutionCount" integer NOT NULL,
 	"ErrorCount" integer NOT NULL,
-	"AverageDuration" numeric NOT NULL
+	"DurationSumInSeconds" bigint NOT NULL
 );
 
 CREATE TABLE jobs."JobStatus"
@@ -237,6 +256,14 @@ ALTER TABLE hosts."Host" ADD CONSTRAINT "PK_Host"
 ALTER TABLE hosts."Host" 
   ADD CONSTRAINT "UQ_Host_Name" UNIQUE ("Name");
 
+ALTER TABLE hosts."HostActivity" ADD CONSTRAINT "PK_HostActivity"
+	PRIMARY KEY ("IdHostActivity");
+
+ALTER TABLE hosts."HostActivity" 
+  ADD CONSTRAINT "UQ_HostActivity_IdHost" UNIQUE ("IdHost");
+
+CREATE INDEX "IXFK_HostActivity_Host" ON hosts."HostActivity" ("IdHost" ASC);
+
 ALTER TABLE hosts."HostLog" ADD CONSTRAINT "PK_HostLog"
 	PRIMARY KEY ("IdHostLog");
 
@@ -245,9 +272,20 @@ CREATE INDEX "IXFK_HostLog_Host" ON hosts."HostLog" ("IdHost" ASC);
 ALTER TABLE jobs."Job" ADD CONSTRAINT "PK_Job"
 	PRIMARY KEY ("IdJob");
 
+ALTER TABLE jobs."Job" 
+  ADD CONSTRAINT "UQ_Job_Name" UNIQUE ("Name");
+
 CREATE INDEX "IXFK_Job_JobRunType" ON jobs."Job" ("IdJobRunType" ASC);
 
-CREATE INDEX "IXFK_Job_JobStatus" ON jobs."Job" ("IdJobStatus" ASC);
+ALTER TABLE jobs."JobActivity" ADD CONSTRAINT "PK_JobActivity"
+	PRIMARY KEY ("IdJobActivity");
+
+ALTER TABLE jobs."JobActivity" 
+  ADD CONSTRAINT "UQ_JobActivity_IdJob" UNIQUE ("IdJob");
+
+CREATE INDEX "IXFK_JobActivity_Job" ON jobs."JobActivity" ("IdJob" ASC);
+
+CREATE INDEX "IXFK_JobActivity_JobStatus" ON jobs."JobActivity" ("IdJobStatus" ASC);
 
 ALTER TABLE jobs."JobData" ADD CONSTRAINT "PK_JobData"
 	PRIMARY KEY ("IdJobData");
@@ -261,10 +299,14 @@ CREATE INDEX "IXFK_JobExecution_Job" ON jobs."JobExecution" ("IdJob" ASC);
 
 CREATE INDEX "IXFK_JobExecution_JobStatus" ON jobs."JobExecution" ("IdJobStatus" ASC);
 
+CREATE INDEX "IX_JobExecution_StatisticsStartHourUtc" ON jobs."JobExecution" ("StatisticsStartHourUtc" ASC);
+
 ALTER TABLE jobs."JobLog" ADD CONSTRAINT "PK_JobLog"
 	PRIMARY KEY ("IdJobLog");
 
 CREATE INDEX "IXFK_JobLog_Job" ON jobs."JobLog" ("IdJob" ASC);
+
+CREATE INDEX "IXFK_JobLog_JobExecution" ON jobs."JobLog" ("IdJobExecution" ASC);
 
 CREATE INDEX "IXFK_JobLog_JobStatus" ON jobs."JobLog" ("IdJobStatus" ASC);
 
@@ -283,6 +325,9 @@ ALTER TABLE jobs."JobRunType" ADD CONSTRAINT "PK_JobRunType"
 
 ALTER TABLE jobs."JobStatistics" ADD CONSTRAINT "PK_JobStatistics"
 	PRIMARY KEY ("IdJobStatistics");
+
+ALTER TABLE jobs."JobStatistics" 
+  ADD CONSTRAINT "UQ_JobStatistics_IdJob_StartHour" UNIQUE ("IdJob","StartHourUtc");
 
 CREATE INDEX "IXFK_JobStatistics_Job" ON jobs."JobStatistics" ("IdJob" ASC);
 
@@ -343,13 +388,19 @@ ALTER TABLE orch."OrchestrationStepProcessingMessageType" ADD CONSTRAINT "PK_Orc
 ALTER TABLE orch."OrchestrationStepProcessingStatus" ADD CONSTRAINT "PK_OrchestrationStepProcessingStatus"
 	PRIMARY KEY ("IdOrchestrationStepProcessingStatus");
 
+ALTER TABLE hosts."HostActivity" ADD CONSTRAINT "FK_HostActivity_IdHost"
+	FOREIGN KEY ("IdHost") REFERENCES hosts."Host" ("IdHost") ON DELETE No Action ON UPDATE No Action;
+
 ALTER TABLE hosts."HostLog" ADD CONSTRAINT "FK_HostLog_IdHost"
 	FOREIGN KEY ("IdHost") REFERENCES hosts."Host" ("IdHost") ON DELETE No Action ON UPDATE No Action;
 
 ALTER TABLE jobs."Job" ADD CONSTRAINT "FK_Job_IdJobRunType"
 	FOREIGN KEY ("IdJobRunType") REFERENCES jobs."JobRunType" ("IdJobRunType") ON DELETE No Action ON UPDATE No Action;
 
-ALTER TABLE jobs."Job" ADD CONSTRAINT "FK_Job_IdJobStatus"
+ALTER TABLE jobs."JobActivity" ADD CONSTRAINT "FK_JobActivity_IdJob"
+	FOREIGN KEY ("IdJob") REFERENCES jobs."Job" ("IdJob") ON DELETE No Action ON UPDATE No Action;
+
+ALTER TABLE jobs."JobActivity" ADD CONSTRAINT "FK_JobActivity_IdJobStatus"
 	FOREIGN KEY ("IdJobStatus") REFERENCES jobs."JobStatus" ("IdJobStatus") ON DELETE No Action ON UPDATE No Action;
 
 ALTER TABLE jobs."JobData" ADD CONSTRAINT "FK_JobData_IdJob"
@@ -363,6 +414,9 @@ ALTER TABLE jobs."JobExecution" ADD CONSTRAINT "FK_JobExecution_IdJobStatus"
 
 ALTER TABLE jobs."JobLog" ADD CONSTRAINT "FK_JobLog_IdJob"
 	FOREIGN KEY ("IdJob") REFERENCES jobs."Job" ("IdJob") ON DELETE No Action ON UPDATE No Action;
+
+ALTER TABLE jobs."JobLog" ADD CONSTRAINT "FK_JobLog_IdJobExecution"
+	FOREIGN KEY ("IdJobExecution") REFERENCES jobs."JobExecution" ("IdJobExecution") ON DELETE No Action ON UPDATE No Action;
 
 ALTER TABLE jobs."JobLog" ADD CONSTRAINT "FK_JobLog_IdJobStatus"
 	FOREIGN KEY ("IdJobStatus") REFERENCES jobs."JobStatus" ("IdJobStatus") ON DELETE No Action ON UPDATE No Action;

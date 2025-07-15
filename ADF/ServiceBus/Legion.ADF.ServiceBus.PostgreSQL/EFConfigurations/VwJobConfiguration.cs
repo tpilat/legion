@@ -23,16 +23,6 @@ public class VwJobConfiguration : IEntityTypeConfiguration<ServiceBus.Model.VwJo
 
 		entityBuilder.Property(e => e.IdJobRunType).HasColumnType("uuid");
 
-		entityBuilder.Property(e => e.JobRunType)
-			.IsRequired()
-			.HasColumnType("varchar(63)");
-
-		entityBuilder.Property(e => e.IdJobStatus).HasColumnType("uuid");
-
-		entityBuilder.Property(e => e.JobStatus)
-			.IsRequired()
-			.HasColumnType("varchar(63)");
-
 		entityBuilder.Property(e => e.Namespace)
 			.IsRequired()
 			.HasColumnType("varchar(1023)");
@@ -41,11 +31,9 @@ public class VwJobConfiguration : IEntityTypeConfiguration<ServiceBus.Model.VwJo
 
 		entityBuilder.Property(e => e.CronExpression).HasColumnType("varchar(63)");
 
-		entityBuilder.Property(e => e.LastProcessingUtc).HasColumnType("timestamptz");
-
-		entityBuilder.Property(e => e.NextProcessinUtc).HasColumnType("timestamptz");
-
 		entityBuilder.Property(e => e.IdDefaultHost).HasColumnType("uuid");
+
+		entityBuilder.Property(e => e.RowVersion).HasColumnType("uuid");
 	}
 
 	public static ModelBuilder Build(ModelBuilder modelBuilder)

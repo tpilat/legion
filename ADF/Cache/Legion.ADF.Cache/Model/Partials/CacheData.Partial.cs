@@ -28,7 +28,7 @@ public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEnt
 		if (slidingTime.HasValue && result.IsArgumentLessThanOrEqual(scopeContext, slidingTime.Value, TimeSpan.Zero))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var cacheData = new CacheData
 		{
 			__IsNewObject = true,
@@ -37,10 +37,11 @@ public sealed partial class CacheData : Cache.CacheBaseEntity, Legion.Model.IEnt
 			KeyPrefix450 = 450 < key.Length ? key[..450] : key,
 			Value = value,
 			ValueHash = HashHelper.ComputeMD5Hash(value),
-			LastAccessedUtc = utcNow,
-			ExpiresUtc = expiresUtc,
 			SlidingTime = slidingTime,
-			RowVersion = 0
+			ExpiresUtc = expiresUtc,
+			CreatedUtc = utcNow,
+			LastAccessedUtc = utcNow,
+			RowVersion = GlobalContext.Instance.NewGuid()
 		};
 
 		var validationResult =

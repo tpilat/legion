@@ -108,7 +108,7 @@ public sealed partial class OutboxMessage : Outbox.OutboxBaseEntity, Legion.Mode
 			return result.Build();
 
 		var nowUtc = GlobalContext.Instance.UtcNow;
-		var id = messageContent?.IdOutboxMessageContent ?? Guid.NewGuid();
+		var id = messageContent?.IdOutboxMessageContent ?? GlobalContext.Instance.NewGuid();
 		var outboxMessage = new OutboxMessage
 		{
 			__IsNewObject = true,

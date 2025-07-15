@@ -12,6 +12,15 @@ public static partial class ErrorCodes
 				$"Invalid connection string strore ID = {storeId}");
 	}
 
+	public static partial class ServiceBusMonitorException
+	{
+		public static IErrorCode DistributedManagerError => _distributedManagerError.Value;
+		private static readonly Lazy<IErrorCode> _distributedManagerError = new(() =>
+			new ErrorCode(
+				"L_ESB_Mon_0001",
+				$"Monitor: DistributedManager error"));
+	}
+
 	public static partial class ServiceBusUnitOfWorkException
 	{
 		public static IErrorCode InvalidUoW => _invalidUoW.Value;
@@ -32,6 +41,19 @@ public static partial class ErrorCodes
 			=> new ErrorCode(
 				"L_ESB_Host_0001",
 				$"No host found with name \"{hostName}\"");
+
+		public static IErrorCode InvalidHostConfig(string hostName)
+			=> new ErrorCode(
+				"L_ESB_Host_0002",
+				$"Host \"{hostName}\" has invalid config");
+	}
+
+	public static partial class ServiceBusJobException
+	{
+		public static IErrorCode UnhandledError(string hostName, Guid? idHost, string jobName, Guid idJob)
+			=> new ErrorCode(
+				"L_ESB_Job_0000",
+				$"Unhandled error in job with name \"{jobName}\" with id {idJob} on host with name \"{hostName}\" with id {idHost}");
 	}
 
 	public static partial class HostConfigurationException

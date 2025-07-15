@@ -14,14 +14,14 @@ public sealed partial class RolePermission : Auth.AuthBaseEntity, Legion.Model.A
 		var rolePermission = new RolePermission
 		{
 			__IsNewObject = true,
-			IdRolePermission = Guid.NewGuid(),
+			IdRolePermission = GlobalContext.Instance.NewGuid(),
 			IdRole = idRole,
 			IdPermission = idPermission,
 			AuditCreatedUtc = GlobalContext.Instance.UtcNow,
 			AuditModifiedUtc = null,
 			IdAuditCreatedBy = scopeContext.IdUser,
 			IdAuditModifiedBy = null,
-			ConcurrencyToken = Guid.NewGuid(),
+			ConcurrencyToken = GlobalContext.Instance.NewGuid(),
 			DeletedUtc = DateTime.MinValue
 		};
 
@@ -47,7 +47,7 @@ public sealed partial class RolePermission : Auth.AuthBaseEntity, Legion.Model.A
 		{
 			AuditModifiedUtc = DeletedUtc;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =

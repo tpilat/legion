@@ -1,6 +1,6 @@
 namespace Legion.ADF.Logs.SqlServer;
 
-public partial class LogsQueryUnitOfWorkFactory : ILogsQueryUnitOfWorkFactory
+public partial class LogsQueryUnitOfWorkFactory : ILogsQueryUnitOfWorkFactory, Legion.Model.Repositories.IQueryUnitOfWorkFactory<ILogsQueryUnitOfWork>
 {
 	public ILogsQueryUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

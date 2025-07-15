@@ -1,4 +1,5 @@
 ﻿using Legion.ADF.Logs.Extensions;
+using Legion.ADF.ServiceBus.Extensions;
 using Legion.AspNetCore.WebApi;
 using Legion.Extensions;
 using System.Globalization;
@@ -23,7 +24,7 @@ public class Program
 				"Legion.ADF.ServiceBus.RestApi",
 				removePreviousSameMethodFrame: true,
 				previousScopeContext: null,
-				correlationId: Guid.NewGuid(),
+				correlationId: GlobalContext.Instance.NewGuid(),
 				principal: null,
 				idUser: null,
 				businessProcess: null, //TODO: nastavit pri application entry v controlleri / Handleri
@@ -42,7 +43,9 @@ public class Program
 		builder.Services.AddADFLogs(builder.Configuration)
 			.ConfigurePostgreSQL();
 
-		builder.Services.AddADFServiceBusMonitor("ESB", builder.Configuration);
+		var esbConfigBindingPath = "WebApi";
+		builder.Services.AddADFServiceBusMonitor(esbConfigBindingPath, builder.Configuration)
+			.ConfigurePostgreSQL();
 
 		builder.Services.AddInMemoryMessageBus([
 			typeof(ServiceBus.PostgreSQL.TableInfoProvider).Assembly,
@@ -59,18 +62,13 @@ public class Program
 		//add all TOption builders
 		builder.Services.ConfigureOptionsBuilders(assemblies);
 
-		builder.Services.AddWebApiControllers(builder.Configuration, new List<Assembly> { typeof(Legion.ADF.ServiceBus.AppDefaults).Assembly });
+		builder.Services.AddWebApiControllers(builder.Configuration, [ typeof(Legion.ADF.ServiceBus.AppDefaults).Assembly ], esbConfigBindingPath);
 
 		var app = builder.Build();
 
-		app.Use(async (context, next) =>
-		{
-			await next();
-		});
-
 		app.UseWebApi();
 
-		app.UseHttpsRedirection();
+		//app.UseHttpsRedirection();
 
 		app.UseAuthorization();
 

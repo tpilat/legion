@@ -13,7 +13,7 @@ public sealed partial class BlockedDomainEventType : DomainEvents.DomainEventsBa
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, blockedNamespace))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var dbBlockedDomainEventType = new BlockedDomainEventType
 		{
 			__IsNewObject = true,

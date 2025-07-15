@@ -2,28 +2,37 @@
 
 namespace Legion.ADF.ServiceBus.RestApi.Client;
 
-public partial class ServiceBusRestApiClient : HttpApiClient<ServiceBusRestApiClientOptions>
+public partial class ServiceBusRestApiClient : HttpApiClient<ServiceBusRestApiClientOptions>, IServiceBusMonitor
 {
 	public static class URI
 	{
-		public static class Hosts
+		public static class ServiceBus
 		{
 			public static class V1
 			{
-				public const string GetHostsSummary = "/api/v1/Hosts/GetHostsSummary";
-				public const string GetHostConfiguration = "/api/v1/Hosts/GetHostConfiguration";
-				public const string GetHostLogs = "/api/v1/Hosts/GetHostLogs";
+				public const string IsAlive = "/api/v1/ServiceBus/IsAlive";
+				public const string GetInstances = "/api/v1/ServiceBus/GetInstances";
 			}
 		}
 
-		public static class Jobs
+
+		public static class Host
 		{
 			public static class V1
 			{
-				public const string GetJobsSummary = "/api/v1/Jobs/GetJobsSummary";
-				public const string GetJobsStatistics = "/api/v1/Jobs/GetJobStatistics";
-				public const string GetJobExecutions = "/api/v1/Jobs/GetJobExecutions";
-				public const string GetJobLogs = "/api/v1/Jobs/GetJobLogs";
+				public const string GetDetail = "/api/v1/Host/GetDetail";
+				public const string GetLogs = "/api/v1/Host/GetLogs";
+			}
+		}
+
+		public static class Job
+		{
+			public static class V1
+			{
+				public const string GetDetail = "/api/v1/Job/GetDetail";
+				public const string GetStatistics = "/api/v1/Job/GetStatistics";
+				public const string GetExecutions = "/api/v1/Job/GetExecutions";
+				public const string GetLogs = "/api/v1/Job/GetLogs";
 			}
 		}
 	}

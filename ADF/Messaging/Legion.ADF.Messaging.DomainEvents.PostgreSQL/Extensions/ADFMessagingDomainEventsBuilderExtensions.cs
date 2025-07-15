@@ -4,6 +4,7 @@ using Legion.Database.PostgreSQL.Extensions;
 using Legion.EntityFrameworkCore.Database;
 using Legion.EntityFrameworkCore.Extensions;
 using Legion.Extensions;
+using Legion.Model.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -24,6 +25,8 @@ public static class ADFMessagingDomainEventsBuilderExtensions
 		builder.ADFMessagingBuilder.Services.AddQueryUnitOfWork<IDomainEventsQueryUnitOfWork>(efConnectionProvider => new DomainEventsQueryUnitOfWork(efConnectionProvider));
 		builder.ADFMessagingBuilder.Services.TryAddSingleton<IDomainEventsUnitOfWorkFactory, DomainEventsUnitOfWorkFactory>();
 		builder.ADFMessagingBuilder.Services.TryAddSingleton<IDomainEventsQueryUnitOfWorkFactory, DomainEventsQueryUnitOfWorkFactory>();
+		builder.ADFMessagingBuilder.Services.TryAddSingleton<IUnitOfWorkFactory<IDomainEventsUnitOfWork>, DomainEventsUnitOfWorkFactory>();
+		builder.ADFMessagingBuilder.Services.TryAddSingleton<IQueryUnitOfWorkFactory<IDomainEventsQueryUnitOfWork>, DomainEventsQueryUnitOfWorkFactory>();
 		builder.ADFMessagingBuilder.Services.AddDbContext<DomainEventsDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);
 		builder.ADFMessagingBuilder.Services.TryAddTransient<IDomainEventsDbContext, DomainEventsDbContext>();
 		builder.ADFMessagingBuilder.Services.AddDbContext<DomainEventsQueryDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);

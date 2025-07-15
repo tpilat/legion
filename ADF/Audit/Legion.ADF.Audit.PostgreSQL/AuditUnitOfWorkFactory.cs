@@ -1,6 +1,6 @@
 namespace Legion.ADF.Audit.PostgreSQL;
 
-public partial class AuditUnitOfWorkFactory : IAuditUnitOfWorkFactory
+public partial class AuditUnitOfWorkFactory : IAuditUnitOfWorkFactory, Legion.Model.Repositories.IUnitOfWorkFactory<IAuditUnitOfWork>
 {
 	public IAuditUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

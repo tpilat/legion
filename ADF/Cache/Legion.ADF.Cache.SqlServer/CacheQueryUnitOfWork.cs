@@ -1,4 +1,4 @@
-using Legion;
+﻿using Legion;
 using Legion.EntityFrameworkCore;
 using Legion.Model.Audit;
 using Legion.EntityFrameworkCore.Queries;
@@ -24,7 +24,7 @@ internal partial class CacheQueryUnitOfWork : Legion.ADF.Cache.ICacheQueryUnitOf
 	public CacheQueryUnitOfWork(IEFConnectionProvider connectionProvider)
 	{
 #if TRACK_OBJECTS
-		IdCacheQueryUnitOfWork = Guid.NewGuid();
+		IdCacheQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdCacheQueryUnitOfWork.ToString());
 #endif
 
@@ -37,7 +37,7 @@ internal partial class CacheQueryUnitOfWork : Legion.ADF.Cache.ICacheQueryUnitOf
 	public CacheQueryUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbUnitOfWork dbUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdCacheQueryUnitOfWork = Guid.NewGuid();
+		IdCacheQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdCacheQueryUnitOfWork.ToString());
 #endif
 
@@ -50,7 +50,7 @@ internal partial class CacheQueryUnitOfWork : Legion.ADF.Cache.ICacheQueryUnitOf
 	public CacheQueryUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbQueryUnitOfWork dbQueryUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdCacheQueryUnitOfWork = Guid.NewGuid();
+		IdCacheQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdCacheQueryUnitOfWork.ToString());
 #endif
 
@@ -68,7 +68,7 @@ internal partial class CacheQueryUnitOfWork : Legion.ADF.Cache.ICacheQueryUnitOf
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdCacheQueryUnitOfWork = Guid.NewGuid();
+		IdCacheQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdCacheQueryUnitOfWork.ToString());
 #endif
 
@@ -92,7 +92,7 @@ internal partial class CacheQueryUnitOfWork : Legion.ADF.Cache.ICacheQueryUnitOf
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdCacheQueryUnitOfWork = Guid.NewGuid();
+		IdCacheQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdCacheQueryUnitOfWork.ToString());
 #endif
 

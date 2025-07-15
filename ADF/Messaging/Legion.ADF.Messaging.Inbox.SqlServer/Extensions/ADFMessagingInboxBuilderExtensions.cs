@@ -4,6 +4,7 @@ using Legion.Database.SqlServer.Extensions;
 using Legion.EntityFrameworkCore.Database;
 using Legion.EntityFrameworkCore.Extensions;
 using Legion.Extensions;
+using Legion.Model.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -24,6 +25,8 @@ public static class ADFMessagingInboxBuilderExtensions
 		builder.ADFMessagingBuilder.Services.AddQueryUnitOfWork<IInboxQueryUnitOfWork>(efConnectionProvider => new InboxQueryUnitOfWork(efConnectionProvider));
 		builder.ADFMessagingBuilder.Services.TryAddSingleton<IInboxUnitOfWorkFactory, InboxUnitOfWorkFactory>();
 		builder.ADFMessagingBuilder.Services.TryAddSingleton<IInboxQueryUnitOfWorkFactory, InboxQueryUnitOfWorkFactory>();
+		builder.ADFMessagingBuilder.Services.TryAddSingleton<IUnitOfWorkFactory<IInboxUnitOfWork>, InboxUnitOfWorkFactory>();
+		builder.ADFMessagingBuilder.Services.TryAddSingleton<IQueryUnitOfWorkFactory<IInboxQueryUnitOfWork>, InboxQueryUnitOfWorkFactory>();
 		builder.ADFMessagingBuilder.Services.AddDbContext<InboxDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);
 		builder.ADFMessagingBuilder.Services.TryAddTransient<IInboxDbContext, InboxDbContext>();
 		builder.ADFMessagingBuilder.Services.AddDbContext<InboxQueryDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);

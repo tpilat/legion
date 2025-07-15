@@ -120,7 +120,7 @@ public class ScopeContext : IScopeContext, IApplicationEntryScopeContext
 
 		Throw.IfNull(traceFrameStack);
 
-		TraceCorrelationId = Guid.NewGuid();
+		TraceCorrelationId = GlobalContext.Instance.NewGuid();
 		SourceSystemName = sourceSystemName ?? previousScopeContext?.SourceSystemName!;
 		TraceFrameStack = traceFrameStack;
 		RuntimeUniqueKey = EnvironmentInfo.RUNTIME_UNIQUE_KEY;
@@ -165,7 +165,7 @@ public class ScopeContext : IScopeContext, IApplicationEntryScopeContext
 
 		var traceFrameStack = new TraceFrameStack(previousScopeContext.TraceFrameStack, previousScopeContext.TraceFrameStack.LastTraceFrame, true);
 
-		TraceCorrelationId = Guid.NewGuid();
+		TraceCorrelationId = GlobalContext.Instance.NewGuid();
 		SourceSystemName = previousScopeContext.SourceSystemName!;
 		TraceFrameStack = traceFrameStack;
 		RuntimeUniqueKey = EnvironmentInfo.RUNTIME_UNIQUE_KEY;

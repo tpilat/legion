@@ -24,7 +24,7 @@ internal partial class ServiceBusQueryUnitOfWork : Legion.ADF.ServiceBus.IServic
 	public ServiceBusQueryUnitOfWork(IEFConnectionProvider connectionProvider)
 	{
 #if TRACK_OBJECTS
-		IdServiceBusQueryUnitOfWork = Guid.NewGuid();
+		IdServiceBusQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdServiceBusQueryUnitOfWork.ToString());
 #endif
 
@@ -37,7 +37,7 @@ internal partial class ServiceBusQueryUnitOfWork : Legion.ADF.ServiceBus.IServic
 	public ServiceBusQueryUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbUnitOfWork dbUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdServiceBusQueryUnitOfWork = Guid.NewGuid();
+		IdServiceBusQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdServiceBusQueryUnitOfWork.ToString());
 #endif
 
@@ -50,7 +50,7 @@ internal partial class ServiceBusQueryUnitOfWork : Legion.ADF.ServiceBus.IServic
 	public ServiceBusQueryUnitOfWork(Legion.EntityFrameworkCore.Model.Repositories.IDbQueryUnitOfWork dbQueryUnitOfWork)
 	{
 #if TRACK_OBJECTS
-		IdServiceBusQueryUnitOfWork = Guid.NewGuid();
+		IdServiceBusQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdServiceBusQueryUnitOfWork.ToString());
 #endif
 
@@ -68,7 +68,7 @@ internal partial class ServiceBusQueryUnitOfWork : Legion.ADF.ServiceBus.IServic
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdServiceBusQueryUnitOfWork = Guid.NewGuid();
+		IdServiceBusQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdServiceBusQueryUnitOfWork.ToString());
 #endif
 
@@ -92,7 +92,7 @@ internal partial class ServiceBusQueryUnitOfWork : Legion.ADF.ServiceBus.IServic
 		bool createAuditEntryStore)
 	{
 #if TRACK_OBJECTS
-		IdServiceBusQueryUnitOfWork = Guid.NewGuid();
+		IdServiceBusQueryUnitOfWork = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, IdServiceBusQueryUnitOfWork.ToString());
 #endif
 

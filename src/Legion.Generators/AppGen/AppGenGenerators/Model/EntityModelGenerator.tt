@@ -655,7 +655,7 @@ if (enableFixupReferences)
 	if (Helpers.TypeHelper.TypeToCSharpSourceCode(concurrencyProp.ClrType) == "Guid")
 	{
 #>
-		<#= concurrencyProp.Name #> = Guid.NewGuid();
+		<#= concurrencyProp.Name #> = Legion.GlobalContext.Instance.NewGuid();
 <#
 	}
 	else

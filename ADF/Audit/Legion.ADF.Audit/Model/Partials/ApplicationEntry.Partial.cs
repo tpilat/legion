@@ -16,7 +16,7 @@ public sealed partial class ApplicationEntry : Audit.AuditBaseEntity, Legion.Mod
 		var applicationEntry = new ApplicationEntry
 		{
 			__IsNewObject = true,
-			IdApplicationEntry = Guid.NewGuid(),
+			IdApplicationEntry = GlobalContext.Instance.NewGuid(),
 			IdApplicationEntryToken = idApplicationEntryToken,
 			IdAuditOperation = idAuditOperation,
 			RuntimeUniqueKey = scopeContext.RuntimeUniqueKey,

@@ -83,7 +83,7 @@ public sealed partial class RolePermission : Auth.AuthBaseEntity, Legion.Model.A
 
 	public void SetNewConcurrencyToken()
 	{
-		ConcurrencyToken = Guid.NewGuid();
+		ConcurrencyToken = GlobalContext.Instance.NewGuid();
 	}
 
 	static RolePermission()

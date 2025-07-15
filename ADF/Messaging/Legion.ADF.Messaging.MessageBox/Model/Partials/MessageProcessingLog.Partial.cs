@@ -29,7 +29,7 @@ public sealed partial class MessageProcessingLog : MessageBox.MessageBoxBaseEnti
 		if (idQueuedMessage.HasValue && idSubscribedMessage.HasValue)
 			return result.WithArgumentException(scopeContext, idQueuedMessage, errorCode: null, detail: "Both are set", paramName: $"{nameof(idQueuedMessage)} != null && {nameof(idSubscribedMessage)} != null");
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageProcessingLog = new MessageProcessingLog
 		{
 			__IsNewObject = true,
@@ -67,7 +67,7 @@ public sealed partial class MessageProcessingLog : MessageBox.MessageBoxBaseEnti
 		if (result.IsArgumentNull(scopeContext, queuedMessage))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageProcessingLog = new MessageProcessingLog
 		{
 			__IsNewObject = true,
@@ -105,7 +105,7 @@ public sealed partial class MessageProcessingLog : MessageBox.MessageBoxBaseEnti
 		if (result.IsArgumentNull(scopeContext, subscribedMessage))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageProcessingLog = new MessageProcessingLog
 		{
 			__IsNewObject = true,

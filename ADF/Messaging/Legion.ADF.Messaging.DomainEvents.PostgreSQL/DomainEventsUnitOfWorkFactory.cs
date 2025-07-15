@@ -1,6 +1,6 @@
 namespace Legion.ADF.Messaging.DomainEvents.PostgreSQL;
 
-public partial class DomainEventsUnitOfWorkFactory : IDomainEventsUnitOfWorkFactory
+public partial class DomainEventsUnitOfWorkFactory : IDomainEventsUnitOfWorkFactory, Legion.Model.Repositories.IUnitOfWorkFactory<IDomainEventsUnitOfWork>
 {
 	public IDomainEventsUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

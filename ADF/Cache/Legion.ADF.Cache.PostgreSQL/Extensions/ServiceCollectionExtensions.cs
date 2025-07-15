@@ -3,6 +3,7 @@ using Legion.Database.PostgreSQL.Extensions;
 using Legion.EntityFrameworkCore.Database;
 using Legion.EntityFrameworkCore.Extensions;
 using Legion.Extensions;
+using Legion.Model.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -23,6 +24,8 @@ public static class ServiceCollectionExtensions
 		builder.Services.AddQueryUnitOfWork<ICacheQueryUnitOfWork>(efConnectionProvider => new CacheQueryUnitOfWork(efConnectionProvider));
 		builder.Services.TryAddSingleton<ICacheUnitOfWorkFactory, CacheUnitOfWorkFactory>();
 		builder.Services.TryAddSingleton<ICacheQueryUnitOfWorkFactory, CacheQueryUnitOfWorkFactory>();
+		builder.Services.TryAddSingleton<IUnitOfWorkFactory<ICacheUnitOfWork>, CacheUnitOfWorkFactory>();
+		builder.Services.TryAddSingleton<IQueryUnitOfWorkFactory<ICacheQueryUnitOfWork>, CacheQueryUnitOfWorkFactory>();
 		builder.Services.AddDbContext<CacheDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);
 		builder.Services.TryAddTransient<ICacheDbContext, CacheDbContext>();
 		builder.Services.AddDbContext<CacheQueryDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);

@@ -3,7 +3,7 @@ using Legion.Model.Mappers;
 
 namespace Legion.ADF.ServiceBus.Model;
 
-public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model.IEntity
+public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model.Concurrence.IConcurrent, Legion.Model.IEntity
 {
 	public static ServiceBus.Model.Host? Map(
 		ServiceBus.Model.Host source,
@@ -57,16 +57,10 @@ public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model
 				target.CreatedUtc = CreatedUtc;
 			if (conds.CanMap(this, nameof(IsEnabled)))
 				target.IsEnabled = IsEnabled;
-			if (conds.CanMap(this, nameof(StartedUtc)))
-				target.StartedUtc = StartedUtc;
-			if (conds.CanMap(this, nameof(LastActivityUtc)))
-				target.LastActivityUtc = LastActivityUtc;
-			if (conds.CanMap(this, nameof(StoppedUtc)))
-				target.StoppedUtc = StoppedUtc;
 			if (conds.CanMap(this, nameof(Configuration)))
 				target.Configuration = Configuration;
-			if (conds.CanMap(this, nameof(IsDistributedManagerAvailable)))
-				target.IsDistributedManagerAvailable = IsDistributedManagerAvailable;
+			if (conds.CanMap(this, nameof(RowVersion)))
+				target.RowVersion = RowVersion;
 		}
 		else
 		{
@@ -75,21 +69,20 @@ public sealed partial class Host : ServiceBus.ServiceBusBaseEntity, Legion.Model
 			target.Description = Description;
 			target.CreatedUtc = CreatedUtc;
 			target.IsEnabled = IsEnabled;
-			target.StartedUtc = StartedUtc;
-			target.LastActivityUtc = LastActivityUtc;
-			target.StoppedUtc = StoppedUtc;
 			target.Configuration = Configuration;
-			target.IsDistributedManagerAvailable = IsDistributedManagerAvailable;
+			target.RowVersion = RowVersion;
 		}
 
 		cache.Add(this, target);
 
 		if (referenceModifier == ReferenceModifier.MapAllReferences)
 		{
+			target.HostActivity = HostActivity?.MapTo(target.HostActivity, referenceModifier, conds?.GetConditions(x => x.HostActivity), instanceFactory, cache)!;
 			target._hostLogs = MapperHelper.MapToList(HostLogs, target._hostLogs, Legion.ADF.ServiceBus.Model.HostLog.Map, referenceModifier, conds?.GetConditions(x => x.HostLogs), instanceFactory, cache)!;
 		}
 		else if (referenceModifier == ReferenceModifier.SetNull)
 		{
+			target.HostActivity = null!;
 			target._hostLogs = [];
 		}
 

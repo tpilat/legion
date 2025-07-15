@@ -20,14 +20,17 @@ public sealed partial class DistributedLock : Cache.CacheBaseEntity, Legion.Mode
 		if (result.IsArgumentLessThanOrEqual(scopeContext, timeout, TimeSpan.Zero))
 			return result.Build();
 
+		var utcNow = GlobalContext.Instance.UtcNow;
+
 		var distributedLock = new DistributedLock
 		{
 			__IsNewObject = true,
 			KeyHash = HashHelper.ComputeMD5Hash(key),
 			LockKey = key,
-			LockId = HashHelper.ComputeMD5Hash(Guid.NewGuid().ToString()),
+			LockId = HashHelper.ComputeMD5Hash(GlobalContext.Instance.NewGuid().ToString()),
 			Metadata = metadata,
-			ExpiresUtc = GlobalContext.Instance.UtcNow.Add(timeout)
+			CreatedUtc = utcNow,
+			ExpiresUtc = utcNow.Add(timeout)
 		};
 
 		var validationResult =

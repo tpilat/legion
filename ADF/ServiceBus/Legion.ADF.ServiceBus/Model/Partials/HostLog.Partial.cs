@@ -4,7 +4,7 @@ namespace Legion.ADF.ServiceBus.Model;
 
 public sealed partial class HostLog : ServiceBusBaseEntity, Legion.Model.IEntity
 {
-	public static IResult<HostLog> Create(
+	internal static IResult<HostLog> Create(
 		IScopeContext scopeContext,
 		Guid idHost,
 		string code,
@@ -21,7 +21,7 @@ public sealed partial class HostLog : ServiceBusBaseEntity, Legion.Model.IEntity
 		if (result.IsArgumentNull(scopeContext, logMessage))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var hostLog = new HostLog
 		{
 			__IsNewObject = true,
@@ -44,5 +44,22 @@ public sealed partial class HostLog : ServiceBusBaseEntity, Legion.Model.IEntity
 			return result.Build();
 
 		return result.WithData(hostLog).Build();
+	}
+
+	internal DTOs.Hosts.HostLogDto ToDto()
+	{
+		var dto = new DTOs.Hosts.HostLogDto
+		{
+			IdHost = IdHost,
+			IdLogLevel = IdLogLevel,
+			CreatedUtc = CreatedUtc,
+			IsRunning = IsRunning,
+			TraceCorrelationId = TraceCorrelationId,
+			IdLogMessage = IdLogMessage,
+			Code = Code,
+			Detail = Detail
+		};
+
+		return dto;
 	}
 }

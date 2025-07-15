@@ -35,22 +35,8 @@ public partial interface I{generatorOptions.UnitOfWorkName} : Legion.Model.Repos
 
 		iUnitOfWorkSBFactory.Append($@"namespace {generatorOptions.ModelNamespace};
 
-public partial interface I{generatorOptions.UnitOfWorkName}Factory
+public partial interface I{generatorOptions.UnitOfWorkName}Factory : Legion.Model.Repositories.IQueryUnitOfWorkFactory<I{generatorOptions.UnitOfWorkName}>
 {{
-	I{generatorOptions.UnitOfWorkName} Create(Legion.Database.IConnectionProvider connectionProvider);
-	I{generatorOptions.UnitOfWorkName} Create(Legion.Model.Repositories.IUnitOfWork unitOfWork);
-	I{generatorOptions.UnitOfWorkName} Create(Legion.Model.Repositories.IQueryUnitOfWork queryUnitOfWork);
-	I{generatorOptions.UnitOfWorkName} Create(
-		IServiceProvider serviceProvider,
-		string connectionStirng,
-		System.Data.IsolationLevel? isolationLevel,
-		bool? allowLocking,
-		bool createAuditEntryStore);
-	I{generatorOptions.UnitOfWorkName} CreateWithoutTransaction(
-		IServiceProvider serviceProvider,
-		string connectionStirng,
-		bool? allowLocking,
-		bool createAuditEntryStore);
 }}
 ");
 
@@ -81,7 +67,7 @@ internal partial class {generatorOptions.UnitOfWorkName} : {generatorOptions.Mod
 	public {generatorOptions.UnitOfWorkName}(IEFConnectionProvider connectionProvider)
 	{{
 #if TRACK_OBJECTS
-		Id{generatorOptions.UnitOfWorkName} = Guid.NewGuid();
+		Id{generatorOptions.UnitOfWorkName} = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, Id{generatorOptions.UnitOfWorkName}.ToString());
 #endif
 
@@ -94,7 +80,7 @@ internal partial class {generatorOptions.UnitOfWorkName} : {generatorOptions.Mod
 	public {generatorOptions.UnitOfWorkName}(Legion.EntityFrameworkCore.Model.Repositories.IDbUnitOfWork dbUnitOfWork)
 	{{
 #if TRACK_OBJECTS
-		Id{generatorOptions.UnitOfWorkName} = Guid.NewGuid();
+		Id{generatorOptions.UnitOfWorkName} = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, Id{generatorOptions.UnitOfWorkName}.ToString());
 #endif
 
@@ -107,7 +93,7 @@ internal partial class {generatorOptions.UnitOfWorkName} : {generatorOptions.Mod
 	public {generatorOptions.UnitOfWorkName}(Legion.EntityFrameworkCore.Model.Repositories.IDbQueryUnitOfWork dbQueryUnitOfWork)
 	{{
 #if TRACK_OBJECTS
-		Id{generatorOptions.UnitOfWorkName} = Guid.NewGuid();
+		Id{generatorOptions.UnitOfWorkName} = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, Id{generatorOptions.UnitOfWorkName}.ToString());
 #endif
 
@@ -125,7 +111,7 @@ internal partial class {generatorOptions.UnitOfWorkName} : {generatorOptions.Mod
 		bool createAuditEntryStore)
 	{{
 #if TRACK_OBJECTS
-		Id{generatorOptions.UnitOfWorkName} = Guid.NewGuid();
+		Id{generatorOptions.UnitOfWorkName} = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, Id{generatorOptions.UnitOfWorkName}.ToString());
 #endif
 
@@ -149,7 +135,7 @@ internal partial class {generatorOptions.UnitOfWorkName} : {generatorOptions.Mod
 		bool createAuditEntryStore)
 	{{
 #if TRACK_OBJECTS
-		Id{generatorOptions.UnitOfWorkName} = Guid.NewGuid();
+		Id{generatorOptions.UnitOfWorkName} = Legion.GlobalContext.Instance.NewGuid();
 		Trackers.ObjectLifetimeTracker.Track(this, Id{generatorOptions.UnitOfWorkName}.ToString());
 #endif
 
@@ -314,7 +300,7 @@ internal partial class {generatorOptions.UnitOfWorkName} : {generatorOptions.Mod
 		var unitOfWorkSBFactory = new StringBuilder();
 		unitOfWorkSBFactory.Append($@"namespace {generatorOptions.EFNamespace};
 
-public partial class {generatorOptions.UnitOfWorkName}Factory : I{generatorOptions.UnitOfWorkName}Factory
+public partial class {generatorOptions.UnitOfWorkName}Factory : I{generatorOptions.UnitOfWorkName}Factory, Legion.Model.Repositories.IQueryUnitOfWorkFactory<I{generatorOptions.UnitOfWorkName}>
 {{
 	public I{generatorOptions.UnitOfWorkName} Create(Legion.Database.IConnectionProvider connectionProvider)
 	{{

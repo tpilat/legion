@@ -2157,7 +2157,7 @@ if (enableFixupReferences)
             
             #line default
             #line hidden
-            this.Write(" = Guid.NewGuid();\r\n");
+            this.Write(" = Legion.GlobalContext.Instance.NewGuid();\r\n");
             
             #line 659 "C:\Code\legion\src\Legion.Generators\AppGen\AppGenGenerators\Model\EntityModelGenerator.tt"
 

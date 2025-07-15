@@ -1,6 +1,6 @@
 namespace Legion.ADF.Auth.SqlServer;
 
-public partial class AuthQueryUnitOfWorkFactory : IAuthQueryUnitOfWorkFactory
+public partial class AuthQueryUnitOfWorkFactory : IAuthQueryUnitOfWorkFactory, Legion.Model.Repositories.IQueryUnitOfWorkFactory<IAuthQueryUnitOfWork>
 {
 	public IAuthQueryUnitOfWork Create(Legion.Database.IConnectionProvider connectionProvider)
 	{

@@ -14,8 +14,10 @@ public partial class ServiceBusDbContext : Legion.EntityFrameworkCore.Audit.Audi
 		PrimaryKeyFormatters = new System.Collections.Generic.Dictionary<string, string>
 		{
 			{ nameof(Legion.ADF.ServiceBus.Model.Host), SqlServer.HostConfiguration.PrimaryKeyFormatter },
+			{ nameof(Legion.ADF.ServiceBus.Model.HostActivity), SqlServer.HostActivityConfiguration.PrimaryKeyFormatter },
 			{ nameof(Legion.ADF.ServiceBus.Model.HostLog), SqlServer.HostLogConfiguration.PrimaryKeyFormatter },
 			{ nameof(Legion.ADF.ServiceBus.Model.Job), SqlServer.JobConfiguration.PrimaryKeyFormatter },
+			{ nameof(Legion.ADF.ServiceBus.Model.JobActivity), SqlServer.JobActivityConfiguration.PrimaryKeyFormatter },
 			{ nameof(Legion.ADF.ServiceBus.Model.JobData), SqlServer.JobDataConfiguration.PrimaryKeyFormatter },
 			{ nameof(Legion.ADF.ServiceBus.Model.JobExecution), SqlServer.JobExecutionConfiguration.PrimaryKeyFormatter },
 			{ nameof(Legion.ADF.ServiceBus.Model.JobLog), SqlServer.JobLogConfiguration.PrimaryKeyFormatter },
@@ -38,8 +40,10 @@ public partial class ServiceBusDbContext : Legion.EntityFrameworkCore.Audit.Audi
 	}
 
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.Host> Host { get; set; }
+	public virtual DbSet<Legion.ADF.ServiceBus.Model.HostActivity> HostActivity { get; set; }
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.HostLog> HostLog { get; set; }
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.Job> Job { get; set; }
+	public virtual DbSet<Legion.ADF.ServiceBus.Model.JobActivity> JobActivity { get; set; }
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.JobData> JobData { get; set; }
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.JobExecution> JobExecution { get; set; }
 	public virtual DbSet<Legion.ADF.ServiceBus.Model.JobLog> JobLog { get; set; }
@@ -92,8 +96,10 @@ public partial class ServiceBusDbContext : Legion.EntityFrameworkCore.Audit.Audi
 		RegisterUnaccentFunction(modelBuilder);
 
 		SqlServer.HostConfiguration.Build(modelBuilder);
+		SqlServer.HostActivityConfiguration.Build(modelBuilder);
 		SqlServer.HostLogConfiguration.Build(modelBuilder);
 		SqlServer.JobConfiguration.Build(modelBuilder);
+		SqlServer.JobActivityConfiguration.Build(modelBuilder);
 		SqlServer.JobDataConfiguration.Build(modelBuilder);
 		SqlServer.JobExecutionConfiguration.Build(modelBuilder);
 		SqlServer.JobLogConfiguration.Build(modelBuilder);

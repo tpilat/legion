@@ -4,6 +4,10 @@ namespace Legion.ADF.Cache.Model.Repositories;
 
 public partial interface ICacheDataRepository : Legion.ADF.Cache.ICacheRepository<Legion.ADF.Cache.Model.CacheData>
 {
+	Task<bool> IsAliveAsync(
+		IScopeContext scopeContext,
+		CancellationToken cancellationToken = default);
+
 	Task<Cache.Model.CacheData?> TryGetCacheDataAsync(
 		IScopeContext scopeContext,
 		string key,
@@ -18,7 +22,7 @@ public partial interface ICacheDataRepository : Legion.ADF.Cache.ICacheRepositor
 		IScopeContext scopeContext,
 		string key,
 		string value,
-		long? currentRowVersion,
+		Guid? currentRowVersion,
 		MemoryCacheEntryOptions? options,
 		CancellationToken cancellationToken = default);
 
@@ -27,7 +31,7 @@ public partial interface ICacheDataRepository : Legion.ADF.Cache.ICacheRepositor
 		string key,
 		string oldValue,
 		string newValue,
-		long currentRowVersion,
+		Guid currentRowVersion,
 		MemoryCacheEntryOptions? options = null,
 		CancellationToken cancellationToken = default);
 

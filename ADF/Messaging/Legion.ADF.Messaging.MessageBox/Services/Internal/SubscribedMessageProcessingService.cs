@@ -60,7 +60,7 @@ public class SubscribedMessageProcessingService : BackgroundService
 		var noTopic = false;
 		while (!cancellationToken.IsCancellationRequested)
 		{
-			var scopeContext = ScopeContext.Create(scopeContextGlobal, correlationId: Guid.NewGuid());
+			var scopeContext = ScopeContext.Create(scopeContextGlobal, correlationId: GlobalContext.Instance.NewGuid());
 
 			if (_options.LogLevel <= LogLevel.Information)
 				_logger?.LogInformationMessage(scopeContext, x => x.InternalMessage($"{nameof(SubscribedMessageProcessingService)}.{nameof(ExecuteAsync)}: START"));
@@ -408,7 +408,7 @@ public class SubscribedMessageProcessingService : BackgroundService
 		MessagingMessageBoxStoreOptions storeOptions,
 		CancellationToken cancellationToken = default)
 	{
-		scopeContext = ScopeContext.Create(scopeContext, correlationId: Guid.NewGuid())
+		scopeContext = ScopeContext.Create(scopeContext, correlationId: GlobalContext.Instance.NewGuid())
 			.AddContextProperty(nameof(idSubscribedMessage), idSubscribedMessage.ToString());
 
 		try

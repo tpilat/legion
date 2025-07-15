@@ -7,8 +7,9 @@ CREATE TABLE cache."CacheData"
 	"KeyPrefix450" text NOT NULL,
 	"ExpiresUtc" timestamp with time zone NULL,
 	"SlidingTime" interval NULL,
+	"CreatedUtc" timestamp with time zone NOT NULL,
 	"LastAccessedUtc" timestamp with time zone NOT NULL,
-	"RowVersion" bigint NOT NULL
+	"RowVersion" uuid NOT NULL
 );
 
 CREATE TABLE cache."DistributedLock"
@@ -17,6 +18,7 @@ CREATE TABLE cache."DistributedLock"
 	"LockKey" text NOT NULL,
 	"LockId" text NOT NULL,
 	"Metadata" text NULL,
+	"CreatedUtc" timestamp with time zone NOT NULL,
 	"ExpiresUtc" timestamp with time zone NOT NULL
 );
 
@@ -40,6 +42,8 @@ CREATE INDEX "IX_CacheData_ValueHash" ON cache."CacheData" ("ValueHash" ASC);
 
 ALTER TABLE cache."DistributedLock" ADD CONSTRAINT "PK_DistributedLock"
 	PRIMARY KEY ("KeyHash");
+
+CREATE INDEX "IX_DistributedLock_LockId" ON cache."DistributedLock" ("LockId" ASC);
 
 ALTER TABLE cache."ReloadableCacheKey" ADD CONSTRAINT "PK_ReloadableCacheKey"
 	PRIMARY KEY ("IdReloadableCacheKey");

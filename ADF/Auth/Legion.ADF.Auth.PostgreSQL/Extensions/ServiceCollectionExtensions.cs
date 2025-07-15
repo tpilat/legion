@@ -3,6 +3,7 @@ using Legion.Database.PostgreSQL.Extensions;
 using Legion.EntityFrameworkCore.Database;
 using Legion.EntityFrameworkCore.Extensions;
 using Legion.Extensions;
+using Legion.Model.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -23,6 +24,8 @@ public static class ServiceCollectionExtensions
 		builder.Services.AddQueryUnitOfWork<IAuthQueryUnitOfWork>(efConnectionProvider => new AuthQueryUnitOfWork(efConnectionProvider));
 		builder.Services.TryAddSingleton<IAuthUnitOfWorkFactory, AuthUnitOfWorkFactory>();
 		builder.Services.TryAddSingleton<IAuthQueryUnitOfWorkFactory, AuthQueryUnitOfWorkFactory>();
+		builder.Services.TryAddSingleton<IUnitOfWorkFactory<IAuthUnitOfWork>, AuthUnitOfWorkFactory>();
+		builder.Services.TryAddSingleton<IQueryUnitOfWorkFactory<IAuthQueryUnitOfWork>, AuthQueryUnitOfWorkFactory>();
 		builder.Services.AddDbContext<AuthDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);
 		builder.Services.TryAddTransient<IAuthDbContext, AuthDbContext>();
 		builder.Services.AddDbContext<AuthQueryDbContext>(options => options.AddRowNumberSupport(), ServiceLifetime.Transient);

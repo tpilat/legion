@@ -13,7 +13,7 @@ public class NavigationObjectPath<T> : ObjectPath<T>, INavigationObjectPath, IOb
 	}
 
 	internal NavigationObjectPath(ObjectPath parent, string propertyName)
-		: this(Guid.NewGuid())
+		: this(GlobalContext.Instance.NewGuid())
 	{
 		Throw.IfArgumentNull(parent);
 

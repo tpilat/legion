@@ -24,7 +24,7 @@ public class Program
 				"Legion.ADF.Cache.RestApi",
 				removePreviousSameMethodFrame: true,
 				previousScopeContext: null,
-				correlationId: Guid.NewGuid(),
+				correlationId: GlobalContext.Instance.NewGuid(),
 				principal: null,
 				idUser: null,
 				businessProcess: null, //TODO: nastavit pri application entry v controlleri / Handleri
@@ -43,10 +43,14 @@ public class Program
 		builder.Services.AddADFLogs(builder.Configuration)
 			.ConfigurePostgreSQL();
 
+		var esbConfigBindingPath = "WebApi";
 		builder.Services.AddADFCache(builder.Configuration)
 			.ConfigurePostgreSQL();
 
-		builder.Services.AddInMemoryMessageBus([typeof(Cache.PostgreSQL.TableInfoProvider).Assembly, typeof(Program).Assembly]);
+		builder.Services.AddInMemoryMessageBus([
+			typeof(Cache.PostgreSQL.TableInfoProvider).Assembly,
+			typeof(Program).Assembly
+			]);
 
 		Assembly[] assemblies = [
 			typeof(Program).Assembly
@@ -58,14 +62,9 @@ public class Program
 		//add all TOption builders
 		builder.Services.ConfigureOptionsBuilders(assemblies);
 
-		builder.Services.AddWebApiControllers(builder.Configuration, new List<Assembly> { typeof(Legion.ADF.Cache.AppDefaults).Assembly });
+		builder.Services.AddWebApiControllers(builder.Configuration, [ typeof(Legion.ADF.Cache.AppDefaults).Assembly ], esbConfigBindingPath);
 
 		var app = builder.Build();
-
-		app.Use(async (context, next) =>
-		{
-			await next();
-		});
 
 		app.UseWebApi();
 

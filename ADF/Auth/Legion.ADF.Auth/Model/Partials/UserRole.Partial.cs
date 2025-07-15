@@ -14,7 +14,7 @@ public sealed partial class UserRole : Auth.AuthBaseEntity, Legion.Model.Audit.I
 		var userRole = new UserRole
 		{
 			__IsNewObject = true,
-			IdUserRole = Guid.NewGuid(),
+			IdUserRole = GlobalContext.Instance.NewGuid(),
 			IdUser = idUser,
 			IdRole = idRole,
 			TenantIdentifier = scopeContext.TenantIdentifier ?? Guid.Empty,
@@ -22,7 +22,7 @@ public sealed partial class UserRole : Auth.AuthBaseEntity, Legion.Model.Audit.I
 			AuditModifiedUtc = null,
 			IdAuditCreatedBy = scopeContext.IdUser,
 			IdAuditModifiedBy = null,
-			ConcurrencyToken = Guid.NewGuid(),
+			ConcurrencyToken = GlobalContext.Instance.NewGuid(),
 			DeletedUtc = DateTime.MinValue
 		};
 
@@ -48,7 +48,7 @@ public sealed partial class UserRole : Auth.AuthBaseEntity, Legion.Model.Audit.I
 		{
 			AuditModifiedUtc = DeletedUtc;
 			IdAuditModifiedBy = scopeContext.IdUser;
-			ConcurrencyToken = Guid.NewGuid();
+			ConcurrencyToken = GlobalContext.Instance.NewGuid();
 		}
 
 		var validationResult =

@@ -13,15 +13,28 @@ public class TableInfoProvider : Legion.ADF.ServiceBus.ITableInfoProvider
 					new(nameof(Legion.ADF.ServiceBus.Model.Host.Description), typeof(string), "[Description]", "varchar(511)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.Host.CreatedUtc), typeof(DateTime), "[CreatedUtc]", "datetime2", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.Host.IsEnabled), typeof(bool), "[IsEnabled]", "bit", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.Host.StartedUtc), typeof(DateTime?), "[StartedUtc]", "datetime2", true),
-					new(nameof(Legion.ADF.ServiceBus.Model.Host.LastActivityUtc), typeof(DateTime), "[LastActivityUtc]", "datetime2", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.Host.StoppedUtc), typeof(DateTime?), "[StoppedUtc]", "datetime2", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.Host.Configuration), typeof(string), "[Configuration]", "nvarchar(max)", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.Host.IsDistributedManagerAvailable), typeof(bool), "[IsDistributedManagerAvailable]", "bit", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.Host.RowVersion), typeof(Guid), "[RowVersion]", "uniqueidentifier", false),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetHostTableInfo()
 		=> _HostTableInfo.Value;
+
+	private readonly static Lazy<Legion.Database.Metamodel.Info.TableInfo> _HostActivityTableInfo = new(() =>
+		new Legion.Database.Metamodel.Info.TableInfo(
+				"hosts", "[HostActivity]",
+				[
+					new(nameof(Legion.ADF.ServiceBus.Model.HostActivity.IdHostActivity), typeof(Guid), "[IdHostActivity]", "uniqueidentifier", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.HostActivity.IdHost), typeof(Guid), "[IdHost]", "uniqueidentifier", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.HostActivity.StartedUtc), typeof(DateTime), "[StartedUtc]", "datetime2", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.HostActivity.LastActivityUtc), typeof(DateTime), "[LastActivityUtc]", "datetime2", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.HostActivity.StoppedUtc), typeof(DateTime?), "[StoppedUtc]", "datetime2", true),
+					new(nameof(Legion.ADF.ServiceBus.Model.HostActivity.IsDistributedManagerAvailable), typeof(bool), "[IsDistributedManagerAvailable]", "bit", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.HostActivity.RowVersion), typeof(Guid), "[RowVersion]", "uniqueidentifier", false),
+				]));
+
+	public static Legion.Database.Metamodel.Info.TableInfo GetHostActivityTableInfo()
+		=> _HostActivityTableInfo.Value;
 
 	private readonly static Lazy<Legion.Database.Metamodel.Info.TableInfo> _HostLogTableInfo = new(() =>
 		new Legion.Database.Metamodel.Info.TableInfo(
@@ -49,7 +62,6 @@ public class TableInfoProvider : Legion.ADF.ServiceBus.ITableInfoProvider
 					new(nameof(Legion.ADF.ServiceBus.Model.Job.Name), typeof(string), "[Name]", "nvarchar(255)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.Job.Description), typeof(string), "[Description]", "nvarchar(1023)", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.Job.IdJobRunType), typeof(Guid), "[IdJobRunType]", "uniqueidentifier", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.Job.IdJobStatus), typeof(Guid), "[IdJobStatus]", "uniqueidentifier", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.Job.Namespace), typeof(string), "[Namespace]", "nvarchar(1023)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.Job.Properties), typeof(string), "[Properties]", "nvarchar(max)", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.Job.DelayedStartInSeconds), typeof(int?), "[DelayedStartInSeconds]", "int", true),
@@ -57,17 +69,32 @@ public class TableInfoProvider : Legion.ADF.ServiceBus.ITableInfoProvider
 					new(nameof(Legion.ADF.ServiceBus.Model.Job.CronExpression), typeof(string), "[CronExpression]", "nvarchar(63)", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.Job.CronExpressionIncludeSeconds), typeof(bool), "[CronExpressionIncludeSeconds]", "bit", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.Job.IdDefaultHost), typeof(Guid), "[IdDefaultHost]", "uniqueidentifier", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.Job.IdCurrentHost), typeof(Guid), "[IdCurrentHost]", "uniqueidentifier", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.Job.AttachedToCurrentHostUtc), typeof(DateTime), "[AttachedToCurrentHostUtc]", "datetime2", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.Job.LastProcessingUtc), typeof(DateTime?), "[LastProcessingUtc]", "datetime2", true),
-					new(nameof(Legion.ADF.ServiceBus.Model.Job.LastProcessingFinishedUtc), typeof(DateTime?), "[LastProcessingFinishedUtc]", "datetime2", true),
-					new(nameof(Legion.ADF.ServiceBus.Model.Job.NextProcessinUtc), typeof(DateTime), "[NextProcessinUtc]", "datetime2", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.Job.RequestedToDisable), typeof(bool), "[RequestedToDisable]", "bit", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.Job.TimeoutForProcessingInSeconds), typeof(int), "[TimeoutForProcessingInSeconds]", "int", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.Job.MaxProcessingRetryCount), typeof(int), "[MaxProcessingRetryCount]", "int", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.Job.RowVersion), typeof(Guid), "[RowVersion]", "uniqueidentifier", false),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetJobTableInfo()
 		=> _JobTableInfo.Value;
+
+	private readonly static Lazy<Legion.Database.Metamodel.Info.TableInfo> _JobActivityTableInfo = new(() =>
+		new Legion.Database.Metamodel.Info.TableInfo(
+				"jobs", "[JobActivity]",
+				[
+					new(nameof(Legion.ADF.ServiceBus.Model.JobActivity.IdJobActivity), typeof(Guid), "[IdJobActivity]", "uniqueidentifier", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobActivity.IdJob), typeof(Guid), "[IdJob]", "uniqueidentifier", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobActivity.IdJobStatus), typeof(Guid), "[IdJobStatus]", "uniqueidentifier", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobActivity.IdCurrentHost), typeof(Guid), "[IdCurrentHost]", "uniqueidentifier", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobActivity.AttachedToCurrentHostUtc), typeof(DateTime), "[AttachedToCurrentHostUtc]", "datetime2", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobActivity.LastStatusChangedUtc), typeof(DateTime), "[LastStatusChangedUtc]", "datetime2", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobActivity.LastProcessingStartedUtc), typeof(DateTime?), "[LastProcessingStartedUtc]", "datetime2", true),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobActivity.LastProcessingFinishedUtc), typeof(DateTime?), "[LastProcessingFinishedUtc]", "datetime2", true),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobActivity.DelayedToUtc), typeof(DateTime?), "[DelayedToUtc]", "datetime2", true),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobActivity.RowVersion), typeof(Guid), "[RowVersion]", "uniqueidentifier", false),
+				]));
+
+	public static Legion.Database.Metamodel.Info.TableInfo GetJobActivityTableInfo()
+		=> _JobActivityTableInfo.Value;
 
 	private readonly static Lazy<Legion.Database.Metamodel.Info.TableInfo> _JobDataTableInfo = new(() =>
 		new Legion.Database.Metamodel.Info.TableInfo(
@@ -104,6 +131,7 @@ public class TableInfoProvider : Legion.ADF.ServiceBus.ITableInfoProvider
 					new(nameof(Legion.ADF.ServiceBus.Model.JobExecution.StartUtc), typeof(DateTime), "[StartUtc]", "datetime2", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.JobExecution.EndUtc), typeof(DateTime?), "[EndUtc]", "datetime2", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.JobExecution.IdJobStatus), typeof(Guid), "[IdJobStatus]", "uniqueidentifier", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobExecution.StatisticsStartHourUtc), typeof(DateTime), "[StatisticsStartHourUtc]", "datetime2", false),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetJobExecutionTableInfo()
@@ -123,6 +151,7 @@ public class TableInfoProvider : Legion.ADF.ServiceBus.ITableInfoProvider
 					new(nameof(Legion.ADF.ServiceBus.Model.JobLog.Code), typeof(string), "[Code]", "nvarchar(127)", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.JobLog.Detail), typeof(string), "[Detail]", "nvarchar(max)", true),
 					new(nameof(Legion.ADF.ServiceBus.Model.JobLog.IdMessageProcessingLog), typeof(Guid?), "[IdMessageProcessingLog]", "uniqueidentifier", true),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobLog.IdJobExecution), typeof(Guid?), "[IdJobExecution]", "uniqueidentifier", true),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetJobLogTableInfo()
@@ -175,7 +204,7 @@ public class TableInfoProvider : Legion.ADF.ServiceBus.ITableInfoProvider
 					new(nameof(Legion.ADF.ServiceBus.Model.JobStatistics.StartHourUtc), typeof(DateTime), "[StartHourUtc]", "datetime2", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.JobStatistics.ExecutionCount), typeof(int), "[ExecutionCount]", "int", false),
 					new(nameof(Legion.ADF.ServiceBus.Model.JobStatistics.ErrorCount), typeof(int), "[ErrorCount]", "int", false),
-					new(nameof(Legion.ADF.ServiceBus.Model.JobStatistics.AverageDuration), typeof(decimal), "[AverageDuration]", "decimal", false),
+					new(nameof(Legion.ADF.ServiceBus.Model.JobStatistics.DurationSumInSeconds), typeof(long), "[DurationSumInSeconds]", "bigint", false),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetJobStatisticsTableInfo()
@@ -346,8 +375,10 @@ public class TableInfoProvider : Legion.ADF.ServiceBus.ITableInfoProvider
 		new(() => new Dictionary<Type, Legion.Database.Metamodel.Info.TableInfo>
 		{
 			{ typeof(Legion.ADF.ServiceBus.Model.Host), GetHostTableInfo() },
+			{ typeof(Legion.ADF.ServiceBus.Model.HostActivity), GetHostActivityTableInfo() },
 			{ typeof(Legion.ADF.ServiceBus.Model.HostLog), GetHostLogTableInfo() },
 			{ typeof(Legion.ADF.ServiceBus.Model.Job), GetJobTableInfo() },
+			{ typeof(Legion.ADF.ServiceBus.Model.JobActivity), GetJobActivityTableInfo() },
 			{ typeof(Legion.ADF.ServiceBus.Model.JobData), GetJobDataTableInfo() },
 			{ typeof(Legion.ADF.ServiceBus.Model.JobExecution), GetJobExecutionTableInfo() },
 			{ typeof(Legion.ADF.ServiceBus.Model.JobLog), GetJobLogTableInfo() },

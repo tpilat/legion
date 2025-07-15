@@ -4,15 +4,15 @@ namespace Legion.ADF.ServiceBus.DTOs.Jobs;
 
 public class JobStatisticsDto
 {
-	public Guid IdJob { get; private set; }
+	public Guid IdJob { get; set; }
 
-	public DateTime StartHourUtc { get; private set; }
+	public DateTime StartHourUtc { get; set; }
 
-	public int ExecutionCount { get; private set; }
+	public int ExecutionCount { get; set; }
 
-	public int ErrorCount { get; private set; }
+	public int ErrorCount { get; set; }
 
-	public decimal AverageDuration { get; private set; }
+	public decimal AverageDurationInSeconds { get; set; }
 
 	public static List<JobStatisticsDto> Aggregate(List<JobStatisticsDto> data, JobExecutionTypeEnum jobExecutionType)
 	{
@@ -29,7 +29,7 @@ public class JobStatisticsDto
 					StartHourUtc = g.Key.Date,
 					ExecutionCount = g.Sum(x => x.ExecutionCount),
 					ErrorCount = g.Sum(x => x.ErrorCount),
-					AverageDuration = g.Average(x => x.AverageDuration)
+					AverageDurationInSeconds = g.Average(x => x.AverageDurationInSeconds)
 				})
 				.ToList();
 		}
@@ -52,7 +52,7 @@ public class JobStatisticsDto
 					StartHourUtc = new DateTime(g.Key.Year, 1, 1).AddDays((g.Key.Week - 1) * 7), // Start of the week
 					ExecutionCount = g.Sum(x => x.ExecutionCount),
 					ErrorCount = g.Sum(x => x.ErrorCount),
-					AverageDuration = g.Average(x => x.AverageDuration)
+					AverageDurationInSeconds = g.Average(x => x.AverageDurationInSeconds)
 				})
 				.ToList();
 		}
@@ -67,7 +67,7 @@ public class JobStatisticsDto
 					StartHourUtc = new DateTime(g.Key.Year, g.Key.Month, 1),
 					ExecutionCount = g.Sum(x => x.ExecutionCount),
 					ErrorCount = g.Sum(x => x.ErrorCount),
-					AverageDuration = g.Average(x => x.AverageDuration)
+					AverageDurationInSeconds = g.Average(x => x.AverageDurationInSeconds)
 				})
 				.ToList();
 		}

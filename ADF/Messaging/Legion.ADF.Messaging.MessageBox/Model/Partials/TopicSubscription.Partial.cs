@@ -35,7 +35,7 @@ public sealed partial class TopicSubscription : MessageBox.MessageBoxBaseEntity,
 		if (subscription.IsSequentialFIFO && (subscription.MaxDegreeOfParallelism == 0 || 1 < subscription.MaxDegreeOfParallelism))
 			return result.WithArgumentException(scopeContext, subscription.MaxDegreeOfParallelism, null, $"{nameof(subscription.MaxDegreeOfParallelism)} must be NULL or 1 if {nameof(subscription.IsSequentialFIFO)} is true.");
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var topicSubscription = new TopicSubscription
 		{
 			__IsNewObject = true,

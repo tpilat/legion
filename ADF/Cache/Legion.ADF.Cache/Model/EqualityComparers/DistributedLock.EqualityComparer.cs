@@ -58,6 +58,8 @@ public sealed partial class DistributedLock : Cache.CacheBaseEntity, Legion.Mode
 						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.Metadata)) && !string.Equals(obj1.Metadata, obj2.Metadata))
 						return false;
+					if (conds.CanCompare(obj1, nameof(obj1.CreatedUtc)) && obj1.CreatedUtc != obj2.CreatedUtc)
+						return false;
 					if (conds.CanCompare(obj1, nameof(obj1.ExpiresUtc)) && obj1.ExpiresUtc != obj2.ExpiresUtc)
 						return false;
 				}
@@ -70,6 +72,8 @@ public sealed partial class DistributedLock : Cache.CacheBaseEntity, Legion.Mode
 					if (!string.Equals(obj1.LockId, obj2.LockId))
 						return false;
 					if (!string.Equals(obj1.Metadata, obj2.Metadata))
+						return false;
+					if (obj1.CreatedUtc != obj2.CreatedUtc)
 						return false;
 					if (obj1.ExpiresUtc != obj2.ExpiresUtc)
 						return false;

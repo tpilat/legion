@@ -15,8 +15,9 @@ public class TableInfoProvider : Legion.ADF.Cache.ITableInfoProvider
 					new(nameof(Legion.ADF.Cache.Model.CacheData.KeyPrefix450), typeof(string), "\"KeyPrefix450\"", "text", false),
 					new(nameof(Legion.ADF.Cache.Model.CacheData.ExpiresUtc), typeof(DateTime?), "\"ExpiresUtc\"", "timestamp with time zone", true),
 					new(nameof(Legion.ADF.Cache.Model.CacheData.SlidingTime), typeof(TimeSpan?), "\"SlidingTime\"", "interval", true),
+					new(nameof(Legion.ADF.Cache.Model.CacheData.CreatedUtc), typeof(DateTime), "\"CreatedUtc\"", "timestamp with time zone", false),
 					new(nameof(Legion.ADF.Cache.Model.CacheData.LastAccessedUtc), typeof(DateTime), "\"LastAccessedUtc\"", "timestamp with time zone", false),
-					new(nameof(Legion.ADF.Cache.Model.CacheData.RowVersion), typeof(long), "\"RowVersion\"", "bigint", false),
+					new(nameof(Legion.ADF.Cache.Model.CacheData.RowVersion), typeof(Guid), "\"RowVersion\"", "uuid", false),
 				]));
 
 	public static Legion.Database.Metamodel.Info.TableInfo GetCacheDataTableInfo()
@@ -30,6 +31,7 @@ public class TableInfoProvider : Legion.ADF.Cache.ITableInfoProvider
 					new(nameof(Legion.ADF.Cache.Model.DistributedLock.LockKey), typeof(string), "\"LockKey\"", "text", false),
 					new(nameof(Legion.ADF.Cache.Model.DistributedLock.LockId), typeof(string), "\"LockId\"", "text", false),
 					new(nameof(Legion.ADF.Cache.Model.DistributedLock.Metadata), typeof(string), "\"Metadata\"", "text", true),
+					new(nameof(Legion.ADF.Cache.Model.DistributedLock.CreatedUtc), typeof(DateTime), "\"CreatedUtc\"", "timestamp with time zone", false),
 					new(nameof(Legion.ADF.Cache.Model.DistributedLock.ExpiresUtc), typeof(DateTime), "\"ExpiresUtc\"", "timestamp with time zone", false),
 				]));
 

@@ -16,6 +16,8 @@ public class DistributedLockConfiguration : IEntityTypeConfiguration<Cache.Model
 
 		entityBuilder.ToTable("DistributedLock", "cache");
 
+		entityBuilder.HasIndex(e => e.LockId, "IX_DistributedLock_LockId");
+
 		entityBuilder.Property(e => e.KeyHash)
 			.HasColumnType("nvarchar(32)")
 			.HasMaxLength(32)
@@ -31,6 +33,8 @@ public class DistributedLockConfiguration : IEntityTypeConfiguration<Cache.Model
 			.HasMaxLength(32);
 
 		entityBuilder.Property(e => e.Metadata).HasColumnType("nvarchar(max)");
+
+		entityBuilder.Property(e => e.CreatedUtc).HasColumnType("datetime2(7)");
 
 		entityBuilder.Property(e => e.ExpiresUtc).HasColumnType("datetime2(7)");
 	}

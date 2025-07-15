@@ -21,7 +21,7 @@ public sealed partial class MessageType : MessageBox.MessageBoxBaseEntity, Legio
 		if (result.IsArgumentNullOrWhiteSpace(scopeContext, @namespace))
 			return result.Build();
 
-		var id = Guid.NewGuid();
+		var id = GlobalContext.Instance.NewGuid();
 		var messageType = new MessageType
 		{
 			__IsNewObject = true,
